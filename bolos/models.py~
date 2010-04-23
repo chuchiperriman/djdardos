@@ -1,0 +1,18 @@
+from django.db import models
+
+# Create your models here.
+class Marca(models.Model):
+    nombre = models.CharField(max_length=20)
+    
+    def __unicode__(self):
+        return self.nombre
+
+
+class Proyecto(models.Model):
+    marca = models.ForeignKey(Marca)
+    nombre = models.CharField(max_length=100)
+    fecha_creacion = models.DateTimeField('Fecha de Creacion')
+
+    def __unicode__(self):
+        return self.nombre
+

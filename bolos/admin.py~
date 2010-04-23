@@ -1,0 +1,13 @@
+from pymasterdt.master.models import Marca, Proyecto
+from django.contrib import admin
+
+
+class ProyectoAdmin(admin.ModelAdmin):
+    #fields = ['pub_date', 'question']
+    list_display = ('nombre', 'marca', 'fecha_creacion')
+    list_filter = ['marca']
+    search_fields = ['nombre']
+
+
+admin.site.register(Proyecto, ProyectoAdmin)
+admin.site.register(Marca)

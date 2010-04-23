@@ -1,0 +1,11 @@
+{% if jugadores_list %}
+    Jugadores:
+    <ul>
+    {% for j in jugadores_list %}
+        <li>{{ j.nombre }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay jugadores disponibles.</p>
+{% endif %}
+

@@ -1,0 +1,15 @@
+from pymasterdt.master.models import Marca, Proyecto
+from django.shortcuts import render_to_response
+from django.http import HttpResponse, Http404
+
+
+
+# Create your views here.
+def index(request):
+    proyectos_list = Proyecto.objects.all().order_by('nombre')[:5]
+    return render_to_response('master/proyectos/index.html', {'proyectos_list': proyectos_list})
+
+def detail(request, proyecto_id):
+    p = get_object_or_404(Proyecto, pk=proyecto_id)
+    return render_to_response('master/proyectos/detail.html', {'proyecto': p})
+    
