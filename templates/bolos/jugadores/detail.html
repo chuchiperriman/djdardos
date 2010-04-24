@@ -1,6 +1,11 @@
+{% extends "bolos/base.html" %}
+
+{% block title %}Jugadores{% endblock %}
+
+{% block content %}
 <h1>{{ jugador.nombre }}</h1>
 <b>Nombre:</b> {{jugador.nombre}}<br/>
 <b>Equipo:</b> {{jugador.equipo.nombre}}<br/>
 <b>Fecha de alta:</b> {{jugador.fecha_alta}}<br/>
 
-
+{% endblock %}

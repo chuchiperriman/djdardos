@@ -1,3 +1,9 @@
+{% extends "bolos/base.html" %}
+
+{% block title %}Jugadores{% endblock %}
+
+{% block content %}
+
 {% if jugadores_list %}
     Jugadores:
     <ul>
@@ -8,4 +14,10 @@
 {% else %}
     <p>No hay jugadores disponibles.</p>
 {% endif %}
+
+
+{% endblock %}
+
+
+
 
