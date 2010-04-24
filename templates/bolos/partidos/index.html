@@ -1,0 +1,23 @@
+{% extends "bolos/base.html" %}
+
+{% block title %}Equipos{% endblock %}
+
+{% block content %}
+
+{% if partidos %}
+    Partidos:
+    <ul>
+    {% for p in partidos %}
+        <li>{{ p.fecha }} <a href="/partidos/{{p.id}}" >[Ver]</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay partidos disponibles.</p>
+{% endif %}
+
+
+{% endblock %}
+
+
+
+

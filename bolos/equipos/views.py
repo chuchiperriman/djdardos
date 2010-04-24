@@ -16,4 +16,4 @@ def detail(request, equipo_id):
     e = get_object_or_404(Equipo, pk=equipo_id)
     return render_to_response('bolos/equipos/detail.html', 
     	{'equipo': e, 'jugadores': e.jugador_set.all()})
-    
+

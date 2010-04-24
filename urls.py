@@ -1,3 +1,5 @@
+# -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
+
 from django.conf.urls.defaults import *
 from django.conf import settings
 
@@ -11,6 +13,9 @@ urlpatterns = patterns('',
     (r'^equipos/(?P<equipo_id>\d+)/$', 'djbolos.bolos.equipos.views.detail'),
     (r'^jugadores$', 'djbolos.bolos.jugadores.views.index'),
     (r'^jugadores/(?P<jugador_id>\d+)/$', 'djbolos.bolos.jugadores.views.detail'),
+    (r'^partidos$', 'djbolos.bolos.partidos.views.index'),
+    (r'^partidos/new$', 'djbolos.bolos.partidos.views.new'),
+    (r'^partidos/(?P<partido_id>\d+)/$', 'djbolos.bolos.partidos.views.detail'),
     # Example:
     # (r'^djbolos/', include('djbolos.foo.urls')),
 

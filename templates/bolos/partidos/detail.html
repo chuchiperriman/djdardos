@@ -1,0 +1,23 @@
+{% extends "bolos/base.html" %}
+
+{% block title %}Equipo{% endblock %}
+
+{% block content %}
+<h1>{{ partido.fecha }}</h1>
+<b>Nombre:</b> {{equipo.nombre}}<br/>
+<h2>Jugadores</h2>
+
+<table>
+	<tr>
+		<th>Tipo</th>
+		<th>&nbsp;</th>
+	</tr>
+{% for p in partidas %}
+	<tr>
+		<td>{{p.tipo}}</td>
+		<td><a href="/jugadores/{{p.id}}">[Ver]</a></td>
+	</tr>
+{% endfor %}
+</table>
+
+{% endblock %}
