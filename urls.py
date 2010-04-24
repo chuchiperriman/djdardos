@@ -7,6 +7,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^equipos$', 'djbolos.bolos.equipos.views.index'),
+    (r'^equipos/(?P<equipo_id>\d+)/$', 'djbolos.bolos.equipos.views.detail'),
     (r'^jugadores$', 'djbolos.bolos.jugadores.views.index'),
     (r'^jugadores/(?P<jugador_id>\d+)/$', 'djbolos.bolos.jugadores.views.detail'),
     # Example:

@@ -1,0 +1,23 @@
+{% extends "bolos/base.html" %}
+
+{% block title %}Equipos{% endblock %}
+
+{% block content %}
+
+{% if equipos %}
+    Equipos:
+    <ul>
+    {% for e in equipos %}
+        <li>{{ e.nombre }} <a href="/equipos/{{e.id}}" >[Ver]</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay equipos disponibles.</p>
+{% endif %}
+
+
+{% endblock %}
+
+
+
+
