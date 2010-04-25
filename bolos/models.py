@@ -5,6 +5,9 @@ from django.db import models
 class Liga(models.Model):
     nombre = models.CharField(max_length=100)
 
+    def __unicode__(self):
+        return self.nombre
+
 class Equipo(models.Model):
     liga = models.ForeignKey(Liga)
     nombre = models.CharField(max_length=20)

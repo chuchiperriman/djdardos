@@ -1,6 +1,7 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
 
 from djbolos.bolos.models import *
+from djbolos.bolos.partidos.forms import *
 from django.shortcuts import render_to_response, get_object_or_404
 
 from django.http import HttpResponse, Http404
@@ -18,5 +19,19 @@ def detail(request, partido_id):
     	{'partido': p, 'partidas': p.partida_set.all()})
         
 def new(request):
-    return render_to_response('bolos/partidos/new.html')
+    if request.method == 'POST':
+        form = PartidoPreForm(request.POST) # A form bound to the POST data
+        if form.is_valid():
+            return render_to_response('bolos/partidos/new2.html',
+                {})
+    else:
+        form = PartidoPreForm()
+        
+    equipos = Equipo.objects.all().order_by("nombre")
+    return render_to_response('bolos/partidos/new1.html',
+        {"equipos": equipos,
+        "form": form})
+        
+    
+    
     

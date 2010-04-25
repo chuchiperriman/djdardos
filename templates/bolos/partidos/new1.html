@@ -1,0 +1,13 @@
+{% extends "bolos/base.html" %}
+
+{% block title %}Nuevo partido{% endblock %}
+
+{% block content %}
+<h1>Nuevo partido</h1>
+
+<form action="new" method="post">
+{{form.as_p}}
+<input type="submit" name="continuar" value="Continuar" />
+</form>
+
+{% endblock %}
