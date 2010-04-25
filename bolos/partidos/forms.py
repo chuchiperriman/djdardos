@@ -19,6 +19,8 @@ class PartidoForm(forms.Form):
     """    
     jugador_local = forms.ModelChoiceField(queryset=Jugador.objects.none())
     jugador_visitante = forms.ModelChoiceField(queryset=Jugador.objects.none())
+    puntos_local = forms.IntegerField(max_value=1, min_value=0)
+    puntos_visitante = forms.IntegerField(max_value=1, min_value=0)
     
     def __init__(self, equipo_local, equipo_visitante, *args, **kwargs):
         super(PartidoForm, self).__init__(*args, **kwargs)
