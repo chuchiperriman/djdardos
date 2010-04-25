@@ -18,13 +18,10 @@ def detail(request, partido_id):
     return render_to_response('bolos/partidos/detail.html', 
     	{'partido': p, 'partidas': p.partida_set.all()})
         
-def new(request):
+def prenew(request):
     if request.method == 'POST':
         form = PartidoPreForm(request.POST) # A form bound to the POST data
         if form.is_valid():
-            """form2 = PartidoForm(form.cleaned_data["equipo_local"],
-                                form.cleaned_data["equipo_visitante"])
-            """
             form2 = PartidoForm(equipo_local=form.cleaned_data["equipo_local"],
                                 equipo_visitante=form.cleaned_data["equipo_visitante"])
             return render_to_response('bolos/partidos/new2.html',
@@ -36,7 +33,11 @@ def new(request):
     return render_to_response('bolos/partidos/new1.html',
         {"equipos": equipos,
         "form": form})
-        
+
+def new(request):
+    if request.method == 'POST':
+        return index(request)
+    return prenew(request)
     
     
     

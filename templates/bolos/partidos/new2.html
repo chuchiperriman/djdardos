@@ -6,194 +6,251 @@
 <h1>Nuevo partido</h1>
 <form action="new" method="post">
 <style>
-#id_puntos_local{
-	width: 10px;
-}
-#id_puntos_visitante{
-	width: 10px;
-}
 </style>
+<form action="new" method="post">
 <h2>501 Parejas</h2>
 <table width="100%">
 	<tr>
-		<th align="center" colspan="2">Local</th>
-		<th align="center" width="50px">Puntos</th>
-		<th align="center" width="50px">Puntos</th>
-		<th align="center" colspan="2">Visitante</th>
+		<th align="left" >Local</th>
+		<th align="center" width="50px">Ganador</th>
+		<th align="right" >Visitante</th>
 	</tr>
 	<tr>
-		<td align="right">
-			{{ form.jugador_local.errors }}
-			{{ form.jugador_local }}
-		</td>
-		<td align="right">
-			{{ form.jugador_local.errors }}
-			{{ form.jugador_local }}
+		<td align="left">
+			{{ form.par501jl1_1 }}
+			{{ form.par501jl2_1 }}
 		</td>
 		<td align="center">
-			{{ form.puntos_local.errors }}
-			{{ form.puntos_local }}
+			{{ form.par501g_1 }}
+		</td>
+		<td align="right">
+			{{ form.par501jv1_1 }}
+			{{ form.par501jv2_1 }}
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+			{{ form.par501jl1_2 }}
+			{{ form.par501jl2_2 }}
 		</td>
 		<td align="center">
-			{{ form.puntos_visitante.errors }}
-			{{ form.puntos_visitante }}
+			{{ form.par501g_2 }}
 		</td>
-		<td align="left">
-			{{ form.jugador_visitante.errors }}
-			{{ form.jugador_visitante }}
-		</td>
-		<td align="left">
-			{{ form.jugador_visitante.errors }}
-			{{ form.jugador_visitante }}
+		<td align="right">
+			{{ form.par501jv1_2 }}
+			{{ form.par501jv2_2 }}
 		</td>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_1" size="10"/></td>
-		<td align="right"><input name="local_501_ind_1" size="10"/></td>
-		<td align="center"><input name="local_501_ind_1_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_1_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_1" size="10"/></td>
-		<td align="left"><input name="visitante_501_ind_1" size="10"/></td>
-	</tr>
-	<tr>
-		<td colspan="6">
+		<td colspan="4">
 		<hr style="height:1px;border: 0 none;background-color:#BBB"/>
 		</td>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_1" size="10"/></td>
-		<td align="right"><input name="local_501_ind_1" size="10"/></td>
-		<td align="center"><input name="local_501_ind_1_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_1_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_1" size="10"/></td>
-		<td align="left"><input name="visitante_501_ind_1" size="10"/></td>
+		<td align="left">
+			{{ form.par501jl1_3 }}
+			{{ form.par501jl2_3 }}
+		</td>
+		<td align="center">
+			{{ form.par501g_3 }}
+		</td>
+		<td align="right">
+			{{ form.par501jv1_3 }}
+			{{ form.par501jv2_3 }}
+		</td>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_1" size="10"/></td>
-		<td align="right"><input name="local_501_ind_1" size="10"/></td>
-		<td align="center"><input name="local_501_ind_1_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_1_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_1" size="10"/></td>
-		<td align="left"><input name="visitante_501_ind_1" size="10"/></td>
+		<td align="left">
+			{{ form.par501jl1_4 }}
+			{{ form.par501jl2_4 }}
+		</td>
+		<td align="center">
+			{{ form.par501g_4 }}
+		</td>
+		<td align="right">
+			{{ form.par501jv1_4 }}
+			{{ form.par501jv2_4 }}
+		</td>
 	</tr>
 </table>
 
 <br/>
 <h2>501 Individual</h2>
+
 <table width="100%">
 	<tr>
-		<th align="center">Local</th>
-		<th align="center" width="50px">Puntos</th>
-		<th align="center" width="50px">Puntos</th>
-		<th align="center">Visitante</th>
+		<th align="left" >Local</th>
+		<th align="center" width="50px">Ganador</th>
+		<th align="right" >Visitante</th>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_1"/></td>
-		<td align="center"><input name="local_501_ind_1_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_1_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_1"/></td>
+		<td align="left">
+			{{ form.ind501jl1_1 }}
+		</td>
+		<td align="center">
+			{{ form.ind501g_1 }}
+		</td>
+		<td align="right">
+			{{ form.ind501jv1_1 }}
+		</td>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_2"/></td>
-		<td align="center"><input name="local_501_ind_2_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_2_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_2"/></td>
+		<td align="left">
+			{{ form.ind501jl1_2 }}
+		</td>
+		<td align="center">
+			{{ form.ind501g_2 }}
+		</td>
+		<td align="right">
+			{{ form.ind501jv1_2 }}
+		</td>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_3"/></td>
-		<td align="center"><input name="local_501_ind_3_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_3_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_3"/></td>
+		<td align="left">
+			{{ form.ind501jl1_3 }}
+		</td>
+		<td align="center">
+			{{ form.ind501g_3 }}
+		</td>
+		<td align="right">
+			{{ form.ind501jv1_3 }}
+		</td>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_4"/></td>
-		<td align="center"><input name="local_501_ind_4_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_4_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_4"/></td>
+		<td align="left">
+			{{ form.ind501jl1_4 }}
+		</td>
+		<td align="center">
+			{{ form.ind501g_4 }}
+		</td>
+		<td align="right">
+			{{ form.ind501jv1_4 }}
+		</td>
 	</tr>
-	
 </table>
+
 <br/>
-<h2>501 Parejas</h2>
+<h2>Cricket Parejas</h2>
+
 <table width="100%">
 	<tr>
-		<th align="center" colspan="2">Local</th>
-		<th align="center" width="50px">Puntos</th>
-		<th align="center" width="50px">Puntos</th>
-		<th align="center" colspan="2">Visitante</th>
+		<th align="left" >Local</th>
+		<th align="center" width="50px">Ganador</th>
+		<th align="right" >Visitante</th>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_1" size="10"/></td>
-		<td align="right"><input name="local_501_ind_1" size="10"/></td>
-		<td align="center"><input name="local_501_ind_1_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_1_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_1" size="10"/></td>
-		<td align="left"><input name="visitante_501_ind_1" size="10"/></td>
+		<td align="left">
+			{{ form.parcrijl1_1 }}
+			{{ form.parcrijl2_1 }}
+		</td>
+		<td align="center">
+			{{ form.parcrig_1 }}
+		</td>
+		<td align="right">
+			{{ form.parcrijv1_1 }}
+			{{ form.parcrijv2_1 }}
+		</td>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_1" size="10"/></td>
-		<td align="right"><input name="local_501_ind_1" size="10"/></td>
-		<td align="center"><input name="local_501_ind_1_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_1_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_1" size="10"/></td>
-		<td align="left"><input name="visitante_501_ind_1" size="10"/></td>
+		<td align="left">
+			{{ form.parcrijl1_2 }}
+			{{ form.parcrijl2_2 }}
+		</td>
+		<td align="center">
+			{{ form.parcrig_2 }}
+		</td>
+		<td align="right">
+			{{ form.parcrijv1_2 }}
+			{{ form.parcrijv2_2 }}
+		</td>
 	</tr>
 	<tr>
-		<td colspan="6">
+		<td colspan="4">
 		<hr style="height:1px;border: 0 none;background-color:#BBB"/>
 		</td>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_1" size="10"/></td>
-		<td align="right"><input name="local_501_ind_1" size="10"/></td>
-		<td align="center"><input name="local_501_ind_1_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_1_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_1" size="10"/></td>
-		<td align="left"><input name="visitante_501_ind_1" size="10"/></td>
+		<td align="left">
+			{{ form.parcrijl1_3 }}
+			{{ form.parcrijl2_3 }}
+		</td>
+		<td align="center">
+			{{ form.parcrig_3 }}
+		</td>
+		<td align="right">
+			{{ form.parcrijv1_3 }}
+			{{ form.parcrijv2_3 }}
+		</td>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_1" size="10"/></td>
-		<td align="right"><input name="local_501_ind_1" size="10"/></td>
-		<td align="center"><input name="local_501_ind_1_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_1_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_1" size="10"/></td>
-		<td align="left"><input name="visitante_501_ind_1" size="10"/></td>
+		<td align="left">
+			{{ form.parcrijl1_4 }}
+			{{ form.parcrijl2_4 }}
+		</td>
+		<td align="center">
+			{{ form.parcrig_4 }}
+		</td>
+		<td align="right">
+			{{ form.parcrijv1_4 }}
+			{{ form.parcrijv2_4 }}
+		</td>
 	</tr>
 </table>
 
 <br/>
 <h2>501 Individual</h2>
+
 <table width="100%">
 	<tr>
-		<th align="center">Local</th>
-		<th align="center" width="50px">Puntos</th>
-		<th align="center" width="50px">Puntos</th>
-		<th align="center">Visitante</th>
+		<th align="left" >Local</th>
+		<th align="center" width="50px">Ganador</th>
+		<th align="right" >Visitante</th>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_1"/></td>
-		<td align="center"><input name="local_501_ind_1_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_1_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_1"/></td>
+		<td align="left">
+			{{ form.ind501jl1_5 }}
+		</td>
+		<td align="center">
+			{{ form.ind501g_5 }}
+		</td>
+		<td align="right">
+			{{ form.ind501jv1_5 }}
+		</td>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_2"/></td>
-		<td align="center"><input name="local_501_ind_2_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_2_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_2"/></td>
+		<td align="left">
+			{{ form.ind501jl1_6 }}
+		</td>
+		<td align="center">
+			{{ form.ind501g_6 }}
+		</td>
+		<td align="right">
+			{{ form.ind501jv1_6 }}
+		</td>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_3"/></td>
-		<td align="center"><input name="local_501_ind_3_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_3_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_3"/></td>
+		<td align="left">
+			{{ form.ind501jl1_7 }}
+		</td>
+		<td align="center">
+			{{ form.ind501g_7 }}
+		</td>
+		<td align="right">
+			{{ form.ind501jv1_7 }}
+		</td>
 	</tr>
 	<tr>
-		<td align="right"><input name="local_501_ind_4"/></td>
-		<td align="center"><input name="local_501_ind_4_puntos" size="1"/></td>
-		<td align="center"><input name="visitante_501_ind_4_puntos" size="1"/></td>
-		<td align="left"><input name="visitante_501_ind_4"/></td>
+		<td align="left">
+			{{ form.ind501jl1_8 }}
+		</td>
+		<td align="center">
+			{{ form.ind501g_8 }}
+		</td>
+		<td align="right">
+			{{ form.ind501jv1_8 }}
+		</td>
 	</tr>
-	
 </table>
+<input type="submit" value="Guardar" />
+</form>
 {% endblock %}

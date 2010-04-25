@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     (r'^jugadores/(?P<jugador_id>\d+)/$', 'djbolos.bolos.jugadores.views.detail'),
     (r'^partidos$', 'djbolos.bolos.partidos.views.index'),
     (r'^partidos/new$', 'djbolos.bolos.partidos.views.new'),
+    (r'^partidos/prenew$', 'djbolos.bolos.partidos.views.prenew'),
     (r'^partidos/(?P<partido_id>\d+)/$', 'djbolos.bolos.partidos.views.detail'),
     # Example:
     # (r'^djbolos/', include('djbolos.foo.urls')),
