@@ -36,7 +36,15 @@ def prenew(request):
 
 def new(request):
     if request.method == 'POST':
-        return index(request)
+        form = PartidoPreForm(request.POST)
+        form = PartidoForm (request.POST, equipo_local=form.cleaned_data["equipo_local"],
+                           equipo_visitante=form.cleaned_data["equipo_visitante"])
+        if form.is_valid():
+            return detail(request)
+        
+        return render_to_response('bolos/partidos/new2.html',
+                {"form": form})
+        
     return prenew(request)
     
     

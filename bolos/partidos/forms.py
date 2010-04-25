@@ -8,6 +8,9 @@ class PartidoPreForm(forms.Form):
     equipo_visitante = forms.ModelChoiceField(queryset=Equipo.objects.all().order_by("nombre"))
 
 class PartidoForm(forms.Form):
+    
+    equipo_local = forms.ModelChoiceField(queryset=Equipo.objects.all().order_by("nombre"))
+    equipo_visitante = forms.ModelChoiceField(queryset=Equipo.objects.all().order_by("nombre"))
 
     par501jl1_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
     par501jl2_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
