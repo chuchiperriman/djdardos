@@ -22,8 +22,13 @@ def new(request):
     if request.method == 'POST':
         form = PartidoPreForm(request.POST) # A form bound to the POST data
         if form.is_valid():
+            """form2 = PartidoForm(form.cleaned_data["equipo_local"],
+                                form.cleaned_data["equipo_visitante"])
+            """
+            form2 = PartidoForm(equipo_local=form.cleaned_data["equipo_local"],
+                                equipo_visitante=form.cleaned_data["equipo_visitante"])
             return render_to_response('bolos/partidos/new2.html',
-                {})
+                {"form": form2})
     else:
         form = PartidoPreForm()
         
