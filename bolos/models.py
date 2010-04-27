@@ -2,6 +2,11 @@
 
 from django.db import models
 
+TIPOS_PARTIDA = (
+    ("1" , "501"),
+    ("2" , "Cricket")
+)
+
 class Division(models.Model):
     nombre = models.CharField(max_length=100)
     
@@ -58,7 +63,7 @@ class Partido(models.Model):
 
 class PartidaIndividual(models.Model):
     partido = models.ForeignKey(Partido)
-    tipo = models.IntegerField()
+    tipo = models.CharField(max_length=1, choices=TIPOS_PARTIDA)
     jugador_local = models.ForeignKey(Jugador, related_name="jugador_local")
     jugador_visitante = models.ForeignKey(Jugador, related_name="jugador_visitante")
     ganador = models.ForeignKey(Jugador, related_name="ganador")

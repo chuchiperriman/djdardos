@@ -19,6 +19,7 @@
 		<th>Puntos visitante</th>
 	</tr>
 {% for j in jornadas %}
+	{% if j.partido %}
 	<tr>
 		<td><b>Jornada {{j.jornada.numero}}</b></td>
 		<td>{{j.partido.fecha}}</td>
@@ -28,6 +29,7 @@
 		<td><b>{{j.partido.puntos_local}}</b></td>
 		<td><b>{{j.partido.puntos_visitante}}</b></td>
 	</tr>
+	{% endif %}
 {% endfor %}
 </table>
 <br/>
