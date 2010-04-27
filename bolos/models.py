@@ -44,6 +44,17 @@ class Partido(models.Model):
     equipo_visitante = models.ForeignKey(Equipo, related_name="equipo_visitante")
     ganador = models.ForeignKey(Equipo, related_name="ganador")
     fecha = models.DateTimeField()
+    
+    def puntos_local(self):
+        jugadores = self.equipo_local.jugador_set.all()
+        return self.partidaindividual_set.filter(ganador__in=jugadores).count()
+    
+    def puntos_visitante(self):
+        jugadores = self.equipo_visitante.jugador_set.all()
+        return self.partidaindividual_set.filter(ganador__in=jugadores).count()
+    
+    def __unicode__(self):
+        return self.equipo_local.nombre + "-" + self.equipo_visitante.nombre + " " + str(self.fecha)
 
 class PartidaIndividual(models.Model):
     partido = models.ForeignKey(Partido)

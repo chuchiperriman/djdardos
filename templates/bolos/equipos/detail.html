@@ -15,6 +15,8 @@
 		<th>Local</th>
 		<th>Visitante</th>
 		<th>Ganador</th>
+		<th>Puntos local</th>
+		<th>Puntos visitante</th>
 	</tr>
 {% for j in jornadas %}
 	<tr>
@@ -23,6 +25,8 @@
 		<td>{{j.partido.equipo_local.nombre}}</td>
 		<td>{{j.partido.equipo_visitante.nombre}}</td>
 		<td><b>{{j.partido.ganador.nombre}}</b></td>
+		<td><b>{{j.partido.puntos_local}}</b></td>
+		<td><b>{{j.partido.puntos_visitante}}</b></td>
 	</tr>
 {% endfor %}
 </table>
