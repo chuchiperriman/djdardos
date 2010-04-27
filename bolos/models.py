@@ -43,6 +43,36 @@ class Jugador(models.Model):
 
     def __unicode__(self):
         return self.nombre
+
+    def partidas_ind(self):
+        return PartidaIndividual.objects \
+            .filter(Q(jugador_local=self) | Q(jugador_visitante=self)) \
+            .count()
+            
+    def partidas_par(self):
+        return PartidaParejas.objects \
+            .filter(Q(jugador_local1=self) | Q(jugador_local2=self) \
+                | Q(jugador_visitante1=self) | Q(jugador_visitante2=self)) \
+            .count()
+            
+    def partidas_ind_ganadas(self):
+        return PartidaIndividual.objects.filter(ganador=self).count()
+        
+    def partidas_par_ganadas(self):
+        return PartidaParejas.objects.filter(Q(ganador1=self) | Q(ganador2=self)).count()
+        
+    def partidas_ind_perdidas(self):
+        return PartidaIndividual.objects \
+            .filter(Q(jugador_local=self) | Q(jugador_visitante=self)) \
+            .exclude(ganador=self) \
+            .count()
+            
+    def partidas_par_perdidas(self):
+        return PartidaParejas.objects \
+            .filter(Q(jugador_local1=self) | Q(jugador_local2=self) \
+                | Q(jugador_visitante1=self) | Q(jugador_visitante2=self)) \
+            .exclude(Q(ganador1=self) | Q(ganador2=self)) \
+            .count()
         
 class Partido(models.Model):
     jornada = models.ForeignKey(Jornada)

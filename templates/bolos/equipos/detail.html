@@ -37,11 +37,23 @@
 <table>
 	<tr>
 		<th>Nombre</th>
+		<th>G.I.</th>
+		<th>G.P.</th>
+		<th>P.I.</th>
+		<th>P.P.</th>
+		<th>J.I.</th>
+		<th>J.P.</th>
 		<th>&nbsp;</th>
 	</tr>
 {% for j in jugadores %}
 	<tr>
 		<td>{{j.nombre}}</td>
+		<td>{{j.partidas_ind_ganadas}}</td>
+		<td>{{j.partidas_par_ganadas}}</td>
+		<td>{{j.partidas_ind_perdidas}}</td>
+		<td>{{j.partidas_par_perdidas}}</td>
+		<td>{{j.partidas_ind}}</td>
+		<td>{{j.partidas_par}}</td>
 		<td><a href="/jugadores/{{j.id}}">[Ver]</a></td>
 	</tr>
 {% endfor %}

@@ -15,7 +15,6 @@ class JornadasPartidos:
         if partidos:
             self.partido = partidos[0]
 
-
 # Create your views here.
 def index(request):
     equipos = Equipo.objects.all().order_by('nombre')
