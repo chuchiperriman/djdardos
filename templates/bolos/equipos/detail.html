@@ -5,8 +5,29 @@
 {% block content %}
 <h1>{{ equipo.nombre }}</h1>
 <b>Nombre:</b> {{equipo.nombre}}<br/>
-<h2>Jugadores</h2>
 
+<br/>
+<h2>Liga {{liga_actual.nombre}} </h2>
+<table>
+	<tr>
+		<th>Nº Jornada</th>
+		<th>Fecha</th>
+		<th>Local</th>
+		<th>Visitante</th>
+		<th>Ganador</th>
+	</tr>
+{% for j in jornadas %}
+	<tr>
+		<td><b>Jornada {{j.jornada.numero}}</b></td>
+		<td>{{j.partido.fecha}}</td>
+		<td>{{j.partido.equipo_local.nombre}}</td>
+		<td>{{j.partido.equipo_visitante.nombre}}</td>
+		<td><b>{{j.partido.ganador.nombre}}</b></td>
+	</tr>
+{% endfor %}
+</table>
+<br/>
+<h2>Jugadores</h2>
 <table>
 	<tr>
 		<th>Nombre</th>

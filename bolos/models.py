@@ -18,6 +18,9 @@ class Liga(models.Model):
 class Jornada(models.Model):
     liga = models.ForeignKey(Liga)
     numero = models.IntegerField()
+    
+    def __unicode__(self):
+        return str(self.numero)
 
 class Equipo(models.Model):
     ligas = models.ManyToManyField(Liga)
@@ -25,6 +28,7 @@ class Equipo(models.Model):
     
     def __unicode__(self):
         return self.nombre
+    
 
 class Jugador(models.Model):
     equipo = models.ForeignKey(Equipo)

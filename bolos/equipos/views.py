@@ -1,10 +1,19 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
 
 from djbolos.bolos.models import *
+from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
 
 from django.http import HttpResponse, Http404
 
+class JornadasPartidos:
+    jornada = None
+    partido = None
+    def __init__(self, jornada, equipo):
+        self.jornada = jornada
+        partidos = jornada.partido_set.filter(Q(equipo_local=equipo) | Q(equipo_visitante=equipo))
+        if partidos:
+            self.partido = partidos[0]
 
 
 # Create your views here.
@@ -14,6 +23,12 @@ def index(request):
 
 def detail(request, equipo_id):
     e = get_object_or_404(Equipo, pk=equipo_id)
+    liga_actual = e.ligas.all()[0]
+    jornadas = []
+    for j in liga_actual.jornada_set.all():
+        jornadas.append(JornadasPartidos(j, e))
+    #TODO Esto es una cochinada temporal (lo de las ligas)
     return render_to_response('bolos/equipos/detail.html', 
-    	{'equipo': e, 'jugadores': e.jugador_set.all()})
+    	{'equipo': e, 'jugadores': e.jugador_set.all(),
+         'liga_actual': liga_actual, 'jornadas': jornadas})
 
