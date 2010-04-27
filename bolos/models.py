@@ -1,6 +1,7 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
 
 from django.db import models
+from django.db.models import Q
 
 TIPOS_PARTIDA = (
     ("1" , "501"),
@@ -52,11 +53,15 @@ class Partido(models.Model):
     
     def puntos_local(self):
         jugadores = self.equipo_local.jugador_set.all()
-        return self.partidaindividual_set.filter(ganador__in=jugadores).count()
+        puntos = self.partidaindividual_set.filter(ganador__in=jugadores).count()
+        puntos += self.partidaparejas_set.filter(Q(ganador1__in=jugadores) | Q(ganador2__in=jugadores)).count()
+        return puntos
     
     def puntos_visitante(self):
         jugadores = self.equipo_visitante.jugador_set.all()
-        return self.partidaindividual_set.filter(ganador__in=jugadores).count()
+        puntos = self.partidaindividual_set.filter(ganador__in=jugadores).count()
+        puntos += self.partidaparejas_set.filter(Q(ganador1__in=jugadores) | Q(ganador2__in=jugadores)).count()
+        return puntos
     
     def __unicode__(self):
         return self.equipo_local.nombre + "-" + self.equipo_visitante.nombre + " " + str(self.fecha)
@@ -70,7 +75,7 @@ class PartidaIndividual(models.Model):
     
 class PartidaParejas(models.Model):
     partido = models.ForeignKey(Partido)
-    tipo = models.IntegerField()
+    tipo = models.CharField(max_length=1, choices=TIPOS_PARTIDA)
     jugador_local1 = models.ForeignKey(Jugador, related_name="jugador_local1")
     jugador_local2 = models.ForeignKey(Jugador, related_name="jugador_local2")
     jugador_visitante1 = models.ForeignKey(Jugador, related_name="jugador_visitante1")
