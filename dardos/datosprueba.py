@@ -34,3 +34,37 @@ def cargar():
     j.save()
     j = Jugador(pk=6, nombre="Marta", fecha_alta=datetime.now(), equipo=e2)
     j.save()
+    
+    p = Partido(pk=1, jornada=Jornada.objects.get(pk=1), 
+            equipo_local=e2, equipo_visitante=e, ganador=e2, 
+            fecha=datetime.now())
+    p.save()
+    
+    pa = PartidaIndividual(pk=1, partido=p, tipo="1", 
+            jugador_local=Jugador.objects.get(pk=4),
+            jugador_visitante=Jugador.objects.get(pk=1),
+            ganador=Jugador.objects.get(pk=4))
+    pa.save()
+    
+    pa = PartidaIndividual(pk=2, partido=p, tipo="1", 
+            jugador_local=Jugador.objects.get(pk=5),
+            jugador_visitante=Jugador.objects.get(pk=2),
+            ganador=Jugador.objects.get(pk=2))
+    pa.save()
+    
+    pa = PartidaIndividual(pk=3, partido=p, tipo="1", 
+            jugador_local=Jugador.objects.get(pk=4),
+            jugador_visitante=Jugador.objects.get(pk=2),
+            ganador=Jugador.objects.get(pk=2))
+    pa.save()
+    
+    pa = PartidaParejas(pk=1, partido=p, tipo="1", 
+            jugador_local1=Jugador.objects.get(pk=4),
+            jugador_local2=Jugador.objects.get(pk=5),
+            jugador_visitante1=Jugador.objects.get(pk=1),
+            jugador_visitante2=Jugador.objects.get(pk=3),
+            ganador1=Jugador.objects.get(pk=1),
+            ganador2=Jugador.objects.get(pk=3))
+    pa.save()
+    
+    
