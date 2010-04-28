@@ -5,7 +5,34 @@
 {% block content %}
 <h1>{{ equipo.nombre }}</h1>
 <b>Nombre:</b> {{equipo.nombre}}<br/>
-
+<br/>
+<h2>Estadísticas</h2>
+<table>
+	<tr>
+		<th>Tipo partida</th>
+		<th>Jugados</th>
+		<th>Ganados</th>
+		<th>Perdidos</th>
+	</tr>
+	<tr>
+		<td>Local</td>
+		<td>{{estadisticas.partidos_jugados_local}}</td>
+		<td>{{estadisticas.partidos_ganados_local}}</td>
+		<td>{{estadisticas.partidos_perdidos_local}}</td>
+	</tr>
+	<tr>
+		<td>Visitante</td>
+		<td>{{estadisticas.partidos_jugados_visitante}}</td>
+		<td>{{estadisticas.partidos_ganados_visitante}}</td>
+		<td>{{estadisticas.partidos_perdidos_visitante}}</td>
+	</tr>
+	<tr>
+		<td>General</td>
+		<td>{{estadisticas.partidos_jugados}}</td>
+		<td>{{estadisticas.partidos_ganados}}</td>
+		<td>{{estadisticas.partidos_perdidos}}</td>
+	</tr>
+</table>
 <br/>
 <h2>Liga {{liga_actual.nombre}} </h2>
 <table>
