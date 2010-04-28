@@ -1,4 +1,4 @@
-from djbolos.bolos.models import *
+from djdardos.dardos.models import *
 from django.contrib import admin
 
 

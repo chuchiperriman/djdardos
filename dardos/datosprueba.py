@@ -1,6 +1,6 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
 
-from bolos.models import *
+from dardos.models import *
 from datetime import datetime
 
 def cargar():

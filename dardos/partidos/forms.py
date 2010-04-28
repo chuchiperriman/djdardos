@@ -1,6 +1,6 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
 
-from djbolos.bolos.models import *
+from djdardos.dardos.models import *
 from django import forms
 
 class PartidoPreForm(forms.Form):

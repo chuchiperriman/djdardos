@@ -9,16 +9,16 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^equipos$', 'djbolos.bolos.equipos.views.index'),
-    (r'^equipos/(?P<equipo_id>\d+)/$', 'djbolos.bolos.equipos.views.detail'),
-    (r'^jugadores$', 'djbolos.bolos.jugadores.views.index'),
-    (r'^jugadores/(?P<jugador_id>\d+)/$', 'djbolos.bolos.jugadores.views.detail'),
-    (r'^partidos$', 'djbolos.bolos.partidos.views.index'),
-    (r'^partidos/new$', 'djbolos.bolos.partidos.views.new'),
-    (r'^partidos/prenew$', 'djbolos.bolos.partidos.views.prenew'),
-    (r'^partidos/(?P<partido_id>\d+)/$', 'djbolos.bolos.partidos.views.detail'),
+    (r'^equipos$', 'djdardos.dardos.equipos.views.index'),
+    (r'^equipos/(?P<equipo_id>\d+)/$', 'djdardos.dardos.equipos.views.detail'),
+    (r'^jugadores$', 'djdardos.dardos.jugadores.views.index'),
+    (r'^jugadores/(?P<jugador_id>\d+)/$', 'djdardos.dardos.jugadores.views.detail'),
+    (r'^partidos$', 'djdardos.dardos.partidos.views.index'),
+    (r'^partidos/new$', 'djdardos.dardos.partidos.views.new'),
+    (r'^partidos/prenew$', 'djdardos.dardos.partidos.views.prenew'),
+    (r'^partidos/(?P<partido_id>\d+)/$', 'djdardos.dardos.partidos.views.detail'),
     # Example:
-    # (r'^djbolos/', include('djbolos.foo.urls')),
+    # (r'^djdardos/', include('djdardos.foo.urls')),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
