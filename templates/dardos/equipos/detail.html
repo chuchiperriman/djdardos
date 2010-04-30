@@ -6,6 +6,24 @@
 <h1>{{ equipo.nombre }}</h1>
 <b>Nombre:</b> {{equipo.nombre}}<br/>
 <br/>
+<h2>Clasificación</h2>
+<table>
+	<tr>
+		<th>Equipo</th>
+		<th>Ganados</th>
+		<th>Perdidos</th>
+		<th>Puntos</th>
+	</tr>
+{% for d in clasificacion.equipos %}
+	<tr>
+		<td>{{d.equipo.nombre}}</td>
+		<td>{{d.estadisticas.partidos_ganados}}</td>
+		<td>{{d.estadisticas.partidos_perdidos}}</td>
+		<td>{{d.estadisticas.puntos}}</td>
+	</tr>
+{% endfor %}
+</table>
+<br/>
 <h2>Estadísticas</h2>
 <table>
 	<tr>

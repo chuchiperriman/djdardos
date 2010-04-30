@@ -34,4 +34,6 @@ class EstadisticasEquipo:
 
     def partidos_perdidos_visitante(self):
         return Partido.objects.filter(Q(equipo_visitante=self.equipo)).exclude(ganador=self.equipo).count()
-        
+    
+    def puntos(self):
+        return self.partidos_ganados() * 2
