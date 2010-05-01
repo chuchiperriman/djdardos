@@ -230,15 +230,15 @@
 
 /* Column widths */
 .width {
-  width: 776px;
+  width: 960px;
 }
 
 .widthPad {
-  width: 746px;
+  width: 930px;
 }
 
 .width25 {
-  width: 24%;
+  width: 15%;
 }
 
 .width50 {
@@ -246,7 +246,7 @@
 }
 
 .width73 {
-  width: 73%;
+  width: 82%;
 }
 
 .width75 {
