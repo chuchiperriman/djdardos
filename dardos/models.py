@@ -78,8 +78,9 @@ class Partido(models.Model):
     jornada = models.ForeignKey(Jornada)
     equipo_local = models.ForeignKey(Equipo, related_name="equipo_local")
     equipo_visitante = models.ForeignKey(Equipo, related_name="equipo_visitante")
-    ganador = models.ForeignKey(Equipo, related_name="ganador")
+    ganador = models.ForeignKey(Equipo, related_name="ganador", null=True, blank=True)
     fecha = models.DateTimeField()
+    jugado = models.BooleanField()
     
     def puntos_local(self):
         jugadores = self.equipo_local.jugador_set.all()

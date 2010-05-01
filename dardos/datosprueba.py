@@ -37,7 +37,8 @@ def cargar():
     
     p = Partido(pk=1, jornada=Jornada.objects.get(pk=1), 
             equipo_local=e2, equipo_visitante=e, ganador=e2, 
-            fecha=datetime.now())
+            fecha=datetime.now(),
+            jugado = True)
     p.save()
     
     pa = PartidaIndividual(pk=1, partido=p, tipo="1", 
@@ -67,4 +68,13 @@ def cargar():
             ganador2=Jugador.objects.get(pk=3))
     pa.save()
     
+    temp = Equipo(pk=3, nombre="Equipo Primero")
+    temp.save()
+    temp.ligas.add(l)
+    temp = Equipo(pk=4, nombre="Equipo Tercero")
+    temp.save()
+    temp.ligas.add(l)
+    temp = Equipo(pk=5, nombre="Equipo Cuarto")
+    temp.save()
+    temp.ligas.add(l)
     
