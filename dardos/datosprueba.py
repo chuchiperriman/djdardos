@@ -71,10 +71,23 @@ def cargar():
     temp = Equipo(pk=3, nombre="Equipo Primero")
     temp.save()
     temp.ligas.add(l)
-    temp = Equipo(pk=4, nombre="Equipo Tercero")
-    temp.save()
-    temp.ligas.add(l)
-    temp = Equipo(pk=5, nombre="Equipo Cuarto")
-    temp.save()
-    temp.ligas.add(l)
+    e3 = Equipo(pk=4, nombre="Equipo Tercero")
+    e3.save()
+    e3.ligas.add(l)
+    e4 = Equipo(pk=5, nombre="Equipo Cuarto")
+    e4.save()
+    e4.ligas.add(l)
+    
+    p = Partido(pk=3, jornada=Jornada.objects.get(pk=3), 
+            equipo_local=e, equipo_visitante=e3, ganador=None, 
+            fecha=datetime.now(),
+            jugado = False)
+    p.save()
+    
+    p = Partido(pk=4, jornada=Jornada.objects.get(pk=4), 
+            equipo_local=e4, equipo_visitante=e, ganador=None, 
+            fecha=datetime.now(),
+            jugado = False)
+    p.save()
+    
     
