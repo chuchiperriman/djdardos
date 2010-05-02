@@ -54,7 +54,13 @@ class Jugador(models.Model):
             .filter(Q(jugador_local1=self) | Q(jugador_local2=self) \
                 | Q(jugador_visitante1=self) | Q(jugador_visitante2=self)) \
             .count()
-            
+
+    def partidas_ganadas(self):
+        return self.partidas_ind_ganadas() + self.partidas_par_ganadas()
+    
+    def partidas_perdidas(self):
+        return self.partidas_ind_perdidas() + self.partidas_par_perdidas()
+        
     def partidas_ind_ganadas(self):
         return PartidaIndividual.objects.filter(ganador=self).count()
         

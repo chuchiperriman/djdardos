@@ -63,7 +63,13 @@
 			</tr>
 		{% for d in clasificacion.equipos %}
 			<tr>
-				<td>{{d.equipo.nombre}}</td>
+				<td>
+				{% ifequal d.equipo.id equipo.id %}
+					<b>{{d.equipo.nombre}}</b>
+				{% else %}
+					{{d.equipo.nombre}}
+				{% endifequal %}
+				</td>
 				<td>{{d.estadisticas.partidos_ganados}}</td>
 				<td>{{d.estadisticas.partidos_perdidos}}</td>
 				<td>{{d.estadisticas.partidos_empatados}}</td>
@@ -136,6 +142,32 @@
 				<td>{{estadisticas.partidos_ganados}}</td>
 				<td>{{estadisticas.partidos_perdidos}}</td>
 				<td>{{estadisticas.partidos_empatados}}</td>
+			</tr>
+		</table>
+		<table>
+			<tr>
+				<td>Más victorias</td>
+				<td>{{estadisticas.jugador_mas_ganadas.nombre}}</td>
+			</tr>
+			<tr>
+				<td>Más derrotas</td>
+				<td>{{estadisticas.jugador_mas_perdidas.nombre}}</td>
+			</tr>
+			<tr>
+				<td>Más victorias individuales</td>
+				<td>{{estadisticas.jugador_mas_ganadas_ind.nombre}}</td>
+			</tr>
+			<tr>
+				<td>Más victorias parejas</td>
+				<td>{{estadisticas.jugador_mas_ganadas_par.nombre}}</td>
+			</tr>
+			<tr>
+				<td>Más derrotas individuales</td>
+				<td>{{estadisticas.jugador_mas_perdidas_ind.nombre}}</td>
+			</tr>
+			<tr>
+				<td>Más derrotas parejas</td>
+				<td>{{estadisticas.jugador_mas_perdidas_par.nombre}}</td>
 			</tr>
 		</table>
 	</div>
