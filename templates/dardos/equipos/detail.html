@@ -58,6 +58,7 @@
 				<th>Equipo</th>
 				<th>Ganados</th>
 				<th>Perdidos</th>
+				<th>Empatados</th>
 				<th>Puntos</th>
 			</tr>
 		{% for d in clasificacion.equipos %}
@@ -65,6 +66,7 @@
 				<td>{{d.equipo.nombre}}</td>
 				<td>{{d.estadisticas.partidos_ganados}}</td>
 				<td>{{d.estadisticas.partidos_perdidos}}</td>
+				<td>{{d.estadisticas.partidos_empatados}}</td>
 				<td>{{d.estadisticas.puntos}}</td>
 			</tr>
 		{% endfor %}
@@ -81,6 +83,7 @@
 				<th>Ganador</th>
 				<th>Puntos local</th>
 				<th>Puntos visitante</th>
+				<th>Jugado</th>
 			</tr>
 		{% for j in jornadas %}
 			{% if j.partido %}
@@ -92,6 +95,13 @@
 				<td><b>{{j.partido.ganador.nombre}}</b></td>
 				<td><b>{{j.partido.puntos_local}}</b></td>
 				<td><b>{{j.partido.puntos_visitante}}</b></td>
+				<td>
+					{% if j.partido.jugado %}
+						V
+					{% else %}
+						X
+					{%endif%}
+				</td>
 			</tr>
 			{% endif %}
 		{% endfor %}
@@ -104,24 +114,28 @@
 				<th>Jugados</th>
 				<th>Ganados</th>
 				<th>Perdidos</th>
+				<th>Empatados</th>
 			</tr>
 			<tr>
 				<td>Local</td>
 				<td>{{estadisticas.partidos_jugados_local}}</td>
 				<td>{{estadisticas.partidos_ganados_local}}</td>
 				<td>{{estadisticas.partidos_perdidos_local}}</td>
+				<td>{{estadisticas.partidos_empatados_local}}</td>
 			</tr>
 			<tr>
 				<td>Visitante</td>
 				<td>{{estadisticas.partidos_jugados_visitante}}</td>
 				<td>{{estadisticas.partidos_ganados_visitante}}</td>
 				<td>{{estadisticas.partidos_perdidos_visitante}}</td>
+				<td>{{estadisticas.partidos_empatados_visitante}}</td>
 			</tr>
 			<tr>
 				<td>General</td>
 				<td>{{estadisticas.partidos_jugados}}</td>
 				<td>{{estadisticas.partidos_ganados}}</td>
 				<td>{{estadisticas.partidos_perdidos}}</td>
+				<td>{{estadisticas.partidos_empatados}}</td>
 			</tr>
 		</table>
 	</div>
