@@ -18,4 +18,5 @@ class Clasificacion:
         for equipo in liga.equipo_set.all():
             self.equipos.append(DatosEquipo(equipo))
         
-        
+        self.equipos.sort(key=lambda datos: datos.estadisticas.puntos(), reverse=True)
+                

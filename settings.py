@@ -1,5 +1,11 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
 # Django settings for djdardos project.
+import logging
+
+logging.basicConfig(
+    level = logging.DEBUG,
+    format = '%(asctime)s %(levelname)s %(message)s',
+)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

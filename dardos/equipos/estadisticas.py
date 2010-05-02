@@ -18,6 +18,10 @@ class EstadisticasEquipo:
         return Partido.objects.filter(Q(jugado=True) & (Q(equipo_local=self.equipo) | 
             Q(equipo_visitante=self.equipo))).exclude(
                 Q(ganador=self.equipo) | Q(ganador=None)).count()
+    
+    def partidos_empatados(self):
+        return Partido.objects.filter(Q(jugado=True) & Q(ganador=None) & 
+            (Q(equipo_local=self.equipo) | Q(equipo_visitante=self.equipo))).count()
         
     def partidos_jugados_local(self):
         return Partido.objects.filter(Q(jugado=True) & Q(equipo_local=self.equipo)).count()
@@ -40,4 +44,5 @@ class EstadisticasEquipo:
             Q(ganador=self.equipo) | Q(ganador=None)).count()
     
     def puntos(self):
-        return self.partidos_ganados() * 2
+        return self.partidos_ganados() * 2 + self.partidos_empatados()
+        
