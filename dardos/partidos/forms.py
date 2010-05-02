@@ -2,16 +2,28 @@
 
 from djdardos.dardos.models import *
 from django import forms
+import datetime
 
 class PartidoPreForm(forms.Form):
+    #jornada = models.ForeignKey(Jornada)
+    fecha = forms.DateField(input_formats=('%d-%m-%Y', '%d/%m/%Y'))
+    jornada = forms.ModelChoiceField(queryset=Jornada.objects.filter(partido=None))
     equipo_local = forms.ModelChoiceField(queryset=Equipo.objects.all().order_by("nombre"))
     equipo_visitante = forms.ModelChoiceField(queryset=Equipo.objects.all().order_by("nombre"))
+    
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        #TODO Comprobar que no hayan jugado ya
+        if (cleaned_data['equipo_local'].id == cleaned_data['equipo_visitante'].id):
+            raise forms.ValidationError("No puedes seleccionar el mismo equipo")
+        return cleaned_data
+
 
 class PartidoForm(forms.Form):
     
-    equipo_local = forms.ModelChoiceField(queryset=Equipo.objects.all().order_by("nombre"))
-    equipo_visitante = forms.ModelChoiceField(queryset=Equipo.objects.all().order_by("nombre"))
-
+    equipo_local = forms.IntegerField()
+    equipo_visitante = forms.IntegerField()
+    
     par501jl1_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
     par501jl2_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
     par501jv1_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
@@ -80,10 +92,12 @@ class PartidoForm(forms.Form):
     ind501jv1_8 = forms.ModelChoiceField(queryset=Jugador.objects.none())
     ind501g_8 = forms.ModelChoiceField(queryset=Equipo.objects.none())
     
-    
-    def __init__(self, equipo_local, equipo_visitante, *args, **kwargs):
-        super(PartidoForm, self).__init__(*args, **kwargs)
+    def cargar_datos_por_id(self, id_local, id_visitante):
+        self.cargar_datos(Equipo.objects.get(pk=id_local), Equipo.objects.get(pk=id_visitante))
         
+    def cargar_datos(self, equipo_local, equipo_visitante):
+        self.fields['equipo_local'].initial = equipo_local.id
+        self.fields['equipo_visitante'].initial = equipo_visitante.id
         self.fields['par501jl1_1'].queryset = equipo_local.jugador_set.all()
         self.fields['par501jl2_1'].queryset = equipo_local.jugador_set.all()
         self.fields['par501jv1_1'].queryset = equipo_visitante.jugador_set.all()
@@ -113,10 +127,10 @@ class PartidoForm(forms.Form):
         self.fields['ind501g_2'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
         self.fields['ind501jl1_3'].queryset = equipo_local.jugador_set.all()
         self.fields['ind501jv1_3'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['ind501g_2'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
+        self.fields['ind501g_3'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
         self.fields['ind501jl1_4'].queryset = equipo_local.jugador_set.all()
         self.fields['ind501jv1_4'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['ind501g_2'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
+        self.fields['ind501g_4'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
         
         self.fields['parcrijl1_1'].queryset = equipo_local.jugador_set.all()
         self.fields['parcrijl2_1'].queryset = equipo_local.jugador_set.all()

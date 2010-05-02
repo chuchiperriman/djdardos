@@ -5,7 +5,7 @@ from djdardos.dardos.partidos.forms import *
 from django.shortcuts import render_to_response, get_object_or_404
 
 from django.http import HttpResponse, Http404
-
+import logging
 
 
 # Create your views here.
@@ -22,8 +22,9 @@ def prenew(request):
     if request.method == 'POST':
         form = PartidoPreForm(request.POST) # A form bound to the POST data
         if form.is_valid():
-            form2 = PartidoForm(equipo_local=form.cleaned_data["equipo_local"],
-                                equipo_visitante=form.cleaned_data["equipo_visitante"])
+            form2 = PartidoForm()
+            form2.cargar_datos(form.cleaned_data["equipo_local"],
+                               form.cleaned_data["equipo_visitante"])
             return render_to_response('dardos/partidos/new2.html',
                 {"form": form2})
     else:
@@ -36,12 +37,16 @@ def prenew(request):
 
 def new(request):
     if request.method == 'POST':
-        form = PartidoPreForm(request.POST)
-        form = PartidoForm (request.POST, equipo_local=form.cleaned_data["equipo_local"],
-                           equipo_visitante=form.cleaned_data["equipo_visitante"])
+        form = PartidoForm (request.POST)
+        form.cargar_datos_por_id (form.data['equipo_local'],
+            form.data['equipo_visitante'])
         if form.is_valid():
-            return detail(request)
+            logging.debug("Si es valido: "+str(form.cleaned_data))
+            return render_to_response('dardos/partidos/new2.html',
+                {"form": form})
         
+        logging.debug("No es valido: "+str(form.data['equipo_local']))
+        logging.debug("Errores: "+str(form.errors))
         return render_to_response('dardos/partidos/new2.html',
                 {"form": form})
         
