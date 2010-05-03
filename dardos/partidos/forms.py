@@ -3,6 +3,7 @@
 from djdardos.dardos.models import *
 from django import forms
 import datetime
+import logging
 
 class PartidoPreForm(forms.Form):
     #jornada = models.ForeignKey(Jornada)
@@ -11,9 +12,19 @@ class PartidoPreForm(forms.Form):
     equipo_local = forms.ModelChoiceField(queryset=Equipo.objects.all().order_by("nombre"))
     equipo_visitante = forms.ModelChoiceField(queryset=Equipo.objects.all().order_by("nombre"))
     
+    def han_jugado(self,liga, equipo_local, equipo_visitante):
+        num = Partido.objects.filter(Q(jornada__in=liga.jornada_set.all()) &
+            Q(equipo_local=equipo_local) & 
+            Q(equipo_visitante=equipo_visitante)).count()
+        return num > 0
+        
     def clean(self):
         cleaned_data = self.cleaned_data
-        #TODO Comprobar que no hayan jugado ya
+
+        if (self.han_jugado(cleaned_data['jornada'].liga, 
+            cleaned_data['equipo_local'], cleaned_data['equipo_visitante'])):
+            raise forms.ValidationError("Estos equipos ya han jugado")
+        
         if (cleaned_data['equipo_local'].id == cleaned_data['equipo_visitante'].id):
             raise forms.ValidationError("No puedes seleccionar el mismo equipo")
         return cleaned_data
