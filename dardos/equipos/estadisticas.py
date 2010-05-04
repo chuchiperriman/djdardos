@@ -51,4 +51,65 @@ class EstadisticasEquipo:
             
     def puntos(self):
         return self.partidos_ganados() * 2 + self.partidos_empatados()
+    
+    def jugador_mas_ganadas(self):
+        fin = None
+        for j in Jugador.objects.filter(equipo=self.equipo):
+            if not fin:
+                fin = j
+                continue
+            if j.partidas_ganadas() > fin.partidas_ganadas():
+                fin = j
+        return fin
+        
+    def jugador_mas_ganadas_ind(self):
+        fin = None
+        for j in Jugador.objects.filter(equipo=self.equipo):
+            if not fin:
+                fin = j
+                continue
+            if j.partidas_ind_ganadas() > fin.partidas_ind_ganadas():
+                fin = j
+        return fin
+    
+    def jugador_mas_ganadas_par(self):
+        fin = None
+        for j in Jugador.objects.filter(equipo=self.equipo):
+            if not fin:
+                fin = j
+                continue
+            if j.partidas_par_ganadas() > fin.partidas_par_ganadas():
+                fin = j
+        return fin
+        
+    def jugador_mas_perdidas(self):
+        fin = None
+        for j in Jugador.objects.filter(equipo=self.equipo):
+            if not fin:
+                fin = j
+                continue
+            if j.partidas_perdidas() > fin.partidas_perdidas():
+                fin = j
+        return fin
+        
+    def jugador_mas_perdidas_ind(self):
+        fin = None
+        for j in Jugador.objects.filter(equipo=self.equipo):
+            if not fin:
+                fin = j
+                continue
+            if j.partidas_ind_perdidas() > fin.partidas_ind_perdidas():
+                fin = j
+        return fin
+    
+    def jugador_mas_perdidas_par(self):
+        fin = None
+        for j in Jugador.objects.filter(equipo=self.equipo):
+            if not fin:
+                fin = j
+                continue
+            if j.partidas_par_perdidas() > fin.partidas_par_perdidas():
+                fin = j
+        return fin
+    
         
