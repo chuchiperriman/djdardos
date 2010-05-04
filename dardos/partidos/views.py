@@ -17,7 +17,7 @@ def detail(request, partido_id):
     p = get_object_or_404(Partido, pk=partido_id)
     return render_to_response('dardos/partidos/detail.html', 
     	{'partido': p, 'partidas': p.partida_set.all()})
-        
+"""    
 def prenew(request):
     if request.method == 'POST':
         form = PartidoPreForm(request.POST) # A form bound to the POST data
@@ -34,23 +34,28 @@ def prenew(request):
     return render_to_response('dardos/partidos/new1.html',
         {"equipos": equipos,
         "form": form})
+"""
 
 def new(request):
-    if request.method == 'POST':
-        form = PartidoForm (request.POST)
-        form.cargar_datos_por_id (form.data['equipo_local'],
-            form.data['equipo_visitante'])
-        if form.is_valid():
-            logging.debug("Si es valido: "+str(form.cleaned_data))
-            return render_to_response('dardos/partidos/new2.html',
-                {"form": form})
-        
-        logging.debug("No es valido: "+str(form.data['equipo_local']))
-        logging.debug("Errores: "+str(form.errors))
-        return render_to_response('dardos/partidos/new2.html',
-                {"form": form})
-        
-    return prenew(request)
     
+    form = PartidoPreForm()
+    
+    if request.method == 'POST':
+        form = PartidoPreForm(request.POST) # A form bound to the POST data
+        if form.is_valid():
+            p = Partido(jornada=form.cleaned_data['jornada'],
+                equipo_local = form.cleaned_data['equipo_local'],
+                equipo_visitante = form.cleaned_data['equipo_visitante'],
+                fecha = form.cleaned_data['fecha'],
+                jugado = False,
+                ganador = None)
+            p.save()
+            return index(request)
+    
+    
+    equipos = Equipo.objects.all().order_by("nombre")
+    return render_to_response('dardos/partidos/new.html',
+        {"equipos": equipos,
+        "form": form})
     
     

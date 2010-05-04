@@ -16,7 +16,6 @@ urlpatterns = patterns('',
     (r'^jugadores/(?P<jugador_id>\d+)/$', 'djdardos.dardos.jugadores.views.detail'),
     (r'^partidos$', 'djdardos.dardos.partidos.views.index'),
     (r'^partidos/new$', 'djdardos.dardos.partidos.views.new'),
-    (r'^partidos/prenew$', 'djdardos.dardos.partidos.views.prenew'),
     (r'^partidos/(?P<partido_id>\d+)/$', 'djdardos.dardos.partidos.views.detail'),
     # Example:
     # (r'^djdardos/', include('djdardos.foo.urls')),
