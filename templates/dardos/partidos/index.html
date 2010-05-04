@@ -18,7 +18,12 @@
         	<td>{{p.equipo_local.nombre}}</td>
         	<td>{{p.equipo_visitante.nombre}}</td>
         	<td>{{ p.fecha|date:"d-m-Y" }}</td>
-        	<td><a href="/partidos/{{p.id}}" >[Ver]</a></td>
+        	<td>
+        		<a href="/partidos/{{p.id}}" >[Ver]</a>
+        		{% if not p.jugado %}
+        		<a href="/partidos/partidas/{{p.id}}" >[Editar]</a>
+        		{% endif %}
+        	</td>
        	</tr>
     {% endfor %}
     </table>

@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     (r'^partidos$', 'djdardos.dardos.partidos.views.index'),
     (r'^partidos/new$', 'djdardos.dardos.partidos.views.new'),
     (r'^partidos/(?P<partido_id>\d+)/$', 'djdardos.dardos.partidos.views.detail'),
+    (r'^partidos/partidas/(?P<partido_id>\d+)/$', 'djdardos.dardos.partidos.views.setpartidas'),
     # Example:
     # (r'^djdardos/', include('djdardos.foo.urls')),
 

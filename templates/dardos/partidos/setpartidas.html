@@ -9,15 +9,16 @@
 	<p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
 	<ul>
 	{% for field in form %}
-	<li>{{ field.errors|striptags }}</li>
+		{%if field.errors%}
+		<li>{{ field.errors|striptags }}</li>
+		{%endif%}
 	{% endfor %}
 	</ul>
 </div>
 {% endif %}
 
-<form action="new" method="post">
+<form action="." method="post">
 <h2>501 Parejas</h2>
-{{ form.equipo_local.as_hidden }}<br/>{{ form.equipo_visitante.as_hidden }}
 <table width="100%">
 	<tr>
 		<th align="left" >Local</th>

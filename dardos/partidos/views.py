@@ -57,5 +57,18 @@ def new(request):
     return render_to_response('dardos/partidos/new.html',
         {"equipos": equipos,
         "form": form})
-    
-    
+
+def setpartidas(request, partido_id):
+    if request.method == 'POST':
+        form = PartidasForm(data=request.POST, partido_id=partido_id)
+        if form.is_valid():
+            logging.debug('Valido !!')
+            
+    else:
+        form = PartidasForm(partido_id=partido_id)
+
+    #form.cargar_datos (partido_id)
+        
+    return render_to_response('dardos/partidos/setpartidas.html',
+        {"form": form})
+

@@ -6,7 +6,9 @@ import datetime
 import logging
 
 class PartidoPreForm(forms.Form):
-    #jornada = models.ForeignKey(Jornada)
+    
+    #TODO Hacerlo con un formulario de modelo: http://docs.djangoproject.com/en/dev/topics/forms/modelforms/
+    
     fecha = forms.DateField(input_formats=('%d-%m-%Y', '%d/%m/%Y'))
     jornada = forms.ModelChoiceField(queryset=Jornada.objects.filter(partido=None))
     equipo_local = forms.ModelChoiceField(queryset=Equipo.objects.all().order_by("nombre"))
@@ -30,10 +32,9 @@ class PartidoPreForm(forms.Form):
         return cleaned_data
 
 
-class PartidoForm(forms.Form):
+class PartidasForm(forms.Form):
     
-    equipo_local = forms.IntegerField()
-    equipo_visitante = forms.IntegerField()
+    #TODO Usar model forms: http://collingrady.wordpress.com/2008/02/18/editing-multiple-objects-in-django-with-newforms/
     
     par501jl1_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
     par501jl2_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
@@ -103,12 +104,13 @@ class PartidoForm(forms.Form):
     ind501jv1_8 = forms.ModelChoiceField(queryset=Jugador.objects.none())
     ind501g_8 = forms.ModelChoiceField(queryset=Equipo.objects.none())
     
-    def cargar_datos_por_id(self, id_local, id_visitante):
-        self.cargar_datos(Equipo.objects.get(pk=id_local), Equipo.objects.get(pk=id_visitante))
+    def __init__(self, partido_id, *args, **kwargs):
+        partido = Partido.objects.get(pk=partido_id)
+        equipo_local = partido.equipo_local
+        equipo_visitante = partido.equipo_visitante
         
-    def cargar_datos(self, equipo_local, equipo_visitante):
-        self.fields['equipo_local'].initial = equipo_local.id
-        self.fields['equipo_visitante'].initial = equipo_visitante.id
+        super(PartidasForm, self).__init__(*args, **kwargs)
+        
         self.fields['par501jl1_1'].queryset = equipo_local.jugador_set.all()
         self.fields['par501jl2_1'].queryset = equipo_local.jugador_set.all()
         self.fields['par501jv1_1'].queryset = equipo_visitante.jugador_set.all()
@@ -177,3 +179,9 @@ class PartidoForm(forms.Form):
         self.fields['ind501jv1_8'].queryset = equipo_visitante.jugador_set.all()
         self.fields['ind501g_8'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
         
+    def clean(self):
+        cleaned_data = self.cleaned_data
+
+        #TODO Comprobar que la pareja no sea la misma
+        #TODO Comprobar que una pareja del grupo 1 no puede jugar en el grupo 2
+        return cleaned_data
