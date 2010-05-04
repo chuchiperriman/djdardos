@@ -9,6 +9,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^$', 'djdardos.dardos.views.index'),
     (r'^equipos$', 'djdardos.dardos.equipos.views.index'),
     (r'^equipos/(?P<equipo_id>\d+)/$', 'djdardos.dardos.equipos.views.detail'),
     (r'^jugadores$', 'djdardos.dardos.jugadores.views.index'),
