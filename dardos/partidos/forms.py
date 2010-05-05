@@ -17,6 +17,8 @@ class PartidoForm(forms.ModelForm):
         return num > 0
     
     def clean(self):
+        logging.debug("widgets:"+str(dir(self)))
+        logging.debug("widgets:"+str(dir(self.instance)))
         self.cleaned_data = super(PartidoForm, self).clean()
         
         if ('jornada' in self.cleaned_data and
@@ -29,6 +31,7 @@ class PartidoForm(forms.ModelForm):
             
             if (self.cleaned_data['equipo_local'].id == self.cleaned_data['equipo_visitante'].id):
                 raise forms.ValidationError("No puedes seleccionar el mismo equipo")
+            #TODO Validar que ninguno de los dos equipos hayan jugado ya la jornada indicada
 
         return self.cleaned_data
 

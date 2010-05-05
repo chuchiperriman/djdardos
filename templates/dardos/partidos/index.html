@@ -8,6 +8,7 @@
     <h1>Partidos</h1>
     <table width="100%">
     	<tr>
+    		<th>Jornada</th>
     		<th>Local</th>
     		<th>Visitante</th>
     		<th>Fecha</th>
@@ -15,6 +16,7 @@
     	</tr>
     {% for p in partidos %}
     	<tr>
+    		<td>{{p.jornada.numero}}</td>
         	<td>{{p.equipo_local.nombre}}</td>
         	<td>{{p.equipo_visitante.nombre}}</td>
         	<td>{{ p.fecha|date:"d-m-Y" }}</td>

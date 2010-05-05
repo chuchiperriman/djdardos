@@ -10,7 +10,7 @@ import logging
 
 # Create your views here.
 def index(request):
-    partidos = Partido.objects.all().order_by('-fecha')
+    partidos = Partido.objects.all().order_by('jornada')
     return render_to_response('dardos/partidos/index.html', {'partidos': partidos})
 
 def detail(request, partido_id):
@@ -54,8 +54,9 @@ def new(request):
             p.save()
             """
             return index(request)
-    
-    
+            
+    #q = Partido.objects.all().values('jornada').query
+    #form.fields["jornada"].queryset = Jornada.objects.exclude(pk__in=q)
     equipos = Equipo.objects.all().order_by("nombre")
     return render_to_response('dardos/partidos/new.html',
         {"equipos": equipos,
