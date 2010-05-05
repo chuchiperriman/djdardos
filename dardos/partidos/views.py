@@ -38,11 +38,13 @@ def prenew(request):
 
 def new(request):
     
-    form = PartidoPreForm()
+    form = PartidoForm()
     
     if request.method == 'POST':
-        form = PartidoPreForm(request.POST) # A form bound to the POST data
+        form = PartidoForm(request.POST) # A form bound to the POST data
         if form.is_valid():
+            form.save()
+            """
             p = Partido(jornada=form.cleaned_data['jornada'],
                 equipo_local = form.cleaned_data['equipo_local'],
                 equipo_visitante = form.cleaned_data['equipo_visitante'],
@@ -50,6 +52,7 @@ def new(request):
                 jugado = False,
                 ganador = None)
             p.save()
+            """
             return index(request)
     
     

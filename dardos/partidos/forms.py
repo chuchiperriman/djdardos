@@ -5,33 +5,34 @@ from django import forms
 import datetime
 import logging
 
-class PartidoPreForm(forms.Form):
-    
-    #TODO Hacerlo con un formulario de modelo: http://docs.djangoproject.com/en/dev/topics/forms/modelforms/
-    
-    fecha = forms.DateField(input_formats=('%d-%m-%Y', '%d/%m/%Y'))
-    jornada = forms.ModelChoiceField(queryset=Jornada.objects.filter(partido=None))
-    equipo_local = forms.ModelChoiceField(queryset=Equipo.objects.all().order_by("nombre"))
-    equipo_visitante = forms.ModelChoiceField(queryset=Equipo.objects.all().order_by("nombre"))
-    
+class PartidoForm(forms.ModelForm):
+    #TODO Mostrar solo jornadas que no tienen partido asignado
+    class Meta:
+        model = Partido
+
     def han_jugado(self,liga, equipo_local, equipo_visitante):
         num = Partido.objects.filter(Q(jornada__in=liga.jornada_set.all()) &
             Q(equipo_local=equipo_local) & 
             Q(equipo_visitante=equipo_visitante)).count()
         return num > 0
-        
+    
     def clean(self):
-        cleaned_data = self.cleaned_data
-
-        if (self.han_jugado(cleaned_data['jornada'].liga, 
-            cleaned_data['equipo_local'], cleaned_data['equipo_visitante'])):
-            raise forms.ValidationError("Estos equipos ya han jugado")
+        self.cleaned_data = super(PartidoForm, self).clean()
         
-        if (cleaned_data['equipo_local'].id == cleaned_data['equipo_visitante'].id):
-            raise forms.ValidationError("No puedes seleccionar el mismo equipo")
-        return cleaned_data
+        if ('jornada' in self.cleaned_data and
+            'equipo_local' in self.cleaned_data and
+            'equipo_visitante' in self.cleaned_data):
+            
+            if (self.han_jugado(self.cleaned_data['jornada'].liga, 
+                self.cleaned_data['equipo_local'], self.cleaned_data['equipo_visitante'])):
+                raise forms.ValidationError("Estos equipos ya han jugado")
+            
+            if (self.cleaned_data['equipo_local'].id == self.cleaned_data['equipo_visitante'].id):
+                raise forms.ValidationError("No puedes seleccionar el mismo equipo")
 
+        return self.cleaned_data
 
+    
 class PartidasForm(forms.Form):
     
     #TODO Usar model forms: http://collingrady.wordpress.com/2008/02/18/editing-multiple-objects-in-django-with-newforms/
