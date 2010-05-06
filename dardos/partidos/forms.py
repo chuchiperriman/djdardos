@@ -35,7 +35,18 @@ class PartidoForm(forms.ModelForm):
 
         return self.cleaned_data
 
-    
+class PartidaIndividualForm(forms.ModelForm):
+    #TODO Mostrar solo jornadas que no tienen partido asignado
+    class Meta:
+        model = PartidaIndividual
+        exclude = ("partido", "tipo")
+        
+class PartidaParejasForm(forms.ModelForm):
+    #TODO Mostrar solo jornadas que no tienen partido asignado
+    class Meta:
+        model = PartidaParejas
+        exclude = ("partido", "tipo")
+        
 class PartidasForm(forms.Form):
     
     #TODO Usar model forms: http://collingrady.wordpress.com/2008/02/18/editing-multiple-objects-in-django-with-newforms/
