@@ -3,263 +3,150 @@
 {% block title %}Nuevo partido{% endblock %}
 
 {% block content %}
-<h1>Nuevo partido</h1>
+{% for form in forms_parejas_1 %}
 {% if form.errors %}
 <div id="form-error">
-	<p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
-	<ul>
-	{% for field in form %}
-		{%if field.errors%}
-		<li>{{ field.errors|striptags }}</li>
-		{%endif%}
-	{% endfor %}
-	</ul>
+       <p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after ma
+       <ul>
+       {% for field in form %}
+               {%if field.errors%}
+               <li>{{ field.errors|striptags }}</li>
+               {%endif%}
+       {% endfor %}
+       </ul>
 </div>
 {% endif %}
+{%endfor%}
 
-<form action="." method="post">
+<h1>Nuevo partido</h1>
 <h2>501 Parejas</h2>
+<form action="." method="post">
 <table width="100%">
 	<tr>
-		<th align="left" >Local</th>
-		<th align="center" width="50px">Ganador</th>
-		<th align="right" >Visitante</th>
+		<th align="left">Pareja local</th>
+		<th align="center">Ganadores</th>
+		<th align="right">Pareja visitante</th>
 	</tr>
+{% for form in forms_parejas_1 %}
 	<tr>
 		<td align="left">
-			{{ form.par501jl1_1 }}
-			{{ form.par501jl2_1 }}
+			{{form.jugador_local1}}
+			{{form.jugador_local2}}
 		</td>
 		<td align="center">
-			{{ form.par501g_1 }}
+			{{form.ganador1}}
+			{{form.ganador2}}
 		</td>
 		<td align="right">
-			{{ form.par501jv1_1 }}
-			{{ form.par501jv2_1 }}
+			{{form.jugador_visitante1}}
+			{{form.jugador_visitante2}}
 		</td>
 	</tr>
-	<tr>
-		<td align="left">
-			{{ form.par501jl1_2 }}
-			{{ form.par501jl2_2 }}
-		</td>
-		<td align="center">
-			{{ form.par501g_2 }}
-		</td>
-		<td align="right">
-			{{ form.par501jv1_2 }}
-			{{ form.par501jv2_2 }}
-		</td>
-	</tr>
-	<tr>
-		<td colspan="4">
-		<hr style="height:1px;border: 0 none;background-color:#BBB"/>
-		</td>
-	</tr>
-	<tr>
-		<td align="left">
-			{{ form.par501jl1_3 }}
-			{{ form.par501jl2_3 }}
-		</td>
-		<td align="center">
-			{{ form.par501g_3 }}
-		</td>
-		<td align="right">
-			{{ form.par501jv1_3 }}
-			{{ form.par501jv2_3 }}
-		</td>
-	</tr>
-	<tr>
-		<td align="left">
-			{{ form.par501jl1_4 }}
-			{{ form.par501jl2_4 }}
-		</td>
-		<td align="center">
-			{{ form.par501g_4 }}
-		</td>
-		<td align="right">
-			{{ form.par501jv1_4 }}
-			{{ form.par501jv2_4 }}
-		</td>
-	</tr>
+{% endfor %}
 </table>
-
-<br/>
+<hr/>
+<table width="100%">
+{% for form in forms_parejas_2 %}
+	<tr>
+		<td align="left">
+			{{form.jugador_local1}}
+			{{form.jugador_local2}}
+		</td>
+		<td align="center">
+			{{form.ganador1}}
+			{{form.ganador2}}
+		</td>
+		<td align="right">
+			{{form.jugador_visitante1}}
+			{{form.jugador_visitante2}}
+		</td>
+	</tr>
+{% endfor %}
+</table><br/>
 <h2>501 Individual</h2>
-
 <table width="100%">
 	<tr>
-		<th align="left" >Local</th>
-		<th align="center" width="50px">Ganador</th>
-		<th align="right" >Visitante</th>
+		<th align="left">Jugador local</th>
+		<th align="center">Ganador</th>
+		<th align="right">Jugador visitante</th>
 	</tr>
+{% for form in forms_individual_1 %}
 	<tr>
 		<td align="left">
-			{{ form.ind501jl1_1 }}
+			{{form.jugador_local}}
 		</td>
 		<td align="center">
-			{{ form.ind501g_1 }}
+			{{form.ganador}}
 		</td>
 		<td align="right">
-			{{ form.ind501jv1_1 }}
+			{{form.jugador_visitante}}
 		</td>
 	</tr>
-	<tr>
-		<td align="left">
-			{{ form.ind501jl1_2 }}
-		</td>
-		<td align="center">
-			{{ form.ind501g_2 }}
-		</td>
-		<td align="right">
-			{{ form.ind501jv1_2 }}
-		</td>
-	</tr>
-	<tr>
-		<td align="left">
-			{{ form.ind501jl1_3 }}
-		</td>
-		<td align="center">
-			{{ form.ind501g_3 }}
-		</td>
-		<td align="right">
-			{{ form.ind501jv1_3 }}
-		</td>
-	</tr>
-	<tr>
-		<td align="left">
-			{{ form.ind501jl1_4 }}
-		</td>
-		<td align="center">
-			{{ form.ind501g_4 }}
-		</td>
-		<td align="right">
-			{{ form.ind501jv1_4 }}
-		</td>
-	</tr>
-</table>
-
-<br/>
+{% endfor %}
+</table><br/>
 <h2>Cricket Parejas</h2>
-
 <table width="100%">
 	<tr>
-		<th align="left" >Local</th>
-		<th align="center" width="50px">Ganador</th>
-		<th align="right" >Visitante</th>
+		<th align="left">Pareja local</th>
+		<th align="center">Ganadores</th>
+		<th align="right">Pareja visitante</th>
 	</tr>
+{% for form in forms_parejas_3 %}
 	<tr>
 		<td align="left">
-			{{ form.parcrijl1_1 }}
-			{{ form.parcrijl2_1 }}
+			{{form.jugador_local1}}
+			{{form.jugador_local2}}
 		</td>
 		<td align="center">
-			{{ form.parcrig_1 }}
+			{{form.ganador1}}
+			{{form.ganador2}}
 		</td>
 		<td align="right">
-			{{ form.parcrijv1_1 }}
-			{{ form.parcrijv2_1 }}
+			{{form.jugador_visitante1}}
+			{{form.jugador_visitante2}}
 		</td>
 	</tr>
-	<tr>
-		<td align="left">
-			{{ form.parcrijl1_2 }}
-			{{ form.parcrijl2_2 }}
-		</td>
-		<td align="center">
-			{{ form.parcrig_2 }}
-		</td>
-		<td align="right">
-			{{ form.parcrijv1_2 }}
-			{{ form.parcrijv2_2 }}
-		</td>
-	</tr>
-	<tr>
-		<td colspan="4">
-		<hr style="height:1px;border: 0 none;background-color:#BBB"/>
-		</td>
-	</tr>
-	<tr>
-		<td align="left">
-			{{ form.parcrijl1_3 }}
-			{{ form.parcrijl2_3 }}
-		</td>
-		<td align="center">
-			{{ form.parcrig_3 }}
-		</td>
-		<td align="right">
-			{{ form.parcrijv1_3 }}
-			{{ form.parcrijv2_3 }}
-		</td>
-	</tr>
-	<tr>
-		<td align="left">
-			{{ form.parcrijl1_4 }}
-			{{ form.parcrijl2_4 }}
-		</td>
-		<td align="center">
-			{{ form.parcrig_4 }}
-		</td>
-		<td align="right">
-			{{ form.parcrijv1_4 }}
-			{{ form.parcrijv2_4 }}
-		</td>
-	</tr>
+{% endfor %}
 </table>
-
-<br/>
+<hr/>
+<table width="100%">
+{% for form in forms_parejas_4 %}
+	<tr>
+		<td align="left">
+			{{form.jugador_local1}}
+			{{form.jugador_local2}}
+		</td>
+		<td align="center">
+			{{form.ganador1}}
+			{{form.ganador2}}
+		</td>
+		<td align="right">
+			{{form.jugador_visitante1}}
+			{{form.jugador_visitante2}}
+		</td>
+	</tr>
+{% endfor %}
+</table><br/>
 <h2>501 Individual</h2>
-
 <table width="100%">
 	<tr>
-		<th align="left" >Local</th>
-		<th align="center" width="50px">Ganador</th>
-		<th align="right" >Visitante</th>
+		<th align="left">Jugador local</th>
+		<th align="center">Ganador</th>
+		<th align="right">Jugador visitante</th>
 	</tr>
+{% for form in forms_individual_2 %}
 	<tr>
 		<td align="left">
-			{{ form.ind501jl1_5 }}
+			{{form.jugador_local}}
 		</td>
 		<td align="center">
-			{{ form.ind501g_5 }}
+			{{form.ganador}}
 		</td>
 		<td align="right">
-			{{ form.ind501jv1_5 }}
+			{{form.jugador_visitante}}
 		</td>
 	</tr>
-	<tr>
-		<td align="left">
-			{{ form.ind501jl1_6 }}
-		</td>
-		<td align="center">
-			{{ form.ind501g_6 }}
-		</td>
-		<td align="right">
-			{{ form.ind501jv1_6 }}
-		</td>
-	</tr>
-	<tr>
-		<td align="left">
-			{{ form.ind501jl1_7 }}
-		</td>
-		<td align="center">
-			{{ form.ind501g_7 }}
-		</td>
-		<td align="right">
-			{{ form.ind501jv1_7 }}
-		</td>
-	</tr>
-	<tr>
-		<td align="left">
-			{{ form.ind501jl1_8 }}
-		</td>
-		<td align="center">
-			{{ form.ind501g_8 }}
-		</td>
-		<td align="right">
-			{{ form.ind501jv1_8 }}
-		</td>
-	</tr>
+{% endfor %}
 </table>
 <input type="submit" value="Guardar" />
 </form>
