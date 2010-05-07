@@ -3,7 +3,71 @@
 from dardos.models import *
 from datetime import datetime
 
+from xml.dom.minidom import parse
+
 def cargar():
+    dom = parse("/home/perriman/dev/djdardos/data/datos.xml")
+    root = dom.childNodes[0]
+    
+    equipos = {}
+    
+    for en in root.getElementsByTagName("equipo"):
+        equipos[en.attributes["id"].value] = en.attributes["nombre"].value
+        e = Equipo(pk=en.attributes["id"].value, nombre=en.attributes["nombre"].value)
+        e.save()
+        Jugador.objects.filter(equipo=e).delete()
+        print 'equipo',e.nombre
+        for jn in en.getElementsByTagName("jugador"):
+            j = Jugador(pk=jn.attributes["id"].value, nombre=jn.attributes["nombre"].value,
+                fecha_alta=datetime.now(), equipo=e)
+            j.save()
+            print '\tjugador', j.nombre
+    for dn in root.getElementsByTagName("division"):
+        Division.objects.filter(nombre=dn.attributes["nombre"].value).delete()
+        d = Division(nombre=dn.attributes["nombre"].value)
+        d.save()
+        print 'division',d.nombre
+        for ln in dn.getElementsByTagName("liga"):
+            l = Liga(nombre=ln.attributes["nombre"].value, division=d)
+            l.save()
+            print '\tliga', l.nombre
+            for eln in ln.getElementsByTagName("equipo_liga"):
+                e = Equipo.objects.get(pk=eln.attributes["id"].value)
+                e.ligas.add(l)
+                e.save()
+            for jn in ln.getElementsByTagName("jornada"):
+                j = Jornada(liga=l, numero=jn.attributes["numero"].value)
+                j.save()
+                Partido.objects.filter(jornada=j).delete()
+                print '\t\tjornada', j.numero
+                for pn in jn.getElementsByTagName("partido"):
+                    p = Partido(equipo_local=Equipo.objects.get(pk=pn.attributes["equipo_local"].value),
+                        equipo_visitante=Equipo.objects.get(pk=pn.attributes["equipo_visitante"].value),
+                        ganador=Equipo.objects.get(pk=pn.attributes["ganador"].value),
+                        fecha=datetime.strptime(pn.attributes["fecha"].value, "%d/%m/%Y"),
+                        jugado=bool(pn.attributes["jugado"].value),
+                        jornada=j)
+                    p.save()
+                    print '\t\t\tpartido',p.fecha,p.equipo_local,p.equipo_visitante
+                    for ppn in pn.getElementsByTagName("partidapar"):
+                        pp = PartidaParejas(partido=p, tipo=ppn.attributes["tipo"].value, 
+                            jugador_local1=Jugador.objects.get(pk=ppn.attributes["jugador_local1"].value),
+                            jugador_local2=Jugador.objects.get(pk=ppn.attributes["jugador_local2"].value),
+                            jugador_visitante1=Jugador.objects.get(pk=ppn.attributes["jugador_visitante1"].value),
+                            jugador_visitante2=Jugador.objects.get(pk=ppn.attributes["jugador_visitante2"].value),
+                            ganador1=Jugador.objects.get(pk=ppn.attributes["ganador1"].value),
+                            ganador2=Jugador.objects.get(pk=ppn.attributes["ganador2"].value))
+                        pp.save()
+                        print '\t\t\t\tpartida parejas',pp.pk
+                    for pin in pn.getElementsByTagName("partidaind"):
+                        pi = PartidaIndividual(partido=p, tipo=pin.attributes["tipo"].value, 
+                            jugador_local=Jugador.objects.get(pk=pin.attributes["jugador_local"].value),
+                            jugador_visitante=Jugador.objects.get(pk=pin.attributes["jugador_visitante"].value),
+                            ganador=Jugador.objects.get(pk=pin.attributes["ganador"].value))
+                        pi.save()
+                        print '\t\t\t\tpartida individual',pi.pk
+                    
+    return
     d = Division(pk=1, nombre="Primera")
     d.save()
     d = Division(pk=2, nombre="Segunda")

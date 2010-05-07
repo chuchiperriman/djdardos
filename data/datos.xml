@@ -1,0 +1,92 @@
+<datos>
+    <equipo id="1" nombre="Paris">
+        <jugador id="1" nombre="Chuchi">
+        </jugador>
+        <jugador id="2" nombre="Rego">
+        </jugador>
+        <jugador id="3" nombre="Saúl">
+        </jugador>
+        <jugador id="4" nombre="Jose">
+        </jugador>
+        <jugador id="5" nombre="Luis">
+        </jugador>
+        <jugador id="6" nombre="Grau">
+        </jugador>
+        <jugador id="7" nombre="Javi">
+        </jugador>
+        <jugador id="8" nombre="Víctor">
+        </jugador>
+    </equipo>
+    <equipo id="2" nombre="Molly Corner">
+        <jugador id="9" nombre="Maxi">
+        </jugador>
+        <jugador id="10" nombre="Miguel">
+        </jugador>
+        <jugador id="11" nombre="Alejandro">
+        </jugador>
+        <jugador id="12" nombre="Álvaro">
+        </jugador>
+        <jugador id="13" nombre="Sergio">
+        </jugador>
+    </equipo>
+    <equipo id="3" nombre="Coffe Beer B">
+    </equipo>
+    <equipo id="4" nombre="Medina">
+    </equipo>
+    <equipo id="5" nombre="Flash Sport">
+    </equipo>
+    <division nombre="3ª División Grupo C">
+        <liga nombre="2010">
+            <equipo_liga id="1"/>
+            <equipo_liga id="2"/>
+            <equipo_liga id="3"/>
+            <equipo_liga id="4"/>
+            <equipo_liga id="5"/>
+            <jornada numero="1">
+                <partido equipo_local="1" equipo_visitante="2" ganador="2"
+                    fecha="15/04/2010" jugado="true">
+                    <partidapar jugador_local1="7" jugador_local2="6"
+                        jugador_visitante1="9" jugador_visitante2="10"
+                        ganador1="9" ganador2="10" tipo="1"/>
+                    <partidapar jugador_local1="7" jugador_local2="2"
+                        jugador_visitante1="9" jugador_visitante2="11"
+                        ganador1="9" ganador2="11" tipo="1"/>
+                    <partidapar jugador_local1="8" jugador_local2="4"
+                        jugador_visitante1="12" jugador_visitante2="13"
+                        ganador1="12" ganador2="13" tipo="1"/>
+                    <partidapar jugador_local1="8" jugador_local2="4"
+                        jugador_visitante1="12" jugador_visitante2="13"
+                        ganador1="12" ganador2="13" tipo="1"/>
+                    <partidaind jugador_local="7" jugador_visitante="12"
+                        ganador="12" tipo="1"/>
+                    <partidaind jugador_local="2" jugador_visitante="13"
+                        ganador="2" tipo="1"/>
+                    <partidaind jugador_local="6" jugador_visitante="9"
+                        ganador="6" tipo="1"/>
+                    <partidaind jugador_local="8" jugador_visitante="11"
+                        ganador="11" tipo="1"/>
+                    <partidapar jugador_local1="8" jugador_local2="2"
+                        jugador_visitante1="10" jugador_visitante2="11"
+                        ganador1="8" ganador2="2" tipo="2"/>
+                    <partidapar jugador_local1="8" jugador_local2="2"
+                        jugador_visitante1="10" jugador_visitante2="9"
+                        ganador1="10" ganador2="9" tipo="2"/>
+                    <partidapar jugador_local1="4" jugador_local2="6"
+                        jugador_visitante1="13" jugador_visitante2="12"
+                        ganador1="13" ganador2="12" tipo="2"/>
+                    <partidapar jugador_local1="7" jugador_local2="5"
+                        jugador_visitante1="13" jugador_visitante2="12"
+                        ganador1="13" ganador2="12" tipo="2"/>
+                    <partidaind jugador_local="2" jugador_visitante="13"
+                        ganador="13" tipo="1"/>
+                    <partidaind jugador_local="4" jugador_visitante="11"
+                        ganador="11" tipo="1"/>
+                    <partidaind jugador_local="5" jugador_visitante="10"
+                        ganador="5" tipo="1"/>
+                    <partidaind jugador_local="8" jugador_visitante="9"
+                        ganador="9" tipo="1"/>
+                </partido>
+            </jornada>
+        </liga>
+    </division>
+</datos>

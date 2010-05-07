@@ -24,6 +24,8 @@ def index(request):
 
 def detail(request, equipo_id):
     e = get_object_or_404(Equipo, pk=equipo_id)
+    import logging
+    logging.debug(e.ligas.all())
     liga_actual = e.ligas.all()[0]
     estadisticas = EstadisticasEquipo(e)
     jornadas = []
