@@ -4,6 +4,23 @@ from djdardos.dardos.models import *
 from django.db import models
 from django.db.models import Q
 
+class DatosEstadisticaJugadores:
+    def __init__(self):
+        self.jugadores = []
+        self.valor = 0
+        
+    def __unicode__(self):
+        val=""
+        primero = True
+        for j in self.jugadores:
+            if not primero:
+                val += ", "
+            else:
+                primero = False
+                
+            val += j.nombre
+        return str(self.valor) + " -> " + val
+
 class EstadisticasEquipo:
     def __init__(self, equipo):
         self.equipo = equipo
@@ -52,147 +69,95 @@ class EstadisticasEquipo:
     def puntos(self):
         return self.partidos_ganados() * 2 + self.partidos_empatados()
     
-    def jugador_mas_ganadas(self):
-        fin = None
+    def __controlar_jugador_mejor(self, datos, jugador, valor):
+        if valor > datos.valor:
+            datos.jugadores = [jugador]
+            datos.valor = valor
+        elif valor == datos.valor:
+            datos.jugadores.append(jugador)
+            
+    def __controlar_jugador_peor(self, datos, jugador, valor):
+        if valor < datos.valor:
+            datos.jugadores = [jugador]
+            datos.valor = valor
+        elif valor == datos.valor:
+            datos.jugadores.append(jugador)
+            
+    def datos_mas_ganadas(self):
+        datos = DatosEstadisticaJugadores()
         for j in Jugador.objects.filter(equipo=self.equipo):
-            if not fin:
-                fin = j
-                continue
-            if j.partidas_ganadas() > fin.partidas_ganadas():
-                fin = j
-        return fin
+            self.__controlar_jugador_mejor(datos, j, j.partidas_ganadas())
+        return datos
         
-    def jugador_mas_ganadas_ind(self):
-        fin = None
+    def datos_mas_ganadas_ind(self):
+        datos = DatosEstadisticaJugadores()
         for j in Jugador.objects.filter(equipo=self.equipo):
-            if not fin:
-                fin = j
-                continue
-            if j.partidas_ind_ganadas() > fin.partidas_ind_ganadas():
-                fin = j
-        return fin
+            self.__controlar_jugador_mejor(datos, j, j.partidas_ind_ganadas())
+        return datos
     
-    def jugador_mas_ganadas_par(self):
-        fin = None
+    def datos_mas_ganadas_par(self):
+        datos = DatosEstadisticaJugadores()
         for j in Jugador.objects.filter(equipo=self.equipo):
-            if not fin:
-                fin = j
-                continue
-            if j.partidas_par_ganadas() > fin.partidas_par_ganadas():
-                fin = j
-        return fin
+            self.__controlar_jugador_mejor(datos, j, j.partidas_par_ganadas())
+        return datos
         
-    def jugador_mas_perdidas(self):
-        fin = None
+    def datos_mas_perdidas(self):
+        datos = DatosEstadisticaJugadores()
         for j in Jugador.objects.filter(equipo=self.equipo):
-            if not fin:
-                fin = j
-                continue
-            if j.partidas_perdidas() > fin.partidas_perdidas():
-                fin = j
-        return fin
+            self.__controlar_jugador_mejor(datos, j, j.partidas_perdidas())
+        return datos
         
-    def jugador_mas_perdidas_ind(self):
-        fin = None
+    def datos_mas_perdidas_ind(self):
+        datos = DatosEstadisticaJugadores()
         for j in Jugador.objects.filter(equipo=self.equipo):
-            if not fin:
-                fin = j
-                continue
-            if j.partidas_ind_perdidas() > fin.partidas_ind_perdidas():
-                fin = j
-        return fin
+            self.__controlar_jugador_mejor(datos, j, j.partidas_ind_perdidas())
+        return datos
     
-    def jugador_mas_perdidas_par(self):
-        fin = None
+    def datos_mas_perdidas_par(self):
+        datos = DatosEstadisticaJugadores()
         for j in Jugador.objects.filter(equipo=self.equipo):
-            if not fin:
-                fin = j
-                continue
-            if j.partidas_par_perdidas() > fin.partidas_par_perdidas():
-                fin = j
-        return fin
+            self.__controlar_jugador_mejor(datos, j, j.partidas_par_perdidas())
+        return datos
     
-    def jugador_mejor_media_ind(self):
-        fin = None
-        media = 0
+    def datos_mejor_media_ind(self):
+        datos = DatosEstadisticaJugadores()
         for j in Jugador.objects.filter(equipo=self.equipo):
-            mediatemp = j.partidas_ind_ganadas () - j.partidas_ind_perdidas()
-            if not fin:
-                fin = j
-                media = mediatemp
-                continue
-            if mediatemp > media:
-                fin = j
-                media = mediatemp
-        return fin
+            self.__controlar_jugador_mejor(datos, j, 
+                    j.partidas_ind_ganadas () - j.partidas_ind_perdidas())
+        return datos
         
-    def jugador_mejor_media_par(self):
-        fin = None
-        media = 0
+    def datos_mejor_media_par(self):
+        datos = DatosEstadisticaJugadores()
         for j in Jugador.objects.filter(equipo=self.equipo):
-            mediatemp = j.partidas_par_ganadas () - j.partidas_par_perdidas()
-            if not fin:
-                fin = j
-                media = mediatemp
-                continue
-            if mediatemp > media:
-                fin = j
-                media = mediatemp
-        return fin
+            self.__controlar_jugador_mejor(datos, j, 
+                    j.partidas_par_ganadas () - j.partidas_par_perdidas())
+        return datos
         
-    def jugador_mejor_media(self):
-        fin = None
-        media = 0
+    def datos_mejor_media(self):
+        datos = DatosEstadisticaJugadores()
         for j in Jugador.objects.filter(equipo=self.equipo):
-            mediatemp = j.partidas_ganadas () - j.partidas_perdidas()
-            if not fin:
-                fin = j
-                media = mediatemp
-                continue
-            if mediatemp > media:
-                fin = j
-                media = mediatemp
-        return fin
+            self.__controlar_jugador_mejor(datos, j, 
+                    j.partidas_ganadas () - j.partidas_perdidas())
+        return datos
         
-    def jugador_peor_media_ind(self):
-        fin = None
-        media = 0
+    def datos_peor_media_ind(self):
+        datos = DatosEstadisticaJugadores()
         for j in Jugador.objects.filter(equipo=self.equipo):
-            mediatemp = j.partidas_ind_ganadas () - j.partidas_ind_perdidas()
-            if not fin:
-                fin = j
-                media = mediatemp
-                continue
-            if mediatemp < media:
-                fin = j
-                media = mediatemp
-        return fin
+            self.__controlar_jugador_peor(datos, j, 
+                    j.partidas_ind_ganadas () - j.partidas_ind_perdidas())
+        return datos
         
-    def jugador_peor_media_par(self):
-        fin = None
-        media = 0
+    def datos_peor_media_par(self):
+        datos = DatosEstadisticaJugadores()
         for j in Jugador.objects.filter(equipo=self.equipo):
-            mediatemp = j.partidas_par_ganadas () - j.partidas_par_perdidas()
-            if not fin:
-                fin = j
-                media = mediatemp
-                continue
-            if mediatemp < media:
-                fin = j
-                media = mediatemp
-        return fin
+            self.__controlar_jugador_peor(datos, j, 
+                    j.partidas_par_ganadas () - j.partidas_par_perdidas())
+        return datos
         
-    def jugador_peor_media(self):
-        fin = None
-        media = 0
+    def datos_peor_media(self):
+        datos = DatosEstadisticaJugadores()
         for j in Jugador.objects.filter(equipo=self.equipo):
-            mediatemp = j.partidas_ganadas () - j.partidas_perdidas()
-            if not fin:
-                fin = j
-                media = mediatemp
-                continue
-            if mediatemp < media:
-                fin = j
-                media = mediatemp
-        return fin
+            self.__controlar_jugador_peor(datos, j, 
+                    j.partidas_ganadas () - j.partidas_perdidas())
+        return datos
         
