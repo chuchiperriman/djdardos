@@ -44,6 +44,9 @@ class Jugador(models.Model):
     def __unicode__(self):
         return self.nombre
 
+    def partidas(self):
+        return self.partidas_ind() + self.partidas_par()
+            
     def partidas_ind(self):
         return PartidaIndividual.objects \
             .filter(Q(jugador_local=self) | Q(jugador_visitante=self)) \
@@ -79,6 +82,13 @@ class Jugador(models.Model):
                 | Q(jugador_visitante1=self) | Q(jugador_visitante2=self)) \
             .exclude(Q(ganador1=self) | Q(ganador2=self)) \
             .count()
+            
+    def partidas_media(self):
+        return self.partidas_ganadas() - self.partidas_perdidas()
+    def partidas_ind_media(self):
+        return self.partidas_ind_ganadas() - self.partidas_ind_perdidas()
+    def partidas_par_media(self):
+        return self.partidas_par_ganadas() - self.partidas_par_perdidas()
         
 class Partido(models.Model):
     jornada = models.ForeignKey(Jornada)

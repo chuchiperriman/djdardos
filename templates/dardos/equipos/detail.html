@@ -31,26 +31,52 @@
 			<tr>
 				<th>Nombre</th>
 				<th>G.I.</th>
-				<th>G.P.</th>
 				<th>P.I.</th>
+				<th>M.I.</th>
+				<th>G.P.</th>
 				<th>P.P.</th>
+				<th>M.P.</th>
+				<th>G.T.</th>
+				<th>P.T.</th>
+				<th>M.T.</th>
 				<th>J.I.</th>
 				<th>J.P.</th>
+				<th>J.T.</th>
 				<th>&nbsp;</th>
 			</tr>
 		{% for j in jugadores %}
 			<tr>
 				<td>{{j.nombre}}</td>
 				<td>{{j.partidas_ind_ganadas}}</td>
-				<td>{{j.partidas_par_ganadas}}</td>
 				<td>{{j.partidas_ind_perdidas}}</td>
+				<td>{{j.partidas_ind_media}}</td>
+				<td>{{j.partidas_par_ganadas}}</td>
 				<td>{{j.partidas_par_perdidas}}</td>
+				<td>{{j.partidas_par_media}}</td>
+				<td>{{j.partidas_ganadas}}</td>
+				<td>{{j.partidas_perdidas}}</td>
+				<td>{{j.partidas_media}}</td>
 				<td>{{j.partidas_ind}}</td>
 				<td>{{j.partidas_par}}</td>
+				<td>{{j.partidas}}</td>
 				<td><a href="/jugadores/{{j.id}}">[Ver]</a></td>
 			</tr>
 		{% endfor %}
 		</table>
+		<ul>
+			<li>G.I.: Ganados individuales</li>
+			<li>P.I.: Perdidos individuales</li>
+			<li>M.I.: Media individuales</li>
+			<li>G.P.: Ganados parejas</li>
+			<li>P.P.: Perdidos parejas</li>
+			<li>M.P.: Media parejas</li>
+			<li>G.T.: Ganados total</li>
+			<li>P.T.: Perdidos total</li>
+			<li>M.T.: Media total</li>
+			<li>J.I.: Jugados individuales</li>
+			<li>J.P.: Jugados parejas</li>
+			<li>J.T.: Jugados total</li>
+		</ul>
 	</div>
 	<div id="tabs-2">
 		<table>
@@ -168,6 +194,30 @@
 			<tr>
 				<td>Más derrotas parejas</td>
 				<td>{{estadisticas.jugador_mas_perdidas_par.nombre}}</td>
+			</tr>
+			<tr>
+				<td>Mejor media individuales</td>
+				<td>{{estadisticas.jugador_mejor_media_ind.nombre}}</td>
+			</tr>
+			<tr>
+				<td>Mejor media parejas</td>
+				<td>{{estadisticas.jugador_mejor_media_par.nombre}}</td>
+			</tr>
+			<tr>
+				<td>Mejor media general</td>
+				<td>{{estadisticas.jugador_mejor_media.nombre}}</td>
+			</tr>
+			<tr>
+				<td>Peor media individuales</td>
+				<td>{{estadisticas.jugador_peor_media_ind.nombre}}</td>
+			</tr>
+			<tr>
+				<td>Peor media parejas</td>
+				<td>{{estadisticas.jugador_peor_media_par.nombre}}</td>
+			</tr>
+			<tr>
+				<td>Peor media general</td>
+				<td>{{estadisticas.jugador_peor_media.nombre}}</td>
 			</tr>
 		</table>
 	</div>

@@ -112,4 +112,87 @@ class EstadisticasEquipo:
                 fin = j
         return fin
     
+    def jugador_mejor_media_ind(self):
+        fin = None
+        media = 0
+        for j in Jugador.objects.filter(equipo=self.equipo):
+            mediatemp = j.partidas_ind_ganadas () - j.partidas_ind_perdidas()
+            if not fin:
+                fin = j
+                media = mediatemp
+                continue
+            if mediatemp > media:
+                fin = j
+                media = mediatemp
+        return fin
+        
+    def jugador_mejor_media_par(self):
+        fin = None
+        media = 0
+        for j in Jugador.objects.filter(equipo=self.equipo):
+            mediatemp = j.partidas_par_ganadas () - j.partidas_par_perdidas()
+            if not fin:
+                fin = j
+                media = mediatemp
+                continue
+            if mediatemp > media:
+                fin = j
+                media = mediatemp
+        return fin
+        
+    def jugador_mejor_media(self):
+        fin = None
+        media = 0
+        for j in Jugador.objects.filter(equipo=self.equipo):
+            mediatemp = j.partidas_ganadas () - j.partidas_perdidas()
+            if not fin:
+                fin = j
+                media = mediatemp
+                continue
+            if mediatemp > media:
+                fin = j
+                media = mediatemp
+        return fin
+        
+    def jugador_peor_media_ind(self):
+        fin = None
+        media = 0
+        for j in Jugador.objects.filter(equipo=self.equipo):
+            mediatemp = j.partidas_ind_ganadas () - j.partidas_ind_perdidas()
+            if not fin:
+                fin = j
+                media = mediatemp
+                continue
+            if mediatemp < media:
+                fin = j
+                media = mediatemp
+        return fin
+        
+    def jugador_peor_media_par(self):
+        fin = None
+        media = 0
+        for j in Jugador.objects.filter(equipo=self.equipo):
+            mediatemp = j.partidas_par_ganadas () - j.partidas_par_perdidas()
+            if not fin:
+                fin = j
+                media = mediatemp
+                continue
+            if mediatemp < media:
+                fin = j
+                media = mediatemp
+        return fin
+        
+    def jugador_peor_media(self):
+        fin = None
+        media = 0
+        for j in Jugador.objects.filter(equipo=self.equipo):
+            mediatemp = j.partidas_ganadas () - j.partidas_perdidas()
+            if not fin:
+                fin = j
+                media = mediatemp
+                continue
+            if mediatemp < media:
+                fin = j
+                media = mediatemp
+        return fin
         
