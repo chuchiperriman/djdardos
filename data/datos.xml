@@ -40,6 +40,10 @@
     	<jugador id="21" nombre="David" />
     </equipo>
     <equipo id="4" nombre="Medina">
+    	<jugador id="22" nombre="Elsa" />
+    	<jugador id="23" nombre="Rubén" />
+    	<jugador id="24" nombre="Berto" />
+    	<jugador id="25" nombre="Fran" />
     </equipo>
     <equipo id="5" nombre="Flash Sport">
     </equipo>
@@ -111,7 +115,7 @@
                         jugador_visitante1="1" jugador_visitante2="5"
                         ganador1="1" ganador2="5" tipo="1"/>
                     <partidaind jugador_local="18" jugador_visitante="6"
-                        ganador="18" tipo=""/>
+                        ganador="18" tipo="1"/>
                     <partidaind jugador_local="14" jugador_visitante="5"
                         ganador="14" tipo="1"/>
                     <partidaind jugador_local="15" jugador_visitante="1"
@@ -138,6 +142,51 @@
                         ganador="7" tipo="1"/>
                     <partidaind jugador_local="14" jugador_visitante="5"
                         ganador="14" tipo="1"/>
+                </partido>
+            </jornada>
+            <jornada numero="3">
+                <partido equipo_local="1" equipo_visitante="4" ganador="4"
+                    fecha="06/05/2010" jugado="true">
+                    <partidapar jugador_local1="2" jugador_local2="8"
+                        jugador_visitante1="22" jugador_visitante2="23"
+                        ganador1="22" ganador2="23" tipo="1"/>
+                    <partidapar jugador_local1="2" jugador_local2="8"
+                        jugador_visitante1="22" jugador_visitante2="23"
+                        ganador1="22" ganador2="23" tipo="1"/>
+                    <partidapar jugador_local1="5" jugador_local2="6"
+                        jugador_visitante1="24" jugador_visitante2="25"
+                        ganador1="24" ganador2="25" tipo="1"/>
+                    <partidapar jugador_local1="4" jugador_local2="1"
+                        jugador_visitante1="24" jugador_visitante2="25"
+                        ganador1="24" ganador2="25" tipo="1"/>
+                    <partidaind jugador_local="4" jugador_visitante="22"
+                        ganador="22" tipo="1"/>
+                    <partidaind jugador_local="7" jugador_visitante="23"
+                        ganador="23" tipo="1"/>
+                    <partidaind jugador_local="6" jugador_visitante="25"
+                        ganador="6" tipo="1"/>
+                    <partidaind jugador_local="5" jugador_visitante="24"
+                        ganador="24" tipo="1"/>
+                    <partidapar jugador_local1="8" jugador_local2="6"
+                        jugador_visitante1="23" jugador_visitante2="25"
+                        ganador1="23" ganador2="25" tipo="2"/>
+                    <partidapar jugador_local1="8" jugador_local2="2"
+                        jugador_visitante1="23" jugador_visitante2="25"
+                        ganador1="8" ganador2="2" tipo="2"/>
+                    <partidapar jugador_local1="1" jugador_local2="5"
+                        jugador_visitante1="22" jugador_visitante2="24"
+                        ganador1="1" ganador2="5" tipo="2"/>
+                    <partidapar jugador_local1="1" jugador_local2="5"
+                        jugador_visitante1="22" jugador_visitante2="24"
+                        ganador1="1" ganador2="5" tipo="2"/>
+                    <partidaind jugador_local="2" jugador_visitante="23"
+                        ganador="23" tipo="1"/>
+                    <partidaind jugador_local="7" jugador_visitante="25"
+                        ganador="7" tipo="1"/>
+                    <partidaind jugador_local="8" jugador_visitante="22"
+                        ganador="22" tipo="1"/>
+                    <partidaind jugador_local="1" jugador_visitante="24"
+                        ganador="1" tipo="1"/>
                 </partido>
             </jornada>
         </liga>
