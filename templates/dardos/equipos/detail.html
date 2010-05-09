@@ -32,13 +32,13 @@
 				<th>Nombre</th>
 				<th>G.I.</th>
 				<th>P.I.</th>
-				<th>M.I.</th>
+				<th>D.I.</th>
 				<th>G.P.</th>
 				<th>P.P.</th>
-				<th>M.P.</th>
+				<th>D.P.</th>
 				<th>G.T.</th>
 				<th>P.T.</th>
-				<th>M.T.</th>
+				<th>D.T.</th>
 				<th>J.I.</th>
 				<th>J.P.</th>
 				<th>J.T.</th>
@@ -49,13 +49,13 @@
 				<td>{{j.nombre}}</td>
 				<td>{{j.partidas_ind_ganadas}}</td>
 				<td>{{j.partidas_ind_perdidas}}</td>
-				<td>{{j.partidas_ind_media}}</td>
+				<td>{{j.partidas_ind_diferencia}}</td>
 				<td>{{j.partidas_par_ganadas}}</td>
 				<td>{{j.partidas_par_perdidas}}</td>
-				<td>{{j.partidas_par_media}}</td>
+				<td>{{j.partidas_par_diferencia}}</td>
 				<td>{{j.partidas_ganadas}}</td>
 				<td>{{j.partidas_perdidas}}</td>
-				<td>{{j.partidas_media}}</td>
+				<td>{{j.partidas_diferencia}}</td>
 				<td>{{j.partidas_ind}}</td>
 				<td>{{j.partidas_par}}</td>
 				<td>{{j.partidas}}</td>
@@ -66,13 +66,13 @@
 		<ul>
 			<li>G.I.: Ganados individuales</li>
 			<li>P.I.: Perdidos individuales</li>
-			<li>M.I.: Media individuales</li>
+			<li>D.I.: Diferencia individuales</li>
 			<li>G.P.: Ganados parejas</li>
 			<li>P.P.: Perdidos parejas</li>
-			<li>M.P.: Media parejas</li>
+			<li>D.P.: Diferencia parejas</li>
 			<li>G.T.: Ganados total</li>
 			<li>P.T.: Perdidos total</li>
-			<li>M.T.: Media total</li>
+			<li>D.T.: Diferencia total</li>
 			<li>J.I.: Jugados individuales</li>
 			<li>J.P.: Jugados parejas</li>
 			<li>J.T.: Jugados total</li>
@@ -196,28 +196,52 @@
 				<td>{{estadisticas.datos_mas_perdidas_par}}</td>
 			</tr>
 			<tr>
-				<td>Mejor media individuales</td>
-				<td>{{estadisticas.datos_mejor_media_ind}}</td>
+				<td>Mejor diferencia individuales</td>
+				<td>{{estadisticas.datos_mejor_diferencia_ind}}</td>
 			</tr>
 			<tr>
-				<td>Mejor media parejas</td>
-				<td>{{estadisticas.datos_mejor_media_par}}</td>
+				<td>Mejor diferencia parejas</td>
+				<td>{{estadisticas.datos_mejor_diferencia_par}}</td>
 			</tr>
 			<tr>
-				<td>Mejor media general</td>
-				<td>{{estadisticas.datos_mejor_media}}</td>
+				<td>Mejor diferencia general</td>
+				<td>{{estadisticas.datos_mejor_diferencia}}</td>
 			</tr>
 			<tr>
-				<td>Peor media individuales</td>
-				<td>{{estadisticas.datos_peor_media_ind}}</td>
+				<td>Peor diferencia individuales</td>
+				<td>{{estadisticas.datos_peor_diferencia_ind}}</td>
 			</tr>
 			<tr>
-				<td>Peor media parejas</td>
-				<td>{{estadisticas.datos_peor_media_par}}</td>
+				<td>Peor diferencia parejas</td>
+				<td>{{estadisticas.datos_peor_diferencia_par}}</td>
 			</tr>
 			<tr>
-				<td>Peor media general</td>
-				<td>{{estadisticas.datos_peor_media}}</td>
+				<td>Peor diferencia general</td>
+				<td>{{estadisticas.datos_peor_diferencia}}</td>
+			</tr>
+			<tr>
+				<td>Mejor porcentaje individuales</td>
+				<td>{{estadisticas.datos_mejor_porcentaje_ind}}</td>
+			</tr>
+			<tr>
+				<td>Mejor porcentaje parejas</td>
+				<td>{{estadisticas.datos_mejor_porcentaje_par}}</td>
+			</tr>
+			<tr>
+				<td>Mejor porcentaje general</td>
+				<td>{{estadisticas.datos_mejor_porcentaje}}</td>
+			</tr>
+			<tr>
+				<td>Mayor porcentaje perdidas individuales</td>
+				<td>{{estadisticas.datos_mayor_porcentaje_perdidas_ind}}</td>
+			</tr>
+			<tr>
+				<td>Mayor porcentaje perdidas parejas</td>
+				<td>{{estadisticas.datos_mayor_porcentaje_perdidas_par}}</td>
+			</tr>
+			<tr>
+				<td>Mayor porcentaje perdidas general</td>
+				<td>{{estadisticas.datos_mayor_porcentaje_perdidas}}</td>
 			</tr>
 		</table>
 	</div>

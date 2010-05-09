@@ -83,11 +83,11 @@ class Jugador(models.Model):
             .exclude(Q(ganador1=self) | Q(ganador2=self)) \
             .count()
             
-    def partidas_media(self):
+    def partidas_diferencia(self):
         return self.partidas_ganadas() - self.partidas_perdidas()
-    def partidas_ind_media(self):
+    def partidas_ind_diferencia(self):
         return self.partidas_ind_ganadas() - self.partidas_ind_perdidas()
-    def partidas_par_media(self):
+    def partidas_par_diferencia(self):
         return self.partidas_par_ganadas() - self.partidas_par_perdidas()
         
 class Partido(models.Model):
