@@ -85,5 +85,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
-    'djdardos.dardos'
+    'django.contrib.comments',
+    'django.contrib.markup',
+    'tagging',
+    'djdardos.basic.inlines',
+    'djdardos.basic.blog',
+    'dardos'
 )

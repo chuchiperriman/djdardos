@@ -18,6 +18,8 @@ urlpatterns = patterns('',
     (r'^partidos/new$', 'djdardos.dardos.partidos.views.new'),
     (r'^partidos/(?P<partido_id>\d+)/$', 'djdardos.dardos.partidos.views.detail'),
     (r'^partidos/partidas/(?P<partido_id>\d+)/$', 'djdardos.dardos.partidos.views.setpartidas'),
+    (r'^comments/', include('django.contrib.comments.urls')),
+    (r'^blog/', include('djdardos.basic.blog.urls')), 
     # Example:
     # (r'^djdardos/', include('djdardos.foo.urls')),
 
