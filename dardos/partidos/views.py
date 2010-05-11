@@ -16,7 +16,7 @@ def index(request):
 def detail(request, partido_id):
     p = get_object_or_404(Partido, pk=partido_id)
     return render_to_response('dardos/partidos/detail.html', 
-    	{'partido': p, 'partidas': p.partida_set.all()})
+    	{'partido': p, 'partidas': p.partida.all()})
 """    
 def prenew(request):
     if request.method == 'POST':

@@ -19,7 +19,12 @@ urlpatterns = patterns('',
     (r'^partidos/(?P<partido_id>\d+)/$', 'djdardos.dardos.partidos.views.detail'),
     (r'^partidos/partidas/(?P<partido_id>\d+)/$', 'djdardos.dardos.partidos.views.setpartidas'),
     (r'^comments/', include('django.contrib.comments.urls')),
-    (r'^blog/', include('djdardos.basic.blog.urls')), 
+    url(r'^post/(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/$',
+        view='djdardos.dardos.views.post_detail',
+        name='blog_detail'
+    ),
+    #(r'^blog/', include('djdardos.basic.blog.urls')),
+    
     # Example:
     # (r'^djdardos/', include('djdardos.foo.urls')),
 
