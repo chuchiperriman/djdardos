@@ -111,7 +111,7 @@ def setpartidas(request, partido_id):
         
         if all([f.is_valid() for f in todos]):
             #TODO Comprobar que una pareja del grupo 1 no puede jugar en el grupo 2
-            #TODO Comprobar que una un jugador no puede jugar más de una individual de cada grupo
+            #TODO Comprobar que una un jugador no puede jugar mas de una individual de cada grupo
             for f in todos:
                 f.save()
         else:
