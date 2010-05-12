@@ -40,163 +40,36 @@ class PartidaIndividualForm(forms.ModelForm):
     class Meta:
         model = PartidaIndividual
         exclude = ("partido", "tipo")
-        
+    
 class PartidaParejasForm(forms.ModelForm):
     #TODO Mostrar solo jornadas que no tienen partido asignado
     class Meta:
         model = PartidaParejas
         exclude = ("partido", "tipo")
-        
-class PartidasForm(forms.Form):
-    
-    #TODO Usar model forms: http://collingrady.wordpress.com/2008/02/18/editing-multiple-objects-in-django-with-newforms/
-    
-    par501jl1_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501jl2_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501jv1_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501jv2_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501g_1 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    par501jl1_2 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501jl2_2 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501jv1_2 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501jv2_2 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501g_2 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    par501jl1_3 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501jl2_3 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501jv1_3 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501jv2_3 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501g_3 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    par501jl1_4 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501jl2_4 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501jv1_4 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501jv2_4 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    par501g_4 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    
-    ind501jl1_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501jv1_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501g_1 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    ind501jl1_2 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501jv1_2 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501g_2 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    ind501jl1_3 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501jv1_3 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501g_3 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    ind501jl1_4 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501jv1_4 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501g_4 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    
-    parcrijl1_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrijl2_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrijv1_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrijv2_1 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrig_1 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    parcrijl1_2 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrijl2_2 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrijv1_2 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrijv2_2 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrig_2 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    parcrijl1_3 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrijl2_3 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrijv1_3 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrijv2_3 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrig_3 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    parcrijl1_4 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrijl2_4 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrijv1_4 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrijv2_4 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    parcrig_4 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    
-    ind501jl1_5 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501jv1_5 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501g_5 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    ind501jl1_6 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501jv1_6 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501g_6 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    ind501jl1_7 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501jv1_7 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501g_7 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    ind501jl1_8 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501jv1_8 = forms.ModelChoiceField(queryset=Jugador.objects.none())
-    ind501g_8 = forms.ModelChoiceField(queryset=Equipo.objects.none())
-    
-    def __init__(self, partido_id, *args, **kwargs):
-        partido = Partido.objects.get(pk=partido_id)
-        equipo_local = partido.equipo_local
-        equipo_visitante = partido.equipo_visitante
-        
-        super(PartidasForm, self).__init__(*args, **kwargs)
-        
-        self.fields['par501jl1_1'].queryset = equipo_local.jugador_set.all()
-        self.fields['par501jl2_1'].queryset = equipo_local.jugador_set.all()
-        self.fields['par501jv1_1'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['par501jv2_1'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['par501g_1'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        self.fields['par501jl1_2'].queryset = equipo_local.jugador_set.all()
-        self.fields['par501jl2_2'].queryset = equipo_local.jugador_set.all()
-        self.fields['par501jv1_2'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['par501jv2_2'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['par501g_2'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        self.fields['par501jl1_3'].queryset = equipo_local.jugador_set.all()
-        self.fields['par501jl2_3'].queryset = equipo_local.jugador_set.all()
-        self.fields['par501jv1_3'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['par501jv2_3'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['par501g_3'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        self.fields['par501jl1_4'].queryset = equipo_local.jugador_set.all()
-        self.fields['par501jl2_4'].queryset = equipo_local.jugador_set.all()
-        self.fields['par501jv1_4'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['par501jv2_4'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['par501g_4'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        
-        self.fields['ind501jl1_1'].queryset = equipo_local.jugador_set.all()
-        self.fields['ind501jv1_1'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['ind501g_1'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        self.fields['ind501jl1_2'].queryset = equipo_local.jugador_set.all()
-        self.fields['ind501jv1_2'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['ind501g_2'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        self.fields['ind501jl1_3'].queryset = equipo_local.jugador_set.all()
-        self.fields['ind501jv1_3'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['ind501g_3'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        self.fields['ind501jl1_4'].queryset = equipo_local.jugador_set.all()
-        self.fields['ind501jv1_4'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['ind501g_4'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        
-        self.fields['parcrijl1_1'].queryset = equipo_local.jugador_set.all()
-        self.fields['parcrijl2_1'].queryset = equipo_local.jugador_set.all()
-        self.fields['parcrijv1_1'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['parcrijv2_1'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['parcrig_1'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        self.fields['parcrijl1_2'].queryset = equipo_local.jugador_set.all()
-        self.fields['parcrijl2_2'].queryset = equipo_local.jugador_set.all()
-        self.fields['parcrijv1_2'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['parcrijv2_2'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['parcrig_2'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        self.fields['parcrijl1_3'].queryset = equipo_local.jugador_set.all()
-        self.fields['parcrijl2_3'].queryset = equipo_local.jugador_set.all()
-        self.fields['parcrijv1_3'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['parcrijv2_3'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['parcrig_3'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        self.fields['parcrijl1_4'].queryset = equipo_local.jugador_set.all()
-        self.fields['parcrijl2_4'].queryset = equipo_local.jugador_set.all()
-        self.fields['parcrijv1_4'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['parcrijv2_4'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['parcrig_4'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        
-        self.fields['ind501jl1_5'].queryset = equipo_local.jugador_set.all()
-        self.fields['ind501jv1_5'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['ind501g_5'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        self.fields['ind501jl1_6'].queryset = equipo_local.jugador_set.all()
-        self.fields['ind501jv1_6'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['ind501g_6'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        self.fields['ind501jl1_7'].queryset = equipo_local.jugador_set.all()
-        self.fields['ind501jv1_7'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['ind501g_7'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        self.fields['ind501jl1_8'].queryset = equipo_local.jugador_set.all()
-        self.fields['ind501jv1_8'].queryset = equipo_visitante.jugador_set.all()
-        self.fields['ind501g_8'].queryset = Equipo.objects.filter(pk__in=[equipo_local.id, equipo_visitante.id])
-        
+
     def clean(self):
         cleaned_data = self.cleaned_data
-
-        #TODO Comprobar que la pareja no sea la misma
-        #TODO Comprobar que una pareja del grupo 1 no puede jugar en el grupo 2
+        jugador_local1 = cleaned_data["jugador_local1"]
+        jugador_local2 = cleaned_data["jugador_local2"]
+        jugador_visitante1 = cleaned_data["jugador_visitante1"]
+        jugador_visitante2 = cleaned_data["jugador_visitante2"]
+        ganador1 = cleaned_data["ganador1"]
+        ganador2 = cleaned_data["ganador2"]
+        
+        jugadores = [jugador_local1, jugador_local2, jugador_visitante1, jugador_visitante2]
+        
+        if jugador_local1 == jugador_local2:
+            raise forms.ValidationError("El jugador local 1 no puede ser el mismo que el jugador local 2")
+        if jugador_visitante1 == jugador_visitante2:
+            raise forms.ValidationError("El jugador visitante 1 no puede ser el mismo que el jugador visitante 2")
+        if ganador1 not in jugadores:
+            raise forms.ValidationError("El ganador 1 ("+ganador1.nombre+") no ha jugado la partida")
+        if ganador2 not in jugadores:
+            raise forms.ValidationError("El ganador 2 ("+ganador2.nombre+") no ha jugado la partida")
+        if ganador1 == ganador2:
+            raise forms.ValidationError("El ganador 1 no puede ser el mismo que el ganador 2")
+        if ganador1.equipo != ganador2.equipo:
+            raise forms.ValidationError("No puede haber un ganador de cada equipo")
+            
         return cleaned_data
+        

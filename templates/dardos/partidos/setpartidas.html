@@ -6,11 +6,16 @@
 {% for form in todos %}
 {% if form.errors %}
 <div id="form-error">
-       <p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after ma
+       <p>Ocurrieron errores</p>
        <ul>
+       {% for error in form.non_field_errors %}
+           <li>{{ error|striptags }}</li>
+       {% endfor %}
        {% for field in form %}
                {%if field.errors%}
-               <li>{{ field.errors|striptags }}</li>
+               	   {% for error in field.errors %}
+	               <li>{{ error|striptags }}</li>
+	           {%endfor%}
                {%endif%}
        {% endfor %}
        </ul>
