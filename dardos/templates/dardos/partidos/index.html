@@ -4,13 +4,14 @@
 
 {% block content %}
 
-{% if partidos %}
-    <h1>Partidos</h1>
+<h1>Partidos</h1>
     <div>
 	    <a href="partidos/new" class="add">
 	    	Nuevo partido
 	    </a>
     </div>
+
+{% if partidos %}
     <table width="100%">
     	<tr>
     		<th>Jornada</th>
