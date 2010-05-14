@@ -72,4 +72,25 @@ class PartidaParejasForm(forms.ModelForm):
             raise forms.ValidationError("No puede haber un ganador de cada equipo")
             
         return cleaned_data
+
+class JornadaForm(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        super(JornadaForm, self).__init__(*args, **kwargs)
+        self.fields['fecha_prevista'].input_formats = ('%d/%m/%Y','%d-%m-%Y')
+        
+    class Meta:
+        model = Jornada
+        
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        
+        if Jornada.objects.filter(
+            Q(numero=cleaned_data["numero"]) & Q(liga=cleaned_data["liga"])).count() > 0:
+            raise forms.ValidationError("La fornada "+str(cleaned_data["numero"])+" de la liga "+
+                str(cleaned_data["liga"])+" ya esta dada de alta "+str(cleaned_data["fecha_prevista"]))
+            
+        
+        return cleaned_data
+        
         

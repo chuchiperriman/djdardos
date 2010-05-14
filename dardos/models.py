@@ -24,6 +24,7 @@ class Liga(models.Model):
 class Jornada(models.Model):
     liga = models.ForeignKey(Liga)
     numero = models.IntegerField()
+    fecha_prevista = models.DateField('Fecha prevista')
     
     def __unicode__(self):
         return str(self.numero)
