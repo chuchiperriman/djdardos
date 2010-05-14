@@ -5,12 +5,19 @@
 {% block content %}
 
 {% if equipos %}
-    Equipos:
-    <ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Equipos</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
     {% for e in equipos %}
-        <li>{{ e.nombre }} <a href="/equipos/{{e.id}}" >[Ver]</a></li>
+        <tr>
+            <td>{{ e.nombre }}</td>
+            <td><a href="/equipos/{{e.id}}" class="view"></a></td>
     {% endfor %}
-    </ul>
+    </table>
 {% else %}
     <p>No hay equipos disponibles.</p>
 {% endif %}

@@ -6,7 +6,11 @@
 
 {% if partidos %}
     <h1>Partidos</h1>
-    <a href="partidos/new">Nuevo partido</a>
+    <div>
+	    <a href="partidos/new" class="add">
+	    	Nuevo partido
+	    </a>
+    </div>
     <table width="100%">
     	<tr>
     		<th>Jornada</th>
@@ -22,9 +26,9 @@
         	<td>{{p.equipo_visitante.nombre}}</td>
         	<td>{{ p.fecha|date:"d-m-Y" }}</td>
         	<td>
-        		<a href="/partidos/{{p.id}}" >[Ver]</a>
+        		<a href="/partidos/{{p.id}}" class="view"></a>
         		{% if not p.jugado %}
-        		<a href="/partidos/partidas/{{p.id}}" >[Editar]</a>
+        		<a href="/partidos/partidas/{{p.id}}" class="edit"></a>
         		{% endif %}
         	</td>
        	</tr>

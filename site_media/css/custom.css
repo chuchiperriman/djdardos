@@ -1,0 +1,22 @@
+.add{
+    background: url(../images/add.png) no-repeat;
+    float: right;
+    padding-left: 20px;
+}
+.view{
+    background: url(../images/view.png) no-repeat left bottom;
+    padding-left: 20px;
+    display: inline-block;
+    height: 20px;
+}
+
+.edit{
+    background: url(../images/edit.png) no-repeat left bottom;
+    padding-left: 20px;
+    display: inline-block;
+    height: 20px;
+}
+
+table{
+    border-spacing: 5px;
+}

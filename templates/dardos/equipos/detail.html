@@ -59,7 +59,7 @@
 				<td>{{j.partidas_ind}}</td>
 				<td>{{j.partidas_par}}</td>
 				<td>{{j.partidas}}</td>
-				<td><a href="/jugadores/{{j.id}}">[Ver]</a></td>
+				<td><a href="/jugadores/{{j.id}}" class="view"></a></td>
 			</tr>
 		{% endfor %}
 		</table>
@@ -121,7 +121,7 @@
 			{% if j.partido %}
 			<tr>
 				<td><b>Jornada {{j.jornada.numero}}</b></td>
-				<td>{{j.partido.fecha}}</td>
+				<td>{{j.partido.fecha|date:"d-m-Y"}}</td>
 				<td>{{j.partido.equipo_local.nombre}}</td>
 				<td>{{j.partido.equipo_visitante.nombre}}</td>
 				<td><b>{{j.partido.ganador.nombre}}</b></td>
@@ -129,9 +129,9 @@
 				<td><b>{{j.partido.puntos_visitante}}</b></td>
 				<td>
 					{% if j.partido.jugado %}
-						V
+						<img src="/site_media/images/yes.png" />
 					{% else %}
-						X
+						<img src="/site_media/images/no.png" />
 					{%endif%}
 				</td>
 			</tr>
