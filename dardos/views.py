@@ -17,7 +17,8 @@ def index(request, page=0, paginate_by=5, **kwargs):
         queryset=Post.objects.published(),
         paginate_by=page_size,
         page=page,
-	template_name='dardos/index.html',
+        template_name='dardos/index.html',
+        extra_context={'divisiones': Division.objects.all()},
         **kwargs
     )
     

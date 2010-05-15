@@ -13,6 +13,7 @@ class JugadorAdmin(admin.ModelAdmin):
 
 admin.site.register(Jugador, JugadorAdmin)
 admin.site.register(Equipo)
+admin.site.register(Division)
 admin.site.register(Liga)
 admin.site.register(Partido)
 admin.site.register(PartidaIndividual)
