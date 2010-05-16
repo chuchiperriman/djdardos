@@ -1,0 +1,29 @@
+{% if partidos %}
+    <table width="100%">
+    	<tr>
+    		<th>Jornada</th>
+    		<th>Local</th>
+    		<th>Visitante</th>
+    		<th>Ganador</th>
+    		<th>Fecha</th>
+    		<th>&nbsp;</th>
+    	</tr>
+    {% for p in partidos %}
+    	<tr>
+    		<td>Jornada {{p.jornada.numero}}</td>
+        	<td>{{p.equipo_local.nombre}}</td>
+        	<td>{{p.equipo_visitante.nombre}}</td>
+        	<td>{{p.ganador.nombre}}</td>
+        	<td>{{p.fecha|date:"d-m-Y" }}</td>
+        	<td>
+        		<a href="/partidos/{{p.id}}" class="view"></a>
+        		{% if not p.jugado %}
+        		<a href="/partidos/partidas/{{p.id}}" class="edit"></a>
+        		{% endif %}
+        	</td>
+       	</tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No hay partidos disponibles.</p>
+{% endif %}

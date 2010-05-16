@@ -17,11 +17,16 @@ def detail(request, division_id):
 
          
 def ajax_jornada_detail(request, jornada_id):
-#    if request.is_ajax():
+    """
+    if request.is_ajax():
         mimetype = 'application/javascript'
         jornada = Jornada.objects.get(pk=jornada_id)
         data = serializers.serialize('json', jornada.partido_set.all())
         return HttpResponse(data,mimetype)
-#    else:
-#        return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=400)
+    """
+    partidos = Partido.objects.filter(jornada = jornada_id)
+    return render_to_response('dardos/partidos/partidos_jornada_block.html', 
+    	{'partidos': partidos})
 

@@ -17,7 +17,7 @@
 	
 	function show_jornada(url){
 	    $.get(url, function(data) {
-                alert(data);
+	        $('#partidos_jornada').html(data);
         });
     }
 	
@@ -49,6 +49,8 @@
 			</tr>
 		{%endfor%}
 		</table>
+		<div id="partidos_jornada">
+		</div>
 	</div>
 	<div id="tabs-3">
 	</div>
