@@ -1,5 +1,7 @@
 {% extends "dardos/base.html" %}
 
+{% load dardos_general %}
+
 {% block title %}Equipo{% endblock %}
 
 {% block content %}
@@ -12,6 +14,13 @@
 	$(function() {
 		$("#tabs").tabs();
 	});
+	
+	function show_jornada(url){
+	    $.get(url, function(data) {
+                alert(data);
+        });
+    }
+	
 </script>
 
 <h1>{{ division.nombre }} ({{liga.nombre}})</h1>
@@ -23,13 +32,20 @@
 		<li><a href="#tabs-3">Resultados</a></li>
 	</ul>
 	<div id="tabs-1">
+	    {% show_clasificacion liga %}
 	</div>
 	<div id="tabs-2">
 		<table>
+		    <tr>
+		        <th>Jornada</th>
+		        <th>Fecha prevista</th>
+		        <th>&nbsp;</th>
+		    </tr>
 		{% for j in liga.jornada_set.all%}
 			<tr>
-				<td>{{j.numero}}</td>
+				<td>Jornada {{j.numero}}</td>
 				<td>{{j.fecha_prevista}}</td>
+				<td><a href="#" onclick="show_jornada('/ajax_jornada_detail/{{j.id}}')" class="view"></a></td>
 			</tr>
 		{%endfor%}
 		</table>

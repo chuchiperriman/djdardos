@@ -1,0 +1,26 @@
+<table>
+	<tr>
+		<th>Equipo</th>
+		<th>Jugados</th>
+		<th>Ganados</th>
+		<th>Empatados</th>
+		<th>Perdidos</th>
+		<th>Puntos</th>
+	</tr>
+{% for d in clasificacion.equipos %}
+	<tr>
+		<td>
+		{% ifequal d.equipo.id equipo.id %}
+			<b>{{d.equipo.nombre}}</b>
+		{% else %}
+			{{d.equipo.nombre}}
+		{% endifequal %}
+		</td>
+		<td>{{d.estadisticas.partidos_jugados}}</td>
+		<td>{{d.estadisticas.partidos_ganados}}</td>
+		<td>{{d.estadisticas.partidos_empatados}}</td>
+		<td>{{d.estadisticas.partidos_perdidos}}</td>
+		<td>{{d.estadisticas.puntos}}</td>
+	</tr>
+{% endfor %}
+</table>
