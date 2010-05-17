@@ -16,8 +16,9 @@
         	<td>{{p.ganador.nombre}}</td>
         	<td>{{p.fecha|date:"d-m-Y" }}</td>
         	<td>
+        	    {% if p.jugado %}
         		<a href="/partidos/{{p.id}}" class="view"></a>
-        		{% if not p.jugado %}
+        		{% else %}
         		<a href="/partidos/partidas/{{p.id}}" class="edit"></a>
         		{% endif %}
         	</td>

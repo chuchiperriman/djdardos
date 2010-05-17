@@ -115,6 +115,7 @@ class Partido(models.Model):
         return self.equipo_local.nombre + "-" + self.equipo_visitante.nombre + " " + str(self.fecha)
 
 class PartidaIndividual(models.Model):
+    numero = models.IntegerField()
     partido = models.ForeignKey(Partido)
     tipo = models.CharField(max_length=1, choices=TIPOS_PARTIDA)
     jugador_local = models.ForeignKey(Jugador, related_name="jugador_local")
@@ -122,6 +123,7 @@ class PartidaIndividual(models.Model):
     ganador = models.ForeignKey(Jugador, related_name="ganador")
     
 class PartidaParejas(models.Model):
+    numero = models.IntegerField()
     partido = models.ForeignKey(Partido)
     tipo = models.CharField(max_length=1, choices=TIPOS_PARTIDA)
     jugador_local1 = models.ForeignKey(Jugador, related_name="jugador_local1")
