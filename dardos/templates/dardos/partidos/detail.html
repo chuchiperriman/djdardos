@@ -18,7 +18,7 @@ table tr td ul li{
     <table>
         <tr>
             <th class="local">Local</th>
-            <th>Resultado</th>
+            <th class="resultado">Resultado</th>
             <th class="visitante">Visitante</th>
         </tr>
     </table>
@@ -38,6 +38,16 @@ table tr td ul li{
 
     <h2>Individuales 501</h2>
     {% show_partida_individuales partidas_ind_2 %}
+    
+    <table class="tabla_parejas">
+        <tr>
+            <td class="local" style="font-size: 1.5em">Local</td>
+            <td class="resultado" style="font-size: 1.5em; font-weight: bold">
+                {{ partido.puntos_local }} - {{ partido.puntos_visitante }}
+            </td>
+            <td class="visitante" style="font-size: 1.5em">Visitante</td>
+        </tr>
+    </table>
 </div>
 
 {% endblock %}

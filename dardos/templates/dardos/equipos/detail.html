@@ -95,6 +95,7 @@
 				<th>Puntos local</th>
 				<th>Puntos visitante</th>
 				<th>Jugado</th>
+				<th>&nbsp;</th>
 			</tr>
 		{% for j in jornadas %}
 			{% if j.partido %}
@@ -112,6 +113,11 @@
 					{% else %}
 						<img src="/site_media/images/no.png" />
 					{%endif%}
+				</td>
+				<td>
+				    {% if j.partido.jugado %}
+                		<a href="/partidos/{{j.partido.id}}" class="view"></a>
+            		{% endif %}
 				</td>
 			</tr>
 			{% endif %}
