@@ -1,5 +1,7 @@
 {% extends "dardos/base.html" %}
 
+{% load dardos_general %}
+
 {% block title %}Equipo{% endblock %}
 
 {% block content %}
@@ -11,165 +13,31 @@ table tr td ul li{
 </style>
 
 <h1>{{partido.equipo_local.nombre}} - {{partido.equipo_visitante.nombre}} ({{partido.fecha|date:"d-m-Y"}})</h1>
-<table>
-	<tr>
-		<th>Local</th>
-		<th colspan="2">Resultado</th>
-		<th>Visitante</th>
-	</tr>
-{% for p in partidas_par_1 %}
-	<tr>
-		<td>
-		    {{p.jugador_local1.nombre}} - {{p.jugador_local2.nombre}}
-		</td>
-		    {% ifequal p.ganador1.equipo p.jugador_local1.equipo %}
-		        <td>
-		            <img src="/site_media/images/yes.png" />
-		        </td>
-		        <td>
-    		        <img src="/site_media/images/no.png" />
-		        </td>
-		    {% else %}
-		        <td>
-		            <img src="/site_media/images/no.png" />
-		        </td>
-		        <td>
-    		        <img src="/site_media/images/yes.png" />
-		        </td>
-		    {% endifequal %}
-		<td>
-		    {{p.jugador_visitante1.nombre}} - {{p.jugador_visitante2.nombre}}
-		</td>
-	</tr>
-{% endfor %}
-{% for p in partidas_par_2 %}
-	<tr>
-		<td>
-		    {{p.jugador_local1.nombre}} - {{p.jugador_local2.nombre}}
-		</td>
-		    {% ifequal p.ganador1.equipo p.jugador_local1.equipo %}
-		        <td>
-		            <img src="/site_media/images/yes.png" />
-		        </td>
-		        <td>
-    		        <img src="/site_media/images/no.png" />
-		        </td>
-		    {% else %}
-		        <td>
-		            <img src="/site_media/images/no.png" />
-		        </td>
-		        <td>
-    		        <img src="/site_media/images/yes.png" />
-		        </td>
-		    {% endifequal %}
-		<td>
-		    {{p.jugador_visitante1.nombre}} - {{p.jugador_visitante2.nombre}}
-		</td>
-	</tr>
-{% endfor %}
 
-{% for p in partidas_ind_1 %}
-	<tr>
-		<td>
-		    {{p.jugador_local.nombre}}
-		</td>
-		    {% ifequal p.ganador p.jugador_local %}
-		        <td>
-		            <img src="/site_media/images/yes.png" />
-		        </td>
-		        <td>
-    		        <img src="/site_media/images/no.png" />
-		        </td>
-		    {% else %}
-		        <td>
-		            <img src="/site_media/images/no.png" />
-		        </td>
-		        <td>
-    		        <img src="/site_media/images/yes.png" />
-		        </td>
-		    {% endifequal %}
-		<td>
-		    {{p.jugador_visitante.nombre}}
-		</td>
-	</tr>
-{% endfor %}
+<div id="partidas">
+    <table>
+        <tr>
+            <th class="local">Local</th>
+            <th>Resultado</th>
+            <th class="visitante">Visitante</th>
+        </tr>
+    </table>
 
-{% for p in partidas_par_3 %}
-	<tr>
-		<td>
-		    {{p.jugador_local1.nombre}} - {{p.jugador_local2.nombre}}
-		</td>
-		    {% ifequal p.ganador1.equipo p.jugador_local1.equipo %}
-		        <td>
-		            <img src="/site_media/images/yes.png" />
-		        </td>
-		        <td>
-    		        <img src="/site_media/images/no.png" />
-		        </td>
-		    {% else %}
-		        <td>
-		            <img src="/site_media/images/no.png" />
-		        </td>
-		        <td>
-    		        <img src="/site_media/images/yes.png" />
-		        </td>
-		    {% endifequal %}
-		<td>
-		    {{p.jugador_visitante1.nombre}} - {{p.jugador_visitante2.nombre}}
-		</td>
-	</tr>
-{% endfor %}
-{% for p in partidas_par_4 %}
-	<tr>
-		<td>
-		    {{p.jugador_local1.nombre}} - {{p.jugador_local2.nombre}}
-		</td>
-		    {% ifequal p.ganador1.equipo p.jugador_local1.equipo %}
-		        <td>
-		            <img src="/site_media/images/yes.png" />
-		        </td>
-		        <td>
-    		        <img src="/site_media/images/no.png" />
-		        </td>
-		    {% else %}
-		        <td>
-		            <img src="/site_media/images/no.png" />
-		        </td>
-		        <td>
-    		        <img src="/site_media/images/yes.png" />
-		        </td>
-		    {% endifequal %}
-		<td>
-		    {{p.jugador_visitante1.nombre}} - {{p.jugador_visitante2.nombre}}
-		</td>
-	</tr>
-{% endfor %}
+    <h2>Parejas 501</h2>
+    {% show_partida_parejas partidas_par_1 %}
 
-{% for p in partidas_ind_2 %}
-	<tr>
-		<td>
-		    {{p.jugador_local.nombre}}
-		</td>
-		    {% ifequal p.ganador p.jugador_local %}
-		        <td>
-		            <img src="/site_media/images/yes.png" />
-		        </td>
-		        <td>
-    		        <img src="/site_media/images/no.png" />
-		        </td>
-		    {% else %}
-		        <td>
-		            <img src="/site_media/images/no.png" />
-		        </td>
-		        <td>
-    		        <img src="/site_media/images/yes.png" />
-		        </td>
-		    {% endifequal %}
-		<td>
-		    {{p.jugador_visitante.nombre}}
-		</td>
-	</tr>
-{% endfor %}
-</table>
+    {% show_partida_parejas partidas_par_2 %}
+
+    <h2>Individuales 501</h2>
+    {% show_partida_individuales partidas_ind_1 %}
+
+    <h2>Parejas Cricket</h2>
+    {% show_partida_parejas partidas_par_3 %}
+
+    {% show_partida_parejas partidas_par_4 %}
+
+    <h2>Individuales 501</h2>
+    {% show_partida_individuales partidas_ind_2 %}
+</div>
 
 {% endblock %}

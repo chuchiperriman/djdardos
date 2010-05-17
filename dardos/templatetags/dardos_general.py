@@ -17,4 +17,10 @@ def show_clasificacion(liga, equipo = None):
     return {'clasificacion' : clasificacion,
         'equipo' : equipo}
     
+@register.inclusion_tag('dardos/includes/partida_parejas.html')
+def show_partida_parejas(partidas):
+    return {'partidas' : partidas}
     
+@register.inclusion_tag('dardos/includes/partida_individuales.html')
+def show_partida_individuales(partidas):
+    return {'partidas' : partidas}

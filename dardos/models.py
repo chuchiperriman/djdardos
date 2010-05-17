@@ -122,6 +122,9 @@ class PartidaIndividual(models.Model):
     jugador_visitante = models.ForeignKey(Jugador, related_name="jugador_visitante")
     ganador = models.ForeignKey(Jugador, related_name="ganador")
     
+    def __unicode__(self):
+        return str(self.partido) + " - " + str(self.numero)
+    
 class PartidaParejas(models.Model):
     numero = models.IntegerField()
     partido = models.ForeignKey(Partido)
@@ -133,6 +136,8 @@ class PartidaParejas(models.Model):
     ganador1 = models.ForeignKey(Jugador, related_name="ganador1")
     ganador2 = models.ForeignKey(Jugador, related_name="ganador2")
     
+    def __unicode__(self):
+        return str(self.partido) + " - " + str(self.numero)
     
     
     

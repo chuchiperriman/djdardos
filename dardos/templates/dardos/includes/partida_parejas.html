@@ -1,0 +1,22 @@
+<table class="tabla_parejas">
+{% for p in partidas %}
+	<tr>
+		<td class="local">
+		    {{p.jugador_local1.nombre}} - {{p.jugador_local2.nombre}}
+		</td>
+		    <td class="resultado">
+		    {% ifequal p.ganador1.equipo p.jugador_local1.equipo %}
+		        
+		            <img src="/site_media/images/yes.png" />
+    		        <img src="/site_media/images/no.png" />
+		    {% else %}
+		            <img src="/site_media/images/no.png" />
+    		        <img src="/site_media/images/yes.png" />
+		    {% endifequal %}
+		    </td>
+		<td class="visitante">
+		    {{p.jugador_visitante1.nombre}} - {{p.jugador_visitante2.nombre}}
+		</td>
+	</tr>
+{% endfor %}
+</table>
