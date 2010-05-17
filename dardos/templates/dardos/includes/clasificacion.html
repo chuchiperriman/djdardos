@@ -11,9 +11,13 @@
 	<tr>
 		<td>
 		{% ifequal d.equipo.id equipo.id %}
-			<b>{{d.equipo.nombre}}</b>
+			<a href="/equipos/{{d.equipo.id}}">
+			    <b>{{d.equipo.nombre}}</b>
+			</a>
 		{% else %}
-			{{d.equipo.nombre}}
+		    <a href="/equipos/{{d.equipo.id}}">
+    			{{d.equipo.nombre}}
+    		</a>
 		{% endifequal %}
 		</td>
 		<td>{{d.estadisticas.partidos_jugados}}</td>
