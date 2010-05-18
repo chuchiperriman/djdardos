@@ -85,7 +85,7 @@ class EstadisticasEquipo:
         return Partido.objects.filter(Q(jugado=True) & Q(equipo_visitante=self.equipo) & Q(ganador=None)).count()
             
     def puntos(self):
-        return self.partidos_ganados() * 2 + self.partidos_empatados()
+        return self.partidos_ganados() * 3 + self.partidos_empatados()
     
     def __controlar_jugador_mejor(self, datos, jugador, valor):
         if valor > datos.valor:

@@ -45,11 +45,11 @@
 			<tr>
 				<td>Jornada {{j.numero}}</td>
 				<td>{{j.fecha_prevista}}</td>
-				<td><a href="#" onclick="show_jornada('/ajax_jornada_detail/{{j.id}}')" class="view"></a></td>
+				<td><a href="#partidos_jornada" onclick="show_jornada('/ajax_jornada_detail/{{j.id}}');return false;" class="view"></a></td>
 			</tr>
 		{%endfor%}
 		</table>
-		<div id="partidos_jornada">
+		<div id="partidos_jornada" >
 		</div>
 	</div>
 	<div id="tabs-3">
