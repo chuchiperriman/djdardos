@@ -1,20 +1,35 @@
 {% if partidos %}
-    <table width="100%">
+    <table id="tabla_partidos" width="100%">
     	<tr>
     		<th>Jornada</th>
-    		<th>Local</th>
-    		<th>Visitante</th>
-    		<th>Ganador</th>
     		<th>Fecha</th>
+    		<th>Local</th>
+    		<th>Ganador</th>
+    		<th>Visitante</th>
     		<th>&nbsp;</th>
     	</tr>
     {% for p in partidos %}
     	<tr>
     		<td>Jornada {{p.jornada.numero}}</td>
+    		<td>{{p.fecha|date:"d-m-Y" }}</td>
         	<td>{{p.equipo_local.nombre}}</td>
+        	<td>
+        	    {% ifequal p.ganador p.equipo_local %}
+	                <img src="/site_media/images/yes.png" title="Ganado"/>
+		            <img src="/site_media/images/no.png" title="Perdido"/>
+		        {% endifequal %}
+		        {% ifequal p.ganador p.equipo_visitante %}
+	                <img src="/site_media/images/no.png" title="Perdido"/>
+		            <img src="/site_media/images/yes.png" title="Ganado"/>
+		        {% endifequal %}
+		        {% if not p.ganador and p.jugado %}
+	                <img src="/site_media/images/empate.png" title="Empate"/>
+		        {% endif %}
+		        {% if not p.ganador and not p.jugado %}
+	                <img src="/site_media/images/no-jugado.png" title="No jugado"/>
+		        {% endif %}
+            </td>
         	<td>{{p.equipo_visitante.nombre}}</td>
-        	<td>{{p.ganador.nombre}}</td>
-        	<td>{{p.fecha|date:"d-m-Y" }}</td>
         	<td>
         	    {% if p.jugado %}
         		<a href="/partidos/{{p.id}}" class="view"></a>

@@ -56,4 +56,11 @@ table{
     width: 600px;
     margin: 0px auto auto ;
 }
+#tabla_partidos tr td,
+#tabla_partidos tr th{
+    text-align: center;
+}
 
+
+
+}
