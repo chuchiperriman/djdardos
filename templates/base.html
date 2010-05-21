@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+{% load dardos_general %}
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+
+  <title>{% block title %}{% endblock %}</title>
+
+  <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+  <meta name="author" content="fullahead.org - studio7designs.com" />
+  <meta name="description" content="Site Description Here" />
+  <meta name="keywords" content="keywords, here" />
+  <meta name="robots" content="index, follow, noarchive" />
+  <meta name="googlebot" content="noarchive" />
+
+  <link rel="stylesheet" type="text/css" href="/site_media/css/layout.css" media="screen, projection, tv " />
+  <link rel="stylesheet" type="text/css" href="/site_media/css/html.css" media="screen, projection, tv " />
+  <link rel="stylesheet" type="text/css" href="/site_media/css/custom.css" media="screen, projection, tv " />
+
+  <!-- CSS specific to current theme -->
+  <link rel="stylesheet"           type="text/css" href="/site_media/css/light.css" title="light" media="screen, projection, tv " />
+  <link rel="alternate stylesheet" type="text/css" href="/site_media/css/dark.css"  title="dark"  media="screen, projection, tv " />
+
+
+</head>
+
+<body>
+
+<!-- #content: holds all except site footer - causes footer to stick to bottom -->
+<div id="content">
+
+  <!-- #header: holds the logo and top links -->
+  <!--
+  <div id="header" class="width">
+
+    <img src="images/logo.gif" alt="Pequeño logo"/>
+
+    <ul>
+      <li><a href="index.html">Back to Main page</a></li>
+      <li><a href="">About us</a></li>
+      <li><a href="">Streaming Video</a></li>
+      <li><a href="" class="last">RSS Feeds</a></li>
+    </ul>
+
+  </div>
+  <!-- #header end -->
+  -->
+
+  <!-- #headerImg: holds the main header image or flash -->
+  <div id="headerImg" class="width">
+  	<h1>Liga de dardos</h1>
+  </div>
+
+
+
+  <!-- #menu: the main large box site menu -->
+  <div id="menu" class="width">
+
+  </div>
+  <!-- #menu end -->
+
+  <!-- #page: holds the page content -->
+  <div id="page">
+
+
+    <!-- #columns: holds the columns of the page -->
+    <div id="columns" class="widthPad">
+
+
+    <!-- Left column -->
+    <div class="floatLeft width73">
+
+    {% block content %}{% endblock %}
+    
+    </div>
+    <!-- Left column end -->
+
+
+    <!-- Right link column -->
+    <div class="floatRight width25 lightBlueBg horzPad">
+
+      <h2>Liga <span class="dark">dardos</span></h2>
+
+      <ul class="submenu1">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/equipos">Equipos</a></li>
+        <li><a href="/jugadores">Jugadores</a></li>
+        <li><a href="/partidos">Partidos</a></li>
+      </ul>
+      {% show_divisiones %}
+      {% block menu %}{% endblock %}
+
+    </div>
+    <!-- Right links column end -->
+
+
+
+    </div>
+    <!-- #columns end -->
+
+  </div>
+  <!-- #page end -->
+
+</div>
+<!-- #content end -->
+
+
+
+
+<!-- #footer: holds the site footer (logo and links) -->
+<div id="footer">
+
+  <!-- #bg: applies the site width and footer background -->
+  <div id="bg" class="width">
+
+    <img src="images/logo.gif" alt="Your logo goes here"/>
+
+ <ul>
+      <li><a href="mailto:chuchiperriman@gmail.com">Contacto</a></li>
+      <li><a href="http://www.opensourcetemplates.org">opensourcetemplates.org</a></li>
+      <li><a href="http://www.studio7designs.com" class="last">studio7designs.com</a></li>
+	</ul>
+
+  </div>
+  <!-- #bg end -->
+
+</div>
+<!-- #footer end -->
+
+</body>
+
+</html>
+

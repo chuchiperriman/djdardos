@@ -73,7 +73,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'djdardos.urls'
 
 TEMPLATE_DIRS = (
-#    '/home/perriman/dev/djdardos/templates',
+    '/home/perriman/dev/djdardos/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

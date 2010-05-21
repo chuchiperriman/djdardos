@@ -9,7 +9,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^$', 'djdardos.dardos.views.index'),
+    url(r'^$', 'djdardos.basic.blog.views.post_list'),
     (r'^equipos$', 'djdardos.dardos.equipos.views.index'),
     (r'^equipos/(?P<equipo_id>\d+)/$', 'djdardos.dardos.equipos.views.detail'),
     (r'^jugadores$', 'djdardos.dardos.jugadores.views.index'),
@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     (r'^division/(?P<division_id>\d+)/$', 'djdardos.dardos.divisiones.views.detail'),
     (r'^ajax_jornada_detail/(?P<jornada_id>\d+)/$', 'djdardos.dardos.divisiones.views.ajax_jornada_detail'),
     (r'^comments/', include('django.contrib.comments.urls')),
+    (r'^blog/', include('basic.blog.urls')),
     url(r'^post/(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/$',
         view='djdardos.dardos.views.post_detail',
         name='blog_detail'
