@@ -18,7 +18,12 @@
 }
 
 table{
-    border-spacing: 5px;
+    border-spacing: 0px;
+}
+
+table tr td,
+table tr th{
+    padding: 5px;
 }
 
 .tabla_parejas{
@@ -61,6 +66,11 @@ table{
     text-align: center;
 }
 
-
-
+.col_sep{
+	padding: 0px;
+	border-spacing: 5px;
+	width: 1px;
+	border: 0px;
+	background-color: #AAAAAA;
+	border-color: #AAAAAA;
 }
