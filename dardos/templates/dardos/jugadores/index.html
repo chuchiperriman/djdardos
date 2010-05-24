@@ -6,11 +6,20 @@
 
 {% if jugadores_list %}
     Jugadores:
-    <ul>
+    <table>
+        <tr>
+            <th>Equipo</th>
+            <th>Jugador</th>
+            <th>&nbsp;</th>
+        </tr>
     {% for j in jugadores_list %}
-        <li>{{ j.nombre }}</li>
+        <tr>
+            <td>{{j.equipo.nombre}}</td>
+            <td><a href="/jugadores/{{j.id}}">{{ j.nombre }}</a></td>
+            <td><a href="/jugadores/{{j.id}}" class="view"></a></td>
+        </tr>
     {% endfor %}
-    </ul>
+    </table>
 {% else %}
     <p>No hay jugadores disponibles.</p>
 {% endif %}
