@@ -41,6 +41,7 @@ class Jugador(models.Model):
     equipo = models.ForeignKey(Equipo)
     nombre = models.CharField(max_length=100)
     fecha_alta = models.DateTimeField('Fecha de Alta')
+    path_foto = models.CharField(max_length=255,null=True, blank=True)
 
     def __unicode__(self):
         return self.nombre

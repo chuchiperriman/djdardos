@@ -26,11 +26,22 @@
 
 
 <h1>{{ jugador.nombre }}</h1>
-<b>Nombre:</b> {{jugador.nombre}}<br/>
-<b>Equipo:</b> <a href="/equipos/{{jugador.equipo.id}}">{{jugador.equipo.nombre}}</a><br/>
-<b>Fecha de alta:</b> {{jugador.fecha_alta}}<br/>
+<div id="ficha">
+    <div id="foto">
+    {% if jugador.path_foto %}
+        <img src="/site_media/fotos/jugadores/{{jugador.path_foto}}"/>
+    {% else %}
+        <img src="/site_media/fotos/jugadores/nofoto.jpg"/>
+    {% endif %}
+    </div>
+    <div id="datos">
+        <b>Nombre:</b> {{jugador.nombre}}<br/>
+        <b>Equipo:</b> <a href="/equipos/{{jugador.equipo.id}}">{{jugador.equipo.nombre}}</a><br/>
+        <b>Fecha de alta:</b> {{jugador.fecha_alta}}<br/>
+    </div>
+</div>
 
-<div id="tabs">
+<div id="tabs" style="clear:both">
 	<ul>
 		<li><a href="#tabs-1">Estadística</a></li>
 		<li><a href="#tabs-2">P. Individuales</a></li>
