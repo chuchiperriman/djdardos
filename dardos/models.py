@@ -42,6 +42,7 @@ class Jugador(models.Model):
     nombre = models.CharField(max_length=100)
     fecha_alta = models.DateTimeField('Fecha de Alta')
     path_foto = models.CharField(max_length=255,null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
 
     def __unicode__(self):
         return self.nombre
