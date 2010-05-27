@@ -74,3 +74,13 @@ table tr th{
 	background-color: #AAAAAA;
 	border-color: #AAAAAA;
 }
+
+#ficha #foto{
+    float:left;
+}
+#ficha #foto img{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #AAAAAA;
+    margin-right: 10px;
+}

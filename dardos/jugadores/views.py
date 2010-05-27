@@ -7,7 +7,7 @@ from django.http import HttpResponse, Http404
 
 # Create your views here.
 def index(request):
-    jugadores_list = Jugador.objects.all().order_by('nombre')[:5]
+    jugadores_list = Jugador.objects.all().order_by('equipo', 'nombre')
     return render_to_response('dardos/jugadores/index.html', {'jugadores_list': jugadores_list})
 
 def detail(request, jugador_id):

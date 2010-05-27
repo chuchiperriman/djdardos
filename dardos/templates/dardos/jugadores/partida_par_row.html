@@ -1,0 +1,17 @@
+<tr>
+    <td>{{partida.partido.fecha|date:"d-m-Y"}}</td>
+    <td>{{partida.jugador_local1}} - {{partida.jugador_local2}}</td>
+    <td>{{partida.ganador1}} - {{partida.ganador2}}</td>
+    <td>{{partida.jugador_visitante1}} - {{partida.jugador_visitante2}}</td>
+    <td>
+        {% ifequal partida.ganador1 jugador%}
+        <img src="/site_media/images/yes.png" />
+        {% else %}
+            {% ifequal partida.ganador2 jugador%}
+                <img src="/site_media/images/yes.png" />
+            {% else %}
+                <img src="/site_media/images/no.png" />
+            {% endifequal %}
+        {% endifequal %}
+    </td>
+</tr>

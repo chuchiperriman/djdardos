@@ -1,0 +1,54 @@
+<table>
+	<tr>
+		<th>Nombre</th>
+		<th>G.I.</th>
+		<th>P.I.</th>
+		<th>D.I.</th>
+		<th>G.P.</th>
+		<th>P.P.</th>
+		<th>D.P.</th>
+		<th>G.T.</th>
+		<th>P.T.</th>
+		<th>D.T.</th>
+		<th>J.I.</th>
+		<th>J.P.</th>
+		<th>J.T.</th>
+		<th>&nbsp;</th>
+	</tr>
+{% for j in jugadores %}
+	<tr>
+		<td>{{j.nombre}}</td>
+		<td>{{j.partidas_ind_ganadas}}</td>
+		<td>{{j.partidas_ind_perdidas}}</td>
+		<td>{{j.partidas_ind_diferencia}}</td>
+		<td>{{j.partidas_par_ganadas}}</td>
+		<td>{{j.partidas_par_perdidas}}</td>
+		<td>{{j.partidas_par_diferencia}}</td>
+		<td>{{j.partidas_ganadas}}</td>
+		<td>{{j.partidas_perdidas}}</td>
+		<td>{{j.partidas_diferencia}}</td>
+		<td>{{j.partidas_ind}}</td>
+		<td>{{j.partidas_par}}</td>
+		<td>{{j.partidas}}</td>
+		<td>
+		    {% if show_details %}
+		        <a href="/jugadores/{{j.id}}" class="view"></a>
+		    {% endif %}
+		</td>
+	</tr>
+{% endfor %}
+</table>
+<ul>
+	<li>G.I.: Ganados individuales</li>
+	<li>P.I.: Perdidos individuales</li>
+	<li>D.I.: Diferencia individuales</li>
+	<li>G.P.: Ganados parejas</li>
+	<li>P.P.: Perdidos parejas</li>
+	<li>D.P.: Diferencia parejas</li>
+	<li>G.T.: Ganados total</li>
+	<li>P.T.: Perdidos total</li>
+	<li>D.T.: Diferencia total</li>
+	<li>J.I.: Jugados individuales</li>
+	<li>J.P.: Jugados parejas</li>
+	<li>J.T.: Jugados total</li>
+</ul>

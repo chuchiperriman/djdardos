@@ -24,3 +24,14 @@ def show_partida_parejas(partidas):
 @register.inclusion_tag('dardos/includes/partida_individuales.html')
 def show_partida_individuales(partidas):
     return {'partidas' : partidas}
+    
+@register.inclusion_tag('dardos/includes/estadisticas_jugadores.html')
+def show_estadisticas_jugadores(jugadores):
+    return {'show_details' : True,
+        'jugadores' : jugadores}
+    
+@register.inclusion_tag('dardos/includes/estadisticas_jugadores.html')
+def show_estadisticas_jugador(jugador):
+    return {'show_details' : False,
+        'jugadores' : (jugador,)}
+    
