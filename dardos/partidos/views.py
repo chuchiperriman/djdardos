@@ -51,6 +51,8 @@ def setpartidas(request, partido_id):
     def crear_partida_parejas(prefix, post=None):
         p = PartidaParejas()
         p.partido = Partido.objects.get(pk=partido_id)
+        p.numero = int(prefix) + 1
+        print p.numero,'paaaar'
         if post:
             f = PartidaParejasForm(post,prefix=prefix, instance = p)
         else:
@@ -68,6 +70,8 @@ def setpartidas(request, partido_id):
     def crear_partida_individual(prefix, post=None):
         p = PartidaIndividual()
         p.partido = Partido.objects.get(pk=partido_id)
+        p.numero = int(prefix) + 1
+        print p.numero,'---'
         if post:
             f = PartidaIndividualForm(post,prefix=prefix, instance = p)
         else:
@@ -103,10 +107,10 @@ def setpartidas(request, partido_id):
     else:
         forms_parejas_1 = [crear_partida_parejas(str(x)) for x in range(0,2)]
         forms_parejas_2 = [crear_partida_parejas(str(x)) for x in range(2,4)]
-        forms_individual_1 = [PartidaIndividualForm(prefix=str(x), instance=PartidaIndividual()) for x in range(4,8)]
+        forms_individual_1 = [crear_partida_individual(str(x)) for x in range(4,8)]
         forms_parejas_3 = [crear_partida_parejas(str(x)) for x in range(8,10)]
         forms_parejas_4 = [crear_partida_parejas(str(x)) for x in range(10,12)]
-        forms_individual_2 = [PartidaIndividualForm(prefix=str(x), instance=PartidaIndividual()) for x in range(12,16)]
+        forms_individual_2 = [crear_partida_individual(str(x)) for x in range(12,16)]
         todos = []
 
     return render_to_response('dardos/partidos/setpartidas.html',

@@ -36,12 +36,20 @@ class PartidoForm(forms.ModelForm):
         return self.cleaned_data
 
 class PartidaIndividualForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PartidaIndividualForm, self).__init__(*args, **kwargs)
+        self.fields['numero'].widget = forms.widgets.HiddenInput()
+
     #TODO Mostrar solo jornadas que no tienen partido asignado
     class Meta:
         model = PartidaIndividual
         exclude = ("partido", "tipo")
     
 class PartidaParejasForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PartidaParejasForm, self).__init__(*args, **kwargs)
+        self.fields['numero'].widget = forms.widgets.HiddenInput()
+        
     #TODO Mostrar solo jornadas que no tienen partido asignado
     class Meta:
         model = PartidaParejas
