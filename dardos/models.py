@@ -32,7 +32,13 @@ class Jornada(models.Model):
 class Equipo(models.Model):
     ligas = models.ManyToManyField(Liga)
     nombre = models.CharField(max_length=20)
-    
+    campo = models.CharField(max_length=100)
+    email = models.EmailField(null=True, blank=True)
+    direccion = models.CharField(max_length=255,null=True, blank=True)
+    path_foto = models.CharField(max_length=255,null=True, blank=True)
+    telefono = models.CharField(max_length=20, null=True, blank=True)
+    google_maps = models.TextField(null=True, blank=True)
+
     def __unicode__(self):
         return self.nombre
     

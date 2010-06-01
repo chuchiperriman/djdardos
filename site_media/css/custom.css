@@ -75,10 +75,13 @@ table tr th{
 	border-color: #AAAAAA;
 }
 
-#ficha #foto{
+#ficha #foto,
+#logo-equipo
+{
     float:left;
 }
-#ficha #foto img{
+#ficha #foto img,
+#logo-equipo img{
     width: 100px;
     height: 100px;
     border: 1px solid #AAAAAA;

@@ -17,16 +17,28 @@
 	});
 </script>
 
-
 <h1>{{ equipo.nombre }}</h1>
-<b>Nombre:</b> {{equipo.nombre}}<br/>
-<br/>
+<div>
+    <div id="logo-equipo">
+        {% if equipo.path_foto%}
+            <img src="/site_media/fotos/equipos/{{equipo.path_foto}}" />
+        {% endif %}
+    </div>
+    
+        <b>Nombre:</b> {{equipo.nombre}}<br/>
+        <b>Campo: </b> {{equipo.campo}}<br/>
+        <b>Dirección: </b> {{equipo.direccion}}<br/>
+        <br/>
+    <div style="clear:both"></div>
+</div>
+
 <div id="tabs">
 	<ul>
 		<li><a href="#tabs-1">Jugadores</a></li>
 		<li><a href="#tabs-2">Clasificación</a></li>
 		<li><a href="#tabs-3">Jornadas</a></li>
 		<li><a href="#tabs-4">Estadísticas</a></li>
+		<li><a href="#tabs-5">Contacto</a></li>
 	</ul>
 	<div id="tabs-1">
 		{% show_estadisticas_jugadores jugadores %}
@@ -180,6 +192,18 @@
 				<td>{{estadisticas.datos_mayor_porcentaje_perdidas}}</td>
 			</tr>
 		</table>
+	</div>
+	<div id="tabs-5">
+	    <div id="mapa" style="float:right">
+	        {% if equipo.google_maps %}
+	            {{equipo.google_maps|safe}}
+	        {% endif %}
+	    </div>
+	    <b>Campo: </b>{{equipo.campo}}<br/>
+	    <b>Dirección: </b>{{equipo.direccion}}<br/>
+	    <b>E-Mail: </b>{{equipo.email}}<br/>
+	    <b>Teléfono: </b>{{equipo.telefono}}<br/>
+	    <div style="clear: both"></div>
 	</div>
 </div>
 
