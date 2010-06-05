@@ -18,7 +18,11 @@ class JornadasPartidos:
 
 # Create your views here.
 def index(request):
-    equipos = Equipo.objects.all().order_by('nombre')
+    if 'q' in request.GET:
+        equipos = Equipo.objects.filter(
+            nombre__contains=request.GET["q"]).order_by('nombre')
+    else:
+        equipos = Equipo.objects.all().order_by('nombre')
     return render_to_response('dardos/equipos/index.html', {'equipos': equipos})
 
 def detail(request, equipo_id):
