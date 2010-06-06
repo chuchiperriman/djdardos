@@ -1,5 +1,7 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
 
+import procesos
+
 from djdardos.dardos.models import *
 from djdardos.dardos.partidos.forms import *
 from django.shortcuts import render_to_response, get_object_or_404
@@ -105,7 +107,8 @@ def setpartidas(request, partido_id):
         
             partido = Partido.objects.get(pk=partido_id)
             partido.jugado = True
-            partido.save()
+            #Este metodo guarda el partido
+            procesos.actualizar_puntos_partido(partido)
         else:
             logging.debug('NOOOO Valido !!')
     else:
