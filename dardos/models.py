@@ -123,7 +123,7 @@ class Partido(models.Model):
         return puntos
     """
     def __unicode__(self):
-        return self.equipo_local.nombre + "-" + self.equipo_visitante.nombre + " " + str(self.fecha)
+        return "Jornada " + str(self.jornada.numero) + ": " + self.equipo_local.nombre + "-" + self.equipo_visitante.nombre + " " + str(self.fecha)
 
 class PartidaIndividual(models.Model):
     numero = models.IntegerField()

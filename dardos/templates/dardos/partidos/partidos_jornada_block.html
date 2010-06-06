@@ -16,18 +16,22 @@
         	<td>
         	    {% ifequal p.ganador p.equipo_local %}
 	                <img src="/site_media/images/yes.png" title="Ganado"/>
-		            <img src="/site_media/images/no.png" title="Perdido"/>
-		        {% endifequal %}
-		        {% ifequal p.ganador p.equipo_visitante %}
+	                {{p.puntos_local}} - {{p.puntos_visitante}}
+		        <img src="/site_media/images/no.png" title="Perdido"/>
+		    {% endifequal %}
+		    {% ifequal p.ganador p.equipo_visitante %}
 	                <img src="/site_media/images/no.png" title="Perdido"/>
-		            <img src="/site_media/images/yes.png" title="Ganado"/>
-		        {% endifequal %}
-		        {% if not p.ganador and p.jugado %}
-	                <img src="/site_media/images/empate.png" title="Empate"/>
-		        {% endif %}
-		        {% if not p.ganador and not p.jugado %}
+	                {{p.puntos_local}} - {{p.puntos_visitante}}
+		        <img src="/site_media/images/yes.png" title="Ganado"/>
+		    {% endifequal %}
+		    {% if not p.ganador and p.jugado %}
+	            	<img src="/site_media/images/empate.png" title="Empate"/>
+	            	{{p.puntos_local}} - {{p.puntos_visitante}}
+	            	<img src="/site_media/images/empate.png" title="Empate"/>
+		    {% endif %}
+		    {% if not p.ganador and not p.jugado %}
 	                <img src="/site_media/images/no-jugado.png" title="No jugado"/>
-		        {% endif %}
+		    {% endif %}
             </td>
         	<td>{{p.equipo_visitante.nombre}}</td>
         	<td>

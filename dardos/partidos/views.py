@@ -102,6 +102,10 @@ def setpartidas(request, partido_id):
             #TODO Comprobar que una un jugador no puede jugar mas de una individual de cada grupo
             for f in todos:
                 f.save()
+        
+            partido = Partido.objects.get(pk=partido_id)
+            partido.jugado = True
+            partido.save()
         else:
             logging.debug('NOOOO Valido !!')
     else:
