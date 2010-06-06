@@ -50,6 +50,7 @@
 		<li><a href="#tabs-1">Estadística</a></li>
 		<li><a href="#tabs-2">P. Individuales</a></li>
 		<li><a href="#tabs-3">P. Parejas</a></li>
+		<li><a href="#tabs-4">Gráficas</a></li>
 	</ul>
 	<div id="tabs-1">
 	    {% show_estadisticas_jugador jugador%}
@@ -94,6 +95,48 @@
 	    {% endfor %}
 	    
 	    </table>
+    </div>
+    <div id="tabs-4">
+        <div id="chart_" style="height:400px;width:500px; "></div>
+        <script language="javascript">
+            line1=[
+                {% for j in jornadas %}
+                    {% if j.partido.jugado %}
+                        {% ifequal j.partido.equipo_local.id equipo.id %}
+                            [{{j.jornada.numero}},{{j.partido.puntos_local}}],
+                        {% else %}
+                            [{{j.jornada.numero}},{{j.partido.puntos_visitante}}],
+                        {% endifequal %}
+                    {% endif %}
+                {% endfor%}
+                ];
+            line2=[
+                {% for j in jornadas %}
+                    {% if j.partido.jugado %}
+                        {% ifnotequal j.partido.equipo_local.id equipo.id %}
+                            [{{j.jornada.numero}},{{j.partido.puntos_local}}],
+                        {% else %}
+                            [{{j.jornada.numero}},{{j.partido.puntos_visitante}}],
+                        {% endifnotequal %}
+                    {% endif %}
+                {% endfor%}
+            ];
+            xticks = [0,1,2,3,4,5,6,7,8,9,10];
+            yticks = [0, 2, 4, 6, 8, 10, 12, 14, 16];
+            plot4 = $.jqplot('chartdiv', [line1, line2], {
+                legend:{show:true}, 
+                title:'Evolución de partidas ganadas/perdidas',
+                grid: {background:'#f3f3f3', gridLineColor:'#accf9b'},
+                series:[
+                    {label:'Ganadas'}, 
+                    {label:'Perdidas'}
+                ],
+                axes:{
+                    xaxis:{ticks:xticks}, 
+                    yaxis:{ticks:yticks, tickOptions:{formatString:'%d'}}
+                }
+            });
+        </script>
     </div>
 </div>
 {% endblock %}

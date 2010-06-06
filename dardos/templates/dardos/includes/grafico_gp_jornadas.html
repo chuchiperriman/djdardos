@@ -1,0 +1,27 @@
+<script language="javascript">
+    line1=[
+        {% for jg in jornadas_grafico.datos %}
+            [{{jg.num_jornada}},{{jg.ganados}}],
+        {% endfor%}
+    ];
+    line2=[
+        {% for jg in jornadas_grafico.datos %}
+            [{{jg.num_jornada}},{{jg.perdidos}}],
+        {% endfor%}
+    ];
+    xticks = [0,1,2,3,4,5,6,7,8,9,10];
+    yticks = [0, 2, 4, 6, 8, 10, 12, 14, 16];
+    plot4 = $.jqplot('{{jornadas_grafico.div_id}}', [line1, line2], {
+        legend:{show:true}, 
+        title:'{{jornadas_grafico.titulo}}',
+        grid: {background:'#f3f3f3', gridLineColor:'#accf9b'},
+        series:[
+            {label:'Ganadas'},
+            {label:'Perdidas'}
+        ],
+        axes:{
+            xaxis:{ticks:xticks}, 
+            yaxis:{ticks:yticks, tickOptions:{formatString:'%d'}}
+        }
+    });
+</script>

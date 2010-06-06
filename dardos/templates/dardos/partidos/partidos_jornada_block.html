@@ -12,7 +12,9 @@
     	<tr>
     		<td>Jornada {{p.jornada.numero}}</td>
     		<td>{{p.fecha|date:"d-m-Y" }}</td>
-        	<td>{{p.equipo_local.nombre}}</td>
+        	<td>
+        	    <a href="/equipos/{{p.equipo_local.id}}">{{p.equipo_local.nombre}}</a>
+        	</td>
         	<td>
         	    {% ifequal p.ganador p.equipo_local %}
 	                <img src="/site_media/images/yes.png" title="Ganado"/>
@@ -33,7 +35,9 @@
 	                <img src="/site_media/images/no-jugado.png" title="No jugado"/>
 		    {% endif %}
             </td>
-        	<td>{{p.equipo_visitante.nombre}}</td>
+        	<td>
+        	    <a href="/equipos/{{p.equipo_visitante.id}}">{{p.equipo_visitante.nombre}}</a>
+        	</td>
         	<td>
         	    {% if p.jugado %}
         		<a href="/partidos/{{p.id}}" class="view"></a>

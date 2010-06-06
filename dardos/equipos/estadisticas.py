@@ -8,6 +8,7 @@ class DatosEstadisticaJugador:
     def __init__(self, jugador):
         self.jugador = jugador
         self.nombre = jugador.nombre
+        self.id = jugador.id
         j = jugador
         self.partidas_ind_ganadas = j.partidas_ind_ganadas()
         self.partidas_par_ganadas = j.partidas_par_ganadas()
