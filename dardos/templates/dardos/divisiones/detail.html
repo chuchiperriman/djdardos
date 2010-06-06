@@ -15,11 +15,15 @@
 		$("#tabs").tabs();
 	});
 	
-	function show_jornada(url){
-	    $.get(url, function(data) {
-	        $('#partidos_jornada').html(data);
-        });
-    }
+	$(document).ready(function () {
+  		$('#jornada').change(function(){
+			$.get('/ajax_jornada_detail/' + $(this).val(), function(data) {
+				$('#partidos_jornada').html(data);
+			});
+		});
+		//Para que cargue la primera jornada
+		$("#jornada").trigger("change");
+	});
 	
 </script>
 
@@ -35,20 +39,13 @@
 	    {% show_clasificacion liga %}
 	</div>
 	<div id="tabs-2">
-		<table>
-		    <tr>
-		        <th>Jornada</th>
-		        <th>Fecha prevista</th>
-		        <th>&nbsp;</th>
-		    </tr>
-		{% for j in liga.jornada_set.all%}
-			<tr>
-				<td>Jornada {{j.numero}}</td>
-				<td>{{j.fecha_prevista}}</td>
-				<td><a href="#partidos_jornada" onclick="show_jornada('/ajax_jornada_detail/{{j.id}}');return false;" class="view"></a></td>
-			</tr>
-		{%endfor%}
-		</table>
+		<form method="get">
+			<select name="jornada" id="jornada">
+			{% for j in liga.jornada_set.all%}
+				<option value="{{j.id}}">Jornada {{j.numero}} ({{j.fecha_prevista}})</option>
+			{%endfor%}
+			</select>
+		</form>
 		<div id="partidos_jornada" >
 		</div>
 	</div>
