@@ -1,5 +1,6 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
 
+from datetime import datetime
 from djdardos.dardos.models import *
 from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
@@ -26,6 +27,7 @@ def index(request):
     return render_to_response('dardos/equipos/index.html', {'equipos': equipos})
 
 def detail(request, equipo_id):
+    print 'ini v', datetime.now()
     e = get_object_or_404(Equipo, pk=equipo_id)
     import logging
     logging.debug(e.ligas.all())
@@ -34,10 +36,10 @@ def detail(request, equipo_id):
     jornadas = []
     for j in liga_actual.jornada_set.all():
         jornadas.append(JornadasPartidos(j, e))
-    
+    print 'fin v', datetime.now()    
     #TODO Esto es una cochinada temporal (lo de las ligas)
     return render_to_response('dardos/equipos/detail.html', 
-    	{'equipo': e, 'jugadores': e.jugador_set.all(),
+    	{'equipo': e, 'jugadores': estadisticas.jugadores,
          'liga_actual': liga_actual, 'jornadas': jornadas,
          'estadisticas': estadisticas})
 

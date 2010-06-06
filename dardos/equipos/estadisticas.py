@@ -1,21 +1,45 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
-
+from datetime import datetime
 from djdardos.dardos.models import *
 from django.db import models
 from django.db.models import Q
 
+class DatosEstadisticaJugador:
+    def __init__(self, jugador):
+        self.jugador = jugador
+        self.nombre = jugador.nombre
+        j = jugador
+        self.partidas_ind_ganadas = j.partidas_ind_ganadas()
+        self.partidas_par_ganadas = j.partidas_par_ganadas()
+        self.partidas_ganadas = self.partidas_ind_ganadas + self.partidas_par_ganadas
+        self.partidas_ind_perdidas = j.partidas_ind_perdidas()
+        self.partidas_par_perdidas = j.partidas_par_perdidas()
+        self.partidas_perdidas = self.partidas_ind_perdidas + self.partidas_par_perdidas
+        self.partidas_ind = j.partidas_ind()
+        self.partidas_par = j.partidas_par()
+        self.partidas = self.partidas_ind + self.partidas_par
+        self.partidas_ind_diferencia = self.partidas_ind_ganadas - self.partidas_ind_perdidas
+        self.partidas_par_diferencia = self.partidas_par_ganadas - self.partidas_par_perdidas
+        self.partidas_diferencia = self.partidas_ganadas - self.partidas_perdidas
+        
 class DatosEstadisticaJugadores:
-    def __init__(self, equipo = None, peor = False, porcentaje = False):
+    def __init__(self, equipo):
         self.equipo = equipo
         self.jugadores = []
         self.valor = 0
-        self.peor = peor
-        self.porcentaje = porcentaje
+        self.peor = False
+        self.porcentaje = False
+        #Preload the query
+        self.jugadores_list = list()
+        print 'ini j', datetime.now()
+        for j in Jugador.objects.filter(equipo=self.equipo):
+            self.jugadores_list.append(DatosEstadisticaJugador(j))
+        print 'fin j', datetime.now()
     
     def calcular_mejor(self, get_valor):
         self.jugadores = []
         self.valor = 0
-        for j in Jugador.objects.filter(equipo=self.equipo):
+        for j in self.jugadores_list:
             valor = get_valor(j)
             if (not self.peor and valor > self.valor) or (self.peor and valor < self.valor):
                 self.jugadores = [j]
@@ -40,55 +64,82 @@ class DatosEstadisticaJugadores:
             return str(self.valor) + " -> " + val
 
 class EstadisticasEquipo:
-    def __init__(self, equipo):
+    def __init__(self, equipo, cargar_jugadores = True):
+        print 'ini', datetime.now()
         self.equipo = equipo
-    
-    def partidos_jugados(self):
-        return Partido.objects.filter(Q(jugado=True) & (Q(equipo_local=self.equipo) | Q(equipo_visitante=self.equipo))).count()
-        
-    def partidos_ganados(self):
-        return Partido.objects.filter(Q(jugado=True) & Q(ganador=self.equipo)).count()
-
-    def partidos_perdidos(self):
-        return Partido.objects.filter(Q(jugado=True) & (Q(equipo_local=self.equipo) | 
+        if cargar_jugadores:
+            self.dej = DatosEstadisticaJugadores(self.equipo)
+            self.jugadores = self.dej.jugadores_list
+        self.partidos_jugados_count = Partido.objects.filter(
+            Q(jugado=True) & (Q(equipo_local=self.equipo) | Q(equipo_visitante=self.equipo))).count()
+        self.partidos_ganados_count = Partido.objects.filter(
+            Q(jugado=True) & Q(ganador=self.equipo)).count()
+        self.partidos_perdidos_count = Partido.objects.filter(
+            Q(jugado=True) & (Q(equipo_local=self.equipo) | 
             Q(equipo_visitante=self.equipo))).exclude(
                 Q(ganador=self.equipo) | Q(ganador=None)).count()
+        self.partidos_empatados_count = Partido.objects.filter(Q(jugado=True) & Q(ganador=None) & 
+            (Q(equipo_local=self.equipo) | Q(equipo_visitante=self.equipo))).count() 
+        self.partidos_ganados_local_count = Partido.objects.filter(
+            Q(jugado=True) & Q(equipo_local=self.equipo) & Q(ganador=self.equipo)).count()
+        self.partidos_perdidos_local_count = Partido.objects.filter(
+            Q(jugado=True) & Q(equipo_local=self.equipo)).exclude(
+            Q(ganador=self.equipo) | Q(ganador=None)).count()
+        self.partidos_empatados_local_count = Partido.objects.filter(
+            Q(jugado=True) & Q(equipo_local=self.equipo) & Q(ganador=None)).count()
+        self.partidos_ganados_visitante_count = Partido.objects.filter(
+            Q(jugado=True) & Q(equipo_visitante=self.equipo) & Q(ganador=self.equipo)).count()
+        self.partidos_perdidos_visitante_count= Partido.objects.filter(
+            Q(jugado=True) & Q(equipo_visitante=self.equipo)).exclude(
+            Q(ganador=self.equipo) | Q(ganador=None)).count()
+        self.partidos_empatados_visitante_count = Partido.objects.filter(
+            Q(jugado=True) & Q(equipo_visitante=self.equipo) & Q(ganador=None)).count()
+        print 'fin', datetime.now()
+        
+    def partidos_jugados(self):
+        return self.partidos_jugados_count
+        
+    def partidos_ganados(self):
+        return self.partidos_ganados_count
+
+    def partidos_perdidos(self):
+        return self.partidos_perdidos_count
     
     def partidos_empatados(self):
-        return Partido.objects.filter(Q(jugado=True) & Q(ganador=None) & 
-            (Q(equipo_local=self.equipo) | Q(equipo_visitante=self.equipo))).count()
+        return self.partidos_empatados_count
 
     def partidos_diferencia(self):
         return self.partidos_ganados() - self.partidos_perdidos()
         
-    def partidos_jugados_local(self):
-        return Partido.objects.filter(Q(jugado=True) & Q(equipo_local=self.equipo)).count()
-        
     def partidos_ganados_local(self):
-        return Partido.objects.filter(Q(jugado=True) & Q(equipo_local=self.equipo) & Q(ganador=self.equipo)).count()
+        return self.partidos_ganados_local_count
 
     def partidos_perdidos_local(self):
-        return Partido.objects.filter(Q(jugado=True) & Q(equipo_local=self.equipo)).exclude(
-            Q(ganador=self.equipo) | Q(ganador=None)).count()
+        return self.partidos_perdidos_local_count
 
     def partidos_empatados_local(self):
-        return Partido.objects.filter(Q(jugado=True) & Q(equipo_local=self.equipo) & Q(ganador=None)).count()
+        return self.partidos_empatados_local_count
+    
+    def partidos_jugados_local(self):
+        return self.partidos_ganados_local_count + \
+            self.partidos_perdidos_local_count + self.partidos_empatados_local_count
         
     def partidos_diferencia_local(self):
         return self.partidos_ganados_local() - self.partidos_perdidos_local()
         
-    def partidos_jugados_visitante(self):
-        return Partido.objects.filter(Q(jugado=True) & Q(equipo_visitante=self.equipo)).count()
-        
     def partidos_ganados_visitante(self):
-        return Partido.objects.filter(Q(jugado=True) & Q(equipo_visitante=self.equipo) & Q(ganador=self.equipo)).count()
+        return self.partidos_ganados_visitante_count
 
     def partidos_perdidos_visitante(self):
-        return Partido.objects.filter(Q(jugado=True) & Q(equipo_visitante=self.equipo)).exclude(
-            Q(ganador=self.equipo) | Q(ganador=None)).count()
+        return self.partidos_perdidos_visitante_count
     
     def partidos_empatados_visitante(self):
-        return Partido.objects.filter(Q(jugado=True) & Q(equipo_visitante=self.equipo) & Q(ganador=None)).count()
+        return self.partidos_empatados_visitante_count
+        
+    def partidos_jugados_visitante(self):
+        return self.partidos_ganados_visitante_count + \
+            self.partidos_perdidos_visitante_count + \
+            self.partidos_empatados_visitante_count
 
     def partidos_diferencia_visitante(self):
         return self.partidos_ganados_visitante() - self.partidos_perdidos_visitante()
@@ -117,104 +168,122 @@ class EstadisticasEquipo:
             datos.jugadores.append(jugador)
             
     def datos_mas_ganadas(self):
-        datos = DatosEstadisticaJugadores(self.equipo)
-        return datos.calcular_mejor(lambda j: j.partidas_ganadas())
+        self.dej.peor = False
+        self.dej.porcentaje = False
+        return self.dej.calcular_mejor(lambda j: j.partidas_ganadas)
         
     def datos_mas_ganadas_ind(self):
-        datos = DatosEstadisticaJugadores(self.equipo)
-        return datos.calcular_mejor(lambda j: j.partidas_ind_ganadas())
+        self.dej.peor = False
+        self.dej.porcentaje = False
+        return self.dej.calcular_mejor(lambda j: j.partidas_ind_ganadas)
     
     def datos_mas_ganadas_par(self):
-        datos = DatosEstadisticaJugadores(self.equipo)
-        return datos.calcular_mejor(lambda j: j.partidas_par_ganadas())
+        self.dej.peor = False
+        self.dej.porcentaje = False
+        return self.dej.calcular_mejor(lambda j: j.partidas_par_ganadas)
         
     def datos_mas_perdidas(self):
-        datos = DatosEstadisticaJugadores(self.equipo)
-        return datos.calcular_mejor(lambda j: j.partidas_perdidas())
+        self.dej.peor = False
+        self.dej.porcentaje = False
+        return self.dej.calcular_mejor(lambda j: j.partidas_perdidas)
         
     def datos_mas_perdidas_ind(self):
-        datos = DatosEstadisticaJugadores(self.equipo)
-        return datos.calcular_mejor(lambda j: j.partidas_ind_perdidas())
+        self.dej.peor = False
+        self.dej.porcentaje = False
+        return self.dej.calcular_mejor(lambda j: j.partidas_ind_perdidas)
     
     def datos_mas_perdidas_par(self):
-        datos = DatosEstadisticaJugadores(self.equipo)
-        return datos.calcular_mejor(lambda j: j.partidas_par_perdidas())
+        self.dej.peor = False
+        self.dej.porcentaje = False
+        return self.dej.calcular_mejor(lambda j: j.partidas_par_perdidas)
     
     def datos_mejor_diferencia_ind(self):
-        datos = DatosEstadisticaJugadores(self.equipo)
-        return datos.calcular_mejor(lambda j: j.partidas_ind_ganadas () - j.partidas_ind_perdidas())
+        self.dej.peor = False
+        self.dej.porcentaje = False
+        return self.dej.calcular_mejor(lambda j: j.partidas_ind_ganadas - j.partidas_ind_perdidas)
         
     def datos_mejor_diferencia_par(self):
-        datos = DatosEstadisticaJugadores(self.equipo)
-        return datos.calcular_mejor(lambda j: j.partidas_par_ganadas () - j.partidas_par_perdidas())
+        self.dej.peor = False
+        self.dej.porcentaje = False
+        return self.dej.calcular_mejor(lambda j: j.partidas_par_ganadas - j.partidas_par_perdidas)
         
     def datos_mejor_diferencia(self):
-        datos = DatosEstadisticaJugadores(self.equipo)
-        return datos.calcular_mejor(lambda j: j.partidas_ganadas () - j.partidas_perdidas())
+        self.dej.peor = False
+        self.dej.porcentaje = False
+        return self.dej.calcular_mejor(lambda j: j.partidas_ganadas - j.partidas_perdidas)
         
     def datos_peor_diferencia_ind(self):
-        datos = DatosEstadisticaJugadores(self.equipo, True)
-        return datos.calcular_mejor(lambda j: j.partidas_ind_ganadas () - j.partidas_ind_perdidas())
+        self.dej.peor = True
+        self.dej.porcentaje = False
+        return self.dej.calcular_mejor(lambda j: j.partidas_ind_ganadas - j.partidas_ind_perdidas)
         
     def datos_peor_diferencia_par(self):
-        datos = DatosEstadisticaJugadores(self.equipo, True)
-        return datos.calcular_mejor(lambda j: j.partidas_par_ganadas () - j.partidas_par_perdidas())
+        self.dej.peor = True
+        self.dej.porcentaje = False
+        return self.dej.calcular_mejor(lambda j: j.partidas_par_ganadas - j.partidas_par_perdidas)
         
     def datos_peor_diferencia(self):
-        datos = DatosEstadisticaJugadores(self.equipo, True)
-        return datos.calcular_mejor(lambda j: j.partidas_ganadas () - j.partidas_perdidas())
+        self.dej.peor = True
+        self.dej.porcentaje = False
+        return self.dej.calcular_mejor(lambda j: j.partidas_ganadas - j.partidas_perdidas)
         
     def datos_mejor_porcentaje_ind(self):
         def calc(j):
-            if j.partidas_ind() == 0:
+            if j.partidas_ind == 0:
                 return 0
-            return j.partidas_ind_ganadas () * 100 / j.partidas_ind()
+            return j.partidas_ind_ganadas * 100 / j.partidas_ind
             
-        datos = DatosEstadisticaJugadores(self.equipo, porcentaje=True)
-        return datos.calcular_mejor(calc)
+        self.dej.peor = False
+        self.dej.porcentaje = True
+        return self.dej.calcular_mejor(calc)
     
     def datos_mejor_porcentaje_par(self):
         def calc(j):
-            if j.partidas_par() == 0:
+            if j.partidas_par == 0:
                 return 0
-            return j.partidas_par_ganadas () * 100 / j.partidas_par()
+            return j.partidas_par_ganadas * 100 / j.partidas_par
             
-        datos = DatosEstadisticaJugadores(self.equipo, porcentaje=True)
-        return datos.calcular_mejor(calc)
+        self.dej.peor = False
+        self.dej.porcentaje = True
+        return self.dej.calcular_mejor(calc)
         
     def datos_mejor_porcentaje(self):
         def calc(j):
-            if j.partidas() == 0:
+            if j.partidas == 0:
                 return 0
-            return j.partidas_ganadas () * 100 / j.partidas()
+            return j.partidas_ganadas * 100 / j.partidas
             
-        datos = DatosEstadisticaJugadores(self.equipo, porcentaje=True)
-        return datos.calcular_mejor(calc)
+        self.dej.peor = False
+        self.dej.porcentaje = True
+        return self.dej.calcular_mejor(calc)
         
     def datos_mayor_porcentaje_perdidas_ind(self):
         def calc(j):
-            if j.partidas_ind() == 0:
+            if j.partidas_ind == 0:
                 return 0
-            return j.partidas_ind_perdidas () * 100 / j.partidas_ind()
+            return j.partidas_ind_perdidas * 100 / j.partidas_ind
             
-        datos = DatosEstadisticaJugadores(self.equipo, porcentaje=True)
-        return datos.calcular_mejor(calc)
+        self.dej.peor = False
+        self.dej.porcentaje = True
+        return self.dej.calcular_mejor(calc)
     
     def datos_mayor_porcentaje_perdidas_par(self):
         def calc(j):
-            if j.partidas_par() == 0:
+            if j.partidas_par == 0:
                 return 0
-            return j.partidas_par_perdidas () * 100 / j.partidas_par()
+            return j.partidas_par_perdidas * 100 / j.partidas_par
             
-        datos = DatosEstadisticaJugadores(self.equipo, porcentaje=True)
-        return datos.calcular_mejor(calc)
+        self.dej.peor = False
+        self.dej.porcentaje = True
+        return self.dej.calcular_mejor(calc)
         
     def datos_mayor_porcentaje_perdidas(self):
         def calc(j):
-            if j.partidas() == 0:
+            if j.partidas == 0:
                 return 0
-            return j.partidas_perdidas () * 100 / j.partidas()
+            return j.partidas_perdidas * 100 / j.partidas
             
-        datos = DatosEstadisticaJugadores(self.equipo, porcentaje=True)
-        return datos.calcular_mejor(calc)
+        self.dej.peor = False
+        self.dej.porcentaje = True
+        return self.dej.calcular_mejor(calc)
     
