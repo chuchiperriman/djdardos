@@ -29,7 +29,6 @@ def index(request):
     return render_to_response('dardos/equipos/index.html', {'equipos': equipos})
 
 def detail(request, equipo_id):
-    print 'ini v', datetime.now()
     e = get_object_or_404(Equipo, pk=equipo_id)
     import logging
     logging.debug(e.ligas.all())
@@ -54,7 +53,6 @@ def detail(request, equipo_id):
                 j.partido.puntos_visitante,
                 j.partido.puntos_local)
     
-    print 'fin v', datetime.now()
     #TODO Esto es una cochinada temporal (lo de las ligas)
     return render_to_response('dardos/equipos/detail.html', 
     	{'equipo': e, 'jugadores': estadisticas.jugadores,

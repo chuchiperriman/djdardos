@@ -12,15 +12,15 @@ class DatosEstadisticaJugador:
         j = jugador
         self.partidas_ind_ganadas = j.partidas_ind_ganadas()
         self.partidas_par_ganadas = j.partidas_par_ganadas()
-        self.partidas_ganadas = self.partidas_ind_ganadas + self.partidas_par_ganadas
+        self.partidas_ganadas = self.partidas_ind_ganadas.count() + self.partidas_par_ganadas.count()
         self.partidas_ind_perdidas = j.partidas_ind_perdidas()
         self.partidas_par_perdidas = j.partidas_par_perdidas()
-        self.partidas_perdidas = self.partidas_ind_perdidas + self.partidas_par_perdidas
+        self.partidas_perdidas = self.partidas_ind_perdidas.count() + self.partidas_par_perdidas.count()
         self.partidas_ind = j.partidas_ind()
         self.partidas_par = j.partidas_par()
         self.partidas = self.partidas_ind + self.partidas_par
-        self.partidas_ind_diferencia = self.partidas_ind_ganadas - self.partidas_ind_perdidas
-        self.partidas_par_diferencia = self.partidas_par_ganadas - self.partidas_par_perdidas
+        self.partidas_ind_diferencia = self.partidas_ind_ganadas.count() - self.partidas_ind_perdidas.count()
+        self.partidas_par_diferencia = self.partidas_par_ganadas.count() - self.partidas_par_perdidas.count()
         self.partidas_diferencia = self.partidas_ganadas - self.partidas_perdidas
         
 class DatosEstadisticaJugadores:

@@ -1,6 +1,6 @@
 {% extends "dardos/base.html" %}
 
-{% load dardos_general %}
+{% load dardos_general graficos %}
 
 {% block title %}Jugadores{% endblock %}
 
@@ -97,46 +97,11 @@
 	    </table>
     </div>
     <div id="tabs-4">
-        <div id="chart_" style="height:400px;width:500px; "></div>
-        <script language="javascript">
-            line1=[
-                {% for j in jornadas %}
-                    {% if j.partido.jugado %}
-                        {% ifequal j.partido.equipo_local.id equipo.id %}
-                            [{{j.jornada.numero}},{{j.partido.puntos_local}}],
-                        {% else %}
-                            [{{j.jornada.numero}},{{j.partido.puntos_visitante}}],
-                        {% endifequal %}
-                    {% endif %}
-                {% endfor%}
-                ];
-            line2=[
-                {% for j in jornadas %}
-                    {% if j.partido.jugado %}
-                        {% ifnotequal j.partido.equipo_local.id equipo.id %}
-                            [{{j.jornada.numero}},{{j.partido.puntos_local}}],
-                        {% else %}
-                            [{{j.jornada.numero}},{{j.partido.puntos_visitante}}],
-                        {% endifnotequal %}
-                    {% endif %}
-                {% endfor%}
-            ];
-            xticks = [0,1,2,3,4,5,6,7,8,9,10];
-            yticks = [0, 2, 4, 6, 8, 10, 12, 14, 16];
-            plot4 = $.jqplot('chartdiv', [line1, line2], {
-                legend:{show:true}, 
-                title:'Evolución de partidas ganadas/perdidas',
-                grid: {background:'#f3f3f3', gridLineColor:'#accf9b'},
-                series:[
-                    {label:'Ganadas'}, 
-                    {label:'Perdidas'}
-                ],
-                axes:{
-                    xaxis:{ticks:xticks}, 
-                    yaxis:{ticks:yticks, tickOptions:{formatString:'%d'}}
-                }
-            });
-        </script>
+        <!--[if IE]><script language="javascript" type="text/javascript" src="/site_media/js/excanvas.js"></script><![endif]-->
+        <script language="javascript" type="text/javascript" src="/site_media/js/jquery.jqplot.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/site_media/css/jquery.jqplot.css" />
+        <div id="chartdiv" style="height:400px;width:500px; "></div>
+        {% show_grafico_gp_jornadas jornadas_grafico %}
     </div>
 </div>
 {% endblock %}

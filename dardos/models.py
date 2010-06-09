@@ -1,5 +1,7 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
 
+from itertools import chain
+
 from django.db import models
 from django.db.models import Q
 
@@ -68,29 +70,27 @@ class Jugador(models.Model):
             .count()
 
     def partidas_ganadas(self):
-        return self.partidas_ind_ganadas() + self.partidas_par_ganadas()
+        return list(chain(self.partidas_ind_ganadas(), self.partidas_par_ganadas()))
     
     def partidas_perdidas(self):
-        return self.partidas_ind_perdidas() + self.partidas_par_perdidas()
+        return list(chain(self.partidas_ind_perdidas(), self.partidas_par_perdidas()))
         
     def partidas_ind_ganadas(self):
-        return PartidaIndividual.objects.filter(ganador=self).count()
+        return PartidaIndividual.objects.filter(ganador=self)
         
     def partidas_par_ganadas(self):
-        return PartidaParejas.objects.filter(Q(ganador1=self) | Q(ganador2=self)).count()
+        return PartidaParejas.objects.filter(Q(ganador1=self) | Q(ganador2=self))
         
     def partidas_ind_perdidas(self):
         return PartidaIndividual.objects \
             .filter(Q(jugador_local=self) | Q(jugador_visitante=self)) \
-            .exclude(ganador=self) \
-            .count()
+            .exclude(ganador=self)
             
     def partidas_par_perdidas(self):
         return PartidaParejas.objects \
             .filter(Q(jugador_local1=self) | Q(jugador_local2=self) \
                 | Q(jugador_visitante1=self) | Q(jugador_visitante2=self)) \
-            .exclude(Q(ganador1=self) | Q(ganador2=self)) \
-            .count()
+            .exclude(Q(ganador1=self) | Q(ganador2=self))
             
     def partidas_diferencia(self):
         return self.partidas_ganadas() - self.partidas_perdidas()

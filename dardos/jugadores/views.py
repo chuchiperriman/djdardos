@@ -1,11 +1,11 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- coding: utf-8 -*-
 
 from djdardos.dardos.models import *
 from django.shortcuts import render_to_response, get_object_or_404
-
 from django.http import HttpResponse, Http404
 
-
+from ..templatetags.graficos import *
 
 # Create your views here.
 def index(request):
@@ -17,6 +17,32 @@ def index(request):
     return render_to_response('dardos/jugadores/index.html', {'jugadores_list': jugadores_list})
 
 def detail(request, jugador_id):
-    p = get_object_or_404(Jugador, pk=jugador_id)
-    return render_to_response('dardos/jugadores/detail.html', {'jugador': p})
+    jugador = get_object_or_404(Jugador, pk=jugador_id)
+
+    ordenado = {}
+    
+    for p in jugador.partidas_ganadas():
+        if not p.partido.jornada.numero in ordenado:
+            ordenado[p.partido.jornada.numero] = DatosJornadaGP(
+                p.partido.jornada.numero, 1, 0)
+        else:
+            ordenado[p.partido.jornada.numero].ganados += 1
+
+    for p in jugador.partidas_perdidas():
+        if not p.partido.jornada.numero in ordenado:
+            ordenado[p.partido.jornada.numero] = DatosJornadaGP(
+                p.partido.jornada.numero, 0, 1)
+        else:
+            ordenado[p.partido.jornada.numero].perdidos += 1
+    
+    jornadas_grafico = JornadasGrafico(u'Evolución de partidas ganadas/perdidas')
+    jornadas_grafico.max_partidas = 6
+    jornadas_grafico.max_jornadas = 15
+
+    for k in ordenado:
+        jornadas_grafico.datos.append(ordenado[k])
+
+    return render_to_response('dardos/jugadores/detail.html', {
+        'jugador': jugador,
+        'jornadas_grafico' : jornadas_grafico})
     

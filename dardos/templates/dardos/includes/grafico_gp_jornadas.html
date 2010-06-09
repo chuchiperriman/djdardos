@@ -9,8 +9,17 @@
             [{{jg.num_jornada}},{{jg.perdidos}}],
         {% endfor%}
     ];
-    xticks = [0,1,2,3,4,5,6,7,8,9,10];
-    yticks = [0, 2, 4, 6, 8, 10, 12, 14, 16];
+    
+    xticks = [
+        {% for i in jornadas_grafico.get_max_x_range %}
+            {{i}},
+        {% endfor %}
+    ];
+    yticks = [
+        {% for i in jornadas_grafico.get_max_y_range %}
+            {{i}},
+        {% endfor %}
+    ];
     plot4 = $.jqplot('{{jornadas_grafico.div_id}}', [line1, line2], {
         legend:{show:true}, 
         title:'{{jornadas_grafico.titulo}}',
