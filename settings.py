@@ -3,6 +3,8 @@
 import logging
 import os.path
 
+VERSION = '0.3.0'
+
 logging.basicConfig(
     level = logging.DEBUG,
     format = '%(asctime)s %(levelname)s %(message)s',
