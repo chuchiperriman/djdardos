@@ -6,6 +6,11 @@ from django.db import models
 from django.db.models import Q
 
 TIPOS_PARTIDA = (
+    ("1" , "Individual"),
+    ("2" , "Parejas")
+)
+
+TIPOS_JUEGO = (
     ("1" , "501"),
     ("2" , "Cricket")
 )
@@ -125,27 +130,14 @@ class Partido(models.Model):
     def __unicode__(self):
         return "Jornada " + str(self.jornada.numero) + ": " + self.equipo_local.nombre + "-" + self.equipo_visitante.nombre + " " + str(self.fecha)
 
-class PartidaIndividual(models.Model):
+class Partida(models.Model):
     numero = models.IntegerField()
     partido = models.ForeignKey(Partido)
     tipo = models.CharField(max_length=1, choices=TIPOS_PARTIDA)
-    jugador_local = models.ForeignKey(Jugador, related_name="jugador_local")
-    jugador_visitante = models.ForeignKey(Jugador, related_name="jugador_visitante")
-    ganador = models.ForeignKey(Jugador, related_name="ganador")
-    
-    def __unicode__(self):
-        return str(self.partido) + " - " + str(self.numero)
-    
-class PartidaParejas(models.Model):
-    numero = models.IntegerField()
-    partido = models.ForeignKey(Partido)
-    tipo = models.CharField(max_length=1, choices=TIPOS_PARTIDA)
-    jugador_local1 = models.ForeignKey(Jugador, related_name="jugador_local1")
-    jugador_local2 = models.ForeignKey(Jugador, related_name="jugador_local2")
-    jugador_visitante1 = models.ForeignKey(Jugador, related_name="jugador_visitante1")
-    jugador_visitante2 = models.ForeignKey(Jugador, related_name="jugador_visitante2")
-    ganador1 = models.ForeignKey(Jugador, related_name="ganador1")
-    ganador2 = models.ForeignKey(Jugador, related_name="ganador2")
+    tipo_juego = models.CharField(max_length=1, choices=TIPOS_JUEGO)
+    jugadores_local = models.ManyToManyField(Jugador, related_name="jugadores_local")
+    jugadores_visitante = models.ManyToManyField(Jugador, related_name="jugadores_visitante")
+    ganadores = models.ManyToManyField(Jugador, related_name="ganadores")
     
     def __unicode__(self):
         return str(self.partido) + " - " + str(self.numero)
