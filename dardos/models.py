@@ -5,9 +5,12 @@ from itertools import chain
 from django.db import models
 from django.db.models import Q
 
+TIPO_PARTIDA_INDIVIDUAL = 1
+TIPO_PARTIDA_PAREJAS = 2
+
 TIPOS_PARTIDA = (
-    ("1" , "Individual"),
-    ("2" , "Parejas")
+    (TIPO_PARTIDA_INDIVIDUAL , "Individual"),
+    (TIPO_PARTIDA_PAREJAS , "Parejas")
 )
 
 TIPOS_JUEGO = (
@@ -56,54 +59,37 @@ class Jugador(models.Model):
     fecha_alta = models.DateTimeField('Fecha de Alta')
     path_foto = models.CharField(max_length=255,null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
-
+    
+    def partidas(self):
+        return Partida.objects.filter(Q(jugadores_local = self) | Q(jugadores_visitante = self)).distinct()
+    
+    def partidas_ind(self):
+        return self.partidas().filter(tipo=TIPO_PARTIDA_INDIVIDUAL)
+        
+    def partidas_par(self):
+        return self.partidas().filter(tipo=TIPO_PARTIDA_PAREJAS)
+    
+    def partidas_ganadas(self):
+        return self.partidas().filter(ganadores=self)
+    
+    def partidas_ind_ganadas(self):
+        return self.partidas_ind().filter(ganadores=self)
+        
+    def partidas_par_ganadas(self):
+        return self.partidas_par().filter(ganadores=self)
+        
+    def partidas_perdidas(self):
+        return self.partidas().exclude(ganadores=self)
+    
+    def partidas_ind_perdidas(self):
+        return self.partidas_ind().exclude(ganadores=self)
+        
+    def partidas_par_perdidas(self):
+        return self.partidas_par().exclude(ganadores=self)
+        
     def __unicode__(self):
         return self.nombre
 
-    def partidas(self):
-        return self.partidas_ind() + self.partidas_par()
-            
-    def partidas_ind(self):
-        return PartidaIndividual.objects \
-            .filter(Q(jugador_local=self) | Q(jugador_visitante=self)) \
-            .count()
-            
-    def partidas_par(self):
-        return PartidaParejas.objects \
-            .filter(Q(jugador_local1=self) | Q(jugador_local2=self) \
-                | Q(jugador_visitante1=self) | Q(jugador_visitante2=self)) \
-            .count()
-
-    def partidas_ganadas(self):
-        return list(chain(self.partidas_ind_ganadas(), self.partidas_par_ganadas()))
-    
-    def partidas_perdidas(self):
-        return list(chain(self.partidas_ind_perdidas(), self.partidas_par_perdidas()))
-        
-    def partidas_ind_ganadas(self):
-        return PartidaIndividual.objects.filter(ganador=self)
-        
-    def partidas_par_ganadas(self):
-        return PartidaParejas.objects.filter(Q(ganador1=self) | Q(ganador2=self))
-        
-    def partidas_ind_perdidas(self):
-        return PartidaIndividual.objects \
-            .filter(Q(jugador_local=self) | Q(jugador_visitante=self)) \
-            .exclude(ganador=self)
-            
-    def partidas_par_perdidas(self):
-        return PartidaParejas.objects \
-            .filter(Q(jugador_local1=self) | Q(jugador_local2=self) \
-                | Q(jugador_visitante1=self) | Q(jugador_visitante2=self)) \
-            .exclude(Q(ganador1=self) | Q(ganador2=self))
-            
-    def partidas_diferencia(self):
-        return self.partidas_ganadas() - self.partidas_perdidas()
-    def partidas_ind_diferencia(self):
-        return self.partidas_ind_ganadas() - self.partidas_ind_perdidas()
-    def partidas_par_diferencia(self):
-        return self.partidas_par_ganadas() - self.partidas_par_perdidas()
-        
 class Partido(models.Model):
     jornada = models.ForeignKey(Jornada)
     equipo_local = models.ForeignKey(Equipo, related_name="equipo_local")
@@ -141,6 +127,5 @@ class Partida(models.Model):
     
     def __unicode__(self):
         return str(self.partido) + " - " + str(self.numero)
-    
     
     

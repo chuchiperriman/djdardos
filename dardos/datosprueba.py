@@ -5,6 +5,35 @@ from datetime import datetime
 
 from xml.dom.minidom import parse
 
+def to_new_partidas():
+    for pi in PartidaIndividual.objects.all():
+        p = Partida()
+        p.numero = pi.numero
+        p.partido = pi.partido
+        p.tipo = 1
+        p.tipo_juego = pi.tipo
+        p.save()
+        p.jugadores_local.add(pi.jugador_local)
+        p.jugadores_visitante.add(pi.jugador_visitante)
+        p.ganadores.add(pi.ganador)
+        p.save()
+        print 'Saved: ', p
+    for pi in PartidaParejas.objects.all():
+        p = Partida()
+        p.numero = pi.numero
+        p.partido = pi.partido
+        p.tipo = 2
+        p.tipo_juego = pi.tipo
+        p.save()
+        p.jugadores_local.add(pi.jugador_local1)
+        p.jugadores_local.add(pi.jugador_local2)
+        p.jugadores_visitante.add(pi.jugador_visitante1)
+        p.jugadores_visitante.add(pi.jugador_visitante2)
+        p.ganadores.add(pi.ganador1)
+        p.ganadores.add(pi.ganador2)
+        p.save()
+        print 'Saved: ', p
+        
 def cargar():
     dom = parse("/home/perriman/dev/djdardos/data/datos.xml")
     root = dom.childNodes[0]

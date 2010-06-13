@@ -10,17 +10,18 @@ class DatosEstadisticaJugador:
         self.nombre = jugador.nombre
         self.id = jugador.id
         j = jugador
-        self.partidas_ind_ganadas = j.partidas_ind_ganadas()
-        self.partidas_par_ganadas = j.partidas_par_ganadas()
-        self.partidas_ganadas = self.partidas_ind_ganadas.count() + self.partidas_par_ganadas.count()
-        self.partidas_ind_perdidas = j.partidas_ind_perdidas()
-        self.partidas_par_perdidas = j.partidas_par_perdidas()
-        self.partidas_perdidas = self.partidas_ind_perdidas.count() + self.partidas_par_perdidas.count()
-        self.partidas_ind = j.partidas_ind()
-        self.partidas_par = j.partidas_par()
+        
+        self.partidas_ind = j.partidas_ind().count()
+        self.partidas_par = j.partidas_par().count()
         self.partidas = self.partidas_ind + self.partidas_par
-        self.partidas_ind_diferencia = self.partidas_ind_ganadas.count() - self.partidas_ind_perdidas.count()
-        self.partidas_par_diferencia = self.partidas_par_ganadas.count() - self.partidas_par_perdidas.count()
+        self.partidas_ind_ganadas = j.partidas_ind_ganadas().count()
+        self.partidas_par_ganadas = j.partidas_par_ganadas().count()
+        self.partidas_ganadas = self.partidas_ind_ganadas + self.partidas_par_ganadas
+        self.partidas_ind_perdidas = j.partidas_ind_perdidas().count()
+        self.partidas_par_perdidas = j.partidas_par_perdidas().count()
+        self.partidas_perdidas = self.partidas_ind_perdidas + self.partidas_par_perdidas
+        self.partidas_ind_diferencia = self.partidas_ind_ganadas - self.partidas_ind_perdidas
+        self.partidas_par_diferencia = self.partidas_par_ganadas - self.partidas_par_perdidas
         self.partidas_diferencia = self.partidas_ganadas - self.partidas_perdidas
         
 class DatosEstadisticaJugadores:
@@ -32,10 +33,8 @@ class DatosEstadisticaJugadores:
         self.porcentaje = False
         #Preload the query
         self.jugadores_list = list()
-        print 'ini j', datetime.now()
         for j in Jugador.objects.filter(equipo=self.equipo):
             self.jugadores_list.append(DatosEstadisticaJugador(j))
-        print 'fin j', datetime.now()
     
     def calcular_mejor(self, get_valor):
         self.jugadores = []
@@ -71,6 +70,7 @@ class EstadisticasEquipo:
         if cargar_jugadores:
             self.dej = DatosEstadisticaJugadores(self.equipo)
             self.jugadores = self.dej.jugadores_list
+            
         self.partidos_jugados_count = Partido.objects.filter(
             Q(jugado=True) & (Q(equipo_local=self.equipo) | Q(equipo_visitante=self.equipo))).count()
         self.partidos_ganados_count = Partido.objects.filter(
@@ -96,7 +96,7 @@ class EstadisticasEquipo:
         self.partidos_empatados_visitante_count = Partido.objects.filter(
             Q(jugado=True) & Q(equipo_visitante=self.equipo) & Q(ganador=None)).count()
         print 'fin', datetime.now()
-        
+
     def partidos_jugados(self):
         return self.partidos_jugados_count
         
@@ -287,4 +287,5 @@ class EstadisticasEquipo:
         self.dej.peor = False
         self.dej.porcentaje = True
         return self.dej.calcular_mejor(calc)
+    
     
