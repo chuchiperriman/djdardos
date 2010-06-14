@@ -14,9 +14,9 @@ urlpatterns = patterns('',
     (r'^equipos/(?P<equipo_id>\d+)/$', 'djdardos.dardos.equipos.views.detail'),
     (r'^jugadores/$', 'djdardos.dardos.jugadores.views.index'),
     (r'^jugadores/(?P<jugador_id>\d+)/$', 'djdardos.dardos.jugadores.views.detail'),
-    #(r'^partidos/$', 'djdardos.dardos.partidos.views.index'),
+    (r'^partidos/$', 'djdardos.dardos.partidos.views.index'),
+    (r'^partidos/(?P<partido_id>\d+)/$', 'djdardos.dardos.partidos.views.detail'),
     #(r'^partidos/new/$', 'djdardos.dardos.partidos.views.new'),
-    #(r'^partidos/(?P<partido_id>\d+)/$', 'djdardos.dardos.partidos.views.detail'),
     #(r'^partidos/partidas/(?P<partido_id>\d+)/$', 'djdardos.dardos.partidos.views.setpartidas'),
     #(r'^partidos/new_jornada/$', 'djdardos.dardos.partidos.views.new_jornada'),
     (r'^division/(?P<division_id>\d+)/$', 'djdardos.dardos.divisiones.views.detail'),
@@ -27,11 +27,6 @@ urlpatterns = patterns('',
         view='djdardos.dardos.views.post_detail',
         name='blog_detail'
     ),
-    #(r'^blog/', include('djdardos.basic.blog.urls')),
-    
-    # Example:
-    # (r'^djdardos/', include('djdardos.foo.urls')),
-
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),

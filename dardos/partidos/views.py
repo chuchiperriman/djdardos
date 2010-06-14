@@ -3,7 +3,7 @@
 import procesos
 
 from djdardos.dardos.models import *
-from djdardos.dardos.partidos.forms import *
+#from djdardos.dardos.partidos.forms import *
 from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic.create_update import create_object
 
@@ -18,19 +18,19 @@ def index(request):
 
 def detail(request, partido_id):
     p = get_object_or_404(Partido, pk=partido_id)
-    partidas_par = PartidaParejas.objects.filter(Q(partido = partido_id) & 
-        Q(numero__in = (1,2,3,4,9,10,11,12))).order_by('numero')
-    partidas_ind = PartidaIndividual.objects.filter(Q(partido = partido_id) & 
-        Q(numero__in = (5,6,7,8,13,14,15,16))).order_by('numero')
+    partidas = p.partida_set.order_by('numero')
+    partidas = list(partidas)
+    print partidas
     return render_to_response('dardos/partidos/detail.html', 
     	{'partido' : p,
-         'partidas_par_1' : partidas_par[0:2],
-         'partidas_par_2' : partidas_par[2:4],
-         'partidas_par_3' : partidas_par[4:6],
-         'partidas_par_4' : partidas_par[6:8],
-         'partidas_ind_1' : partidas_ind[0:4],
-         'partidas_ind_2' : partidas_ind[4:8]})
+         'partidas_par_1' : partidas[0:2],
+         'partidas_par_2' : partidas[2:4],
+         'partidas_ind_1' : partidas[4:8],
+         'partidas_par_3' : partidas[8:10],
+         'partidas_par_4' : partidas[10:12],
+         'partidas_ind_2' : partidas[12:16]})
 
+"""
 def new(request):
     
     form = PartidoForm()
@@ -134,3 +134,6 @@ def new_jornada (request):
         request,
         form_class=JornadaForm,
         post_save_redirect='new')
+"""
+        
+        
