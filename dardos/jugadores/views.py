@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
 
 from ..templatetags.graficos import *
+from ..equipos.estadisticas import DatosEstadisticaJugador
 
 # Create your views here.
 def index(request):
@@ -18,7 +19,7 @@ def index(request):
 
 def detail(request, jugador_id):
     jugador = get_object_or_404(Jugador, pk=jugador_id)
-
+    jugador_datos = DatosEstadisticaJugador(jugador)
     ordenado = {}
     
     for p in jugador.partidas_ganadas():
@@ -44,5 +45,6 @@ def detail(request, jugador_id):
 
     return render_to_response('dardos/jugadores/detail.html', {
         'jugador': jugador,
+        'jugador_datos': jugador_datos,
         'jornadas_grafico' : jornadas_grafico})
     

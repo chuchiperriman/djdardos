@@ -100,19 +100,6 @@ class Partido(models.Model):
     puntos_local = models.PositiveSmallIntegerField(default = 0)
     puntos_visitante = models.PositiveSmallIntegerField(default = 0)
     
-    """
-    def puntos_local(self):
-        jugadores = self.equipo_local.jugador_set.all()
-        puntos = self.partidaindividual_set.filter(ganador__in=jugadores).count()
-        puntos += self.partidaparejas_set.filter(Q(ganador1__in=jugadores) | Q(ganador2__in=jugadores)).count()
-        return puntos
-    
-    def puntos_visitante(self):
-        jugadores = self.equipo_visitante.jugador_set.all()
-        puntos = self.partidaindividual_set.filter(ganador__in=jugadores).count()
-        puntos += self.partidaparejas_set.filter(Q(ganador1__in=jugadores) | Q(ganador2__in=jugadores)).count()
-        return puntos
-    """
     def __unicode__(self):
         return "Jornada " + str(self.jornada.numero) + ": " + self.equipo_local.nombre + "-" + self.equipo_visitante.nombre + " " + str(self.fecha)
 
@@ -125,6 +112,35 @@ class Partida(models.Model):
     jugadores_visitante = models.ManyToManyField(Jugador, related_name="jugadores_visitante")
     ganadores = models.ManyToManyField(Jugador, related_name="ganadores")
     
+    #Funciones de utilidad para partidas individuales
+    def jugador_local(self):
+        return self.jugadores_local.all()[0]
+        
+    def jugador_visitante(self):
+        return self.jugadores_visitante.all()[0]
+    
+    def ganador(self):
+        return self.ganadores.all()[0]
+        
+    #Funciones de utilidad para partidas de parejas
+    def jugador_local1(self):
+        return self.jugadores_local.all()[0]
+        
+    def jugador_visitante1(self):
+        return self.jugadores_visitante.all()[0]
+    
+    def ganador1(self):
+        return self.ganadores.all()[0]
+        
+    def jugador_local2(self):
+        return self.jugadores_local.all()[1]
+        
+    def jugador_visitante2(self):
+        return self.jugadores_visitante.all()[1]
+    
+    def ganador2(self):
+        return self.ganadores.all()[1]
+        
     def __unicode__(self):
         return str(self.partido) + " - " + str(self.numero)
     
