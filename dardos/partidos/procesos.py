@@ -19,6 +19,12 @@ def actualizar_puntos_partido(p):
         
     p.puntos_local = puntos_local
     p.puntos_visitante = puntos_visitante
+    if p.puntos_local > p.puntos_visitante:
+        p.ganador = p.equipo_local
+    elif p.puntos_local < p.puntos_visitante:
+        p.ganador = p.equipo_visitante
+    else:
+        p.ganador = None
     p.jugado = True
     p.save()
     return True
