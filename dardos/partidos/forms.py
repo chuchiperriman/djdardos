@@ -5,6 +5,79 @@ from django import forms
 import datetime
 import logging
 
+class PartidaIndividualForm(forms.Form):
+    tipo_partida = "individual"
+    numero = forms.IntegerField(widget=forms.HiddenInput())
+    jugador_local = forms.IntegerField(widget=forms.Select())
+    jugador_visitante = forms.IntegerField(widget=forms.Select())
+    #l local y v visitante
+    ganador = forms.CharField(
+        widget=forms.RadioSelect(
+            choices=(("l", "Local"), ("v", "Visitante"))
+            ),
+        initial = "l"
+        )
+        
+    def save(self,partido):
+        cleaned_data = self.cleaned_data
+        p = Partida()
+        p.numero = cleaned_data["numero"]
+        p.partido = partido
+        p.tipo = TIPO_PARTIDA_INDIVIDUAL
+        p.tipo_juego = TIPO_JUEGO_501
+        p.save()
+        p.jugadores_local.add(Jugador.objects.get(pk=cleaned_data["jugador_local"]))
+        p.jugadores_visitante.add(Jugador.objects.get(pk=cleaned_data["jugador_visitante"]))
+        if cleaned_data["ganador"] == "l":
+            p.ganadores.add(Jugador.objects.get(pk=cleaned_data["jugador_local"]))
+        else:
+            p.ganadores.add(Jugador.objects.get(pk=cleaned_data["jugador_visitante"]))
+        p.save()
+        print p
+
+class PartidaParejasForm(PartidaIndividualForm):
+    tipo_partida = "parejas"
+    jugador_local2 = forms.IntegerField(widget=forms.Select())
+    jugador_visitante2 = forms.IntegerField(widget=forms.Select())
+    tipo_juego = forms.IntegerField(widget=forms.HiddenInput())
+    
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        jugador_local1 = cleaned_data["jugador_local"]
+        jugador_local2 = cleaned_data["jugador_local2"]
+        jugador_visitante1 = cleaned_data["jugador_visitante"]
+        jugador_visitante2 = cleaned_data["jugador_visitante2"]
+        
+        if jugador_local1 == jugador_local2:
+            raise forms.ValidationError("El jugador local 1 no puede ser el mismo que el jugador local 2")
+        if jugador_visitante1 == jugador_visitante2:
+            raise forms.ValidationError("El jugador visitante 1 no puede ser el mismo que el jugador visitante 2")
+        return cleaned_data
+        
+    def save(self,partido):
+        cleaned_data = self.cleaned_data
+        p = Partida()
+        p.numero = cleaned_data["numero"]
+        p.partido = partido
+        p.tipo = TIPO_PARTIDA_PAREJAS
+        p.tipo_juego = cleaned_data["tipo_juego"]
+        p.save()
+        print cleaned_data["jugador_local"]
+        print cleaned_data["jugador_local2"]
+        p.jugadores_local.add(Jugador.objects.get(pk=cleaned_data["jugador_local"]))
+        p.jugadores_local.add(Jugador.objects.get(pk=cleaned_data["jugador_local2"]))
+        p.jugadores_visitante.add(Jugador.objects.get(pk=cleaned_data["jugador_visitante"]))
+        p.jugadores_visitante.add(Jugador.objects.get(pk=cleaned_data["jugador_visitante2"]))
+        if cleaned_data["ganador"] == "l":
+            p.ganadores.add(Jugador.objects.get(pk=cleaned_data["jugador_local"]))
+            p.ganadores.add(Jugador.objects.get(pk=cleaned_data["jugador_local2"]))
+        else:
+            p.ganadores.add(Jugador.objects.get(pk=cleaned_data["jugador_visitante"]))
+            p.ganadores.add(Jugador.objects.get(pk=cleaned_data["jugador_visitante2"]))
+        p.save()
+        print p.jugadores_local.all()
+        
+"""
 class PartidoForm(forms.ModelForm):
     #TODO Mostrar solo jornadas que no tienen partido asignado
     class Meta:
@@ -42,7 +115,7 @@ class PartidaIndividualForm(forms.ModelForm):
 
     #TODO Mostrar solo jornadas que no tienen partido asignado
     class Meta:
-        model = PartidaIndividual
+        model = Partida
         exclude = ("partido", "tipo")
     
 class PartidaParejasForm(forms.ModelForm):
@@ -52,7 +125,7 @@ class PartidaParejasForm(forms.ModelForm):
         
     #TODO Mostrar solo jornadas que no tienen partido asignado
     class Meta:
-        model = PartidaParejas
+        model = Partida
         exclude = ("partido", "tipo")
 
     def clean(self):
@@ -78,9 +151,8 @@ class PartidaParejasForm(forms.ModelForm):
             raise forms.ValidationError("El ganador 1 no puede ser el mismo que el ganador 2")
         if ganador1.equipo != ganador2.equipo:
             raise forms.ValidationError("No puede haber un ganador de cada equipo")
-            
         return cleaned_data
-
+"""
 class JornadaForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):

@@ -4,15 +4,12 @@ from djdardos.dardos.models import *
 
 
 def actualizar_puntos_partido(p):
-    if p.puntos_local != 0 or p.puntos_visitante != 0:
-        return False
+
     jugadores = p.equipo_local.jugador_set.all()
-    puntos_local = p.partidaindividual_set.filter(ganador__in=jugadores).count()
-    puntos_local += p.partidaparejas_set.filter(Q(ganador1__in=jugadores) | Q(ganador2__in=jugadores)).count()
+    puntos_local = p.partida_set.filter(ganadores__in=jugadores).distinct().count()
     
     jugadores = p.equipo_visitante.jugador_set.all()
-    puntos_visitante = p.partidaindividual_set.filter(ganador__in=jugadores).count()
-    puntos_visitante += p.partidaparejas_set.filter(Q(ganador1__in=jugadores) | Q(ganador2__in=jugadores)).count()
+    puntos_visitante = p.partida_set.filter(ganadores__in=jugadores).distinct().count()
     print p,': ',puntos_local,'-',puntos_visitante
     
     puntos_total = puntos_local + puntos_visitante
@@ -22,6 +19,7 @@ def actualizar_puntos_partido(p):
         
     p.puntos_local = puntos_local
     p.puntos_visitante = puntos_visitante
+    p.jugado = True
     p.save()
     return True
     

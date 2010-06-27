@@ -3,7 +3,7 @@
 import procesos
 
 from djdardos.dardos.models import *
-#from djdardos.dardos.partidos.forms import *
+from djdardos.dardos.partidos.forms import *
 from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic.create_update import create_object
 
@@ -30,7 +30,6 @@ def detail(request, partido_id):
          'partidas_par_4' : partidas[10:12],
          'partidas_ind_2' : partidas[12:16]})
 
-"""
 def new(request):
     
     form = PartidoForm()
@@ -49,9 +48,93 @@ def new(request):
         "form": form})
 
 def setpartidas(request, partido_id):
+    
+    partido = Partido.objects.get(pk=partido_id)
+    jugadores_local_choices = list()
+    for j in partido.equipo_local.jugador_set.all():
+        jugadores_local_choices.append((j.id, j.nombre))
+    jugadores_visitante_choices = list()
+    for j in partido.equipo_visitante.jugador_set.all():
+        jugadores_visitante_choices.append((j.id, j.nombre))
+    
+    def crear_partida_parejas(prefix, post=None, tipo_juego=1):
+        if post:
+            f = PartidaParejasForm(post,prefix=prefix)
+        else:
+            f = PartidaParejasForm(prefix=prefix)
+        f.fields["numero"].initial = int(prefix) + 1
+        f.fields["tipo_juego"].initial = tipo_juego
+        f.fields["jugador_local"].widget.choices = jugadores_local_choices
+        f.fields["jugador_local2"].widget.choices = jugadores_local_choices
+        f.fields["jugador_visitante"].widget.choices = jugadores_visitante_choices
+        f.fields["jugador_visitante2"].widget.choices = jugadores_visitante_choices
+        return f
+        
+    def crear_partida_individual(prefix, post=None):
+        if post:
+            f = PartidaIndividualForm(post,prefix=prefix)
+        else:
+            f = PartidaIndividualForm(prefix=prefix)
+            
+        f.fields["numero"].initial = int(prefix) + 1
+        f.fields["jugador_local"].widget.choices = jugadores_local_choices
+        f.fields["jugador_visitante"].widget.choices = jugadores_visitante_choices
+        return f
+        
+    partido = Partido.objects.get(pk=partido_id)
+    
+    if request.method == 'POST':
+        forms_parejas_1 = [crear_partida_parejas(str(x),request.POST) for x in range(0,2)]
+        forms_parejas_2 = [crear_partida_parejas(str(x),request.POST) for x in range(2,4)]
+        forms_individual_1 = [crear_partida_individual(str(x), request.POST) for x in range(4,8)]
+        forms_parejas_3 = [crear_partida_parejas(str(x),request.POST,2) for x in range(8,10)]
+        forms_parejas_4 = [crear_partida_parejas(str(x),request.POST,2) for x in range(10,12)]
+        forms_individual_2 = [crear_partida_individual(str(x), request.POST) for x in range(12,16)]
+        todos = []
+        todos.extend(forms_parejas_1)
+        todos.extend(forms_parejas_2)
+        todos.extend(forms_parejas_3)
+        todos.extend(forms_parejas_4)
+        todos.extend(forms_individual_1)
+        todos.extend(forms_individual_2)
+        
+        if all([f.is_valid() for f in todos]):
+            #TODO Comprobar que una pareja del grupo 1 no puede jugar en el grupo 2
+            #TODO Comprobar que una un jugador no puede jugar mas de una individual de cada grupo
+            partido.partida_set.all().delete()
+            partido.save()
+            for f in todos:
+                f.save(partido)
+        
+            #Este metodo guarda el partido
+            procesos.actualizar_puntos_partido(partido)
+        else:
+            logging.debug('NOOOO Valido !!')
+    else:
+        todos = []
+        forms_parejas_1 = [crear_partida_parejas(str(x)) for x in range(0,2)]
+        forms_parejas_2 = [crear_partida_parejas(str(x)) for x in range(2,4)]
+        forms_individual_1 = [crear_partida_individual(str(x)) for x in range(4,8)]
+        forms_parejas_3 = [crear_partida_parejas(str(x), None, 2) for x in range(8,10)]
+        forms_parejas_4 = [crear_partida_parejas(str(x), None, 2) for x in range(10,12)]
+        forms_individual_2 = [crear_partida_individual(str(x)) for x in range(12,16)]
+    
+    return render_to_response('dardos/partidos/setpartidas.html',
+        {"partido": partido,
+         "jugadores_local": partido.equipo_local.jugador_set.all(),
+         "jugadores_visitante": partido.equipo_visitante.jugador_set.all(),
+         "forms_parejas_1": forms_parejas_1,
+         "forms_parejas_2": forms_parejas_2,
+         "forms_parejas_3": forms_parejas_3,
+         "forms_parejas_4": forms_parejas_4,
+         "forms_individual_1": forms_individual_1,
+         "forms_individual_2": forms_individual_2,
+         "todos": todos})
+"""
+def setpartidas(request, partido_id):
 
     def crear_partida_parejas(prefix, post=None):
-        p = PartidaParejas()
+        p = Partida()
         p.partido = Partido.objects.get(pk=partido_id)
         p.numero = int(prefix) + 1
         print p.numero,'paaaar'
@@ -70,7 +153,7 @@ def setpartidas(request, partido_id):
         return f
     
     def crear_partida_individual(prefix, post=None):
-        p = PartidaIndividual()
+        p = Partida()
         p.partido = Partido.objects.get(pk=partido_id)
         p.numero = int(prefix) + 1
         print p.numero,'---'
@@ -129,11 +212,11 @@ def setpartidas(request, partido_id):
          "forms_individual_2": forms_individual_2,
          "todos": todos})
 
+"""
 def new_jornada (request):
     return create_object(
         request,
         form_class=JornadaForm,
         post_save_redirect='new')
-"""
         
         

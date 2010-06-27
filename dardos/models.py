@@ -8,14 +8,17 @@ from django.db.models import Q
 TIPO_PARTIDA_INDIVIDUAL = 1
 TIPO_PARTIDA_PAREJAS = 2
 
+TIPO_JUEGO_501 = 1
+TIPO_JUEGO_CRICKET = 2
+
 TIPOS_PARTIDA = (
     (TIPO_PARTIDA_INDIVIDUAL , "Individual"),
     (TIPO_PARTIDA_PAREJAS , "Parejas")
 )
 
 TIPOS_JUEGO = (
-    ("1" , "501"),
-    ("2" , "Cricket")
+    (TIPO_JUEGO_501 , "501"),
+    (TIPO_JUEGO_CRICKET , "Cricket")
 )
 
 class Division(models.Model):
