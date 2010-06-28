@@ -58,11 +58,16 @@ def setpartidas(request, partido_id):
         jugadores_visitante_choices.append((j.id, j.nombre))
     
     def crear_partida_parejas(prefix, post=None, tipo_juego=1):
+        numero = int(prefix) + 1
         if post:
             f = PartidaParejasForm(post,prefix=prefix)
         else:
             f = PartidaParejasForm(prefix=prefix)
-        f.fields["numero"].initial = int(prefix) + 1
+            p = partido.partida_set.filter(numero=numero)
+            if p and len(p) == 1:
+                f.load(p[0])
+                
+        f.fields["numero"].initial = numero
         f.fields["tipo_juego"].initial = tipo_juego
         f.fields["jugador_local"].widget.choices = jugadores_local_choices
         f.fields["jugador_local2"].widget.choices = jugadores_local_choices
@@ -71,12 +76,16 @@ def setpartidas(request, partido_id):
         return f
         
     def crear_partida_individual(prefix, post=None):
+        numero = int(prefix) + 1
         if post:
             f = PartidaIndividualForm(post,prefix=prefix)
         else:
             f = PartidaIndividualForm(prefix=prefix)
+            p = partido.partida_set.filter(numero=numero)
+            if p and len(p) == 1:
+                f.load(p[0])
             
-        f.fields["numero"].initial = int(prefix) + 1
+        f.fields["numero"].initial = numero
         f.fields["jugador_local"].widget.choices = jugadores_local_choices
         f.fields["jugador_visitante"].widget.choices = jugadores_visitante_choices
         return f

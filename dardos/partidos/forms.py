@@ -18,7 +18,15 @@ class PartidaIndividualForm(forms.Form):
         initial = "l"
         )
         
-    def save(self,partido):
+    def load(self, partida):
+        self.fields["jugador_local"].initial = partida.jugadores_local.all()[0].id
+        self.fields["jugador_visitante"].initial = partida.jugadores_visitante.all()[0].id
+        if partida.ganadores.all()[0].id == self.fields["jugador_local"].initial:
+            self.fields["ganador"].initial = "l"
+        else:
+            self.fields["ganador"].initial = "v"
+        
+    def save(self, partido):
         cleaned_data = self.cleaned_data
         p = Partida()
         p.numero = cleaned_data["numero"]
@@ -40,6 +48,24 @@ class PartidaParejasForm(PartidaIndividualForm):
     jugador_local2 = forms.IntegerField(widget=forms.Select())
     jugador_visitante2 = forms.IntegerField(widget=forms.Select())
     tipo_juego = forms.IntegerField(widget=forms.HiddenInput())
+    
+    def load(self, partida):
+        locales = partida.jugadores_local.all()
+        visitantes = partida.jugadores_visitante.all()
+        ganadores = partida.ganadores.all()
+        self.fields["jugador_local"].initial = locales[0].id
+        self.fields["jugador_local2"].initial = locales[1].id
+        self.fields["jugador_visitante"].initial = visitantes[0].id
+        self.fields["jugador_visitante2"].initial = visitantes[1].id
+        local = False
+        for l in locales:
+            if l.id == ganadores[0].id:
+                local = True
+                break
+        if local:
+            self.fields["ganador"].initial = "l"
+        else:
+            self.fields["ganador"].initial = "v"
     
     def clean(self):
         cleaned_data = self.cleaned_data
