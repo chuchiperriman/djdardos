@@ -38,13 +38,21 @@ class DatosEstadisticaJugadores:
     
     def calcular_mejor(self, get_valor):
         self.jugadores = []
-        self.valor = 0
+        primero = True
+        self.valor = -26082004
+        
         for j in self.jugadores_list:
             valor = get_valor(j)
-            if (not self.peor and valor > self.valor) or (self.peor and valor < self.valor):
+            if primero:
+                primero = False
+                self.jugadores = [j]
+                self.valor = valor
+            elif (not self.peor and valor > self.valor) or (self.peor and valor < self.valor):
+                print 'ee'
                 self.jugadores = [j]
                 self.valor = valor
             elif valor == self.valor:
+                print 'aaa'
                 self.jugadores.append(j)
         return self
         
@@ -206,7 +214,11 @@ class EstadisticasEquipo:
     def datos_mejor_diferencia_par(self):
         self.dej.peor = False
         self.dej.porcentaje = False
-        return self.dej.calcular_mejor(lambda j: j.partidas_par_ganadas - j.partidas_par_perdidas)
+        print '---'
+        res = self.dej.calcular_mejor(lambda j: j.partidas_par_ganadas - j.partidas_par_perdidas)
+        print unicode(res)
+        print '---'
+        return res
         
     def datos_mejor_diferencia(self):
         self.dej.peor = False
