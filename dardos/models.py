@@ -80,7 +80,7 @@ class Jugador(models.Model):
         
     def partidas_par_ganadas(self):
         return self.partidas_par().filter(ganadores=self)
-        
+    
     def partidas_perdidas(self):
         return self.partidas().exclude(ganadores=self)
     

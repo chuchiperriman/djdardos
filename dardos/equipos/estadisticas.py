@@ -23,6 +23,29 @@ class DatosEstadisticaJugador:
         self.partidas_ind_diferencia = self.partidas_ind_ganadas - self.partidas_ind_perdidas
         self.partidas_par_diferencia = self.partidas_par_ganadas - self.partidas_par_perdidas
         self.partidas_diferencia = self.partidas_ganadas - self.partidas_perdidas
+        if self.partidas_ind > 0:
+            self.partidas_ind_ganadas_por = self.partidas_ind_ganadas * 100 / self.partidas_ind
+        else:
+            self.partidas_ind_ganadas_por = 0
+        if self.partidas_par > 0:
+            self.partidas_par_ganadas_por = self.partidas_par_ganadas * 100 / self.partidas_par
+        else:
+            self.partidas_par_ganadas_por = 0
+        if self.partidas > 0:
+            self.partidas_ganadas_por = self.partidas_ganadas * 100 / self.partidas
+        else:
+            self.partidas_ganadas_por = 0
+            
+        self.partidas_par_cricket = j.partidas_par()\
+            .filter(tipo_juego=TIPO_JUEGO_CRICKET).count()
+        self.partidas_par_ganadas_cricket = j.partidas_par_ganadas()\
+            .filter(tipo_juego=TIPO_JUEGO_CRICKET).count()
+        self.partidas_par_perdidas_cricket = j.partidas_par_perdidas()\
+            .filter(tipo_juego=TIPO_JUEGO_CRICKET).count()
+        if self.partidas_par_cricket > 0:
+            self.partidas_par_ganadas_cricket_por = \
+                self.partidas_par_ganadas_cricket * 100 / self.partidas_par_cricket
+        self.partidas_par_cricket_dif = self.partidas_par_ganadas_cricket - self.partidas_par_perdidas_cricket
         
 class DatosEstadisticaJugadores:
     def __init__(self, equipo):
@@ -48,11 +71,9 @@ class DatosEstadisticaJugadores:
                 self.jugadores = [j]
                 self.valor = valor
             elif (not self.peor and valor > self.valor) or (self.peor and valor < self.valor):
-                print 'ee'
                 self.jugadores = [j]
                 self.valor = valor
             elif valor == self.valor:
-                print 'aaa'
                 self.jugadores.append(j)
         return self
         
@@ -103,6 +124,7 @@ class EstadisticasEquipo:
             Q(ganador=self.equipo) | Q(ganador=None)).count()
         self.partidos_empatados_visitante_count = Partido.objects.filter(
             Q(jugado=True) & Q(equipo_visitante=self.equipo) & Q(ganador=None)).count()
+        
         print 'fin', datetime.now()
 
     def partidos_jugados(self):
@@ -214,10 +236,7 @@ class EstadisticasEquipo:
     def datos_mejor_diferencia_par(self):
         self.dej.peor = False
         self.dej.porcentaje = False
-        print '---'
         res = self.dej.calcular_mejor(lambda j: j.partidas_par_ganadas - j.partidas_par_perdidas)
-        print unicode(res)
-        print '---'
         return res
         
     def datos_mejor_diferencia(self):
