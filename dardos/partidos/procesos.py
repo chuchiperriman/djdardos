@@ -15,7 +15,7 @@ def actualizar_puntos_partido(p):
     puntos_total = puntos_local + puntos_visitante
     
     if puntos_total > 0 and puntos_total != 16:
-        raise Exception("Las partidas de '%s' no son 16!!" % (p))
+        raise Exception("Las partidas de '%s' no son 16 son %i!!" % (p, puntos_total))
         
     p.puntos_local = puntos_local
     p.puntos_visitante = puntos_visitante

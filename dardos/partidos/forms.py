@@ -94,16 +94,22 @@ class PartidaParejasForm(PartidaIndividualForm):
         p.jugadores_local.add(Jugador.objects.get(pk=cleaned_data["jugador_local2"]))
         p.jugadores_visitante.add(Jugador.objects.get(pk=cleaned_data["jugador_visitante"]))
         p.jugadores_visitante.add(Jugador.objects.get(pk=cleaned_data["jugador_visitante2"]))
+        
+        if cleaned_data["jugador_local"] == cleaned_data["jugador_local2"]:
+            raise forms.ValidationError("El jugador local 1 no puede ser el mismo que el jugador local 2")
+        if cleaned_data["jugador_visitante"] == cleaned_data["jugador_visitante2"]:
+            raise forms.ValidationError("El jugador visitante 1 no puede ser el mismo que el jugador visitante 2")
+            
         if cleaned_data["ganador"] == "l":
             p.ganadores.add(Jugador.objects.get(pk=cleaned_data["jugador_local"]))
             p.ganadores.add(Jugador.objects.get(pk=cleaned_data["jugador_local2"]))
         else:
             p.ganadores.add(Jugador.objects.get(pk=cleaned_data["jugador_visitante"]))
             p.ganadores.add(Jugador.objects.get(pk=cleaned_data["jugador_visitante2"]))
+        
         p.save()
         print p.jugadores_local.all()
         
-"""
 class PartidoForm(forms.ModelForm):
     #TODO Mostrar solo jornadas que no tienen partido asignado
     class Meta:
@@ -124,16 +130,12 @@ class PartidoForm(forms.ModelForm):
             'equipo_local' in self.cleaned_data and
             'equipo_visitante' in self.cleaned_data):
             
-            if (self.han_jugado(self.cleaned_data['jornada'].liga, 
-                self.cleaned_data['equipo_local'], self.cleaned_data['equipo_visitante'])):
-                raise forms.ValidationError("Estos equipos ya han jugado")
-            
             if (self.cleaned_data['equipo_local'].id == self.cleaned_data['equipo_visitante'].id):
                 raise forms.ValidationError("No puedes seleccionar el mismo equipo")
             #TODO Validar que ninguno de los dos equipos hayan jugado ya la jornada indicada
 
         return self.cleaned_data
-
+"""
 class PartidaIndividualForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PartidaIndividualForm, self).__init__(*args, **kwargs)
