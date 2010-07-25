@@ -1,27 +1,35 @@
 <script language="javascript">
-    line1=[
-        {% for jg in grafico_evolucion.datos %}
-            [{{jg.x}},{{jg.y}}],
-        {% endfor%}
-    ];
+    {% for linea in grafico_evolucion.lineas %}
+        linea{{linea.id}} = [
+        {% for dato in linea.datos %}
+            [{{dato.x}},{{dato.y}}],
+        {% endfor %}
+        ];
+    {% endfor%}
     
     xticks = [
-        {% for i in grafico_evolucion.get_max_x_range %}
+        {% for i in grafico_evolucion.range_x %}
             {{i}},
         {% endfor %}
     ];
     yticks = [
-        {% for i in grafico_evolucion.get_max_y_range %}
+        {% for i in grafico_evolucion.range_y %}
             {{i}},
         {% endfor %}
     ];
-    
-    plot4 = $.jqplot('{{grafico_evolucion.div_id}}', [line1], {
+    lineas = [
+        {% for linea in grafico_evolucion.lineas %}
+            linea{{linea.id}},
+        {% endfor %}
+    ];
+    plot4 = $.jqplot('{{grafico_evolucion.div_id}}', lineas, {
         legend:{show:true}, 
         title:'{{grafico_evolucion.titulo}}',
         grid: {background:'#f3f3f3', gridLineColor:'#accf9b'},
         series:[
-            {label:'{{grafico_evolucion.label}}'},
+            {% for linea in grafico_evolucion.lineas %}
+                {label:'{{linea.label}}'},
+            {% endfor %}
         ],
         axes:{
             xaxis:{ticks:xticks, tickOptions:{formatString:'%d'}}, 

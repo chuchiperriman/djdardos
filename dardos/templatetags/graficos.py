@@ -7,10 +7,15 @@ from django import template
 
 register = template.Library()
 
-class DatoLineaSimple:
+class DatoGrafico:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+
+class LineaGrafico:
+    def __init__(self, label=""):
+        self.label = label
+        self.datos = list()
 
 class DatosJornadaGP:
     def __init__(self, num_jornada, ganados, perdidos):
@@ -38,21 +43,28 @@ class JornadasGrafico:
             
     def add_dato (self, num_jornada, ganados, perdidos):
         self.datos.append(DatosJornadaGP(num_jornada, ganados, perdidos))
-        
+
 class GraficoEvolucion:
-    def __init__(self, titulo, div_id="chartdiv", label="Partidas"):
+    def __init__(self, titulo, div_id="chartdiv"):
         self.titulo = titulo
         self.div_id = div_id
-        self.datos = list()
-        self.label = label
-        
-    def get_max_x_range(self):
+        self.lineas = list()
+        self.count = 1
+    def range_x(self):
         return range (0,17)
+    def range_y(self):
+        return range (0,100,10)
+    def add_linea(self, linea):
+        linea.id = self.count
+        self.count += 1
+        self.lineas.append(linea)
+
+class GraficoEvolucionGanadas (GraficoEvolucion):
+    def __init__(self, div_id="chartdiv"):
+        GraficoEvolucion.__init__(self,"Porcentaje ganadas", div_id)
         
-    def get_max_y_range(self):
-        return range (0,7)
-    
     def calcular(self, jugador):
+        linea = LineaGrafico("Partidas ganadas")
         #TODO Filtrar por temporada o liga etc.
         jornadas = Jornada.objects.all()
         for jor in jornadas:
@@ -69,16 +81,19 @@ class GraficoEvolucion:
                     ganadas = ganadas +1
                 else:
                     perdidas = perdidas +1
+            if (ganadas + perdidas) > 0:
+                linea.datos.append(DatoGrafico(partidos[0].jornada.numero,
+                    ganadas * 100 / (ganadas + perdidas) ))
+        self.add_linea(linea)
             
-            self.datos.append(DatoLineaSimple(partidos[0].jornada.numero,ganadas))
-
-@register.inclusion_tag('dardos/includes/grafico_gp_jornadas.html')
-def show_grafico_gp_jornadas(jornadas_grafico):
-    return {'jornadas_grafico' : jornadas_grafico}
 @register.inclusion_tag('dardos/includes/grafico_evolucion.html')
-
 def show_grafico_evolucion(jugador, div_id="chartdiv"):
-    grafico_evolucion = GraficoEvolucion("Gráfico de evolución",div_id)
+    grafico_evolucion = GraficoEvolucionGanadas(div_id)
     grafico_evolucion.calcular(jugador)
     return {'grafico_evolucion' : grafico_evolucion}
     
+@register.inclusion_tag('dardos/includes/grafico_gp_jornadas.html')
+def show_grafico_gp_jornadas(jornadas_grafico):
+    return {'jornadas_grafico' : jornadas_grafico}
+
+
