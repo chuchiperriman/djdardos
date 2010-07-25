@@ -11,6 +11,8 @@
 <script type="text/javascript" src="/site_media/js/ui/jquery.ui.core.js"></script>
 <script type="text/javascript" src="/site_media/js/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="/site_media/js/ui/jquery.ui.tabs.js"></script>
+<script language="javascript" type="text/javascript" src="/site_media/js/jquery.jqplot.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/site_media/css/jquery.jqplot.css" />
 <script type="text/javascript">
 	$(function() {
 		$("#tabs").tabs();
@@ -54,6 +56,9 @@
 	</ul>
 	<div id="tabs-1">
 	    {% show_estadisticas_jugador jugador_datos%}
+	    <!--[if IE]><script language="javascript" type="text/javascript" src="/site_media/js/excanvas.js"></script><![endif]-->
+        <div id="div_evo" style="height:400px;width:500px; "></div>
+	    {% show_grafico_evolucion jugador "div_evo" %}
 	</div>
 	<div id="tabs-2">
 	    <table>
@@ -85,8 +90,6 @@
     </div>
     <div id="tabs-4">
         <!--[if IE]><script language="javascript" type="text/javascript" src="/site_media/js/excanvas.js"></script><![endif]-->
-        <script language="javascript" type="text/javascript" src="/site_media/js/jquery.jqplot.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="/site_media/css/jquery.jqplot.css" />
         <div id="chartdiv" style="height:400px;width:500px; "></div>
         {% show_grafico_gp_jornadas jornadas_grafico %}
     </div>

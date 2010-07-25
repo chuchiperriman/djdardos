@@ -319,4 +319,3 @@ class EstadisticasEquipo:
         self.dej.porcentaje = True
         return self.dej.calcular_mejor(calc)
     
-    
