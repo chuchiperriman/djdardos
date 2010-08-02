@@ -45,19 +45,26 @@ class JornadasGrafico:
         self.datos.append(DatosJornadaGP(num_jornada, ganados, perdidos))
 
 class GraficoEvolucion:
-    def __init__(self, titulo, div_id="chartdiv"):
+    def __init__(self, titulo, div_id="chartdiv", 
+        range_x=range (0,17), range_y=range (0,100,10)):
         self.titulo = titulo
         self.div_id = div_id
         self.__lineas = list()
         self.count = 1
+        self.range_x = range_x
+        self.range_y = range_y
+        
     def range_x(self):
-        return range (0,17)
+        return range_x
+        
     def range_y(self):
-        return range (0,100,10)
+        return range_y
+        
     def add_linea(self, linea):
         linea.id = self.count
         self.count += 1
         self.__lineas.append(linea)
+        
     def get_lineas(self):
         return self.__lineas
 

@@ -6,8 +6,14 @@ from ..models import *
 
 class GraficasForm(forms.Form):
     jugador = forms.IntegerField(widget=forms.HiddenInput)
+    chart_div = forms.CharField(required=False, initial="chartdivevo",
+        widget=forms.HiddenInput)
     tipo_grafico = forms.ChoiceField(choices = [
-        ['1','Evolución']
+        ['1','Evolución por jornadas']
         ])
-    tipo_partida = forms.ChoiceField(choices = TIPOS_PARTIDA)
-    tipo_valor = forms.ChoiceField(choices = TIPOS_JUEGO)
+    tipo_partida = forms.ChoiceField(required=False, 
+        choices = ((0,"Cualquiera"),) + TIPOS_PARTIDA)
+    tipo_juego = forms.ChoiceField(required=False,
+        choices = ((0,"Cualquiera"),) + TIPOS_JUEGO)
+    tipo_valores = forms.ChoiceField(required=False,
+        choices = ((1,"Ganadas y perdidas"), (2, "Porcentaje de ganadas")) )

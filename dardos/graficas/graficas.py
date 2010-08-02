@@ -3,10 +3,6 @@
 
 from ..models import *
 
-TIPO_CALCULO_GANADAS = 1
-TIPO_CALCULO_PERDIDAS = 2
-TIPO_CALCULO_POR_GANADAS = 3
-
 class GraficaJornadas:
     def __init__(self, liga):
         self.liga = liga
@@ -14,7 +10,7 @@ class GraficaJornadas:
         self.jugador = None
         self.tipo_partida = 0
         self.tipo_juego = 0
-        self.tipo_valor = TIPO_CALCULO_GANADAS
+        self.valores = list()
         
     def set_jugador(self, jugador):
         self.jugador = jugador
@@ -27,15 +23,17 @@ class GraficaJornadas:
     def apply_filtro_tipo_partida(self, partidas):
         if self.tipo_partida > 0:
             return partidas.filter(tipo=self.tipo_partida)
+        return partidas
     
     def apply_filtro_tipo_juego(self, partidas):
         if self.tipo_juego > 0:
             return partidas.filter(tipo_juego=self.tipo_juego)
-
+        return partidas
+        
     def calcular_valor(self, partidas):
         ganadas = 0
         perdidas = 0
-        valor = 0
+        porcentaje = 0
         for p in partidas:
             #TODO Aquí hay que filtrar por jugador o equipo según gráfica
             if p.ganadores.filter(id=self.jugador.id).count() > 0:
@@ -43,14 +41,10 @@ class GraficaJornadas:
             else:
                 perdidas = perdidas + 1
 
-        if self.tipo_valor == TIPO_CALCULO_GANADAS:
-            valor = ganadas
-        elif self.tipo_valor == TIPO_CALCULO_PERDIDAS:
-            valor = perdidas
-        elif self.tipo_valor == TIPO_CALCULO_POR_GANADAS:
-            if (ganadas + perdidas) > 0:
-                valor = ganadas * 100 / (ganadas + perdidas)
-        return valor        
+        if (ganadas + perdidas) > 0:
+            porcentaje = ganadas * 100 / (ganadas + perdidas)
+            
+        return (ganadas, perdidas, porcentaje)
                 
     def calcular(self):
         res = list()
@@ -64,11 +58,20 @@ class GraficaJornadas:
             if self.jugador:
                 partidas = partidos[0].partida_set.filter(
                     Q(jugadores_local=self.jugador) | Q(jugadores_visitante=self.jugador))
-            if self.tipo_partida > 0:
-                partidas = self.apply_filtro_tipo_partida(partidas)
-            if self.tipo_juego > 0:
-                partidas = self.apply_filtro_tipo_juego(partidas)
+
+            partidas = self.apply_filtro_tipo_partida(partidas)
+            partidas = self.apply_filtro_tipo_juego(partidas)
             
-            valor = self.calcular_valor(partidas.distinct())
-            res.append([jor, valor])
+            ganadas, perdidas, porcentaje = self.calcular_valor(partidas.distinct())
+            if ganadas != 0 or perdidas != 0:
+                res.append({
+                    "jornada" : jor,
+                    "ganadas" : ganadas,
+                    "perdidas" : perdidas,
+                    "porcentaje" : porcentaje
+                })
+        self.valores = res
         return res
+        
+        
+        
