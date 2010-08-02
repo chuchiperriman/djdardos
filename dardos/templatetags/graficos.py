@@ -48,7 +48,7 @@ class GraficoEvolucion:
     def __init__(self, titulo, div_id="chartdiv"):
         self.titulo = titulo
         self.div_id = div_id
-        self.lineas = list()
+        self.__lineas = list()
         self.count = 1
     def range_x(self):
         return range (0,17)
@@ -57,7 +57,9 @@ class GraficoEvolucion:
     def add_linea(self, linea):
         linea.id = self.count
         self.count += 1
-        self.lineas.append(linea)
+        self.__lineas.append(linea)
+    def get_lineas(self):
+        return self.__lineas
 
 class GraficoEvolucionGanadas (GraficoEvolucion):
     def __init__(self, div_id="chartdiv"):

@@ -16,6 +16,12 @@
 <script type="text/javascript">
 	$(function() {
 		$("#tabs").tabs();
+		
+		$("#boton_formgrafica").click(function(){
+		    $.get('/ajax_grafica_evolucion', $("#formgrafica").serialize(), function(data){
+		        alert("hecho");
+		    });
+		});
 	});
 	
 	function show_jornada(url){
@@ -92,6 +98,11 @@
         <!--[if IE]><script language="javascript" type="text/javascript" src="/site_media/js/excanvas.js"></script><![endif]-->
         <div id="chartdiv" style="height:400px;width:500px; "></div>
         {% show_grafico_gp_jornadas jornadas_grafico %}
+        
+        <form id="formgrafica" method="post">
+        {{graficas_form.as_p}}
+        <input id="boton_formgrafica" type="button" name="continuar" value="Continuar" />
+        </form>
     </div>
 </div>
 {% endblock %}

@@ -1,5 +1,5 @@
 <script language="javascript">
-    {% for linea in grafico_evolucion.lineas %}
+    {% for linea in grafico_evolucion.get_lineas %}
         linea{{linea.id}} = [
         {% for dato in linea.datos %}
             [{{dato.x}},{{dato.y}}],
@@ -18,7 +18,7 @@
         {% endfor %}
     ];
     lineas = [
-        {% for linea in grafico_evolucion.lineas %}
+        {% for linea in grafico_evolucion.get_lineas %}
             linea{{linea.id}},
         {% endfor %}
     ];
@@ -27,7 +27,7 @@
         title:'{{grafico_evolucion.titulo}}',
         grid: {background:'#f3f3f3', gridLineColor:'#accf9b'},
         series:[
-            {% for linea in grafico_evolucion.lineas %}
+            {% for linea in grafico_evolucion.get_lineas %}
                 {label:'{{linea.label}}'},
             {% endfor %}
         ],

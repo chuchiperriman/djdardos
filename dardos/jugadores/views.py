@@ -7,6 +7,8 @@ from django.http import HttpResponse, Http404
 
 from ..templatetags.graficos import *
 from ..equipos.estadisticas import DatosEstadisticaJugador
+from ..graficas import graficas
+from .forms import GraficasForm
 
 # Create your views here.
 def index(request):
@@ -43,8 +45,25 @@ def detail(request, jugador_id):
     for k in ordenado:
         jornadas_grafico.datos.append(ordenado[k])
 
+    graficas_form = GraficasForm()
+    graficas_form.fields["jugador"].initial = jugador.id
     return render_to_response('dardos/jugadores/detail.html', {
         'jugador': jugador,
         'jugador_datos': jugador_datos,
-        'jornadas_grafico' : jornadas_grafico})
-    
+        'jornadas_grafico' : jornadas_grafico,
+        'graficas_form' : graficas_form})
+        
+def ajax_grafica_evolucion(request):
+    #TODO ver cómo cogemos la liga
+    g = graficas.GraficaJornadas(Liga.objects.get(pk=1))
+    g.set_jugador(Jugador.objects.get(pk=request.GET["jugador"]))
+    valores = g.calcular()
+    print 'aaaaaaaaaaaa'
+    for val in valores:
+        print val
+    return render_to_response('dardos/partidos/partidos_jornada_block.html', 
+    	{'partidos': None})
+
+        
+        
+        
