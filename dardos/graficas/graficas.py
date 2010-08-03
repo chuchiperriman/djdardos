@@ -18,7 +18,7 @@ class GraficaJornadas:
         
     def set_equipo(self, equipo):
         self.jugador = None
-        self.equipo = jugador.equipo
+        self.equipo = equipo
         
     def apply_filtro_tipo_partida(self, partidas):
         if self.tipo_partida > 0:
@@ -36,10 +36,16 @@ class GraficaJornadas:
         porcentaje = 0
         for p in partidas:
             #TODO Aquí hay que filtrar por jugador o equipo según gráfica
-            if p.ganadores.filter(id=self.jugador.id).count() > 0:
-                ganadas = ganadas + 1
+            if self.jugador:
+                if p.ganadores.filter(id=self.jugador.id).count() > 0:
+                    ganadas = ganadas + 1
+                else:
+                    perdidas = perdidas + 1
             else:
-                perdidas = perdidas + 1
+                if p.ganadores.filter(equipo=self.equipo).count() > 0:
+                    ganadas = ganadas + 1
+                else:
+                    perdidas = perdidas + 1
 
         if (ganadas + perdidas) > 0:
             porcentaje = ganadas * 100 / (ganadas + perdidas)
@@ -58,6 +64,8 @@ class GraficaJornadas:
             if self.jugador:
                 partidas = partidos[0].partida_set.filter(
                     Q(jugadores_local=self.jugador) | Q(jugadores_visitante=self.jugador))
+            else:
+                partidas = partidos[0].partida_set.all()
 
             partidas = self.apply_filtro_tipo_partida(partidas)
             partidas = self.apply_filtro_tipo_juego(partidas)

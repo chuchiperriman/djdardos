@@ -16,7 +16,10 @@ def ajax_grafica_evolucion(request):
     graf = None
     if form.is_valid():
         g = graficas.GraficaJornadas(Liga.objects.get(pk=1))
-        g.set_jugador(Jugador.objects.get(pk=form.cleaned_data["jugador"]))
+        if form.cleaned_data["jugador"]:
+            g.set_jugador(Jugador.objects.get(pk=form.cleaned_data["jugador"]))
+        else:
+            g.set_equipo(Equipo.objects.get(pk=form.cleaned_data["equipo"]))
         g.tipo_partida = int(form.cleaned_data["tipo_partida"])
         g.tipo_juego = int(form.cleaned_data["tipo_juego"])
         g.calcular()
@@ -24,7 +27,11 @@ def ajax_grafica_evolucion(request):
             form.cleaned_data["chart_div"])
         tipo_valores = int(form.cleaned_data["tipo_valores"])
         if tipo_valores == 1:
-            graf.range_y=range(0,7)
+            if form.cleaned_data["jugador"]:
+                graf.range_y=range(0,7)
+            else:
+                #Si es gráfica de equipo, pueden ganar hasta 16
+                graf.range_y=range(0,17)
             l = LineaGrafico("Ganadas")
             l2 = LineaGrafico("Perdidas")
             for v in g.valores:

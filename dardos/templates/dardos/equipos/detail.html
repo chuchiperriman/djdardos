@@ -17,6 +17,13 @@
 <script type="text/javascript">
 	$(function() {
 		$("#tabs").tabs();
+		
+		$("#boton_formgrafica").click(function(){
+		    $.get('/ajax_grafica_evolucion', $("#formgrafica").serialize(), function(data){
+		        $("#chartdivevo").html('');
+		        $("#graf_wrapper").html(data);
+		    });
+		});
 	});
 </script>
 

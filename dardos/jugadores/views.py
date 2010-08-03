@@ -46,6 +46,7 @@ def detail(request, jugador_id):
         jornadas_grafico.datos.append(ordenado[k])
 
     graficas_form = GraficasForm()
+    graficas_form.fields["equipo"].initial = jugador.equipo.id
     graficas_form.fields["jugador"].initial = jugador.id
     return render_to_response('dardos/jugadores/detail.html', {
         'jugador': jugador,

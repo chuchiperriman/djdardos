@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
 from estadisticas import EstadisticasEquipo
 from ..templatetags.graficos import JornadasGrafico
+from ..graficas.forms import GraficasForm
 
 from django.http import HttpResponse, Http404
 
@@ -38,25 +39,13 @@ def detail(request, equipo_id):
     for j in liga_actual.jornada_set.all():
         jornadas.append(JornadasPartidos(j, e))
         
-    jornadas_grafico = JornadasGrafico(u'Evolución de partidas ganadas/perdidas')
-
-    for j in jornadas:
-        if not j.partido or not j.partido.jugado:
-            continue
-            
-        if j.partido.equipo_local.id == e.id:
-            jornadas_grafico.add_dato(j.jornada.numero,
-                j.partido.puntos_local,
-                j.partido.puntos_visitante)
-        else:
-            jornadas_grafico.add_dato(j.jornada.numero,
-                j.partido.puntos_visitante,
-                j.partido.puntos_local)
+    graficas_form = GraficasForm()
+    graficas_form.fields["equipo"].initial = equipo_id
     
     #TODO Esto es una cochinada temporal (lo de las ligas)
     return render_to_response('dardos/equipos/detail.html', 
     	{'equipo': e, 'jugadores': estadisticas.jugadores,
          'liga_actual': liga_actual, 'jornadas': jornadas,
          'estadisticas': estadisticas,
-         'jornadas_grafico' : jornadas_grafico})
+         'graficas_form' : graficas_form})
 
