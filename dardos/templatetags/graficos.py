@@ -101,8 +101,4 @@ def show_grafico_evolucion(jugador, div_id="chartdiv"):
     grafico_evolucion.calcular(jugador)
     return {'grafico_evolucion' : grafico_evolucion}
     
-@register.inclusion_tag('dardos/includes/grafico_gp_jornadas.html')
-def show_grafico_gp_jornadas(jornadas_grafico):
-    return {'jornadas_grafico' : jornadas_grafico}
-
-
+    

@@ -11,6 +11,9 @@
 <script type="text/javascript" src="/site_media/js/ui/jquery.ui.core.js"></script>
 <script type="text/javascript" src="/site_media/js/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="/site_media/js/ui/jquery.ui.tabs.js"></script>
+<!--[if IE]><script language="javascript" type="text/javascript" src="/site_media/js/excanvas.js"></script><![endif]-->
+<script language="javascript" type="text/javascript" src="/site_media/js/jquery.jqplot.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/site_media/css/jquery.jqplot.css" />
 <script type="text/javascript">
 	$(function() {
 		$("#tabs").tabs();
@@ -195,12 +198,12 @@
 		</table>
 	</div>
 	<div id="tabs-5">
-	    <!--[if IE]><script language="javascript" type="text/javascript" src="/site_media/js/excanvas.js"></script><![endif]-->
-        <script language="javascript" type="text/javascript" src="/site_media/js/jquery.jqplot.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="/site_media/css/jquery.jqplot.css" />
-        <div id="chartdiv" style="height:400px;width:500px; "></div>
-        
-        {% show_grafico_gp_jornadas jornadas_grafico %}
+        <form id="formgrafica" method="post">
+        {{graficas_form.as_p}}
+        <input id="boton_formgrafica" type="button" name="continuar" value="Continuar" />
+        </form>
+        <div id="chartdivevo" style="height:400px;width:500px; "></div>
+        <div id="graf_wrapper"></div>
         
 	</div>
 	<div id="tabs-6">
