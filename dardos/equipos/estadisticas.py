@@ -5,12 +5,13 @@ from django.db import models
 from django.db.models import Q
 
 class DatosEstadisticaJugador:
-    def __init__(self, jugador):
+    def __init__(self, jugador, partidos = None):
         self.jugador = jugador
         self.nombre = jugador.nombre
         self.id = jugador.id
         j = jugador
-        
+        if partidos:
+            j.filters = Q(partido__in=partidos)
         self.partidas_ind = j.partidas_ind().count()
         self.partidas_par = j.partidas_par().count()
         self.partidas = self.partidas_ind + self.partidas_par
@@ -48,7 +49,7 @@ class DatosEstadisticaJugador:
         self.partidas_par_cricket_dif = self.partidas_par_ganadas_cricket - self.partidas_par_perdidas_cricket
         
 class DatosEstadisticaJugadores:
-    def __init__(self, equipo):
+    def __init__(self, equipo, liga = None):
         self.equipo = equipo
         self.jugadores = []
         self.valor = 0
@@ -56,8 +57,10 @@ class DatosEstadisticaJugadores:
         self.porcentaje = False
         #Preload the query
         self.jugadores_list = list()
+        if liga:
+            partidos = Partido.objects.filter(jornada__liga__exact = liga).distinct()
         for j in Jugador.objects.filter(equipo=self.equipo):
-            self.jugadores_list.append(DatosEstadisticaJugador(j))
+            self.jugadores_list.append(DatosEstadisticaJugador(j, partidos))
     
     def calcular_mejor(self, get_valor):
         self.jugadores = []
@@ -93,37 +96,39 @@ class DatosEstadisticaJugadores:
             return str(self.valor) + " -> " + val
 
 class EstadisticasEquipo:
-    def __init__(self, equipo, cargar_jugadores = True):
+    def __init__(self, equipo, liga, cargar_jugadores = True):
         print 'ini', datetime.now()
+        self.liga = liga
         self.equipo = equipo
         if cargar_jugadores:
-            self.dej = DatosEstadisticaJugadores(self.equipo)
+            self.dej = DatosEstadisticaJugadores(self.equipo, self.liga)
             self.jugadores = self.dej.jugadores_list
-            
+        
+        jornadas_liga = Jornada.objects.filter(liga=liga)
         self.partidos_jugados_count = Partido.objects.filter(
-            Q(jugado=True) & (Q(equipo_local=self.equipo) | Q(equipo_visitante=self.equipo))).count()
+            Q(jornada__in=jornadas_liga) & Q(jugado=True) & (Q(equipo_local=self.equipo) | Q(equipo_visitante=self.equipo))).count()
         self.partidos_ganados_count = Partido.objects.filter(
-            Q(jugado=True) & Q(ganador=self.equipo)).count()
+            Q(jornada__in=jornadas_liga) & Q(jugado=True) & Q(ganador=self.equipo)).count()
         self.partidos_perdidos_count = Partido.objects.filter(
-            Q(jugado=True) & (Q(equipo_local=self.equipo) | 
+            Q(jornada__in=jornadas_liga) & Q(jugado=True) & (Q(equipo_local=self.equipo) | 
             Q(equipo_visitante=self.equipo))).exclude(
                 Q(ganador=self.equipo) | Q(ganador=None)).count()
         self.partidos_empatados_count = Partido.objects.filter(Q(jugado=True) & Q(ganador=None) & 
-            (Q(equipo_local=self.equipo) | Q(equipo_visitante=self.equipo))).count() 
+            Q(jornada__in=jornadas_liga) & (Q(equipo_local=self.equipo) | Q(equipo_visitante=self.equipo))).count() 
         self.partidos_ganados_local_count = Partido.objects.filter(
-            Q(jugado=True) & Q(equipo_local=self.equipo) & Q(ganador=self.equipo)).count()
+            Q(jornada__in=jornadas_liga) & Q(jugado=True) & Q(equipo_local=self.equipo) & Q(ganador=self.equipo)).count()
         self.partidos_perdidos_local_count = Partido.objects.filter(
-            Q(jugado=True) & Q(equipo_local=self.equipo)).exclude(
+            Q(jornada__in=jornadas_liga) & Q(jugado=True) & Q(equipo_local=self.equipo)).exclude(
             Q(ganador=self.equipo) | Q(ganador=None)).count()
         self.partidos_empatados_local_count = Partido.objects.filter(
-            Q(jugado=True) & Q(equipo_local=self.equipo) & Q(ganador=None)).count()
+            Q(jornada__in=jornadas_liga) & Q(jugado=True) & Q(equipo_local=self.equipo) & Q(ganador=None)).count()
         self.partidos_ganados_visitante_count = Partido.objects.filter(
-            Q(jugado=True) & Q(equipo_visitante=self.equipo) & Q(ganador=self.equipo)).count()
+            Q(jornada__in=jornadas_liga) & Q(jugado=True) & Q(equipo_visitante=self.equipo) & Q(ganador=self.equipo)).count()
         self.partidos_perdidos_visitante_count= Partido.objects.filter(
-            Q(jugado=True) & Q(equipo_visitante=self.equipo)).exclude(
+            Q(jornada__in=jornadas_liga) & Q(jugado=True) & Q(equipo_visitante=self.equipo)).exclude(
             Q(ganador=self.equipo) | Q(ganador=None)).count()
         self.partidos_empatados_visitante_count = Partido.objects.filter(
-            Q(jugado=True) & Q(equipo_visitante=self.equipo) & Q(ganador=None)).count()
+            Q(jornada__in=jornadas_liga) & Q(jugado=True) & Q(equipo_visitante=self.equipo) & Q(ganador=None)).count()
         
         print 'fin', datetime.now()
 

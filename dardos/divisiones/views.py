@@ -10,7 +10,7 @@ from django.http import HttpResponse, Http404
 
 def detail(request, division_id):
     d = Division.objects.get(pk=division_id)
-    l = d.liga_set.get(nombre="2010")
+    l = d.get_liga_actual()
     return render_to_response('dardos/divisiones/detail.html', 
     	{'division': d,
          'liga': l})

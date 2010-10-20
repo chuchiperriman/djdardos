@@ -4,7 +4,7 @@
 from ..models import *
 
 class GraficaJornadas:
-    def __init__(self, liga):
+    def __init__(self, liga=None):
         self.liga = liga
         self.equipo = None
         self.jugador = None
@@ -54,7 +54,12 @@ class GraficaJornadas:
                 
     def calcular(self):
         res = list()
-        jornadas = self.liga.jornada_set.all()
+        jornadas = None
+        if self.liga:
+            jornadas = self.liga.jornada_set.all()
+        else:
+            jornadas = Jornada.objects.all()
+            
         for jor in jornadas:
             partidos = jor.partido_set.filter(
                 Q(equipo_local=self.equipo) | Q(equipo_visitante=self.equipo))

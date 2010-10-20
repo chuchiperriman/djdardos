@@ -15,7 +15,10 @@ def ajax_grafica_evolucion(request):
     form = GraficasForm(request.GET)
     graf = None
     if form.is_valid():
-        g = graficas.GraficaJornadas(Liga.objects.get(pk=1))
+        liga = None
+        if form.cleaned_data["liga"]:
+            liga = Liga.objects.get(pk=form.cleaned_data["liga"])
+        g = graficas.GraficaJornadas(liga)
         if form.cleaned_data["jugador"]:
             g.set_jugador(Jugador.objects.get(pk=form.cleaned_data["jugador"]))
         else:

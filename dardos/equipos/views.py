@@ -31,10 +31,8 @@ def index(request):
 
 def detail(request, equipo_id):
     e = get_object_or_404(Equipo, pk=equipo_id)
-    import logging
-    logging.debug(e.ligas.all())
-    liga_actual = e.ligas.all()[0]
-    estadisticas = EstadisticasEquipo(e)
+    liga_actual = e.get_liga_actual()
+    estadisticas = EstadisticasEquipo(e, liga_actual)
     jornadas = []
     for j in liga_actual.jornada_set.all():
         jornadas.append(JornadasPartidos(j, e))
@@ -42,7 +40,6 @@ def detail(request, equipo_id):
     graficas_form = GraficasForm()
     graficas_form.fields["equipo"].initial = equipo_id
     
-    #TODO Esto es una cochinada temporal (lo de las ligas)
     return render_to_response('dardos/equipos/detail.html', 
     	{'equipo': e, 'jugadores': estadisticas.jugadores,
          'liga_actual': liga_actual, 'jornadas': jornadas,

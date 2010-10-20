@@ -6,9 +6,10 @@ from djdardos.dardos.equipos.estadisticas import *
 
 class DatosEquipo:
     
-    def __init__(self, equipo):
+    def __init__(self, equipo, liga):
         self.equipo = equipo
-        self.estadisticas = EstadisticasEquipo(equipo, False)
+        self.liga = liga
+        self.estadisticas = EstadisticasEquipo(equipo, liga, False)
     
 
 class Clasificacion:
@@ -16,7 +17,7 @@ class Clasificacion:
         self.liga = liga
         self.equipos = []
         for equipo in liga.equipo_set.all():
-            self.equipos.append(DatosEquipo(equipo))
+            self.equipos.append(DatosEquipo(equipo, liga))
         
         self.equipos.sort(key=lambda datos: datos.estadisticas.puntos(), reverse=True)
                 

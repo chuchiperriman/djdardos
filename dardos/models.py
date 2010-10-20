@@ -24,12 +24,16 @@ TIPOS_JUEGO = (
 class Division(models.Model):
     nombre = models.CharField(max_length=100)
     
+    def get_liga_actual(self):
+        return self.liga_set.get(actual=True)
+        
     def __unicode__(self):
         return self.nombre
     
 class Liga(models.Model):
     division = models.ForeignKey(Division)
     nombre = models.CharField(max_length=100)
+    actual = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.nombre
@@ -40,7 +44,7 @@ class Jornada(models.Model):
     fecha_prevista = models.DateField('Fecha prevista')
     
     def __unicode__(self):
-        return str(self.numero)
+        return self.liga.nombre + ": " + str(self.numero)
 
 class Equipo(models.Model):
     ligas = models.ManyToManyField(Liga)
@@ -52,6 +56,12 @@ class Equipo(models.Model):
     telefono = models.CharField(max_length=20, null=True, blank=True)
     google_maps = models.TextField(null=True, blank=True)
 
+    def get_liga_actual(self):
+        for l in self.ligas.all():
+            if l.actual:
+                return l
+        return None
+    
     def __unicode__(self):
         return self.nombre
     
@@ -63,8 +73,14 @@ class Jugador(models.Model):
     path_foto = models.CharField(max_length=255,null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
     
+    filters = None
+    
     def partidas(self):
-        return Partida.objects.filter(Q(jugadores_local = self) | Q(jugadores_visitante = self)).distinct()
+        #partidos = Partido.objects.filter(jornada__liga__exact = self.equipo.get_liga_actual()).distinct()
+        if self.filters:
+            return Partida.objects.filter(self.filters).filter(Q(jugadores_local = self) | Q(jugadores_visitante = self)).distinct()
+        else:
+            return Partida.objects.filter(Q(jugadores_local = self) | Q(jugadores_visitante = self)).distinct()
     
     def partidas_ind(self):
         return self.partidas().filter(tipo=TIPO_PARTIDA_INDIVIDUAL)
