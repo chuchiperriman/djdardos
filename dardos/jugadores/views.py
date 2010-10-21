@@ -38,19 +38,12 @@ def detail(request, jugador_id):
         else:
             ordenado[p.partido.jornada.numero].perdidos += 1
     
-    jornadas_grafico = JornadasGrafico(u'Evolución de partidas ganadas/perdidas')
-    jornadas_grafico.max_partidas = 6
-    jornadas_grafico.max_jornadas = 15
-
-    for k in ordenado:
-        jornadas_grafico.datos.append(ordenado[k])
-
     graficas_form = GraficasForm()
     graficas_form.fields["equipo"].initial = jugador.equipo.id
     graficas_form.fields["jugador"].initial = jugador.id
+    graficas_form.fields["liga"].initial = jugador.equipo.get_liga_actual().id
     return render_to_response('dardos/jugadores/detail.html', {
         'jugador': jugador,
         'jugador_datos': jugador_datos,
-        'jornadas_grafico' : jornadas_grafico,
         'graficas_form' : graficas_form})
         

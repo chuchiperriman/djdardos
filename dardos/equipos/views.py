@@ -6,7 +6,6 @@ from djdardos.dardos.models import *
 from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
 from estadisticas import EstadisticasEquipo
-from ..templatetags.graficos import JornadasGrafico
 from ..graficas.forms import GraficasForm
 
 from django.http import HttpResponse, Http404
@@ -39,6 +38,7 @@ def detail(request, equipo_id):
         
     graficas_form = GraficasForm()
     graficas_form.fields["equipo"].initial = equipo_id
+    graficas_form.fields["liga"].initial = liga_actual.id
     
     return render_to_response('dardos/equipos/detail.html', 
     	{'equipo': e, 'jugadores': estadisticas.jugadores,

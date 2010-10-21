@@ -7,7 +7,7 @@ from ..models import *
 class GraficasForm(forms.Form):
     equipo = forms.IntegerField(widget=forms.HiddenInput)
     jugador = forms.IntegerField(required=False, widget=forms.HiddenInput)
-    liga = forms.IntegerField(required=False, widget=forms.HiddenInput)
+    liga = forms.IntegerField(widget=forms.HiddenInput)
     
     chart_div = forms.CharField(required=False, initial="chartdivevo",
         widget=forms.HiddenInput)
