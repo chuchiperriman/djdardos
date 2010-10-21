@@ -11,10 +11,13 @@ from ..graficas import graficas
 from .forms import GraficasForm
 
 def ajax_grafica_evolucion(request):
-    #TODO ver cómo cogemos la liga
+    print "---ppp"
     form = GraficasForm(request.GET)
     graf = None
+    print "pop"
+    
     if form.is_valid():
+        print 'valido'
         liga = Liga.objects.get(pk=form.cleaned_data["liga"])
             
         g = graficas.GraficaJornadas(liga)
