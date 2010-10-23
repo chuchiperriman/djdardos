@@ -43,13 +43,16 @@ for j in jugadores:
 print parejas
 
 lista_datos = list()
+liga = e.get_liga_actual()
 
 for pareja in parejas.values():
     partidas_local = Partida.objects.filter(
         Q(tipo=TIPO_PARTIDA_PAREJAS) &
+        Q(partido__jornada__liga=liga) &
         Q(jugadores_local=pareja[0])).filter(Q(jugadores_local=pareja[1])).distinct()
     partidas_vis = Partida.objects.filter(
         Q(tipo=TIPO_PARTIDA_PAREJAS) &
+        Q(partido__jornada__liga=liga) &
         Q(jugadores_visitante=pareja[0])).filter(Q(jugadores_visitante=pareja[1])).distinct()
     
     datos = DatosPareja(pareja)
@@ -76,43 +79,58 @@ pareja_mejor_por = None
 pareja_peor_por = None
 for d in lista_datos:
     if not pareja_mas_ganadas:
-        pareja_mas_ganadas = d
-    elif d.ganadas_total > pareja_mas_ganadas.ganadas_total:
-        pareja_mas_ganadas = d
-    
+        pareja_mas_ganadas = [d]
+    elif d.ganadas_total > pareja_mas_ganadas[0].ganadas_total:
+        pareja_mas_ganadas = [d]
+    elif d.ganadas_total == pareja_mas_ganadas[0].ganadas_total:
+        pareja_mas_ganadas.append(d)
+        
     if not pareja_mejor_dif:
-        pareja_mejor_dif = d
-    elif d.ganadas_diff > pareja_mejor_dif.ganadas_diff:
-        pareja_mejor_dif = d
+        pareja_mejor_dif = [d]
+    elif d.ganadas_diff > pareja_mejor_dif[0].ganadas_diff:
+        pareja_mejor_dif = [d]
+    elif d.ganadas_diff == pareja_mejor_dif[0].ganadas_diff:
+        pareja_mejor_dif.append(d)
         
     if not pareja_mejor_por:
-        pareja_mejor_por = d
-    elif d.ganadas_por > pareja_mejor_por.ganadas_por:
-        pareja_mejor_por = d
+        pareja_mejor_por = [d]
+    elif d.ganadas_por > pareja_mejor_por[0].ganadas_por:
+        pareja_mejor_por = [d]
+    elif d.ganadas_por == pareja_mejor_por[0].ganadas_por:
+        pareja_mejor_por.append(d)
     
     #Si son 0 las dos es que no han jugado
-    if d.ganadas_total!=0 and d.perdidas_total!=0:
+    if d.ganadas_total!=0 or d.perdidas_total!=0:
         if not pareja_menos_ganadas:
-            pareja_menos_ganadas = d
-        elif d.ganadas_total < pareja_menos_ganadas.ganadas_total:
-            pareja_menos_ganadas = d
+            pareja_menos_ganadas = [d]
+        elif d.ganadas_total < pareja_menos_ganadas[0].ganadas_total:
+            pareja_menos_ganadas = [d]
+        elif d.ganadas_total == pareja_menos_ganadas[0].ganadas_total:
+            pareja_menos_ganadas.append(d)
         
         if not pareja_peor_dif:
-            pareja_peor_dif = d
-        elif d.ganadas_diff < pareja_peor_dif.ganadas_diff:
-            pareja_peor_dif = d
+            pareja_peor_dif = [d]
+        elif d.ganadas_diff < pareja_peor_dif[0].ganadas_diff:
+            pareja_peor_dif = [d]
+        elif d.ganadas_diff == pareja_peor_dif[0].ganadas_diff:
+            pareja_peor_dif.append(d)
             
         if not pareja_peor_por:
-            pareja_peor_por = d
-        elif d.ganadas_diff < pareja_peor_por.ganadas_diff:
-            pareja_peor_por = d
+            pareja_peor_por = [d]
+        elif d.ganadas_diff < pareja_peor_por[0].ganadas_diff:
+            pareja_peor_por = [d]
+        elif d.ganadas_diff == pareja_peor_por[0].ganadas_diff:
+            pareja_peor_por.append(d)
 
-print 'pareja mas ganadas:', pareja_mas_ganadas
-print 'pareja menos ganadas:', pareja_menos_ganadas
-print 'pareja mejor diferencia:', pareja_mejor_dif
-print 'pareja peor diferencia:', pareja_peor_dif
-print 'pareja mejor porcentaje:', pareja_mejor_por
-print 'pareja peor porcentaje:', pareja_peor_por
+def print_list(l):
+    for d in l:
+        print d    
+print 'pareja mas ganadas:\n', print_list(pareja_mas_ganadas)
+print 'pareja menos ganadas:\n', print_list(pareja_menos_ganadas)
+print 'pareja mejor diferencia:', print_list(pareja_mejor_dif)
+print 'pareja peor diferencia:', print_list(pareja_peor_dif)
+print 'pareja mejor porcentaje:', print_list(pareja_mejor_por)
+print 'pareja peor porcentaje:', print_list(pareja_peor_por)
 print "fin"
 
 
