@@ -11,6 +11,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'djdardos.basic.blog.views.post_list'),
     (r'^equipos/$', 'djdardos.dardos.equipos.views.index'),
+    (r'^equipos/estparejas/(?P<equipo_id>\d+)/(?P<liga_id>\d+)$', 'djdardos.dardos.equipos.views.ajax_estadistica_parejas'),
     (r'^equipos/(?P<equipo_id>\d+)/$', 'djdardos.dardos.equipos.views.detail'),
     (r'^jugadores/$', 'djdardos.dardos.jugadores.views.index'),
     (r'^jugadores/(?P<jugador_id>\d+)/$', 'djdardos.dardos.jugadores.views.detail'),

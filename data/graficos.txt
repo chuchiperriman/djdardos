@@ -1,0 +1,21 @@
+Liga: 
+    + jugador:
+        - individuales
+        - parejas total
+        - parejas 501
+        - parejas cricket
+            * porcentaje
+            * diferencia
+            * ganadas
+            * perdidas
+
+    + equipo:
+        - individuales
+        - parejas total
+        - parejas 501
+        - parejas cricket
+            * porcentaje
+            * diferencia
+            * ganadas
+            * perdidas
+            

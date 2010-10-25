@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
 from estadisticas import EstadisticasEquipo
 from ..graficas.forms import GraficasForm
+from estparejas import *
 
 from django.http import HttpResponse, Http404
 
@@ -46,3 +47,16 @@ def detail(request, equipo_id):
          'estadisticas': estadisticas,
          'graficas_form' : graficas_form})
 
+def ajax_estadistica_parejas(request, equipo_id, liga_id):
+    try:
+        equipo = Equipo.objects.get(pk=equipo_id)
+        liga = Liga.objects.get(pk=liga_id)
+        estparejas = get_estadistica_parejas (equipo, liga)
+    except:
+        import traceback
+        import sys
+        traceback.print_exc(file=sys.stdout)
+    return render_to_response('dardos/equipos/estparejas.html',
+        {'estadistica' : estparejas})
+         
+         

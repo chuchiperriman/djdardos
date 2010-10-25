@@ -4,6 +4,7 @@ def get_porcentaje(valor, total):
     if total == 0:
         return 0
     return valor * 100 / total
+    
 class DatosPareja:
     ganadas_local=0
     ganadas_vis=0
@@ -124,13 +125,20 @@ for d in lista_datos:
 
 def print_list(l):
     for d in l:
-        print d    
-print 'pareja mas ganadas:\n', print_list(pareja_mas_ganadas)
-print 'pareja menos ganadas:\n', print_list(pareja_menos_ganadas)
-print 'pareja mejor diferencia:', print_list(pareja_mejor_dif)
-print 'pareja peor diferencia:', print_list(pareja_peor_dif)
-print 'pareja mejor porcentaje:', print_list(pareja_mejor_por)
-print 'pareja peor porcentaje:', print_list(pareja_peor_por)
+        print d
+        
+print 'pareja mas ganadas'
+print print_list(pareja_mas_ganadas)
+print 'pareja menos ganadas'
+print print_list(pareja_menos_ganadas)
+print 'pareja mejor diferencia'
+print print_list(pareja_mejor_dif)
+print 'pareja peor diferencia'
+print print_list(pareja_peor_dif)
+print 'pareja mejor porcentaje'
+print print_list(pareja_mejor_por)
+print 'pareja peor porcentaje'
+print print_list(pareja_peor_por)
 print "fin"
 
 
