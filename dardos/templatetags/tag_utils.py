@@ -41,3 +41,36 @@ def num_range(parser, token):
             as context_variable" % (fnctn, fnctn)
     return RangeNode(num, context_name)
 
+class ParejasNode(Node):
+    def __init__(self, parejas):
+        self.parejas = Variable(parejas)
+        print 'init'
+        
+    def render (self, context):
+        print 'aaaa'
+        parejas = self.parejas.resolve(context)
+        if parejas and len(parejas) > 0:
+            res = "<ul>"
+            for pareja in parejas:
+                res += "<li>" + pareja[0].nombre + " - " + pareja[1].nombre + "</li>"
+            res += "</ul>"
+        else:
+            res = "No hay datos"
+        return res
+        
+@register.tag
+def parejas_as_list(parser, token):
+    try:
+        """
+        {% parejas_as_list lista_parejas %}
+        """
+        fnctn, lista = token.split_contents()
+        print 'antes'
+        return ParejasNode(lista)
+    except:
+        import traceback
+        import sys
+        traceback.print_exc(file=sys.stdout)
+
+
+

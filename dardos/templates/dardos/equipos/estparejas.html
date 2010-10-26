@@ -1,3 +1,5 @@
+{% load tag_utils %}
+
 <div id="tabsestparejas">
     <ul>
 		<li><a href="#listaparejas">Jugado</a></li>
@@ -67,32 +69,32 @@
             <tr>
                 <td>Más victorias</td>
                 <td>{{estadistica.mas_ganadas.dato}}</td>
-                <td>{{estadistica.mas_ganadas.parejas}}</td>
+                <td>{% parejas_as_list estadistica.mas_ganadas.parejas %}</td>
             </tr>
             <tr>
                 <td>Mejor diferencia</td>
                 <td>{{estadistica.mejor_dif.dato}}</td>
-                <td>{{estadistica.mejor_dif.parejas}}</td>
+                <td>{% parejas_as_list estadistica.mejor_dif.parejas %}</td>
             </tr>
             <tr>
                 <td>Mejor porcentaje</td>
-                <td>{{estadistica.mejor_por.dato}}</td>
-                <td>{{estadistica.mejor_por.parejas}}</td>
+                <td>{{estadistica.mejor_por.dato}}%</td>
+                <td>{% parejas_as_list estadistica.mejor_por.parejas %}</td>
             </tr>
             <tr>
                 <td>Menos victorias</td>
                 <td>{{estadistica.menos_ganadas.dato}}</td>
-                <td>{{estadistica.menos_ganadas.parejas}}</td>
+                <td>{% parejas_as_list estadistica.menos_ganadas.parejas %}</td>
             </tr>
             <tr>
                 <td>Peor diferencia</td>
                 <td>{{estadistica.peor_dif.dato}}</td>
-                <td>{{estadistica.peor_dif.parejas}}</td>
+                <td>{% parejas_as_list estadistica.peor_dif.parejas %}</td>
             </tr>
             <tr>
-                <td>Peor porcentaje</td>
-                <td>{{estadistica.peor_por.dato}}</td>
-                <td>{{estadistica.peor_por.parejas}}</td>
+                <td>Mayor porcentaje perdidas</td>
+                <td>{{estadistica.peor_por.dato}}%</td>
+                <td>{% parejas_as_list estadistica.peor_por.parejas %}</td>
             </tr>
         </table>
     </div>
