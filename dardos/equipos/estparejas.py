@@ -13,6 +13,10 @@ class EstadisticaPareja:
         self.ganadas_vis=0
         self.perdidas_local=0
         self.perdidas_vis=0
+        self.ganadas_501=0
+        self.ganadas_cricket=0
+        self.perdidas_501=0
+        self.perdidas_cricket=0
         
     def jugador1(self):
         return self.pareja[0]
@@ -99,13 +103,30 @@ def get_estadistica_parejas(equipo, liga):
         for p in partidas_local:
             if pareja[0] in p.ganadores.all():
                 datos.ganadas_local += 1
+                if int(p.tipo_juego) == TIPO_JUEGO_501:
+                    datos.ganadas_501 += 1
+                else:
+                    datos.ganadas_cricket += 1
             else:
                 datos.perdidas_local += 1
+                if int(p.tipo_juego) == TIPO_JUEGO_501:
+                    datos.perdidas_501 += 1
+                else:
+                    datos.perdidas_cricket += 1
         for p in partidas_vis:
             if pareja[0] in p.ganadores.all():
                 datos.ganadas_vis += 1
+                if int(p.tipo_juego) == TIPO_JUEGO_501:
+                    datos.ganadas_501 += 1
+                else:
+                    datos.ganadas_cricket += 1
             else:
                 datos.perdidas_vis += 1
+                if int(p.tipo_juego) == TIPO_JUEGO_501:
+                    datos.perdidas_501 += 1
+                else:
+                    datos.perdidas_cricket += 1
+                
         datos.calcular()
         esttotal.parejas.append(datos)
     esttotal.calcular()

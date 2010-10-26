@@ -44,10 +44,8 @@ def num_range(parser, token):
 class ParejasNode(Node):
     def __init__(self, parejas):
         self.parejas = Variable(parejas)
-        print 'init'
         
     def render (self, context):
-        print 'aaaa'
         parejas = self.parejas.resolve(context)
         if parejas and len(parejas) > 0:
             res = "<ul>"
@@ -65,7 +63,6 @@ def parejas_as_list(parser, token):
         {% parejas_as_list lista_parejas %}
         """
         fnctn, lista = token.split_contents()
-        print 'antes'
         return ParejasNode(lista)
     except:
         import traceback
