@@ -67,7 +67,8 @@ class EstadisticaParejasTotal:
             if d.han_jugado():
                 self.menos_ganadas.comparar_peor(d.pareja, d.ganadas_total)
                 self.peor_dif.comparar_peor(d.pareja, d.ganadas_diff)
-                self.peor_por.comparar_peor(d.pareja, d.ganadas_por)
+                #Aqui es comparar_mejor porque el peor es el que tiene mas perdidas
+                self.peor_por.comparar_mejor(d.pareja, d.perdidas_por)
     
 def get_estadistica_parejas(equipo, liga):
     #e = Equipo.objects.filter(nombre="Paris")[0]
