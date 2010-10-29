@@ -1,0 +1,59 @@
+{% load tag_utils %}
+
+<table>
+    <tr>
+        <th>Estadística</th>
+        <th>Dato</th>
+        <th>Parejas</th>
+    </tr>
+    <tr>
+        <td>Más victorias</td>
+        <td>{{estadistica.mas_ganadas.dato}}</td>
+        <td>{% parejas_as_list estadistica.mas_ganadas.parejas %}</td>
+    </tr>
+    <tr>
+        <td>Mejor diferencia</td>
+        <td>{{estadistica.mejor_dif.dato}}</td>
+        <td>{% parejas_as_list estadistica.mejor_dif.parejas %}</td>
+    </tr>
+    <tr>
+        <td>Mejor porcentaje</td>
+        <td>{{estadistica.mejor_por.dato}}%</td>
+        <td>{% parejas_as_list estadistica.mejor_por.parejas %}</td>
+    </tr>
+    <tr>
+        <td>Menos victorias</td>
+        <td>{{estadistica.menos_ganadas.dato}}</td>
+        <td>{% parejas_as_list estadistica.menos_ganadas.parejas %}</td>
+    </tr>
+    <tr>
+        <td>Peor diferencia</td>
+        <td>{{estadistica.peor_dif.dato}}</td>
+        <td>{% parejas_as_list estadistica.peor_dif.parejas %}</td>
+    </tr>
+    <tr>
+        <td>Mayor porcentaje perdidas</td>
+        <td>{{estadistica.peor_por.dato}}%</td>
+        <td>{% parejas_as_list estadistica.peor_por.parejas %}</td>
+    </tr>
+    <tr>
+        <td>Mejor diferencia cricket</td>
+        <td>{{estadistica.mejor_dif_cricket.dato}}</td>
+        <td>{% parejas_as_list estadistica.mejor_dif_cricket.parejas %}</td>
+    </tr>
+    <tr>
+        <td>Mejor porcentaje cricket</td>
+        <td>{{estadistica.mejor_por_cricket.dato}}%</td>
+        <td>{% parejas_as_list estadistica.mejor_por_cricket.parejas %}</td>
+    </tr>
+    <tr>
+        <td>Peor diferencia cricket</td>
+        <td>{{estadistica.peor_dif_cricket.dato}}</td>
+        <td>{% parejas_as_list estadistica.peor_dif_cricket.parejas %}</td>
+    </tr>
+    <tr>
+        <td>Mayor porcentaje perdidas cricket</td>
+        <td>{{estadistica.peor_por_cricket.dato}}%</td>
+        <td>{% parejas_as_list estadistica.peor_por_cricket.parejas %}</td>
+    </tr>
+</table>

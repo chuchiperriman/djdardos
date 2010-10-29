@@ -1,4 +1,4 @@
-{% load tag_utils %}
+{% load dardos_general %}
 
 <div id="tabsestparejas">
     <ul>
@@ -8,30 +8,7 @@
 	</ul>
     <div id="listaparejas">
         <h2>Partidas por parejas</h2>
-        <table>
-            <tr>
-                <th>Jugador 1</th>
-                <th>Jugador 2</th>
-                <th>Jugadas</th>
-                <th>Ganadas</th>
-                <th>Perdidas</th>
-                <th>Diferencia</th>
-                <th>% ganadas</th>
-            </tr>
-        {% for ep in estadistica.parejas %}
-            {% if ep.han_jugado %}
-                <tr>
-                    <td>{{ep.jugador1.nombre}}</td>
-                    <td>{{ep.jugador2.nombre}}</td>
-                    <td>{{ep.total}}</td>
-                    <td>{{ep.ganadas_total}} ({{ep.ganadas_cricket}})</td>
-                    <td>{{ep.perdidas_total}} ({{ep.perdidas_cricket}})</td>
-                    <td>{{ep.ganadas_diff}} ({{ep.ganadas_diff_cricket}})</td>
-                    <td>{{ep.ganadas_por}}% ({{ep.ganadas_por_cricket}}%)</td>
-                </tr>
-            {% endif %}
-        {% endfor %}
-        </table>
+        {% show_estadisticas_parejas_general estadistica %}
     </div>
     <div id="listaparejasno">
         <h2>Parejas que no han jugado</h2>
@@ -52,71 +29,7 @@
     </div>
     <div id="estparejas">
         <h2>Estadísticas por parejas</h2>
-        <table>
-            <tr>
-                <th>Estadística</th>
-                <th>Dato</th>
-                <th>Parejas</th>
-            </tr>
-            <!--
-            self.pareja_mas_ganadas = None
-        self.pareja_menos_ganadas = None
-        self.pareja_mejor_dif = None
-        self.pareja_peor_dif = None
-        self.pareja_mejor_por = None
-        self.pareja_peor_por = None
-        -->
-            <tr>
-                <td>Más victorias</td>
-                <td>{{estadistica.mas_ganadas.dato}}</td>
-                <td>{% parejas_as_list estadistica.mas_ganadas.parejas %}</td>
-            </tr>
-            <tr>
-                <td>Mejor diferencia</td>
-                <td>{{estadistica.mejor_dif.dato}}</td>
-                <td>{% parejas_as_list estadistica.mejor_dif.parejas %}</td>
-            </tr>
-            <tr>
-                <td>Mejor porcentaje</td>
-                <td>{{estadistica.mejor_por.dato}}%</td>
-                <td>{% parejas_as_list estadistica.mejor_por.parejas %}</td>
-            </tr>
-            <tr>
-                <td>Menos victorias</td>
-                <td>{{estadistica.menos_ganadas.dato}}</td>
-                <td>{% parejas_as_list estadistica.menos_ganadas.parejas %}</td>
-            </tr>
-            <tr>
-                <td>Peor diferencia</td>
-                <td>{{estadistica.peor_dif.dato}}</td>
-                <td>{% parejas_as_list estadistica.peor_dif.parejas %}</td>
-            </tr>
-            <tr>
-                <td>Mayor porcentaje perdidas</td>
-                <td>{{estadistica.peor_por.dato}}%</td>
-                <td>{% parejas_as_list estadistica.peor_por.parejas %}</td>
-            </tr>
-            <tr>
-                <td>Mejor diferencia cricket</td>
-                <td>{{estadistica.mejor_dif_cricket.dato}}</td>
-                <td>{% parejas_as_list estadistica.mejor_dif_cricket.parejas %}</td>
-            </tr>
-            <tr>
-                <td>Mejor porcentaje cricket</td>
-                <td>{{estadistica.mejor_por_cricket.dato}}%</td>
-                <td>{% parejas_as_list estadistica.mejor_por_cricket.parejas %}</td>
-            </tr>
-            <tr>
-                <td>Peor diferencia cricket</td>
-                <td>{{estadistica.peor_dif_cricket.dato}}</td>
-                <td>{% parejas_as_list estadistica.peor_dif_cricket.parejas %}</td>
-            </tr>
-            <tr>
-                <td>Mayor porcentaje perdidas cricket</td>
-                <td>{{estadistica.peor_por_cricket.dato}}%</td>
-                <td>{% parejas_as_list estadistica.peor_por_cricket.parejas %}</td>
-            </tr>
-        </table>
+        {% show_estadisticas_parejas_analisis estadistica %}
     </div>
 </div>
 

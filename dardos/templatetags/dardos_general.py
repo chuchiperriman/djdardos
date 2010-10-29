@@ -38,3 +38,11 @@ def show_estadisticas_jugador(jugador):
 @register.inclusion_tag('dardos/equipos/estequipo.html')
 def show_estadisticas_equipo(estadisticas):
     return {'estadisticas' : estadisticas}
+    
+@register.inclusion_tag('dardos/equipos/estparejasgeneral.html')
+def show_estadisticas_parejas_general(estadistica):
+    return {'estadistica' : estadistica}
+    
+@register.inclusion_tag('dardos/equipos/estparejasanalisis.html')
+def show_estadisticas_parejas_analisis(estadistica):
+    return {'estadistica' : estadistica}

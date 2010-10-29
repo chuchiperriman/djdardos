@@ -1,0 +1,24 @@
+<table>
+    <tr>
+        <th>Jugador 1</th>
+        <th>Jugador 2</th>
+        <th>Jugadas</th>
+        <th>Ganadas</th>
+        <th>Perdidas</th>
+        <th>Diferencia</th>
+        <th>% ganadas</th>
+    </tr>
+{% for ep in estadistica.parejas %}
+    {% if ep.han_jugado %}
+        <tr>
+            <td>{{ep.jugador1.nombre}}</td>
+            <td>{{ep.jugador2.nombre}}</td>
+            <td>{{ep.total}}</td>
+            <td>{{ep.ganadas_total}} ({{ep.ganadas_cricket}})</td>
+            <td>{{ep.perdidas_total}} ({{ep.perdidas_cricket}})</td>
+            <td>{{ep.ganadas_diff}} ({{ep.ganadas_diff_cricket}})</td>
+            <td>{{ep.ganadas_por}}% ({{ep.ganadas_por_cricket}}%)</td>
+        </tr>
+    {% endif %}
+{% endfor %}
+</table>

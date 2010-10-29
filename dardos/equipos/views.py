@@ -63,7 +63,9 @@ def estreport(request, equipo_id):
     e = get_object_or_404(Equipo, pk=equipo_id)
     liga_actual = e.get_liga_actual()
     estadisticas = EstadisticasEquipo(e, liga_actual)
+    estparejas = get_estadistica_parejas (e, liga_actual)
     return render_to_response('dardos/equipos/estreport.html',
         {'jugadores': estadisticas.jugadores,
-         'estadisticas': estadisticas})
+         'estadisticas': estadisticas,
+         'estadistica_parejas': estparejas})
          

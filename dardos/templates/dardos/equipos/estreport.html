@@ -1,8 +1,24 @@
 <html>
+<head>
+    <title>Informe de estadísticas de quipo</title>
+</head>
 <body>
 
 {% load dardos_general graficos %}
 
+<h1>Estadísticas de jugadores</h1>
 {% show_estadisticas_jugadores jugadores %}
+
+<h1>Análisis de mejores jugadores</h1>
+{% show_estadisticas_equipo estadisticas %}
+
+<h1>Estadísticas de parejas</h1>
+
+<h2>Datos generales</h2>
+{% show_estadisticas_parejas_general estadistica_parejas %}
+
+<h2>Análisis de mejores parejas</h2>
+{% show_estadisticas_parejas_analisis estadistica_parejas %}
+
 </body>
 </html>
