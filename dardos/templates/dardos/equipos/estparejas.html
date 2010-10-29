@@ -26,8 +26,8 @@
                     <td>{{ep.total}}</td>
                     <td>{{ep.ganadas_total}} ({{ep.ganadas_cricket}})</td>
                     <td>{{ep.perdidas_total}} ({{ep.perdidas_cricket}})</td>
-                    <td>{{ep.ganadas_diff}}</td>
-                    <td>{{ep.ganadas_por}}%</td>
+                    <td>{{ep.ganadas_diff}} ({{ep.ganadas_diff_cricket}})</td>
+                    <td>{{ep.ganadas_por}}% ({{ep.ganadas_por_cricket}}%)</td>
                 </tr>
             {% endif %}
         {% endfor %}
@@ -95,6 +95,26 @@
                 <td>Mayor porcentaje perdidas</td>
                 <td>{{estadistica.peor_por.dato}}%</td>
                 <td>{% parejas_as_list estadistica.peor_por.parejas %}</td>
+            </tr>
+            <tr>
+                <td>Mejor diferencia cricket</td>
+                <td>{{estadistica.mejor_dif_cricket.dato}}</td>
+                <td>{% parejas_as_list estadistica.mejor_dif_cricket.parejas %}</td>
+            </tr>
+            <tr>
+                <td>Mejor porcentaje cricket</td>
+                <td>{{estadistica.mejor_por_cricket.dato}}%</td>
+                <td>{% parejas_as_list estadistica.mejor_por_cricket.parejas %}</td>
+            </tr>
+            <tr>
+                <td>Peor diferencia cricket</td>
+                <td>{{estadistica.peor_dif_cricket.dato}}</td>
+                <td>{% parejas_as_list estadistica.peor_dif_cricket.parejas %}</td>
+            </tr>
+            <tr>
+                <td>Mayor porcentaje perdidas cricket</td>
+                <td>{{estadistica.peor_por_cricket.dato}}%</td>
+                <td>{% parejas_as_list estadistica.peor_por_cricket.parejas %}</td>
             </tr>
         </table>
     </div>

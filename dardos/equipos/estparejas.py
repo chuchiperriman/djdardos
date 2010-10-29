@@ -29,9 +29,13 @@ class EstadisticaPareja:
         self.ganadas_total = self.ganadas_local + self.ganadas_vis
         self.perdidas_total = self.perdidas_local + self.perdidas_vis
         self.total = self.ganadas_total + self.perdidas_total
+        self.total_cricket = self.ganadas_cricket + self.perdidas_cricket
         self.ganadas_diff = self.ganadas_total - self.perdidas_total
+        self.ganadas_diff_cricket = self.ganadas_cricket - self.perdidas_cricket
         self.ganadas_por = get_porcentaje(self.ganadas_total, self.total)
+        self.ganadas_por_cricket = get_porcentaje(self.ganadas_cricket, self.total_cricket)
         self.perdidas_por = get_porcentaje(self.perdidas_total, self.total)
+        self.perdidas_por_cricket = get_porcentaje(self.perdidas_cricket, self.total_cricket)
         
 class EstadisticaDatosTotal:
     def __init__(self):
@@ -61,18 +65,26 @@ class EstadisticaParejasTotal:
         self.peor_dif = EstadisticaDatosTotal()
         self.mejor_por = EstadisticaDatosTotal()
         self.peor_por = EstadisticaDatosTotal()
+        self.mejor_dif_cricket = EstadisticaDatosTotal()
+        self.peor_dif_cricket = EstadisticaDatosTotal()
+        self.mejor_por_cricket = EstadisticaDatosTotal()
+        self.peor_por_cricket = EstadisticaDatosTotal()
     
     def calcular(self):
         for d in self.parejas:
             self.mas_ganadas.comparar_mejor(d.pareja, d.ganadas_total)
             self.mejor_dif.comparar_mejor(d.pareja, d.ganadas_diff)
             self.mejor_por.comparar_mejor(d.pareja, d.ganadas_por)
+            self.mejor_dif_cricket.comparar_mejor(d.pareja, d.ganadas_diff_cricket)
+            self.mejor_por_cricket.comparar_mejor(d.pareja, d.ganadas_por_cricket)
             #Si son 0 las dos es que no han jugado
             if d.han_jugado():
                 self.menos_ganadas.comparar_peor(d.pareja, d.ganadas_total)
                 self.peor_dif.comparar_peor(d.pareja, d.ganadas_diff)
+                self.peor_dif_cricket.comparar_peor(d.pareja, d.ganadas_diff_cricket)
                 #Aqui es comparar_mejor porque el peor es el que tiene mas perdidas
                 self.peor_por.comparar_mejor(d.pareja, d.perdidas_por)
+                self.peor_por_cricket.comparar_mejor(d.pareja, d.perdidas_por_cricket)
     
 def get_estadistica_parejas(equipo, liga):
     #e = Equipo.objects.filter(nombre="Paris")[0]

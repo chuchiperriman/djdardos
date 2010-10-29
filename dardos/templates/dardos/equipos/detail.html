@@ -35,6 +35,11 @@
 </script>
 
 <h1>{{ equipo.nombre }}</h1>
+<div style="float:right">
+	        <a href="/equipos/estreport/{{equipo.id}}">
+	            <img src="/site_media/images/report.png" title="Informe de estadísticas"/>
+	        </a>
+	    </div>
 <div>
     <div id="logo-equipo">
         {% if equipo.path_foto%}
@@ -118,110 +123,7 @@
 		</table>
 	</div>
 	<div id="tabs-4">
-		<table>
-			<tr>
-				<th>Tipo partida</th>
-				<th>Jugados</th>
-				<th>Ganados</th>
-				<th>Perdidos</th>
-				<th>Empatados</th>
-			</tr>
-			<tr>
-				<td>Local</td>
-				<td>{{estadisticas.partidos_jugados_local}}</td>
-				<td>{{estadisticas.partidos_ganados_local}}</td>
-				<td>{{estadisticas.partidos_perdidos_local}}</td>
-				<td>{{estadisticas.partidos_empatados_local}}</td>
-			</tr>
-			<tr>
-				<td>Visitante</td>
-				<td>{{estadisticas.partidos_jugados_visitante}}</td>
-				<td>{{estadisticas.partidos_ganados_visitante}}</td>
-				<td>{{estadisticas.partidos_perdidos_visitante}}</td>
-				<td>{{estadisticas.partidos_empatados_visitante}}</td>
-			</tr>
-			<tr>
-				<td>General</td>
-				<td>{{estadisticas.partidos_jugados}}</td>
-				<td>{{estadisticas.partidos_ganados}}</td>
-				<td>{{estadisticas.partidos_perdidos}}</td>
-				<td>{{estadisticas.partidos_empatados}}</td>
-			</tr>
-		</table>
-		<table>
-			<tr>
-				<td>Más victorias</td>
-				<td>{{estadisticas.datos_mas_ganadas}}</td>
-			</tr>
-			<tr>
-				<td>Más derrotas</td>
-				<td>{{estadisticas.datos_mas_perdidas}}</td>
-			</tr>
-			<tr>
-				<td>Más victorias individuales</td>
-				<td>{{estadisticas.datos_mas_ganadas_ind}}</td>
-			</tr>
-			<tr>
-				<td>Más victorias parejas</td>
-				<td>{{estadisticas.datos_mas_ganadas_par}}</td>
-			</tr>
-			<tr>
-				<td>Más derrotas individuales</td>
-				<td>{{estadisticas.datos_mas_perdidas_ind}}</td>
-			</tr>
-			<tr>
-				<td>Más derrotas parejas</td>
-				<td>{{estadisticas.datos_mas_perdidas_par}}</td>
-			</tr>
-			<tr>
-				<td>Mejor diferencia individuales</td>
-				<td>{{estadisticas.datos_mejor_diferencia_ind}}</td>
-			</tr>
-			<tr>
-				<td>Mejor diferencia parejas</td>
-				<td>{{estadisticas.datos_mejor_diferencia_par}}</td>
-			</tr>
-			<tr>
-				<td>Mejor diferencia general</td>
-				<td>{{estadisticas.datos_mejor_diferencia}}</td>
-			</tr>
-			<tr>
-				<td>Peor diferencia individuales</td>
-				<td>{{estadisticas.datos_peor_diferencia_ind}}</td>
-			</tr>
-			<tr>
-				<td>Peor diferencia parejas</td>
-				<td>{{estadisticas.datos_peor_diferencia_par}}</td>
-			</tr>
-			<tr>
-				<td>Peor diferencia general</td>
-				<td>{{estadisticas.datos_peor_diferencia}}</td>
-			</tr>
-			<tr>
-				<td>Mejor porcentaje individuales</td>
-				<td>{{estadisticas.datos_mejor_porcentaje_ind}}</td>
-			</tr>
-			<tr>
-				<td>Mejor porcentaje parejas</td>
-				<td>{{estadisticas.datos_mejor_porcentaje_par}}</td>
-			</tr>
-			<tr>
-				<td>Mejor porcentaje general</td>
-				<td>{{estadisticas.datos_mejor_porcentaje}}</td>
-			</tr>
-			<tr>
-				<td>Mayor porcentaje perdidas individuales</td>
-				<td>{{estadisticas.datos_mayor_porcentaje_perdidas_ind}}</td>
-			</tr>
-			<tr>
-				<td>Mayor porcentaje perdidas parejas</td>
-				<td>{{estadisticas.datos_mayor_porcentaje_perdidas_par}}</td>
-			</tr>
-			<tr>
-				<td>Mayor porcentaje perdidas general</td>
-				<td>{{estadisticas.datos_mayor_porcentaje_perdidas}}</td>
-			</tr>
-		</table>
+	    {% show_estadisticas_equipo estadisticas %}
 	</div>
 	<div id="tabs-5">
         <form id="formgrafica" method="post">

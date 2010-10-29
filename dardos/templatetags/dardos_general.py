@@ -35,3 +35,6 @@ def show_estadisticas_jugador(jugador):
     return {'show_details' : False,
         'jugadores' : (jugador,)}
     
+@register.inclusion_tag('dardos/equipos/estequipo.html')
+def show_estadisticas_equipo(estadisticas):
+    return {'estadisticas' : estadisticas}
