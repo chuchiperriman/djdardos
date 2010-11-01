@@ -30,6 +30,7 @@ urlpatterns = patterns('',
         view='djdardos.dardos.views.post_detail',
         name='blog_detail'
     ),
+    (r'^pruebas/$', 'djdardos.dardos.pruebas.views.index'),
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0"><object pk="1" model="dardos.liga"><field to="dardos.division" name="division" rel="ManyToOneRel">1</field><field type="CharField" name="nombre">2010 - Verano</field><field type="BooleanField" name="actual">False</field></object><object pk="2" model="dardos.liga"><field to="dardos.division" name="division" rel="ManyToOneRel">1</field><field type="CharField" name="nombre">2010/2011 - Invierno</field><field type="BooleanField" name="actual">True</field></object></django-objects>
