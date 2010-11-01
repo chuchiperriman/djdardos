@@ -45,8 +45,12 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-#MEDIA_ROOT = '/home/perriman/dev/djdardos/site_media'
-MEDIA_ROOT = '/srv/bundles/djdardos-v1ga46090e6de115f5025c0a974e25bbd25c70d510a/application/djdardos/site_media'
+import socket
+hostname = socket.gethostname()
+if hostname == 'afro':
+    MEDIA_ROOT = '/home/perriman/dev/djdardos/site_media'
+else:
+    MEDIA_ROOT = '/srv/bundles/djdardos-v1ga46090e6de115f5025c0a974e25bbd25c70d510a/application/djdardos/site_media'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
