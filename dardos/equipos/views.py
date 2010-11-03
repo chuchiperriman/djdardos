@@ -8,6 +8,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from estadisticas import EstadisticasEquipo
 from ..graficas.forms import GraficasForm
 from estparejas import *
+from django.template import RequestContext
 
 from django.http import HttpResponse, Http404
 
@@ -31,7 +32,11 @@ def index(request):
 
 def detail(request, equipo_id):
     e = get_object_or_404(Equipo, pk=equipo_id)
-    liga_actual = e.get_liga_actual()
+    if "liga_actual" in request.session:
+        liga_actual = Liga.objects.get(pk=request.session["liga_actual"])
+    else:
+        liga_actual = e.get_liga_actual()
+    
     estadisticas = EstadisticasEquipo(e, liga_actual)
     jornadas = []
     for j in liga_actual.jornada_set.all():
@@ -45,7 +50,8 @@ def detail(request, equipo_id):
     	{'equipo': e, 'jugadores': estadisticas.jugadores,
          'liga_actual': liga_actual, 'jornadas': jornadas,
          'estadisticas': estadisticas,
-         'graficas_form' : graficas_form})
+         'graficas_form' : graficas_form},
+         context_instance = RequestContext(request))
 
 def ajax_estadistica_parejas(request, equipo_id, liga_id):
     try:

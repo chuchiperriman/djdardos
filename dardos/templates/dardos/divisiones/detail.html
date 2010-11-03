@@ -29,6 +29,8 @@
 
 <h1>{{ division.nombre }} ({{liga.nombre}})</h1>
 
+{% seleccion_liga division.liga_set.all liga.id%}
+			
 <div id="tabs">
 	<ul>
 		<li><a href="#tabs-1">Clasificación</a></li>

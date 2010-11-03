@@ -5,15 +5,22 @@ from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
 from djdardos.dardos.liga.clasificacion import *
 from django.core import serializers
+from django.template import RequestContext
 
 from django.http import HttpResponse, Http404
 
 def detail(request, division_id):
     d = Division.objects.get(pk=division_id)
-    l = d.get_liga_actual()
+    if "liga_actual" in request.session:
+        l = Liga.objects.get(pk=request.session["liga_actual"])
+    else:
+        l = d.get_liga_actual()
+        
     return render_to_response('dardos/divisiones/detail.html', 
     	{'division': d,
-         'liga': l})
+         'liga': l,
+         'current_path': request.path},
+         context_instance = RequestContext(request))
 
          
 def ajax_jornada_detail(request, jornada_id):

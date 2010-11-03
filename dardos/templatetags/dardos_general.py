@@ -46,3 +46,11 @@ def show_estadisticas_parejas_general(estadistica):
 @register.inclusion_tag('dardos/equipos/estparejasanalisis.html')
 def show_estadisticas_parejas_analisis(estadistica):
     return {'estadistica' : estadistica}
+    
+@register.inclusion_tag('dardos/includes/seleccion_liga.html', takes_context = True)
+def seleccion_liga(context, ligas, id_liga_actual=None):
+    request = context['request']
+    return {'ligas': ligas,
+        'id_liga_actual': id_liga_actual,
+        'current_path': request.path}
+        

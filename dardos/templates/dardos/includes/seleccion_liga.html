@@ -1,0 +1,19 @@
+Ver otras ligas: 
+<select name="ligas" id="ligas">
+{% for l in ligas%}
+    {% if l.id == id_liga_actual %}
+	    <option value="{{l.id}}" selected="selected">{{l.nombre}}</option>
+	{%else%}
+	    <option value="{{l.id}}">{{l.nombre}}</option>
+	{%endif%}
+{%endfor%}
+</select>
+
+<script type="text/javascript">
+	$(function() {
+		$("#ligas").change(function(){
+		    document.location = "/cambiar_liga?liga=" + $(this).val() +
+		        "&current_path={{current_path|urlencode}}";
+		});
+	});
+</script>
