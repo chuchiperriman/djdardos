@@ -5,6 +5,7 @@ from datetime import datetime
 from djdardos.dardos.models import *
 from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
+from django.views.generic.simple import direct_to_template
 from estadisticas import EstadisticasEquipo
 from ..graficas.forms import GraficasForm
 from estparejas import *
@@ -28,7 +29,7 @@ def index(request):
             nombre__contains=request.GET["q"]).order_by('nombre')
     else:
         equipos = Equipo.objects.all().order_by('nombre')
-    return render_to_response('dardos/equipos/index.html', {'equipos': equipos})
+    return direct_to_template(request, 'dardos/equipos/index.html', {'equipos': equipos})
 
 def detail(request, equipo_id):
     e = get_object_or_404(Equipo, pk=equipo_id)

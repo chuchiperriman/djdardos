@@ -1,0 +1,10 @@
+<div id="divliga">
+    <ul>
+    {% if liga_actual %}
+        <li><b>División:</b> {{liga_actual.division.nombre}}</li>
+        <li><b>Liga:</b> {{liga_actual.nombre}}</li>
+        <li><button>Cambiar{{current_path}}</button></li>
+    {% endif %}
+    </ul>
+</div>
+
