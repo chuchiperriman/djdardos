@@ -1,15 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
 {% load dardos_general vista %}
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
 
 <head>
-
-
   <title>{% block title %}{% endblock %}</title>
-
+  
   <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
   <meta name="author" content="fullahead.org - studio7designs.com" />
   <meta name="description" content="Site Description Here" />
@@ -17,121 +15,87 @@
   <meta name="robots" content="index, follow, noarchive" />
   <meta name="googlebot" content="noarchive" />
 
-  <link rel="stylesheet" type="text/css" href="/site_media/css/layout.css" media="screen, projection, tv " />
-  <link rel="stylesheet" type="text/css" href="/site_media/css/html.css" media="screen, projection, tv " />
+  <link rel="stylesheet" type="text/css" href="/site_media/css/style.css" media="screen, projection, tv " />
+  <link rel="stylesheet" type="text/css" href="/site_media/css/orange.css" media="screen, projection, tv " />
   <link rel="stylesheet" type="text/css" href="/site_media/css/custom.css" media="screen, projection, tv " />
 
   <!-- CSS specific to current theme -->
   <link rel="stylesheet"           type="text/css" href="/site_media/css/light.css" title="light" media="screen, projection, tv " />
   <link rel="alternate stylesheet" type="text/css" href="/site_media/css/dark.css"  title="dark"  media="screen, projection, tv " />
 
-
 </head>
 
 <body>
-
-<!-- #content: holds all except site footer - causes footer to stick to bottom -->
-<div id="content">
-
-  <!-- #header: holds the logo and top links -->
-  <!--
-  <div id="header" class="width">
-
-    <img src="images/logo.gif" alt="Pequeño logo"/>
-
-    <ul>
-      <li><a href="index.html">Back to Main page</a></li>
-      <li><a href="">About us</a></li>
-      <li><a href="">Streaming Video</a></li>
-      <li><a href="" class="last">RSS Feeds</a></li>
-    </ul>
-
-  </div>
-  -->
-  <!-- #header end -->
-
-  <!-- #headerImg: holds the main header image or flash -->
-  <div id="headerImg" class="width">
-  	<h1>Liga de dardos</h1>
-  </div>
-
-
-
-  <!-- #menu: the main large box site menu -->
-  <div id="menu" class="width">
-        {% display_divliga_actual %}
-  </div>
-  <!-- #menu end -->
-
-  <!-- #page: holds the page content -->
-  <div id="page">
-
-
-    <!-- #columns: holds the columns of the page -->
-    <div id="columns" class="widthPad">
-
-
-    <!-- Left column -->
-    <div class="floatLeft width73">
-
-    {% block content %}{% endblock %}
-    
+  <div id="main">
+    <div id="links">
+      <!-- **** INSERT LINKS HERE **** -->
+      <a href="#">another link</a> | <a href="#">another link</a> | <a href="#">another link</a> | <a href="#">another link</a>
     </div>
-    <!-- Left column end -->
-
-
-    <!-- Right link column -->
-    <div class="floatRight width25 lightBlueBg horzPad">
-
-      <h2>Liga <span class="dark">dardos</span></h2>
-
-      <ul class="submenu1">
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/equipos">Equipos</a></li>
-        <li><a href="/jugadores">Jugadores</a></li>
-        <li><a href="/partidos">Partidos</a></li>
+    <div id="logo"><h1>TURN_IT_UP</h1></div>
+    <div id="menu">
+      <ul>
+        <!-- **** INSERT NAVIGATION ITEMS HERE (use id="selected" to identify the page you're on **** -->
+        <li><a id="selected" href="#">home</a></li>
+        <li><a href="#">page 1</a></li>
+        <li><a href="#">page 2</a></li>
+        <li><a href="#">page 3</a></li>
+        <li><a href="#">contact</a></li>
       </ul>
-      {% show_divisiones %}
-      {% block menu %}{% endblock %}
-
     </div>
-    <!-- Right links column end -->
-
-
-
+    <div id="content">
+      <div id="column1">
+        <div class="sidebaritem">
+          <div class="sbihead">
+            <h1>latest news</h1>
+          </div>
+          <div class="sbicontent">
+            <!-- **** INSERT NEWS ITEMS HERE **** -->
+            <h2>01.09.2006</h2>
+            <p>This is where you can put your latest news.</p>
+            <p><a href="#">read more ...</a></p>
+            <p></p>
+            <p></p>
+            <h2>01.09.2006</h2>
+            <p>This is where you can put your latest news.</p>
+            <p><a href="#">read more ...</a></p>
+          </div>
+        </div>
+        <div class="sidebaritem">
+          <div class="sbihead">
+            <h1>additional links</h1>
+          </div>
+          <div class="sbilinks">
+            <!-- **** INSERT ADDITIONAL LINKS HERE **** -->
+            <ul>
+              <li><a href="http://www.openwebdesign.org">open web design</a></li>
+              <li><a href="http://www.w3schools.com/xhtml/default.asp">learn XHTML</a></li>
+              <li><a href="http://www.w3schools.com/css/default.asp">learn CSS</a></li>
+              <li><a href="http://www.mozilla.com/firefox">get firefox</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="sidebaritem">
+          <div class="sbihead">
+            <h1>other information</h1>
+          </div>
+          <div class="sbicontent">
+            <!-- **** INSERT OTHER INFORMATION HERE **** -->
+            <p>
+              This space can be used for additional information such as a contact phone number, address
+              or maybe even a graphic.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="column2">
+        <div style="width: 100%; float:left">
+            {% block content %}{% endblock %}
+        </div>
+      </div>
     </div>
-    <!-- #columns end -->
-
+    <div id="footer">
+      copyright &copy; 2006 your name | <a href="#">email@emailaddress</a> | <a href="http://validator.w3.org/check?uri=referer">XHTML 1.1</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.dcarter.co.uk">design by dcarter</a>
+    </div>
   </div>
-  <!-- #page end -->
-
-</div>
-<!-- #content end -->
-
-
-
-
-<!-- #footer: holds the site footer (logo and links) -->
-<div id="footer">
-
-  <!-- #bg: applies the site width and footer background -->
-  <div id="bg" class="width">
-
-    <!--<img src="images/logo.gif" alt="Your logo goes here"/>-->
-
- <ul>
-      <li><a href="mailto:chuchiperriman@gmail.com">Contacto</a></li>
-      <li><a href="http://www.opensourcetemplates.org">opensourcetemplates.org</a></li>
-      <li><a href="http://www.studio7designs.com" class="last">studio7designs.com</a></li>
-	</ul>
-
-  </div>
-  <!-- #bg end -->
-
-</div>
-<!-- #footer end -->
-
 </body>
-
 </html>
-
