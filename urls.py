@@ -10,6 +10,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'djdardos.basic.blog.views.post_list'),
+    (r'^ligas/$', 'djdardos.dardos.views.ligas_index'),
     (r'^equipos/$', 'djdardos.dardos.equipos.views.index'),
     (r'^equipos/estreport/(?P<equipo_id>\d+)/(?P<liga_id>\d+)$', 'djdardos.dardos.equipos.views.estreport'),
     (r'^equipos/estparejas/(?P<equipo_id>\d+)/(?P<liga_id>\d+)$', 'djdardos.dardos.equipos.views.ajax_estadistica_parejas'),

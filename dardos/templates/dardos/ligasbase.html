@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load dardos_general vista %}
+
+{% block menu %}
+
+<div class="sidebaritem">
+  <div class="sbihead">
+    <h1>General</h1>
+  </div>
+  <div class="sbilinks">
+    <!-- **** INSERT ADDITIONAL LINKS HERE **** -->
+    <ul class="submenu1">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/equipos">Equipos</a></li>
+        <li><a href="/jugadores">Jugadores</a></li>
+        <li><a href="/partidos">Partidos</a></li>
+      </ul>
+  </div>
+</div>
+<div class="sidebaritem">
+  <div class="sbihead">
+    <h1>Divisiones</h1>
+  </div>
+  <div class="sbilinks">
+      {% show_divisiones %}
+  </div>
+</div>
+  {% block submenu %}{% endblock %}
+<div class="sidebaritem">
+  <div class="sbihead">
+    <h1>Información</h1>
+  </div>
+  <div class="sbicontent">
+    <!-- **** INSERT OTHER INFORMATION HERE **** -->
+    <p>
+      Este espacio se puede utilizar para enlaces directos, google adds etc.
+    </p>
+  </div>
+</div>
+
+{% endblock %}

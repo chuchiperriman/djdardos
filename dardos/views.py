@@ -5,10 +5,10 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.views.generic import date_based, list_detail
 from django.conf import settings
+from django.views.generic.simple import direct_to_template
 from djdardos.basic.blog.models import *
 
 
-# Create your views here.
 def index(request, page=0, paginate_by=5, **kwargs):
     #return render_to_response('dardos/index.html')
     page_size = getattr(settings,'BLOG_PAGESIZE', paginate_by)
@@ -21,6 +21,9 @@ def index(request, page=0, paginate_by=5, **kwargs):
         extra_context={'divisiones': Division.objects.all()},
         **kwargs
     )
+    
+def ligas_index(request, **kwargs):
+    return direct_to_template(request, 'dardos/divisiones/index.html',{})
     
 def post_detail(request, slug, year, month, day, **kwargs):
     """
