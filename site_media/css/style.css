@@ -103,6 +103,9 @@ ol li
 
 #links a:hover, #footer a:hover{text-decoration: underline;}
 
+#links a:last-child{
+margin-right: 10px;
+}
 /* logo */
 #logo
 { width: 100%;

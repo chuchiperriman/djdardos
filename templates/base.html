@@ -18,11 +18,6 @@
   <link rel="stylesheet" type="text/css" href="/site_media/css/style.css" media="screen, projection, tv " />
   <link rel="stylesheet" type="text/css" href="/site_media/css/orange.css" media="screen, projection, tv " />
   <link rel="stylesheet" type="text/css" href="/site_media/css/custom.css" media="screen, projection, tv " />
-
-  <!-- CSS specific to current theme -->
-  <link rel="stylesheet"           type="text/css" href="/site_media/css/light.css" title="light" media="screen, projection, tv " />
-  <link rel="alternate stylesheet" type="text/css" href="/site_media/css/dark.css"  title="dark"  media="screen, projection, tv " />
-
 </head>
 
 <body>
@@ -31,7 +26,7 @@
       <!-- **** INSERT LINKS HERE **** -->
       <a href="#">another link</a> | <a href="#">another link</a> | <a href="#">another link</a> | <a href="#">another link</a>
     </div>
-    <div id="logo"><h1>TURN_IT_UP</h1></div>
+    <div id="logo"><h1>LIGA DE DARDOS</h1></div>
     <div id="menu">
       <ul>
         <!-- **** INSERT NAVIGATION ITEMS HERE (use id="selected" to identify the page you're on **** -->
@@ -44,12 +39,12 @@
     </div>
     <div id="content">
       <div id="column1">
+        <!--
         <div class="sidebaritem">
           <div class="sbihead">
             <h1>latest news</h1>
           </div>
           <div class="sbicontent">
-            <!-- **** INSERT NEWS ITEMS HERE **** -->
             <h2>01.09.2006</h2>
             <p>This is where you can put your latest news.</p>
             <p><a href="#">read more ...</a></p>
@@ -60,19 +55,29 @@
             <p><a href="#">read more ...</a></p>
           </div>
         </div>
+        -->
         <div class="sidebaritem">
           <div class="sbihead">
-            <h1>additional links</h1>
+            <h1>General</h1>
           </div>
           <div class="sbilinks">
             <!-- **** INSERT ADDITIONAL LINKS HERE **** -->
-            <ul>
-              <li><a href="http://www.openwebdesign.org">open web design</a></li>
-              <li><a href="http://www.w3schools.com/xhtml/default.asp">learn XHTML</a></li>
-              <li><a href="http://www.w3schools.com/css/default.asp">learn CSS</a></li>
-              <li><a href="http://www.mozilla.com/firefox">get firefox</a></li>
-            </ul>
+            <ul class="submenu1">
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/equipos">Equipos</a></li>
+                <li><a href="/jugadores">Jugadores</a></li>
+                <li><a href="/partidos">Partidos</a></li>
+              </ul>
           </div>
+        <div class="sidebaritem">
+          <div class="sbihead">
+            <h1>Divisiones</h1>
+          </div>
+          <div class="sbilinks">
+              {% show_divisiones %}
+          </div>
+        </div>
+          {% block menu %}{% endblock %}
         </div>
         <div class="sidebaritem">
           <div class="sbihead">

@@ -17,7 +17,7 @@
         </tr>
     {% for j in jugadores_list %}
         <tr>
-            <td>{{j.equipo.nombre}}</td>
+            <td><a href="/jugadores/{{j.equipo.id}}">{{j.equipo.nombre}}</a></td>
             <td><a href="/jugadores/{{j.id}}">{{ j.nombre }}</a></td>
             <td><a href="/jugadores/{{j.id}}" class="view"></a></td>
         </tr>

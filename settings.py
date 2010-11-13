@@ -58,7 +58,7 @@ USE_I18N = True
 # Example: "/home/media/media.lawrence.com/"
 import socket
 hostname = socket.gethostname()
-if hostname == 'afro':
+if hostname == 'afro' or hostname == 'archu':
     MEDIA_ROOT = '/home/perriman/dev/djdardos/site_media'
 else:
     MEDIA_ROOT = '/srv/bundles/djdardos-v1ga46090e6de115f5025c0a974e25bbd25c70d510a/application/djdardos/site_media'
