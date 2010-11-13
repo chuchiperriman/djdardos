@@ -48,7 +48,7 @@ table tr th{
 }
 
 .resultado{
-    width: 50px;
+    width: 70px;
     text-align: center;
 }
 
@@ -86,4 +86,8 @@ table tr th{
     height: 100px;
     border: 1px solid #AAAAAA;
     margin-right: 10px;
+}
+
+.ui-widget {
+    font-size: 1em; !important
 }

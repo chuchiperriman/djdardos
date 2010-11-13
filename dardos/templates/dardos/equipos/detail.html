@@ -4,13 +4,8 @@
 
 {% block title %}Equipo{% endblock %}
 
-{% block content %}
+{% block header %}
 
-<link type="text/css" href="/site_media/css/ui/jquery.ui.all.css" rel="stylesheet" />
-<script type="text/javascript" src="/site_media/js/jquery-1.4.2.js"></script>
-<script type="text/javascript" src="/site_media/js/ui/jquery.ui.core.js"></script>
-<script type="text/javascript" src="/site_media/js/ui/jquery.ui.widget.js"></script>
-<script type="text/javascript" src="/site_media/js/ui/jquery.ui.tabs.js"></script>
 <!--[if IE]><script language="javascript" type="text/javascript" src="/site_media/js/excanvas.js"></script><![endif]-->
 <script language="javascript" type="text/javascript" src="/site_media/js/jquery.jqplot.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/site_media/css/jquery.jqplot.css" />
@@ -34,6 +29,9 @@
 	});
 </script>
 
+{% endblock %}
+
+{% block content %}
 <h1>{{ equipo.nombre }}</h1>
 <div style="float:right">
 	        <a href="/equipos/estreport/{{equipo.id}}/{{liga_actual.id}}">
