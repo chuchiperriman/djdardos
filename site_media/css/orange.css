@@ -15,7 +15,8 @@ blockquote{border-color: #767676;}
 
 #links, #footer, #menu, #menu li a
 { background: #FFF url(menu.png);
-  color: #DBD7D1;
+  /*color: #DBD7D1;*/
+  color: #474747;
   border-color: #D7D7D7;
 }
 
@@ -37,7 +38,8 @@ h1
 
 #menu li a:hover, #menu li a#selected, #menu li a#selected:hover
 { background: #FFF url(orange_menu.png);
-  color: #70695A;
+  /*color: #70695A;*/
+  color: #DBD7D1;
 } 
 
 #content, #column2 a, #column2 a:hover
@@ -62,10 +64,10 @@ h1
 
 .sbilinks li a
 { background: #FFF url(link.png);
-  color: #DBD7D1;
+  color: #474747;
 } 
 
 .sbilinks li a:hover
-{ background: #B7B7B7;
+{ background: #B7B7B7 url(link_hover.png);
   color: #EA8916;
 } 
