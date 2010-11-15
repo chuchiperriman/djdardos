@@ -23,7 +23,10 @@ def index(request, page=0, paginate_by=5, **kwargs):
     )
     
 def ligas_index(request, **kwargs):
-    return direct_to_template(request, 'dardos/divisiones/index.html',{})
+    divisiones = Division.objects.all()
+    request.session.clear()
+    return direct_to_template(request, 'dardos/divisiones/index.html',
+        {'divisiones' : divisiones})
     
 def post_detail(request, slug, year, month, day, **kwargs):
     """

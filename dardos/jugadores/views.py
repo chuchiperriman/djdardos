@@ -4,6 +4,7 @@
 from djdardos.dardos.models import *
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
+from django.views.generic.simple import direct_to_template
 
 from ..templatetags.graficos import *
 from ..equipos.estadisticas import DatosEstadisticaJugador
@@ -17,7 +18,7 @@ def index(request):
             nombre__contains=request.GET["q"]).order_by('equipo', 'nombre')
     else:
         jugadores_list = Jugador.objects.all().order_by('equipo', 'nombre')
-    return render_to_response('dardos/jugadores/index.html', {'jugadores_list': jugadores_list})
+    return direct_to_template(request, 'dardos/jugadores/index.html', {'jugadores_list': jugadores_list})
 
 def detail(request, jugador_id):
     jugador = get_object_or_404(Jugador, pk=jugador_id)
@@ -42,7 +43,7 @@ def detail(request, jugador_id):
     graficas_form.fields["equipo"].initial = jugador.equipo.id
     graficas_form.fields["jugador"].initial = jugador.id
     graficas_form.fields["liga"].initial = jugador.equipo.get_liga_actual().id
-    return render_to_response('dardos/jugadores/detail.html', {
+    return direct_to_template(request, 'dardos/jugadores/detail.html', {
         'jugador': jugador,
         'jugador_datos': jugador_datos,
         'graficas_form' : graficas_form})

@@ -5,6 +5,7 @@ import procesos
 from djdardos.dardos.models import *
 from djdardos.dardos.partidos.forms import *
 from django.shortcuts import render_to_response, get_object_or_404
+from django.views.generic.simple import direct_to_template
 from django.views.generic.create_update import create_object
 
 from django.http import HttpResponse, Http404
@@ -14,14 +15,14 @@ import logging
 # Create your views here.
 def index(request):
     partidos = Partido.objects.all().order_by('jornada')
-    return render_to_response('dardos/partidos/index.html', {'partidos': partidos})
+    return direct_to_template(request, 'dardos/partidos/index.html', {'partidos': partidos})
 
 def detail(request, partido_id):
     p = get_object_or_404(Partido, pk=partido_id)
     partidas = p.partida_set.order_by('numero')
     partidas = list(partidas)
     print partidas
-    return render_to_response('dardos/partidos/detail.html', 
+    return direct_to_template(request, 'dardos/partidos/detail.html', 
     	{'partido' : p,
          'partidas_par_1' : partidas[0:2],
          'partidas_par_2' : partidas[2:4],
@@ -43,7 +44,7 @@ def new(request):
     #q = Partido.objects.all().values('jornada').query
     #form.fields["jornada"].queryset = Jornada.objects.exclude(pk__in=q)
     equipos = Equipo.objects.all().order_by("nombre")
-    return render_to_response('dardos/partidos/new.html',
+    return direct_to_template(request, 'dardos/partidos/new.html',
         {"equipos": equipos,
         "form": form})
 
@@ -129,7 +130,7 @@ def setpartidas(request, partido_id):
         forms_parejas_4 = [crear_partida_parejas(str(x), None, 2) for x in range(10,12)]
         forms_individual_2 = [crear_partida_individual(str(x)) for x in range(12,16)]
     
-    return render_to_response('dardos/partidos/setpartidas.html',
+    return direct_to_template(request, 'dardos/partidos/setpartidas.html',
         {"partido": partido,
          "jugadores_local": partido.equipo_local.jugador_set.all(),
          "jugadores_visitante": partido.equipo_visitante.jugador_set.all(),

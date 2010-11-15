@@ -1,1 +1,17 @@
 {% extends "dardos/ligasbase.html" %}
+{% block content %}
+<ul>
+{% for d in divisiones %}
+    <li>
+    <a href="/division/{{d.id}}">{{d.nombre}}</a>
+    {% if d.liga_set.count > 0 %}
+        <ul>
+        {% for l in d.liga_set.all%}
+            <li>{{l.nombre}}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}
