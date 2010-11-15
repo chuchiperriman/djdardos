@@ -1,7 +1,0 @@
-{% for m in menu_superior.values %}
-    {% if m.seleccionado %}
-        <li><a id="selected" href="{{m.url}}">{{m.nombre}}</a></li>
-    {% else %}
-        <li><a href="{{m.url}}">{{m.nombre}}</a></li>
-    {% endif %}
-{% endfor %}

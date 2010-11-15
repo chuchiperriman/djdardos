@@ -97,7 +97,10 @@ ol li
 
 #links{text-align: right;}
 
-#footer{text-align: center;}
+#footer{
+    text-align: center;
+    margin-top: 20px;
+}
 
 #links a, #footer a{text-decoration: none;}
 

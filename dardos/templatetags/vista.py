@@ -18,23 +18,3 @@ def display_divliga_actual(context):
     return {'liga_actual': liga_actual,
         'current_path': request.path}
 
-@register.inclusion_tag('dardos/vista/menu_superior.html', takes_context = True)
-def display_menu_superior(context):
-    menu_superior = {"general":Opcion("General", "/"), 
-        "ligas" : Opcion("Ligas","/ligas")}
-        
-    request = context['request']
-    if request.path.startswith("/ligas"):
-        menu_superior["ligas"].seleccionado = True
-    else:
-        menu_superior["general"].seleccionado = True
-        
-    return {'menu_superior': menu_superior}
-        
-class Opcion:
-    def __init__(self, nombre, url):
-        self.nombre = nombre
-        self.url = url
-        self.seleccionado = False
-        
-
