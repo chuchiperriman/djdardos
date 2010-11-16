@@ -4,6 +4,7 @@ import procesos
 
 from djdardos.dardos.models import *
 from djdardos.dardos.partidos.forms import *
+from ..general.sesiones import *
 from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic.simple import direct_to_template
 from django.views.generic.create_update import create_object
@@ -14,7 +15,12 @@ import logging
 
 # Create your views here.
 def index(request):
-    partidos = Partido.objects.all().order_by('jornada')
+    partidos = Partido.objects.all()
+    liga_actual = get_liga_actual(request)
+    if liga_actual:
+        partidos = partidos.filter(jornada__in=Jornada.objects.filter(liga = liga_actual))
+        
+    partidos = partidos.order_by('jornada')
     return direct_to_template(request, 'dardos/partidos/index.html', {'partidos': partidos})
 
 def detail(request, partido_id):

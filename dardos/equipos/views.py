@@ -8,6 +8,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic.simple import direct_to_template
 from estadisticas import EstadisticasEquipo
 from ..graficas.forms import GraficasForm
+from ..general.sesiones import *
 from estparejas import *
 from django.template import RequestContext
 
@@ -26,9 +27,15 @@ class JornadasPartidos:
 def index(request):
     if 'q' in request.GET:
         equipos = Equipo.objects.filter(
-            nombre__contains=request.GET["q"]).order_by('nombre')
+            nombre__contains=request.GET["q"])
     else:
-        equipos = Equipo.objects.all().order_by('nombre')
+        equipos = Equipo.objects.all()
+        
+    liga_actual = get_liga_actual(request)
+    if liga_actual:
+        equipos = equipos.filter(ligas = liga_actual)
+    
+    equipos = equipos.order_by('nombre')
     return direct_to_template(request, 'dardos/equipos/index.html', {'equipos': equipos})
 
 def detail(request, equipo_id):

@@ -10,14 +10,21 @@ from ..templatetags.graficos import *
 from ..equipos.estadisticas import DatosEstadisticaJugador
 from ..graficas import graficas
 from ..graficas.forms import GraficasForm
+from ..general.sesiones import *
 
 # Create your views here.
 def index(request):
     if 'q' in request.GET:
         jugadores_list = Jugador.objects.filter(
-            nombre__contains=request.GET["q"]).order_by('equipo', 'nombre')
+            nombre__contains=request.GET["q"])
     else:
-        jugadores_list = Jugador.objects.all().order_by('equipo', 'nombre')
+        jugadores_list = Jugador.objects.all()
+        
+    liga_actual = get_liga_actual(request)
+    if liga_actual:
+        jugadores_list = jugadores_list.filter(equipo__in=Equipo.objects.filter(ligas = liga_actual))
+        
+    jugadores_list = jugadores_list.order_by('equipo', 'nombre')
     return direct_to_template(request, 'dardos/jugadores/index.html', {'jugadores_list': jugadores_list})
 
 def detail(request, jugador_id):
