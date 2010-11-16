@@ -1,11 +1,17 @@
 <div id="divliga">
-    <ul>
     {% if liga_actual %}
-        <li><b>División:</b> {{liga_actual.division.nombre}}</li>
-        <li><b>Liga:</b> {{liga_actual.nombre}}</li>
-        <li><button>Cambiar</button></li>
-        <!-- {{current_path}} -->
+        <div class="sbicontent">
+            <ul>
+                <li><b>División:</b> {{liga_actual.division.nombre}}</li>
+                <li><b>Liga:</b> {{liga_actual.nombre}}</li>
+                <li><button>Cambiar</button></li>
+                <!-- {{current_path}} -->
+            </ul>
+        </div>
+    {% else %}
+        <div class="sbicontent">
+            <p>No hay ninguna liga seleccionada</p>
+        </div>
     {% endif %}
-    </ul>
 </div>
 
