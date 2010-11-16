@@ -4,14 +4,52 @@
             <ul>
                 <li><b>División:</b> {{liga_actual.division.nombre}}</li>
                 <li><b>Liga:</b> {{liga_actual.nombre}}</li>
-                <li><button>Cambiar</button></li>
+                <li><button id="cambiar-liga">Cambiar liga</button></li>
                 <!-- {{current_path}} -->
             </ul>
         </div>
+        <div id="dialog-ligas" title="Seleccionar liga">
+	        <p>Seleccione la liga de la que quiere ver los datos</p>
+
+	        <form>
+		        <label for="name">Name</label>
+		        <select id="selector-ligas" class="text ui-widget-content ui-corner-all">
+		        {% for l in ligas %}
+		            <option value="{{l.id}}">{{l.nombre}}</option>
+		        {% endfor %}
+		        </select>
+	        </form>
+        </div>
+
+        <script>
+        $(function() {
+	        $( "#dialog-ligas" ).dialog({
+		        autoOpen: false,
+		        height: 300,
+		        width: 350,
+		        modal: true,
+		        buttons: {
+			        "Seleccionar": function() {
+			            var url_base = "/cambiar_liga?current_path={{current_path}}&liga=";
+			            url_base += $("#selector-ligas").val()
+			            document.location = url_base;
+                        $( this ).dialog( "close" );
+			        },
+			        Cancel: function() {
+				        $( this ).dialog( "close" );
+			        }
+		        }
+	        });
+	        $( "#cambiar-liga" )
+		        .button()
+		        .click(function() {
+			        $( "#dialog-ligas" ).dialog( "open" );
+		        });
+        });
+        </script>
     {% else %}
         <div class="sbicontent">
             <p>No hay ninguna liga seleccionada</p>
         </div>
     {% endif %}
 </div>
-

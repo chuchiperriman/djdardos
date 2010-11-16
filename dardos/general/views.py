@@ -9,7 +9,6 @@ from django.core import serializers
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 
 def cambiar_liga(request):
-    print request.session.get("liga_actual", "nada")
     request.session["liga_actual"] = request.REQUEST["liga"]
     return HttpResponseRedirect(request.REQUEST["current_path"])
     
