@@ -4,7 +4,9 @@
 from djdardos.dardos.models import *
 from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
+from django.views.generic.simple import direct_to_template
 from djdardos.dardos.liga.clasificacion import *
+from djdardos.dardos.general.sesiones import *
 from django.core import serializers
 from django.contrib import auth
 from django.contrib import messages
@@ -16,19 +18,27 @@ def cambiar_liga(request):
     return HttpResponseRedirect(request.REQUEST["current_path"])
     
 def login (request):
-    """
-    Guardamos los errores en messages para que el tag de login lo muestre
-    """
-    username = request.POST['username']
-    password = request.POST['password']
-    user = auth.authenticate(username=username, password=password)
-    if user is not None:
-        if user.is_active:
-            auth.login(request, user)
+    current_path = "/"
+    if request.method == 'POST':
+        """
+        Guardamos los errores en messages para que el tag de login lo muestre
+        """
+        username = request.POST['username']
+        password = request.POST['password']
+        current_path = get_current_path(request)
+        user = auth.authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                auth.login(request, user)
+                return HttpResponseRedirect(current_path)
+            else:
+                messages.add_message(request, messages.ERROR, 'El usuario está deshabilitado',
+                    extra_tags="login")
         else:
-            messages.add_message(request, messages.ERROR, 'El usuario está deshabilitado',
+            messages.add_message(request, messages.ERROR, 'Usuario y contraseña no válidos',
                 extra_tags="login")
-    else:
-        messages.add_message(request, messages.ERROR, 'Usuario y contraseña no válidos',
-            extra_tags="login")
-    return HttpResponseRedirect(request.REQUEST["current_path"])
+    print current_path
+    return direct_to_template(request, 'dardos/general/login.html', 
+        {'current_path': current_path})
+    
+    

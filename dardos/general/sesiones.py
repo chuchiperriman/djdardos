@@ -12,3 +12,10 @@ def get_liga_actual(request):
     elif DIVISION_ACTUAL in request.session:
         liga_actual = Division.objects.get(pk=request.session[DIVISION_ACTUAL]).get_liga_actual()
     return liga_actual
+    
+def get_current_path(request):
+    if "current_path" in request.REQUEST:
+        current_path = request.REQUEST["current_path"]
+    else:
+        current_path = request.path
+    return current_path
