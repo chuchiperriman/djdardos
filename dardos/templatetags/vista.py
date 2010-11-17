@@ -4,6 +4,7 @@ from djdardos.dardos.models import *
 from djdardos.dardos.general.sesiones import *
 
 from django import template
+from django.contrib import messages
 
 register = template.Library()
 
@@ -17,4 +18,14 @@ def display_divliga_actual(context):
     return {'liga_actual': get_liga_actual(request),
         'ligas': ligas,
         'current_path': request.path}
+
+@register.inclusion_tag('dardos/vista/cuadro_login.html', takes_context = True)
+def cuadro_login(context):
+    request = context['request']
+    mensaje = None
+    for m in messages.get_messages(request):
+        if m.tags.find('login') != -1:
+            mensaje = m
+            break
+    return {'current_path': request.path, 'message': mensaje}
 

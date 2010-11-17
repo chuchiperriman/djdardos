@@ -89,6 +89,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.csrf.CsrfResponseMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
 )
 
 ROOT_URLCONF = 'djdardos.urls'
@@ -105,6 +106,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.auth",
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
+    'django.contrib.messages.context_processors.messages',
 )
 
 DATE_FORMAT= '%d/%m/%Y'
@@ -117,6 +119,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.comments',
     'django.contrib.markup',
+    'django.contrib.messages',
     'tagging',
     'djdardos.basic.inlines',
     'djdardos.basic.blog',

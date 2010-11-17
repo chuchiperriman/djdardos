@@ -27,7 +27,7 @@ def ligas_index(request, **kwargs):
     request.session.clear()
     return direct_to_template(request, 'dardos/divisiones/index.html',
         {'divisiones' : divisiones})
-    
+        
 def post_detail(request, slug, year, month, day, **kwargs):
     """
     Displays post detail. If user is superuser, view will display 

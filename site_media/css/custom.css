@@ -91,3 +91,40 @@ table tr th{
 .ui-widget {
     font-size: 1em; !important
 }
+
+/*********** Cuadro de login *************/
+#div-login{
+    float:right;
+    margin: 10px;
+    background-color: rgba(0,0,0,0.5);
+    height:70px;
+    padding: 2px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+#div-login form{
+    position: relative;
+}
+#div-login form fieldset{
+    border: 0px;
+}
+#div-login label{
+    float: left;
+    text-align: right;
+    margin-right: 0.5em;
+    display: block;
+    width: 70px;
+    color: #e1e1e1;
+}
+#div-login input{
+    border: 1px solid #343434;
+}
+#div-login input[type='text'],
+#div-login input[type='password']{
+    width: 120px;
+    height:12px;
+    font-size: 10px;
+}
+#div-login p{
+    padding: 0px;
+}

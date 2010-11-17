@@ -1,0 +1,25 @@
+<div id="div-login">
+    <form action="/login/" method="post">
+        <input type="hidden" name="current_path" value="{{current_path}}"/>
+        <fieldset>
+            <p>
+                <label>Usuario:</label><input name="username" type="text">
+            </p>
+            <p>
+                <label>Password:</label><input name="password" type="password">
+            </p>
+            <p style="text-align: right">
+                <label>
+                {% if message %}
+                <div class="ui-state-error">
+        <p>{{ message }}</p>
+        </div>
+                {%else%}
+                &nbsp;
+                {%endif%}
+                </label>
+                <input type="submit" value="Entrar">
+            </p>
+        </fieldset>
+    <form>
+</div>
