@@ -7,7 +7,10 @@
 
 <a href="/partidos/new_jornada" class="add">Nueva jornada</a>
 <form method="post">
-{{form.as_p}}
+    <fieldset>
+        <legend>Nuevo partido</legend>
+        {{form.as_p}}
+    </fieldset>
 <input type="submit" name="continuar" value="Continuar" />
 </form>
 

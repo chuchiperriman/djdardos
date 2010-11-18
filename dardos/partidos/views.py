@@ -147,93 +147,11 @@ def setpartidas(request, partido_id):
          "forms_individual_1": forms_individual_1,
          "forms_individual_2": forms_individual_2,
          "todos": todos})
-"""
-def setpartidas(request, partido_id):
-
-    def crear_partida_parejas(prefix, post=None):
-        p = Partida()
-        p.partido = Partido.objects.get(pk=partido_id)
-        p.numero = int(prefix) + 1
-        print p.numero,'paaaar'
-        if post:
-            f = PartidaParejasForm(post,prefix=prefix, instance = p)
-        else:
-            f = PartidaParejasForm(prefix=prefix, instance = p)
-        f.fields["jugador_local1"].queryset = Jugador.objects.filter(equipo=p.partido.equipo_local)
-        f.fields["jugador_local2"].queryset = Jugador.objects.filter(equipo=p.partido.equipo_local)
-        f.fields["jugador_visitante1"].queryset = Jugador.objects.filter(equipo=p.partido.equipo_visitante)
-        f.fields["jugador_visitante2"].queryset = Jugador.objects.filter(equipo=p.partido.equipo_visitante)
-        f.fields["ganador1"].queryset = Jugador.objects.filter(Q(equipo=p.partido.equipo_local) |
-                                            Q(equipo=p.partido.equipo_visitante))
-        f.fields["ganador2"].queryset = Jugador.objects.filter(Q(equipo=p.partido.equipo_local) |
-                                            Q(equipo=p.partido.equipo_visitante))
-        return f
-    
-    def crear_partida_individual(prefix, post=None):
-        p = Partida()
-        p.partido = Partido.objects.get(pk=partido_id)
-        p.numero = int(prefix) + 1
-        print p.numero,'---'
-        if post:
-            f = PartidaIndividualForm(post,prefix=prefix, instance = p)
-        else:
-            f = PartidaIndividualForm(prefix=prefix, instance = p)
-        f.fields["jugador_local"].queryset = Jugador.objects.filter(equipo=p.partido.equipo_local)
-        f.fields["jugador_visitante"].queryset = Jugador.objects.filter(equipo=p.partido.equipo_visitante)
-        f.fields["ganador"].queryset = Jugador.objects.filter(Q(equipo=p.partido.equipo_local) |
-                                            Q(equipo=p.partido.equipo_visitante))
-        return f
-        
-    if request.method == 'POST':
-        forms_parejas_1 = [crear_partida_parejas(str(x),request.POST) for x in range(0,2)]
-        forms_parejas_2 = [crear_partida_parejas(str(x),request.POST) for x in range(2,4)]
-        forms_individual_1 = [crear_partida_individual(str(x), request.POST) for x in range(4,8)]
-        forms_parejas_3 = [crear_partida_parejas(str(x),request.POST) for x in range(8,10)]
-        forms_parejas_4 = [crear_partida_parejas(str(x),request.POST) for x in range(10,12)]
-        forms_individual_2 = [crear_partida_individual(str(x), request.POST) for x in range(12,16)]
-        todos = []
-        todos.extend(forms_parejas_1)
-        todos.extend(forms_parejas_2)
-        todos.extend(forms_parejas_3)
-        todos.extend(forms_parejas_4)
-        todos.extend(forms_individual_1)
-        todos.extend(forms_individual_2)
-        
-        if all([f.is_valid() for f in todos]):
-            #TODO Comprobar que una pareja del grupo 1 no puede jugar en el grupo 2
-            #TODO Comprobar que una un jugador no puede jugar mas de una individual de cada grupo
-            for f in todos:
-                f.save()
-        
-            partido = Partido.objects.get(pk=partido_id)
-            partido.jugado = True
-            #Este metodo guarda el partido
-            procesos.actualizar_puntos_partido(partido)
-        else:
-            logging.debug('NOOOO Valido !!')
-    else:
-        forms_parejas_1 = [crear_partida_parejas(str(x)) for x in range(0,2)]
-        forms_parejas_2 = [crear_partida_parejas(str(x)) for x in range(2,4)]
-        forms_individual_1 = [crear_partida_individual(str(x)) for x in range(4,8)]
-        forms_parejas_3 = [crear_partida_parejas(str(x)) for x in range(8,10)]
-        forms_parejas_4 = [crear_partida_parejas(str(x)) for x in range(10,12)]
-        forms_individual_2 = [crear_partida_individual(str(x)) for x in range(12,16)]
-        todos = []
-
-    return render_to_response('dardos/partidos/setpartidas.html',
-        {"forms_parejas_1": forms_parejas_1,
-         "forms_parejas_2": forms_parejas_2,
-         "forms_individual_1": forms_individual_1,
-         "forms_parejas_3": forms_parejas_3,
-         "forms_parejas_4": forms_parejas_4,
-         "forms_individual_2": forms_individual_2,
-         "todos": todos})
-
-"""
+         
 def new_jornada (request):
     return create_object(
         request,
         form_class=JornadaForm,
-        post_save_redirect='new')
+        post_save_redirect='partidos/new')
         
         

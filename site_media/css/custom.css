@@ -92,6 +92,33 @@ table tr th{
     font-size: 1em; !important
 }
 
+/********** Formularios *************/
+label
+{
+    width: 8em;
+    float: left;
+    text-align: right;
+    margin-right: 0.5em;
+    display: block
+}
+
+input
+{
+    border: 1px solid #989898;
+}
+
+fieldset
+{
+    border: 1px solid #989898;
+    width: 40em;
+}
+
+legend
+{
+    border: 1px solid #989898;
+    padding: 2px 6px
+}
+
 /*********** Cuadro de login *************/
 #top-login{
     float:right;
@@ -132,8 +159,6 @@ table tr th{
 }
 
 /***** página de login *****/
-
-/*********** Cuadro de login *************/
 #div-login{
     margin: 10px;
     background-color: rgba(0,0,0,0.5);
@@ -162,4 +187,9 @@ table tr th{
 }
 #div-login p{
     padding: 0px;
+}
+
+/************* Errores de validación *************/
+.errorlist{
+    color: #cd0a0a/*{fcError}*/;
 }

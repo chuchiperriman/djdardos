@@ -1,12 +1,15 @@
 {% extends "dardos/ligasbase.html" %}
 
-{% block title %}Nuevo partido{% endblock %}
+{% block title %}Nueva joranada{% endblock %}
 
 {% block content %}
-<h1>Nuevo partido</h1>
+<h1>Nueva jornada</h1>
 
-<form action="new_jornada" method="post">
-{{form.as_p}}
+<form action="/partidos/new_jornada/" method="post">
+    <fieldset>
+        <legend>Datos de la jornada</legend>
+        {{form.as_p}}
+    </fieldset>
 <input type="submit" name="continuar" value="Continuar" />
 </form>
 
