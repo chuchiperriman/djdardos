@@ -24,7 +24,6 @@ def index(request, page=0, paginate_by=5, **kwargs):
     
 def ligas_index(request, **kwargs):
     divisiones = Division.objects.all()
-    request.session.clear()
     return direct_to_template(request, 'dardos/divisiones/index.html',
         {'divisiones' : divisiones})
         

@@ -37,8 +37,12 @@ def login (request):
         else:
             messages.add_message(request, messages.ERROR, 'Usuario y contraseña no válidos',
                 extra_tags="login")
-    print current_path
     return direct_to_template(request, 'dardos/general/login.html', 
         {'current_path': current_path})
     
-    
+def logout (request):
+    auth.logout(request)
+    return HttpResponseRedirect('/')
+
+
+

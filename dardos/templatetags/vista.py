@@ -22,5 +22,6 @@ def display_divliga_actual(context):
 @register.inclusion_tag('dardos/vista/cuadro_login.html', takes_context = True)
 def cuadro_login(context):
     request = context['request']
-    return {'current_path': get_current_path(request)}
+    return {'current_path': get_current_path(request),
+            'user' : request.user}
 

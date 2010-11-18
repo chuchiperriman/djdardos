@@ -98,9 +98,11 @@ table tr th{
     margin: 10px;
     background-color: rgba(0,0,0,0.5);
     height:70px;
+    width: 220px;
     padding: 2px;
     -moz-border-radius: 8px;
     border-radius: 8px;
+    color: #e1e1e1;
 }
 #top-login form{
     position: relative;
