@@ -134,6 +134,13 @@ legend
 #top-login form{
     position: relative;
 }
+
+#top-login fieldset
+{
+    border: 1px solid #989898;
+    position:relative;
+    width: 200px;
+}
 #top-login form fieldset{
     border: 0px;
 }
@@ -185,6 +192,7 @@ legend
 #div-login input{
     border: 1px solid #343434;
 }
+
 #div-login p{
     padding: 0px;
 }
