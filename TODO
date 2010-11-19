@@ -1,0 +1,36 @@
+[ ] Alta de jornadas:
+    [ ] Al guardar mostrar mensaje de OK
+    [ ] Seleccionar por defecto la liga de la sesión
+[ ] Alta de partido:
+    [ ] Fecha en formato español
+    [ ] Fecha con datepicker
+    [ ] Quitar combo ganador y poner según puntos
+    [ ] Al guardar mostrar mensaje de OK
+    [ ] Combo de division->liga enlazados
+    [ ] Seleccionar división y liga de la sesión
+    [ ] Quitar combo ganador y poner según puntos
+    [ ] Si marcan jugado habilitar puntos sino deshabilitar
+    [ ] Añadir botón guardar que guarde y muestre el OK
+    [ ] Añadir botón guardar e introducir partidas que lleve a la 
+        edición de partidas 
+[ ] Alta de partidas:
+    [ ] Recolocar el formulario (títulos y ganador)
+    [ ] Mientras se da de alta bloquear la pantalla con "Calculando..."
+    [ ] Al guardar mostrar mensaje de OK
+[ ] Añadir edición de partidos
+    [ ] Edición de partidos sin partidas
+    [ ] Edición de partidos con partidas
+[ ] Hacer cuadro de resultados en la división
+[ ] Estadísticas de un partido:
+    [ ] Mejor jugador de partido, peor etc
+    [ ] Gráfica de jugadores en el partido:
+        [ ] Barras de partidas ganadas
+        [ ] Barras de partidas perdidas
+        [ ] Barras de diferencia:
+         ___  |2|
+        |_1_| |_| __
+                 |-1|
+                
+        
+        
+        
