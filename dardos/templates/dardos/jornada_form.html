@@ -12,11 +12,21 @@
     </fieldset>
 <input type="submit" name="continuar" value="Continuar" />
 </form>
+<div class="ui-state-highlight" id="info-jornada"></div>
 
 <script>
     $(function() {
 		$("#id_fecha_prevista").addClass("datepicker");
 		cargar_calendarios();
+		$("#id_liga").change(function(){
+		    var liga = $(this).val();
+		    if (liga != ''){
+		        var url = '/liga/'+liga+'/ajax_get_siguiente_jornada/';
+		        $.get(url, function(data) {
+		            $("#info-jornada").html(data);
+                });
+            }
+		});
 	});
 </script>
 

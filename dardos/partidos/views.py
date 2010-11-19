@@ -4,6 +4,7 @@
 import procesos
 
 from djdardos.dardos.models import *
+from django.db.models import Max
 from djdardos.dardos.partidos.forms import *
 from ..general.sesiones import *
 from django.shortcuts import render_to_response, get_object_or_404
@@ -153,6 +154,15 @@ def new_jornada (request):
     return create_object(
         request,
         form_class=JornadaForm,
-        post_save_redirect='partidos/new')
+        post_save_redirect='/partidos/new')
         
+def ajax_get_siguiente_jornada (request, liga_id):
+    if request.is_ajax():
+        numero = Jornada.objects.filter(liga=liga_id).aggregate(Max("numero"))["numero__max"]
+        jornada = Jornada.objects.get(liga=liga_id, numero=numero)
+        texto = "<b>Información:</b> La última jornada de la liga '" + str(jornada.liga.nombre) + \
+            "' es la " + str(numero) + " el día " + str(jornada.fecha_prevista)
+        return HttpResponse(texto)
+    else:
+        return HttpResponse(status=400)
         

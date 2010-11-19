@@ -92,6 +92,10 @@ table tr th{
     font-size: 1em; !important
 }
 
+.ui-state-highlight{
+    padding: 0.7em;
+}
+
 /********** Formularios *************/
 label
 {
