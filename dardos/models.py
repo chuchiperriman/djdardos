@@ -44,7 +44,7 @@ class Jornada(models.Model):
     fecha_prevista = models.DateField('Fecha prevista')
     
     def __unicode__(self):
-        return self.liga.nombre + ": " + str(self.numero)
+        return "%s: %d (%s)" % (self.liga.nombre, self.numero, str(self.fecha_prevista))
 
 class Equipo(models.Model):
     ligas = models.ManyToManyField(Liga)
