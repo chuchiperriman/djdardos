@@ -156,10 +156,16 @@ def setpartidas(request, partido_id):
          "todos": todos})
          
 def new_jornada (request):
+    liga_actual = get_liga_actual(request)
+    if liga_actual:
+        liga_actual = liga_actual.id
+    else:
+        liga_actual = ''
     return create_object(
         request,
         form_class=JornadaForm,
-        post_save_redirect='/partidos/new')
+        post_save_redirect='/partidos/new',
+        extra_context={'liga_sesion': liga_actual})
 
 def ajax_get_siguiente_jornada (request, liga_id):
     if request.is_ajax():

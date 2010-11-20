@@ -1,6 +1,6 @@
-[ ] Alta de jornadas:
+[X] Alta de jornadas:
     [X] Al guardar mostrar mensaje de OK
-    [ ] Seleccionar por defecto la liga de la sesión
+    [X] Seleccionar por defecto la liga de la sesión
 [ ] Alta de partido:
     [X] Fecha en formato español
     [X] Fecha con datepicker
