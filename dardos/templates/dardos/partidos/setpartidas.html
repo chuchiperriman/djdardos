@@ -26,7 +26,7 @@
 <h1>Nuevo partido</h1>
 <h2>501 Parejas</h2>
 <form action="." method="post">
-<table width="100%">
+<table class="tabla-partidas" width="100%">
 	<tr>
 		<th align="left">Pareja local</th>
 		<th align="center">Ganadores</th>
@@ -40,7 +40,7 @@
 		    {{form.jugador_local}}
 		    {{form.jugador_local2}}
 		</td>
-		<td align="center">
+		<td class="col-ganador" align="center">
 		    {{form.ganador}}
 		</td>
 		<td align="right">
@@ -51,7 +51,7 @@
 {% endfor %}
 </table>
 <hr/>
-<table width="100%">
+<table class="tabla-partidas" width="100%">
 {% for form in forms_parejas_2 %}
 	<tr>
 		<td align="left">
@@ -60,7 +60,7 @@
 		    {{form.jugador_local}}
 		    {{form.jugador_local2}}
 		</td>
-		<td align="center">
+		<td class="col-ganador" align="center">
 			{{form.ganador}}
 		</td>
 		<td align="right">
@@ -71,7 +71,7 @@
 {% endfor %}
 </table><br/>
 <h2>501 Individual</h2>
-<table width="100%">
+<table class="tabla-partidas" width="100%">
 	<tr>
 		<th align="left">Jugador local</th>
 		<th align="center">Ganador</th>
@@ -83,7 +83,7 @@
 		    {{form.numero}}
 			{{form.jugador_local}}
 		</td>
-		<td align="center">
+		<td class="col-ganador" align="center">
 			{{form.ganador}}
 		</td>
 		<td align="right">
@@ -93,7 +93,7 @@
 {% endfor %}
 </table><br/>
 <h2>Cricket Parejas</h2>
-<table width="100%">
+<table class="tabla-partidas" width="100%">
 	<tr>
 		<th align="left">Pareja local</th>
 		<th align="center">Ganadores</th>
@@ -107,7 +107,7 @@
 		    {{form.jugador_local}}
 		    {{form.jugador_local2}}
 		</td>
-		<td align="center">
+		<td class="col-ganador" align="center">
 			{{form.ganador}}
 		</td>
 		<td align="right">
@@ -118,7 +118,7 @@
 {% endfor %}
 </table>
 <hr/>
-<table width="100%">
+<table class="tabla-partidas" width="100%">
 {% for form in forms_parejas_4 %}
 	<tr>
 		<td align="left">
@@ -127,7 +127,7 @@
 		    {{form.jugador_local}}
 		    {{form.jugador_local2}}
 		</td>
-		<td align="center">
+		<td class="col-ganador" align="center">
 		    {{form.ganador}}
 		</td>
 		<td align="right">
@@ -138,7 +138,7 @@
 {% endfor %}
 </table><br/>
 <h2>501 Individual</h2>
-<table width="100%">
+<table class="tabla-partidas" width="100%">
 	<tr>
 		<th align="left">Jugador local</th>
 		<th align="center">Ganador</th>
@@ -150,7 +150,7 @@
 		    {{form.numero}}
 			{{form.jugador_local}}
 		</td>
-		<td align="center">
+		<td class="col-ganador" align="center">
 			{{form.ganador}}
 		</td>
 		<td align="right">

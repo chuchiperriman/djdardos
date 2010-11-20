@@ -26,6 +26,11 @@ table tr th{
     padding: 5px;
 }
 
+h2{
+    font-size: 130%;
+    margin: 10px 0px;
+}
+
 .tabla_parejas{
     border-color: #888888;
     border-width: 0 0 1px 1px;
@@ -226,3 +231,15 @@ legend
 .messages{
     margin: 0px;
 }
+
+/************ tabla de partidas ***********/
+.tabla-partidas ul{
+    display: inline;
+}
+.tabla-partidas ul li{
+    display: inline;
+}
+.tabla-partidas .col-ganador{
+    width: 200px;
+}
+

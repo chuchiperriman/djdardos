@@ -15,7 +15,7 @@
     [ ] Añadir botón guardar e introducir partidas que lleve a la 
         edición de partidas 
 [ ] Alta de partidas:
-    [ ] Recolocar el formulario (títulos y ganador)
+    [X] Recolocar el formulario (títulos y ganador)
     [ ] Mientras se da de alta bloquear la pantalla con "Calculando..."
     [ ] Al guardar mostrar mensaje de OK
 [ ] Añadir edición de partidos
