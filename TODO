@@ -7,7 +7,7 @@
     [ ] Quitar combo ganador y poner según puntos
     [X] Al guardar mostrar mensaje de OK
     [X] Combo de division->liga enlazados
-    [ ] Seleccionar división y liga de la sesión
+    [X] Seleccionar división y liga de la sesión
     [ ] Si marcan jugado habilitar puntos sino deshabilitar
     [ ] Añadir botón guardar que guarde y muestre el OK
     [ ] Añadir botón guardar e introducir partidas que lleve a la 

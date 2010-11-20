@@ -44,9 +44,13 @@ def new(request):
     ligas = Liga.objects.all()
     jornadas = None
     liga = None
+    liga_sesion = get_liga_actual(request)
     if "liga" in request.REQUEST and request.REQUEST["liga"] != '':
         liga = request.REQUEST["liga"]
         jornadas = Jornada.objects.filter(liga=liga)
+    elif liga_sesion:
+        liga = str(liga_sesion.id)
+        jornadas = liga_sesion.jornada_set.all()
     else:
         jornadas = ligas[0].jornada_set.all()
         
