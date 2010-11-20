@@ -19,4 +19,14 @@ def ajax_jornadas_from_liga (request, liga_id):
         return HttpResponse(texto)
     else:
         return HttpResponse(status=400)
-        
+
+def ajax_equipos_from_liga (request, liga_id):
+    if request.is_ajax():
+        equipos = Equipo.objects.filter(ligas=liga_id)
+        texto = ""
+        for e in equipos:
+            texto = texto + "<option value='"+str(e.id)+"'>"+str(e)+"</option>"
+        return HttpResponse(texto)
+    else:
+        return HttpResponse(status=400)
+

@@ -4,6 +4,7 @@
 [ ] Alta de partido:
     [X] Fecha en formato español
     [X] Fecha con datepicker
+    [X] Mostrar sólo equipos de la liga seleccionada
     [ ] Quitar combo ganador y poner según puntos
     [X] Al guardar mostrar mensaje de OK
     [X] Combo de division->liga enlazados

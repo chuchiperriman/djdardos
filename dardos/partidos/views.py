@@ -41,6 +41,7 @@ def new(request):
     ligas = Liga.objects.all()
     jornadas = None
     liga = None
+    equipos = None
     liga_sesion = get_liga_actual(request)
     if "liga" in request.REQUEST and request.REQUEST["liga"] != '':
         liga = request.REQUEST["liga"]
@@ -50,6 +51,10 @@ def new(request):
         jornadas = liga_sesion.jornada_set.all()
     else:
         jornadas = ligas[0].jornada_set.all()
+    
+    if liga:
+        liga_obj = Liga.objects.get(pk=liga)
+        equipos = liga_obj.equipo_set.all()
         
     return create_object(
         request,
@@ -58,7 +63,8 @@ def new(request):
         extra_context={
             'ligas': ligas,
             'jornadas': jornadas,
-            'liga': liga
+            'liga': liga,
+            'equipos' : equipos
         })
 
 def setpartidas(request, partido_id):

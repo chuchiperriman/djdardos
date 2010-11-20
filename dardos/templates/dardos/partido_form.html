@@ -23,12 +23,7 @@
             </select>
         </p>
         {% for field in form %}
-            {% if field.label != 'Jornada' %}
-                <p>
-                {{ field.errors }}
-                {{ field.label_tag }} {{ field }}
-                </p>
-            {% else %}
+            {% if field.label == 'Jornada' %}
                 <p>
                     {{ form.jornada.errors }}
                     {{ form.jornada.label_tag }}
@@ -42,7 +37,40 @@
                     {% endfor %}
                     </select>
                 </p>
-            {% endif %}
+            {% else %} {% if field.label == 'Equipo local' %}
+                <p>
+                    {{ field.errors }}
+                    {{ field.label_tag }}
+                    <select name="{{field.html_name}}" id="id_{{field.html_name}}">
+                    {% for e in equipos %}
+                        <option value="{{e.id}}"
+                        {% if form.data.equipo_local|safe == e.id|safe %}
+                            selected="selected"
+                        {% endif %}
+                        >{{e}}</option>
+                    {% endfor %}
+                    </select>
+                </p>
+            {% else %} {% if field.label == 'Equipo visitante' %}
+                <p>
+                    {{ field.errors }}
+                    {{ field.label_tag }}
+                    <select name="{{field.html_name}}" id="id_{{field.html_name}}">
+                    {% for e in equipos %}
+                        <option value="{{e.id}}"
+                        {% if form.data.equipo_visitante|safe == e.id|safe %}
+                            selected="selected"
+                        {% endif %}
+                        >{{e}}</option>
+                    {% endfor %}
+                    </select>
+                </p>
+            {% else %}
+                <p>
+                    {{ field.errors }}
+                    {{ field.label_tag }} {{ field }}
+                </p>
+            {% endif %}{% endif %}{% endif %}
         {% endfor %}
     </fieldset>
 <input type="submit" name="continuar" value="Continuar" />
@@ -54,16 +82,26 @@
 		cargar_calendarios();
 		//borramos para obligar a que seleccionen la liga
 		var selectJornada = $("#id_jornada");
-		if (selectJornada.val()=='')
-		    selectJornada.children().remove();
+		var selectEquipoLocal = $("#id_equipo_local");
+		var selectEquipoVisitante = $("#id_equipo_visitante");
+		if (selectJornada.val()=='') selectJornada.children().remove();
+		if (selectEquipoLocal.val()=='') selectEquipoLocal.children().remove();
+		if (selectEquipoVisitante.val()=='') selectEquipoVisitante.children().remove();
 		
 		$("#id_liga").change(function(){
 		    var liga = $(this).val();
 	        var url = '/maestros/ajax_jornadas_from_liga/'+liga+'/';
+	        var url_equipos = '/maestros/ajax_equipos_from_liga/'+liga+'/';
 	        selectJornada.children().remove();
+	        selectEquipoLocal.children().remove();
+		    selectEquipoVisitante.children().remove();
 	        if (liga != ''){
 	            $.get(url, function(data) {
     	            selectJornada.append($(data));
+                });
+                $.get(url_equipos, function(data) {
+    	            selectEquipoLocal.append($(data));
+    	            selectEquipoVisitante.append($(data));
                 });
             }
 		});
