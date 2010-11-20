@@ -135,6 +135,9 @@ class PartidoForm(forms.ModelForm):
             if (self.cleaned_data['equipo_local'].id == self.cleaned_data['equipo_visitante'].id):
                 raise forms.ValidationError("No puedes seleccionar el mismo equipo")
             #TODO Validar que ninguno de los dos equipos hayan jugado ya la jornada indicada
+            #TODO Validar que los dos equipos pertenezcan a la liga seleccionada
+            #TODO asignar ganador y jugado según los puntos de cada uno
+            #TODO validar que los puntos tienen que sumar 16
 
         return self.cleaned_data
 
