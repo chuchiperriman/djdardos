@@ -22,56 +22,65 @@
                 {% endfor %}
             </select>
         </p>
-        {% for field in form %}
-            {% if field.label == 'Jornada' %}
-                <p>
-                    {{ form.jornada.errors }}
-                    {{ form.jornada.label_tag }}
-                    <select name="{{form.jornada.html_name}}" id="id_jornada">
-                    {% for j in jornadas %}
-                        <option value="{{j.id}}"
-                        {% if form.data.jornada|safe == j.id|safe %}
-                            selected="selected"
-                        {% endif %}
-                        >{{j}}</option>
-                    {% endfor %}
-                    </select>
-                </p>
-            {% else %} {% if field.label == 'Equipo local' %}
-                <p>
-                    {{ field.errors }}
-                    {{ field.label_tag }}
-                    <select name="{{field.html_name}}" id="id_{{field.html_name}}">
-                    {% for e in equipos %}
-                        <option value="{{e.id}}"
-                        {% if form.data.equipo_local|safe == e.id|safe %}
-                            selected="selected"
-                        {% endif %}
-                        >{{e}}</option>
-                    {% endfor %}
-                    </select>
-                </p>
-            {% else %} {% if field.label == 'Equipo visitante' %}
-                <p>
-                    {{ field.errors }}
-                    {{ field.label_tag }}
-                    <select name="{{field.html_name}}" id="id_{{field.html_name}}">
-                    {% for e in equipos %}
-                        <option value="{{e.id}}"
-                        {% if form.data.equipo_visitante|safe == e.id|safe %}
-                            selected="selected"
-                        {% endif %}
-                        >{{e}}</option>
-                    {% endfor %}
-                    </select>
-                </p>
-            {% else %}
-                <p>
-                    {{ field.errors }}
-                    {{ field.label_tag }} {{ field }}
-                </p>
-            {% endif %}{% endif %}{% endif %}
-        {% endfor %}
+        <p>
+            {{ form.jornada.errors }}
+            {{ form.jornada.label_tag }}
+            <select name="{{form.jornada.html_name}}" id="id_jornada">
+            {% for j in jornadas %}
+                <option value="{{j.id}}"
+                {% if form.data.jornada|safe == j.id|safe %}
+                    selected="selected"
+                {% endif %}
+                >{{j}}</option>
+            {% endfor %}
+            </select>
+        </p>
+        <p>
+            {{ form.fecha.errors }}
+            {{ form.fecha.label_tag }}
+            {{ form.fecha }}
+        </p>
+        <p>
+            {{ form.equipo_local.errors }}
+            {{ form.equipo_local.label_tag }}
+            <select name="{{form.equipo_local.html_name}}" 
+                id="id_{{form.equipo_local.html_name}}">
+            {% for e in equipos %}
+                <option value="{{e.id}}"
+                {% if form.data.equipo_local|safe == e.id|safe %}
+                    selected="selected"
+                {% endif %}
+                >{{e}}</option>
+            {% endfor %}
+            </select>
+        </p>
+        <p>
+            {{ form.equipo_visitante.errors }}
+            {{ form.equipo_visitante.label_tag }}
+            <select name="{{form.equipo_visitante.html_name}}" 
+                id="id_{{form.equipo_visitante.html_name}}">
+            {% for e in equipos %}
+                <option value="{{e.id}}"
+                {% if form.data.equipo_visitante|safe == e.id|safe %}
+                    selected="selected"
+                {% endif %}
+                >{{e}}</option>
+            {% endfor %}
+            </select>
+        </p>
+        <p>
+            {{ form.puntos_local.errors }}
+            {{ form.puntos_local.label_tag }}
+            {{ form.puntos_local }}
+        </p>
+        <p>
+            {{ form.puntos_visitante.errors }}
+            {{ form.puntos_visitante.label_tag }}
+            {{ form.puntos_visitante }}
+        </p>
+        <p>
+            <b>Nota: </b>Si los puntos son cero se tomará el partido como no jugado
+         </p>
     </fieldset>
 <input type="submit" name="continuar" value="Continuar" />
 </form>

@@ -128,17 +128,41 @@ class PartidoForm(forms.ModelForm):
     def clean(self):
         self.cleaned_data = super(PartidoForm, self).clean()
         
-        if ('jornada' in self.cleaned_data and
-            'equipo_local' in self.cleaned_data and
-            'equipo_visitante' in self.cleaned_data):
+        if self.is_valid():
             
             if (self.cleaned_data['equipo_local'].id == self.cleaned_data['equipo_visitante'].id):
                 raise forms.ValidationError("No puedes seleccionar el mismo equipo")
-            #TODO Validar que ninguno de los dos equipos hayan jugado ya la jornada indicada
-            #TODO Validar que los dos equipos pertenezcan a la liga seleccionada
-            #TODO asignar ganador y jugado según los puntos de cada uno
-            #TODO validar que los puntos tienen que sumar 16
-
+            
+            jornada = self.cleaned_data['jornada']
+            liga = jornada.liga
+            el = self.cleaned_data['equipo_local']
+            ev = self.cleaned_data['equipo_visitante']
+            if liga not in el.ligas.all() or liga not in ev.ligas.all():
+                raise forms.ValidationError("Alguno de los equipos no pertenece a la liga" + str(liga))
+            
+            partidos = Partido.objects.filter(jornada=jornada)
+            
+            if partidos.filter(Q(equipo_local=el) | Q(equipo_visitante=el)).count()>0:
+                raise forms.ValidationError("El equipo %s ya ha jugado en la jornada %s" % (str(el), str(jornada)))
+            if partidos.filter(Q(equipo_local=ev) | Q(equipo_visitante=ev)).count()>0:
+                raise forms.ValidationError("El equipo %s ya ha jugado en la jornada %s" % (str(ev), str(jornada)))
+            
+            pl = self.cleaned_data['puntos_local']
+            pv = self.cleaned_data['puntos_visitante']
+            if pl == 0 and pv == 0:
+                self.cleaned_data['jugado'] = False
+                self.cleaned_data['ganador'] = None
+            elif (pl + pv) != 16:
+                raise forms.ValidationError("El número de partidas en total tiene que ser 16")
+            elif pl == pv:
+                self.cleaned_data['jugado'] = True
+                self.cleaned_data['ganador'] = None
+            else:
+                self.cleaned_data['jugado'] = True
+                if pl > pv:
+                    self.cleaned_data['ganador'] = el
+                else:
+                    self.cleaned_data['ganador'] = ev
         return self.cleaned_data
 
 class JornadaForm(forms.ModelForm):

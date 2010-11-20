@@ -5,13 +5,13 @@
     [X] Fecha en formato español
     [X] Fecha con datepicker
     [X] Mostrar sólo equipos de la liga seleccionada
-    [ ] Validaciones del formulario de partido ( en forms.py están los TODO)
-    [ ] Quitar combo ganador y poner según puntos
+    [X] Validaciones del formulario de partido ( en forms.py están los TODO)
+    [X] Quitar combo ganador y poner según puntos
     [X] Al guardar mostrar mensaje de OK
     [X] Combo de division->liga enlazados
     [X] Seleccionar división y liga de la sesión
-    [ ] Si marcan jugado habilitar puntos sino deshabilitar
-    [ ] Añadir botón guardar que guarde y muestre el OK
+    [-] Si marcan jugado habilitar puntos sino deshabilitar
+    [X] Añadir botón guardar que guarde y muestre el OK
     [ ] Añadir botón guardar e introducir partidas que lleve a la 
         edición de partidas 
 [ ] Alta de partidas:
