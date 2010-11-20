@@ -151,11 +151,12 @@ def setpartidas(request, partido_id):
          "todos": todos})
          
 def new_jornada (request):
+    print request.method
     return create_object(
         request,
         form_class=JornadaForm,
         post_save_redirect='/partidos/new')
-        
+
 def ajax_get_siguiente_jornada (request, liga_id):
     if request.is_ajax():
         numero = Jornada.objects.filter(liga=liga_id).aggregate(Max("numero"))["numero__max"]

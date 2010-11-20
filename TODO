@@ -1,5 +1,5 @@
 [ ] Alta de jornadas:
-    [ ] Al guardar mostrar mensaje de OK
+    [X] Al guardar mostrar mensaje de OK
     [ ] Seleccionar por defecto la liga de la sesión
 [ ] Alta de partido:
     [ ] Fecha en formato español

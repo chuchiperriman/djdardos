@@ -32,10 +32,10 @@ def login (request):
                 auth.login(request, user)
                 return HttpResponseRedirect(current_path)
             else:
-                messages.add_message(request, messages.ERROR, 'El usuario está deshabilitado',
+                messages.error(request, 'El usuario está deshabilitado',
                     extra_tags="login")
         else:
-            messages.add_message(request, messages.ERROR, 'Usuario y contraseña no válidos',
+            messages.error(request, 'Usuario y contraseña no válidos',
                 extra_tags="login")
     return direct_to_template(request, 'dardos/general/login.html', 
         {'current_path': current_path})

@@ -205,3 +205,24 @@ legend
 .errorlist{
     color: #cd0a0a/*{fcError}*/;
 }
+
+.error,
+.success{
+    list-style: none;
+    padding: 5px;
+}
+.error {
+    border: 1px solid #cd0a0a;
+    background: #fef1ec url(images/ui-bg_glass_95_fef1ec_1x400.png) 50% 50% repeat-x;
+    color: #cd0a0a; 
+}
+
+.success{
+    border: 1px solid #fcefa1;
+    background: #fbf9ee url(images/ui-bg_glass_55_fbf9ee_1x400.png) 50% 50% repeat-x;
+    color: #363636; 
+}
+
+.messages{
+    margin: 0px;
+}

@@ -4,15 +4,6 @@
 
 {% block content %}
 
-{% if messages %}
-<div class="ui-state-error">
-    <ul>
-        {% for m in messages %}
-        <li>{{m}}</li>
-        {% endfor %}
-    </ul>
-</div>
-{%endif%}
 <div id="div-login">
     {% cuadro_login %}
 </div>
