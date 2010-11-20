@@ -14,8 +14,6 @@ from django.views.generic.create_update import create_object
 from django.http import HttpResponse, Http404
 import logging
 
-
-# Create your views here.
 def index(request):
     partidos = Partido.objects.all()
     liga_actual = get_liga_actual(request)
@@ -40,7 +38,6 @@ def detail(request, partido_id):
          'partidas_ind_2' : partidas[12:16]})
 
 def new(request):
-    #TODO poner redirección al detalle del partido
     ligas = Liga.objects.all()
     jornadas = None
     liga = None

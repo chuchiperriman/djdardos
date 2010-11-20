@@ -13,11 +13,13 @@ from django.http import HttpResponse, Http404
 
 def detail(request, division_id):
     d = Division.objects.get(pk=division_id)
+    l = None
     if LIGA_ACTUAL in request.session:
-        l = Liga.objects.get(pk=request.session[LIGA_ACTUAL])
-    else:
+        if LIGA_ACTUAL in d.liga_set.all():
+            l = Liga.objects.get(pk=request.session[LIGA_ACTUAL])
+    if not l:
         l = d.get_liga_actual()
-        
+    
     request.session[LIGA_ACTUAL] = l.id
     request.session[DIVISION_ACTUAL] = d.id
         
