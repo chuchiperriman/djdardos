@@ -1,0 +1,73 @@
+{% extends "dardos/ligasbase.html" %}
+
+{% block title %}Nuevo partido{% endblock %}
+
+{% block content %}
+<h1>Nuevo partido</h1>
+
+<a href="/partidos/new_jornada" class="add">Nueva jornada</a>
+<form method="post">
+    {{ form.non_field_errors }}
+    <fieldset>
+        <legend>Nuevo partido</legend>
+        <p>
+            <label>Liga</label>
+            <select name="liga" id="id_liga">
+                {% for l in ligas%}
+                    <option value="{{l.id}}"
+                    {% ifequal l.id|safe liga %}
+                        selected="selected"
+                    {% endifequal %}
+                    >{{l.nombre}}</option>
+                {% endfor %}
+            </select>
+        </p>
+        {% for field in form %}
+            {% if field.label != 'Jornada' %}
+                <p>
+                {{ field.errors }}
+                {{ field.label_tag }} {{ field }}
+                </p>
+            {% else %}
+                <p>
+                    {{ form.jornada.errors }}
+                    {{ form.jornada.label_tag }}
+                    <select name="{{form.jornada.html_name}}" id="id_jornada">
+                    {% for j in jornadas %}
+                        <option value="{{j.id}}"
+                        {% if form.data.jornada|safe == j.id|safe %}
+                            selected="selected"
+                        {% endif %}
+                        >{{j}}</option>
+                    {% endfor %}
+                    </select>
+                </p>
+            {% endif %}
+        {% endfor %}
+    </fieldset>
+<input type="submit" name="continuar" value="Continuar" />
+</form>
+
+<script>
+    $(function() {
+		$("#id_fecha").addClass("datepicker");
+		cargar_calendarios();
+		//borramos para obligar a que seleccionen la liga
+		var selectJornada = $("#id_jornada");
+		if (selectJornada.val()=='')
+		    selectJornada.children().remove();
+		
+		$("#id_liga").change(function(){
+		    var liga = $(this).val();
+	        var url = '/maestros/ajax_jornadas_from_liga/'+liga+'/';
+	        selectJornada.children().remove();
+	        if (liga != ''){
+	            $.get(url, function(data) {
+    	            selectJornada.append($(data));
+                });
+            }
+		});
+	});
+</script>
+
+{% endblock %}

@@ -40,21 +40,25 @@ def detail(request, partido_id):
          'partidas_ind_2' : partidas[12:16]})
 
 def new(request):
-    
-    form = PartidoForm()
-    
-    if request.method == 'POST':
-        form = PartidoForm(request.POST) # A form bound to the POST data
-        if form.is_valid():
-            form.save()
-            return index(request)
-            
-    #q = Partido.objects.all().values('jornada').query
-    #form.fields["jornada"].queryset = Jornada.objects.exclude(pk__in=q)
-    equipos = Equipo.objects.all().order_by("nombre")
-    return direct_to_template(request, 'dardos/partidos/new.html',
-        {"equipos": equipos,
-        "form": form})
+    #TODO poner redirección al detalle del partido
+    ligas = Liga.objects.all()
+    jornadas = None
+    liga = None
+    if "liga" in request.REQUEST and request.REQUEST["liga"] != '':
+        liga = request.REQUEST["liga"]
+        jornadas = Jornada.objects.filter(liga=liga)
+    else:
+        jornadas = ligas[0].jornada_set.all()
+        
+    return create_object(
+        request,
+        form_class=PartidoForm,
+        post_save_redirect='/partidos/new',
+        extra_context={
+            'ligas': ligas,
+            'jornadas': jornadas,
+            'liga': liga
+        })
 
 def setpartidas(request, partido_id):
     
@@ -151,7 +155,6 @@ def setpartidas(request, partido_id):
          "todos": todos})
          
 def new_jornada (request):
-    print request.method
     return create_object(
         request,
         form_class=JornadaForm,

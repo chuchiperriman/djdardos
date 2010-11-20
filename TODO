@@ -2,13 +2,12 @@
     [X] Al guardar mostrar mensaje de OK
     [ ] Seleccionar por defecto la liga de la sesión
 [ ] Alta de partido:
-    [ ] Fecha en formato español
-    [ ] Fecha con datepicker
+    [X] Fecha en formato español
+    [X] Fecha con datepicker
     [ ] Quitar combo ganador y poner según puntos
-    [ ] Al guardar mostrar mensaje de OK
-    [ ] Combo de division->liga enlazados
+    [X] Al guardar mostrar mensaje de OK
+    [X] Combo de division->liga enlazados
     [ ] Seleccionar división y liga de la sesión
-    [ ] Quitar combo ganador y poner según puntos
     [ ] Si marcan jugado habilitar puntos sino deshabilitar
     [ ] Añadir botón guardar que guarde y muestre el OK
     [ ] Añadir botón guardar e introducir partidas que lleve a la 

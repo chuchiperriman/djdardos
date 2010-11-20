@@ -112,6 +112,9 @@ class PartidaParejasForm(PartidaIndividualForm):
         print p.jugadores_local.all()
         
 class PartidoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PartidoForm, self).__init__(*args, **kwargs)
+        self.fields['fecha'].input_formats = ('%d/%m/%Y','%d-%m-%Y')
     #TODO Mostrar solo jornadas que no tienen partido asignado
     class Meta:
         model = Partido
