@@ -10,9 +10,8 @@ from ..general.sesiones import *
 from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic.simple import direct_to_template
 from django.views.generic.create_update import create_object
-
-from django.http import HttpResponse, Http404
-import logging
+from django.contrib import messages
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 
 def index(request):
     partidos = Partido.objects.all()
@@ -141,8 +140,12 @@ def setpartidas(request, partido_id):
         
             #Este metodo guarda el partido
             procesos.actualizar_puntos_partido(partido)
+            messages.success (request, 'Partido dado de alta correctamente')
+            
+            return HttpResponseRedirect('/partidos/%d/' % (partido.id))
+            
         else:
-            logging.debug('NOOOO Valido !!')
+            messages.error (request, 'Revise los datos del acta porque se han producido errores')
     else:
         todos = []
         forms_parejas_1 = [crear_partida_parejas(str(x)) for x in range(0,2)]

@@ -3,25 +3,23 @@
 {% block title %}Nuevo partido{% endblock %}
 
 {% block content %}
+
+<ul>
 {% for form in todos %}
 {% if form.errors %}
-<div id="form-error">
-       <p>Ocurrieron errores</p>
-       <ul>
-       {% for error in form.non_field_errors %}
-           <li>{{ error|striptags }}</li>
-       {% endfor %}
-       {% for field in form %}
-               {%if field.errors%}
-               	   {% for error in field.errors %}
-	               <li>{{field.name}}: {{ error|striptags }}</li>
-	           {%endfor%}
-               {%endif%}
-       {% endfor %}
-       </ul>
-</div>
+   {% for error in form.non_field_errors %}
+       <li class="error">{{ error|striptags }}</li>
+   {% endfor %}
+   {% for field in form %}
+           {%if field.errors%}
+           	   {% for error in field.errors %}
+               <li class="error">{{field.name}}: {{ error|striptags }}</li>
+           {%endfor%}
+           {%endif%}
+   {% endfor %}
 {% endif %}
 {%endfor%}
+</ul>
 
 <h1>Nuevo partido</h1>
 <h2>501 Parejas</h2>

@@ -28,7 +28,8 @@
 [ ] Alta de partidas:
     [X] Recolocar el formulario (títulos y ganador)
     [ ] Mientras se da de alta bloquear la pantalla con "Calculando..."
-    [ ] Al guardar mostrar mensaje de OK
+    [X] Al guardar mostrar mensaje de OK
+    [X] Redirigir al acta cuando se guarda
 [ ] Añadir edición de partidos
     [ ] Edición de partidos sin partidas
     [ ] Edición de partidos con partidas
