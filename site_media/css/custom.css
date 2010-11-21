@@ -101,6 +101,12 @@ h2{
     padding: 0.7em;
 }
 
+#content{
+    background: url(../images/fondo-content.png) no-repeat;
+    margin-left: 0px;
+    padding-left: 15px;
+}
+
 /********** Formularios *************/
 label
 {
