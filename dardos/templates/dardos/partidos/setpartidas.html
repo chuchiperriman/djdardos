@@ -23,7 +23,7 @@
 
 <h1>Nuevo partido</h1>
 <h2>501 Parejas</h2>
-<form action="." method="post">
+<form id="form-partidas" action="." method="post">
 <table class="tabla-partidas" width="100%">
 	<tr>
 		<th align="left">Pareja local</th>
@@ -157,6 +157,29 @@
 	</tr>
 {% endfor %}
 </table>
-<input type="submit" value="Guardar" />
+<input id="boton-guardar" type="submit" value="Guardar" />
 </form>
+
+<div id="dialog-procesando">
+    <img src="/site_media/images/ajax-loader.gif" />
+    <p>Se están procesando los datos, por favor espere...</p>
+</div>
+<script>
+	$(function() {
+		$( "#dialog-procesando" ).dialog({
+			height: 140,
+			modal: true,
+			autoOpen: false,
+			closeOnEscape: false,
+			resizable: false,
+			beforeClose: function(event, ui) { return false; }
+		});
+		$("#boton-guardar").click(function(){
+		    $( "#dialog-procesando" ).dialog("open");
+		    $("#form-partidas").submit();
+		    return false;
+		});
+	});
+</script>
+
 {% endblock %}

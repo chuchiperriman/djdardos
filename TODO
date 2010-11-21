@@ -25,9 +25,9 @@
              ___  |2|
             |_1_| |_| __
                      |-1|
-[ ] Alta de partidas:
+[X] Alta de partidas:
     [X] Recolocar el formulario (títulos y ganador)
-    [ ] Mientras se da de alta bloquear la pantalla con "Calculando..."
+    [X] Mientras se da de alta bloquear la pantalla con "Calculando..."
     [X] Al guardar mostrar mensaje de OK
     [X] Redirigir al acta cuando se guarda
 [ ] Añadir edición de partidos
