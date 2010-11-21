@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from djdardos.dardos.models import *
+from .sesiones import *
 from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic.simple import direct_to_template
@@ -15,7 +16,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 
 def cambiar_liga(request):
     request.session["liga_actual"] = request.REQUEST["liga"]
-    return HttpResponseRedirect(request.REQUEST["current_path"])
+    return HttpResponseRedirect(get_current_path(request))
     
 def login (request):
     current_path = "/"
