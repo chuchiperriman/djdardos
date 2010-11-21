@@ -14,6 +14,17 @@
     [X] Añadir botón guardar que guarde y muestre el OK
     [ ] Añadir botón guardar e introducir partidas que lleve a la 
         edición de partidas 
+[ ] Detalles de partido:
+    [X] Detalle de partidos sin el acta
+    [ ] Estadísticas de un partido:
+        [ ] Mejor jugador de partido, peor etc
+        [ ] Gráfica de jugadores en el partido:
+            [ ] Barras de partidas ganadas
+            [ ] Barras de partidas perdidas
+            [ ] Barras de diferencia:
+             ___  |2|
+            |_1_| |_| __
+                     |-1|
 [ ] Alta de partidas:
     [X] Recolocar el formulario (títulos y ganador)
     [ ] Mientras se da de alta bloquear la pantalla con "Calculando..."
@@ -22,16 +33,5 @@
     [ ] Edición de partidos sin partidas
     [ ] Edición de partidos con partidas
 [ ] Hacer cuadro de resultados en la división
-[ ] Estadísticas de un partido:
-    [ ] Mejor jugador de partido, peor etc
-    [ ] Gráfica de jugadores en el partido:
-        [ ] Barras de partidas ganadas
-        [ ] Barras de partidas perdidas
-        [ ] Barras de diferencia:
-         ___  |2|
-        |_1_| |_| __
-                 |-1|
-                
-        
         
         

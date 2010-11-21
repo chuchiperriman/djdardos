@@ -27,15 +27,18 @@ def detail(request, partido_id):
     p = get_object_or_404(Partido, pk=partido_id)
     partidas = p.partida_set.order_by('numero')
     partidas = list(partidas)
-    print partidas
-    return direct_to_template(request, 'dardos/partidos/detail.html', 
-    	{'partido' : p,
-         'partidas_par_1' : partidas[0:2],
-         'partidas_par_2' : partidas[2:4],
-         'partidas_ind_1' : partidas[4:8],
-         'partidas_par_3' : partidas[8:10],
-         'partidas_par_4' : partidas[10:12],
-         'partidas_ind_2' : partidas[12:16]})
+    if len(partidas) > 0:
+        return direct_to_template(request, 'dardos/partidos/detail.html', 
+        	{'partido' : p,
+             'partidas_par_1' : partidas[0:2],
+             'partidas_par_2' : partidas[2:4],
+             'partidas_ind_1' : partidas[4:8],
+             'partidas_par_3' : partidas[8:10],
+             'partidas_par_4' : partidas[10:12],
+             'partidas_ind_2' : partidas[12:16]})
+    else:
+        return direct_to_template(request, 'dardos/partidos/detail_sin_acta.html', 
+        	{'partido' : p})
 
 def new(request):
     ligas = Liga.objects.all()

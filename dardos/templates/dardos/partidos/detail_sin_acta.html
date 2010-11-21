@@ -1,0 +1,34 @@
+{% extends "dardos/ligasbase.html" %}
+
+{% load dardos_general %}
+
+{% block title %}Equipo{% endblock %}
+
+{% block content %}
+
+<style>
+table tr td ul li{
+    display: inline;
+}
+</style>
+
+<h1>{{partido.equipo_local.nombre}} - {{partido.equipo_visitante.nombre}} ({{partido.fecha|date:"d-m-Y"}})</h1>
+
+<div id="partidas">
+    <table class="tabla_parejas">
+        <tr>
+            <td class="local" style="font-size: 1.5em">{{partido.equipo_local.nombre}}</td>
+            <td class="resultado" style="font-size: 1.5em; font-weight: bold">
+                {{ partido.puntos_local }} - {{ partido.puntos_visitante }}
+            </td>
+            <td class="visitante" style="font-size: 1.5em">{{partido.equipo_visitante.nombre}}</td>
+        </tr>
+    </table>
+</div>
+<p>
+<b>Nota: </b>
+No hay información de las partidas jugadas en este partido por lo que no 
+se puede mostrar el acta ni estadísticas.
+</p>
+
+{% endblock %}
