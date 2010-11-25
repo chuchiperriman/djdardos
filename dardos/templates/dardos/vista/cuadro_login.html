@@ -10,7 +10,7 @@
         </p>
         <p>
             <label>&nbsp;</label>
-            <input type="submit" value="Entrar">
+            <input id="boton-login" type="submit" value="Entrar">
         </p>
     </fieldset>
 </form>
@@ -21,5 +21,11 @@
         <td>{{user.username}}</td>
     </tr>
 </table>
-<a href="/logout">Logout</a>
+<div style="text-align: right;margin-right: 15px">
+<a id="boton-login" href="/logout">Logout</a>
+</div>
 {% endif %}
+
+<script>
+    $("#boton-login").button();
+</script>
