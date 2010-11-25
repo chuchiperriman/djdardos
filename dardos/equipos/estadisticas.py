@@ -97,7 +97,6 @@ class DatosEstadisticaJugadores:
 
 class EstadisticasEquipo:
     def __init__(self, equipo, liga, cargar_jugadores = True):
-        print 'ini', datetime.now()
         self.liga = liga
         self.equipo = equipo
         if cargar_jugadores:
@@ -130,7 +129,6 @@ class EstadisticasEquipo:
         self.partidos_empatados_visitante_count = Partido.objects.filter(
             Q(jornada__in=jornadas_liga) & Q(jugado=True) & Q(equipo_visitante=self.equipo) & Q(ganador=None)).count()
         
-        print 'fin', datetime.now()
 
     def partidos_jugados(self):
         return self.partidos_jugados_count

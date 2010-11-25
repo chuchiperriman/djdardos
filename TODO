@@ -1,6 +1,6 @@
 [ ] Seleccionar qué jugadores juegan en qué ligas porque hay bajas y altas
     entre una liga y otra
-[ ] Maquetar cuandro de login cuando el usuario está logueado
+[X] Maquetar cuandro de login cuando el usuario está logueado
 [X] Alta de jornadas:
     [X] Al guardar mostrar mensaje de OK
     [X] Seleccionar por defecto la liga de la sesión

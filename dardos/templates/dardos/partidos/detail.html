@@ -12,42 +12,58 @@ table tr td ul li{
 }
 </style>
 
+<script type="text/javascript">
+	$(function() {
+		$("#tabs").tabs();
+	});
+</script>
+
 <h1>{{partido.equipo_local.nombre}} - {{partido.equipo_visitante.nombre}} ({{partido.fecha|date:"d-m-Y"}})</h1>
 
-<div id="partidas">
-    <table>
-        <tr>
-            <th class="local">Local</th>
-            <th class="resultado">Resultado</th>
-            <th class="visitante">Visitante</th>
-        </tr>
-    </table>
+<div id="tabs">
+	<ul>
+		<li><a href="#tab-acta">Acta</a></li>
+		<li><a href="#tab-est">Estadísticas</a></li>
+	</ul>
+	<div id="tab-acta">
+		<div id="partidas">
+            <table>
+                <tr>
+                    <th class="local">Local</th>
+                    <th class="resultado">Resultado</th>
+                    <th class="visitante">Visitante</th>
+                </tr>
+            </table>
 
-    <h2>Parejas 501</h2>
-    {% show_partida_parejas partidas_par_1 %}
+            <h2>Parejas 501</h2>
+            {% show_partida_parejas partidas_par_1 %}
 
-    {% show_partida_parejas partidas_par_2 %}
+            {% show_partida_parejas partidas_par_2 %}
 
-    <h2>Individuales 501</h2>
-    {% show_partida_individuales partidas_ind_1 %}
+            <h2>Individuales 501</h2>
+            {% show_partida_individuales partidas_ind_1 %}
 
-    <h2>Parejas Cricket</h2>
-    {% show_partida_parejas partidas_par_3 %}
+            <h2>Parejas Cricket</h2>
+            {% show_partida_parejas partidas_par_3 %}
 
-    {% show_partida_parejas partidas_par_4 %}
+            {% show_partida_parejas partidas_par_4 %}
 
-    <h2>Individuales 501</h2>
-    {% show_partida_individuales partidas_ind_2 %}
-    
-    <table class="tabla_parejas">
-        <tr>
-            <td class="local" style="font-size: 1.5em">Local</td>
-            <td class="resultado" style="font-size: 1.5em; font-weight: bold">
-                {{ partido.puntos_local }} - {{ partido.puntos_visitante }}
-            </td>
-            <td class="visitante" style="font-size: 1.5em">Visitante</td>
-        </tr>
-    </table>
+            <h2>Individuales 501</h2>
+            {% show_partida_individuales partidas_ind_2 %}
+            
+            <table class="tabla_parejas">
+                <tr>
+                    <td class="local" style="font-size: 1.5em">Local</td>
+                    <td class="resultado" style="font-size: 1.5em; font-weight: bold">
+                        {{ partido.puntos_local }} - {{ partido.puntos_visitante }}
+                    </td>
+                    <td class="visitante" style="font-size: 1.5em">Visitante</td>
+                </tr>
+            </table>
+        </div>
+	</div>
+	<div id="tab-est">
+	    {% show_estadisticas_jugadores estadisticas %}
+	</div>
 </div>
-
 {% endblock %}
