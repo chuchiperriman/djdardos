@@ -19,8 +19,11 @@
         edición de partidas 
 [ ] Detalles de partido:
     [X] Detalle de partidos sin el acta
+    [ ] Análisis de jugadores
+        [X] Análisis total
+        [ ] Análisis de jugadores locales
+        [ ] Análisis de jugadores visitantes
     [ ] Estadísticas de un partido:
-        [ ] Mejor jugador de partido, peor etc
         [ ] Gráfica de jugadores en el partido:
             [ ] Barras de partidas ganadas
             [ ] Barras de partidas perdidas
@@ -37,9 +40,3 @@
     [ ] Edición de partidos sin partidas
     [ ] Edición de partidos con partidas
 [ ] Hacer cuadro de resultados en la división
-[ ] Detalle de partido:
-    [X] Estadísticas de los jugadores
-    [ ] Análisis de jugadores
-        [X] Análisis total
-        [ ] Análisis de jugadores locales
-        [ ] Análisis de jugadores visitantes

@@ -1,4 +1,6 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- coding: utf-8 -*-
+
 from datetime import datetime
 from djdardos.dardos.models import *
 from django.db import models
@@ -47,17 +49,14 @@ class DatosEstadisticaJugador:
             self.partidas_par_ganadas_cricket_por = \
                 self.partidas_par_ganadas_cricket * 100 / self.partidas_par_cricket
         self.partidas_par_cricket_dif = self.partidas_par_ganadas_cricket - self.partidas_par_perdidas_cricket
-        
-class DatosEstadisticaJugadores:
-    def __init__(self, jugadores, partidos):
+
+class DatosEstadisticaJugadoresBase:
+    def __init__(self, list_est_jugadores):
+        self.jugadores_list = list_est_jugadores
         self.jugadores = []
         self.valor = 0
         self.peor = False
         self.porcentaje = False
-        #Preload the query
-        self.jugadores_list = list()
-        for j in jugadores:
-            self.jugadores_list.append(DatosEstadisticaJugador(j, partidos))
     
     def calcular_mejor(self, get_valor):
         self.jugadores = []
@@ -91,6 +90,13 @@ class DatosEstadisticaJugadores:
             return str(self.valor) + "% -> " + val
         else:
             return str(self.valor) + " -> " + val
+
+class DatosEstadisticaJugadores(DatosEstadisticaJugadoresBase):
+    def __init__(self, jugadores, partidos):
+        self.jugadores_list = list()
+        for j in jugadores:
+            self.jugadores_list.append(DatosEstadisticaJugador(j, partidos))
+        DatosEstadisticaJugadoresBase.__init__(self, self.jugadores_list)
 
 class EstadisticasEquipo:
     def __init__(self, equipo, liga):
@@ -319,4 +325,6 @@ class AnalisisJugadores:
         self.dej.peor = False
         self.dej.porcentaje = True
         return self.dej.calcular_mejor(calc)
-    
+
+        
+        
