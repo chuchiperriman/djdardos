@@ -29,10 +29,10 @@ def detail(request, partido_id):
     partidas = p.partida_set.order_by('numero')
     
     jugadores = Jugador.objects.filter(Q(jugadores_local__in= partidas) | Q(jugadores_visitante__in= partidas)).distinct()
-    estadisticas = list()
+    estadisticas_jugadores = list()
     for j in jugadores:
-        estadisticas.append(DatosEstadisticaJugador(j, partidoq))
-    for est in estadisticas:
+        estadisticas_jugadores.append(DatosEstadisticaJugador(j, partidoq))
+    for est in estadisticas_jugadores:
         print est.partidas_ganadas
     
     partidas = list(partidas)
@@ -45,7 +45,7 @@ def detail(request, partido_id):
              'partidas_par_3' : partidas[8:10],
              'partidas_par_4' : partidas[10:12],
              'partidas_ind_2' : partidas[12:16],
-             'estadisticas': estadisticas})
+             'estadisticas_jugadores': estadisticas_jugadores})
     else:
         return direct_to_template(request, 'dardos/partidos/detail_sin_acta.html', 
         	{'partido' : p})

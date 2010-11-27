@@ -49,17 +49,14 @@ class DatosEstadisticaJugador:
         self.partidas_par_cricket_dif = self.partidas_par_ganadas_cricket - self.partidas_par_perdidas_cricket
         
 class DatosEstadisticaJugadores:
-    def __init__(self, equipo, liga = None):
-        self.equipo = equipo
+    def __init__(self, jugadores, partidos):
         self.jugadores = []
         self.valor = 0
         self.peor = False
         self.porcentaje = False
         #Preload the query
         self.jugadores_list = list()
-        if liga:
-            partidos = Partido.objects.filter(jornada__liga__exact = liga).distinct()
-        for j in Jugador.objects.filter(equipo=self.equipo):
+        for j in jugadores:
             self.jugadores_list.append(DatosEstadisticaJugador(j, partidos))
     
     def calcular_mejor(self, get_valor):
@@ -100,7 +97,11 @@ class EstadisticasEquipo:
         self.liga = liga
         self.equipo = equipo
         if cargar_jugadores:
-            self.dej = DatosEstadisticaJugadores(self.equipo, self.liga)
+            jugadores = Jugador.objects.filter(equipo=self.equipo)
+            partidos = None
+            if liga:
+                partidos = Partido.objects.filter(jornada__liga__exact = liga).distinct()
+            self.dej = DatosEstadisticaJugadores(jugadores, partidos)
             self.jugadores = self.dej.jugadores_list
         
         jornadas_liga = Jornada.objects.filter(liga=liga)

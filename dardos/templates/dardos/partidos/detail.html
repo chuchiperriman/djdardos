@@ -23,6 +23,7 @@ table tr td ul li{
 <div id="tabs">
 	<ul>
 		<li><a href="#tab-acta">Acta</a></li>
+		<li><a href="#tab-jugadores">Datos jugadores</a></li>
 		<li><a href="#tab-est">Estadísticas</a></li>
 	</ul>
 	<div id="tab-acta">
@@ -62,8 +63,11 @@ table tr td ul li{
             </table>
         </div>
 	</div>
+	<div id="tab-jugadores">
+	    {% show_estadisticas_jugadores estadisticas_jugadores %}
+	</div>
 	<div id="tab-est">
-	    {% show_estadisticas_jugadores estadisticas %}
+	    {% show_estadisticas_equipo estadisticas_partidas %}
 	</div>
 </div>
 {% endblock %}
