@@ -37,5 +37,9 @@
     [ ] Edición de partidos sin partidas
     [ ] Edición de partidos con partidas
 [ ] Hacer cuadro de resultados en la división
-        
-        
+[ ] Detalle de partido:
+    [X] Estadísticas de los jugadores
+    [ ] Análisis de jugadores
+        [X] Análisis total
+        [ ] Análisis de jugadores locales
+        [ ] Análisis de jugadores visitantes

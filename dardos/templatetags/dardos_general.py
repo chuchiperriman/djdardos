@@ -26,9 +26,9 @@ def show_partida_individuales(partidas):
     return {'partidas' : partidas}
     
 @register.inclusion_tag('dardos/includes/estadisticas_jugadores.html')
-def show_estadisticas_jugadores(jugadores):
+def show_estadisticas_jugadores(estjugadores):
     return {'show_details' : True,
-        'jugadores' : jugadores}
+        'jugadores' : estjugadores.jugadores_list}
     
 @register.inclusion_tag('dardos/includes/estadisticas_jugadores.html')
 def show_estadisticas_jugador(jugador):
@@ -38,6 +38,10 @@ def show_estadisticas_jugador(jugador):
 @register.inclusion_tag('dardos/equipos/estequipo.html')
 def show_estadisticas_equipo(estadisticas):
     return {'estadisticas' : estadisticas}
+
+@register.inclusion_tag('dardos/estadisticas/analisis_jugadores.html')
+def show_analisis_jugadores(analisis):
+    return {'analisis' : analisis}
     
 @register.inclusion_tag('dardos/equipos/estparejasgeneral.html')
 def show_estadisticas_parejas_general(estadistica):

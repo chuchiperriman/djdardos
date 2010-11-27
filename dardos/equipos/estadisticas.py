@@ -93,16 +93,9 @@ class DatosEstadisticaJugadores:
             return str(self.valor) + " -> " + val
 
 class EstadisticasEquipo:
-    def __init__(self, equipo, liga, cargar_jugadores = True):
+    def __init__(self, equipo, liga):
         self.liga = liga
         self.equipo = equipo
-        if cargar_jugadores:
-            jugadores = Jugador.objects.filter(equipo=self.equipo)
-            partidos = None
-            if liga:
-                partidos = Partido.objects.filter(jornada__liga__exact = liga).distinct()
-            self.dej = DatosEstadisticaJugadores(jugadores, partidos)
-            self.jugadores = self.dej.jugadores_list
         
         jornadas_liga = Jornada.objects.filter(liga=liga)
         self.partidos_jugados_count = Partido.objects.filter(
@@ -188,6 +181,10 @@ class EstadisticasEquipo:
     def puntos(self):
         return self.partidos_ganados() * 3 + self.partidos_empatados()
     
+class AnalisisJugadores:
+    def __init__(self, estadisticas_jugadores):
+        self.dej = estadisticas_jugadores
+        
     def __controlar_jugador_mejor(self, datos, jugador, valor):
         if valor > datos.valor:
             datos.jugadores = [jugador]

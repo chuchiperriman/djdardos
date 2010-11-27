@@ -9,7 +9,7 @@ class DatosEquipo:
     def __init__(self, equipo, liga):
         self.equipo = equipo
         self.liga = liga
-        self.estadisticas = EstadisticasEquipo(equipo, liga, False)
+        self.estadisticas = EstadisticasEquipo(equipo, liga)
     
 
 class Clasificacion:

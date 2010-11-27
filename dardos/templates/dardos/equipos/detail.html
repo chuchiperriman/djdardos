@@ -75,7 +75,7 @@
 		</li>
 	</ul>
 	<div id="tabs-1">
-		{% show_estadisticas_jugadores jugadores %}
+		{% show_estadisticas_jugadores estjugadores %}
 	</div>
 	<div id="tabs-2">
 	    {% show_clasificacion liga_actual equipo%}
@@ -123,6 +123,7 @@
 	</div>
 	<div id="tabs-4">
 	    {% show_estadisticas_equipo estadisticas %}
+	    {% show_analisis_jugadores analisis_jugadores %}
 	</div>
 	<div id="tabs-5">
         <form id="formgrafica" method="post">

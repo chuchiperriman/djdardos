@@ -6,7 +6,7 @@ from djdardos.dardos.models import *
 from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic.simple import direct_to_template
-from estadisticas import EstadisticasEquipo
+from estadisticas import *
 from ..graficas.forms import GraficasForm
 from ..general.sesiones import *
 from estparejas import *
@@ -46,6 +46,10 @@ def detail(request, equipo_id):
         liga_actual = e.get_liga_actual()
     
     estadisticas = EstadisticasEquipo(e, liga_actual)
+    jugadores = e.jugador_set.all()
+    partidos = Partido.objects.filter(jornada__liga__exact = liga_actual).distinct()
+    estjugadores = DatosEstadisticaJugadores(jugadores, partidos)
+    analisis_jugadores = AnalisisJugadores(estjugadores)
     jornadas = []
     for j in liga_actual.jornada_set.all():
         jornadas.append(JornadasPartidos(j, e))
@@ -55,9 +59,10 @@ def detail(request, equipo_id):
     graficas_form.fields["liga"].initial = liga_actual.id
     
     return render_to_response('dardos/equipos/detail.html', 
-    	{'equipo': e, 'jugadores': estadisticas.jugadores,
+    	{'equipo': e, 'estjugadores': estjugadores,
          'liga_actual': liga_actual, 'jornadas': jornadas,
          'estadisticas': estadisticas,
+         'analisis_jugadores': analisis_jugadores,
          'graficas_form' : graficas_form},
          context_instance = RequestContext(request))
 

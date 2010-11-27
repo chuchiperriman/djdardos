@@ -7,7 +7,7 @@ from djdardos.dardos.models import *
 from django.db.models import Max
 from djdardos.dardos.partidos.forms import *
 from ..general.sesiones import *
-from ..equipos.estadisticas import DatosEstadisticaJugador
+from ..equipos.estadisticas import DatosEstadisticaJugadores, AnalisisJugadores
 from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic.simple import direct_to_template
 from django.views.generic.create_update import create_object
@@ -30,10 +30,8 @@ def detail(request, partido_id):
     
     jugadores = Jugador.objects.filter(Q(jugadores_local__in= partidas) | Q(jugadores_visitante__in= partidas)).distinct()
     estadisticas_jugadores = list()
-    for j in jugadores:
-        estadisticas_jugadores.append(DatosEstadisticaJugador(j, partidoq))
-    for est in estadisticas_jugadores:
-        print est.partidas_ganadas
+    estadisticas_jugadores = DatosEstadisticaJugadores(jugadores, partidoq)
+    analisis_jugadores = AnalisisJugadores(estadisticas_jugadores)
     
     partidas = list(partidas)
     if len(partidas) > 0:
@@ -45,7 +43,8 @@ def detail(request, partido_id):
              'partidas_par_3' : partidas[8:10],
              'partidas_par_4' : partidas[10:12],
              'partidas_ind_2' : partidas[12:16],
-             'estadisticas_jugadores': estadisticas_jugadores})
+             'estadisticas_jugadores': estadisticas_jugadores,
+             'analisis_jugadores': analisis_jugadores})
     else:
         return direct_to_template(request, 'dardos/partidos/detail_sin_acta.html', 
         	{'partido' : p})
