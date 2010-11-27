@@ -1,4 +1,5 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- coding: utf-8 -*-
 
 from itertools import chain
 
@@ -110,6 +111,11 @@ class Jugador(models.Model):
         return self.nombre
 
 class Partido(models.Model):
+    class Meta:
+        permissions = (
+            ("can_add_todo", u"Puede añadir cualquier partido"),
+            ("can_add_equipo", u"Puede añadir sólo de su equipo"),
+        )
     jornada = models.ForeignKey(Jornada)
     fecha = models.DateTimeField()
     equipo_local = models.ForeignKey(Equipo, related_name="equipo_local")

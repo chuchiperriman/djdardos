@@ -1,0 +1,22 @@
+{% extends "dardos/ligasbase.html" %}
+
+{% block content %}
+
+<div id="div-login">
+    <div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+        <p>
+            No tiene los permisos necesarios para acceder a la página
+        </p>
+    </div> 
+    {% if user.is_authenticated %}
+        <a href="/login">
+            <button>Cambiar de usuario</button>
+        </a>
+    {% else %}
+        <a href="/login">
+            <button href="/login">Entrar</button>
+        </a>
+    {% endif %}
+</div>
+
+{% endblock %}

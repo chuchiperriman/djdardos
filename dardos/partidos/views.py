@@ -13,6 +13,7 @@ from django.views.generic.simple import direct_to_template
 from django.views.generic.create_update import create_object
 from django.contrib import messages
 from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required, permission_required
 
 def index(request):
     partidos = Partido.objects.all()
@@ -49,20 +50,33 @@ def detail(request, partido_id):
         return direct_to_template(request, 'dardos/partidos/detail_sin_acta.html', 
         	{'partido' : p})
 
+@login_required
 def new(request):
+    #TODO hacer funcion global para usar en muchos sitios
+    if not request.user.has_perm("dardos.can_add_todo") and not request.user.has_perm("dardos.can_add_equipo"):
+        return HttpResponseRedirect("/errores_permisos")
+        
     ligas = Liga.objects.all()
     jornadas = None
     liga = None
     equipos = None
     liga_sesion = get_liga_actual(request)
-    if "liga" in request.REQUEST and request.REQUEST["liga"] != '':
-        liga = request.REQUEST["liga"]
-        jornadas = Jornada.objects.filter(liga=liga)
-    elif liga_sesion:
-        liga = str(liga_sesion.id)
-        jornadas = liga_sesion.jornada_set.all()
+    if request.user.has_perm("dardos.can_add_todo"):
+        if "liga" in request.REQUEST and request.REQUEST["liga"] != '':
+            liga = request.REQUEST["liga"]
+            jornadas = Jornada.objects.filter(liga=liga)
+        elif liga_sesion:
+            liga = str(liga_sesion.id)
+            jornadas = liga_sesion.jornada_set.all()
+        else:
+            jornadas = ligas[0].jornada_set.all()
+    elif request.user.has_perm("dardos.can_add_equipo"):
+        #TODO Comprobar que en la liga esté el equipo del usuario
+        #sino hay que poner la liga de su equipo
+        return HttpResponse("De momento sin hacer")
     else:
-        jornadas = ligas[0].jornada_set.all()
+        return HttpResponseRedirect("/errores_permisos")
+        
     
     if liga:
         liga_obj = Liga.objects.get(pk=liga)
@@ -79,6 +93,8 @@ def new(request):
             'equipos' : equipos
         })
 
+@permission_required('dardos.add_partido')
+@login_required
 def setpartidas(request, partido_id):
     
     partido = Partido.objects.get(pk=partido_id)
@@ -176,7 +192,8 @@ def setpartidas(request, partido_id):
          "forms_individual_1": forms_individual_1,
          "forms_individual_2": forms_individual_2,
          "todos": todos})
-         
+
+@permission_required('dardos.add_jornada')
 def new_jornada (request):
     liga_actual = get_liga_actual(request)
     if liga_actual:

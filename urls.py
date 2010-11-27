@@ -6,6 +6,7 @@ from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from django.views.generic.simple import direct_to_template
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -13,6 +14,7 @@ urlpatterns = patterns('',
     (r'^ligas/$', 'djdardos.dardos.views.ligas_index'),
     (r'^login/$', 'djdardos.dardos.general.views.login'),
     (r'^logout/$', 'djdardos.dardos.general.views.logout'),
+    (r'^error_permisos/$',direct_to_template, {'template': 'dardos/general/error_permisos.html'}),
     (r'^equipos/$', 'djdardos.dardos.equipos.views.index'),
     (r'^equipos/estreport/(?P<equipo_id>\d+)/(?P<liga_id>\d+)$', 'djdardos.dardos.equipos.views.estreport'),
     (r'^equipos/estparejas/(?P<equipo_id>\d+)/(?P<liga_id>\d+)$', 'djdardos.dardos.equipos.views.ajax_estadistica_parejas'),

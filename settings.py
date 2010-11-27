@@ -72,7 +72,7 @@ MEDIA_URL = 'http://localhost:8000/site_media/'
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '/media/'
-
+LOGIN_URL = '/error_permisos/'
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '1ntn=ht9%!4^tmqh^ytl_m1=mu22a$f=p^k&_20$p2q3hh7hoa'
 
