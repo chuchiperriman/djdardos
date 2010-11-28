@@ -75,7 +75,7 @@ def new(request):
         #sino hay que poner la liga de su equipo
         return HttpResponse("De momento sin hacer")
     else:
-        return HttpResponseRedirect("/errores_permisos")
+        return HttpResponseRedirect("/error_permisos")
         
     
     if liga:

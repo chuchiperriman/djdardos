@@ -113,8 +113,8 @@ class Jugador(models.Model):
 class Partido(models.Model):
     class Meta:
         permissions = (
-            ("can_add_todo", u"Puede añadir cualquier partido"),
-            ("can_add_equipo", u"Puede añadir sólo de su equipo"),
+            ("can_add_todo_partido", u"Puede añadir cualquier partido"),
+            ("can_add_equipo_partido", u"Puede añadir sólo de su equipo"),
         )
     jornada = models.ForeignKey(Jornada)
     fecha = models.DateTimeField()
