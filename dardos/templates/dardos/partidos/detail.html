@@ -6,6 +6,11 @@
 
 {% block content %}
 
+<link rel="stylesheet" href="/site_media/css/jquery.jqplot.css">
+<script language="JavaScript" src="/site_media/js/jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="/site_media/js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script language="JavaScript" src="/site_media/js/plugins/jqplot.barRenderer.min.js"></script>
+
 <style>
 table tr td ul li{
     display: inline;
@@ -14,10 +19,53 @@ table tr td ul li{
 
 <script type="text/javascript">
 	$(function() {
-		$("#tabs").tabs();
+	
+	    $.jqplot.config.enablePlugins = true;
+	    
+	    lineperdidas = [
+	        {% for e in estadisticas_jugadores.jugadores_list %}
+	            -{{e.partidas_perdidas}},
+		    {% endfor %}
+		];
+        lineganadas = [
+            {% for e in estadisticas_jugadores.jugadores_list %}
+	            {{e.partidas_ganadas}},
+		    {% endfor %}
+        ];
+        
+        ticksbase = [
+            {% for e in estadisticas_jugadores.jugadores_list %}
+	            '{{e.jugador.nombre}}',
+		    {% endfor %}
+        ];
+              
+        plot3 = $.jqplot('divgrafica', [lineganadas, lineperdidas], {
+          legend: {show: true, location:'ne', xoffset:10, yoffset:10},
+          seriesDefaults: {
+            fill:true, 
+            fillToZero:true,
+            showMarker: false,
+            renderer:$.jqplot.BarRenderer,
+            rendererOptions:{barPadding: 2, barMargin: 10}
+          },
+          series:[
+            {label: 'Ganadas'},
+            {label: 'Perdidas'}
+          ],    
+          axes: {
+            xaxis: {
+              renderer:$.jqplot.CategoryAxisRenderer,
+              ticks: ticksbase,
+            }, 
+            yaxis:{autoscale:true}
+          }
+        });
+        
+        $("#tabs").tabs();
 		$("#tabs #tabs2").tabs();
 		$("#tabs #tabs2").tabs('select',0);
 	});
+	
 </script>
 
 <h1>{{partido.equipo_local.nombre}} - {{partido.equipo_visitante.nombre}} ({{partido.fecha|date:"d-m-Y"}})</h1>
@@ -26,6 +74,7 @@ table tr td ul li{
 	<ul>
 		<li><a href="#tab-acta">Acta</a></li>
 		<li><a href="#tab-jugadores">Datos jugadores</a></li>
+		<li><a href="#tab-graficas">Gráficas</a></li>
 		<li><a href="#tab-est">Estadísticas</a></li>
 	</ul>
 	<div id="tab-acta">
@@ -67,6 +116,10 @@ table tr td ul li{
 	</div>
 	<div id="tab-jugadores">
         {% show_estadisticas_jugadores estadisticas_jugadores %}
+	</div>
+	<div id="tab-graficas">
+	    <div id="divgrafica" style="height:400px;width:600px; ">
+	    </div>
 	</div>
 	<div id="tab-est">
 	    <div id="tabs2">
