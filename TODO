@@ -19,10 +19,10 @@
         edición de partidas 
 [ ] Detalles de partido:
     [X] Detalle de partidos sin el acta
-    [ ] Análisis de jugadores
+    [X] Análisis de jugadores
         [X] Análisis total
-        [ ] Análisis de jugadores locales
-        [ ] Análisis de jugadores visitantes
+        [X] Análisis de jugadores locales
+        [X] Análisis de jugadores visitantes
     [ ] Estadísticas de un partido:
         [ ] Gráfica de jugadores en el partido:
             [ ] Barras de partidas ganadas

@@ -34,6 +34,16 @@ def detail(request, partido_id):
     estadisticas_jugadores = DatosEstadisticaJugadores(jugadores, partidoq)
     analisis_jugadores = AnalisisJugadores(estadisticas_jugadores)
     
+    #local
+    jugadores_local = Jugador.objects.filter(Q(jugadores_local__in=partidas)).distinct()
+    ej_local = DatosEstadisticaJugadores(jugadores_local, partidoq)
+    aj_local = AnalisisJugadores(ej_local)
+    
+    #visitante
+    jugadores_visitante = Jugador.objects.filter(Q(jugadores_visitante__in=partidas)).distinct()
+    ej_visitante = DatosEstadisticaJugadores(jugadores_visitante, partidoq)
+    aj_visitante = AnalisisJugadores(ej_visitante)
+    
     partidas = list(partidas)
     if len(partidas) > 0:
         return direct_to_template(request, 'dardos/partidos/detail.html', 
@@ -45,7 +55,9 @@ def detail(request, partido_id):
              'partidas_par_4' : partidas[10:12],
              'partidas_ind_2' : partidas[12:16],
              'estadisticas_jugadores': estadisticas_jugadores,
-             'analisis_jugadores': analisis_jugadores})
+             'analisis_jugadores': analisis_jugadores,
+             'analisis_local': aj_local,
+             'analisis_visitante': aj_visitante})
     else:
         return direct_to_template(request, 'dardos/partidos/detail_sin_acta.html', 
         	{'partido' : p})
