@@ -10,6 +10,7 @@
 <script language="JavaScript" src="/site_media/js/jquery.jqplot.min.js"></script>
 <script type="text/javascript" src="/site_media/js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
 <script language="JavaScript" src="/site_media/js/plugins/jqplot.barRenderer.min.js"></script>
+<script language="JavaScript" src="/site_media/js/plugins/jqplot.highlighter.min.js"></script>
 
 <style>
 table tr td ul li{
@@ -58,7 +59,8 @@ table tr td ul li{
               ticks: ticksbase,
             }, 
             yaxis:{autoscale:true}
-          }
+          },
+          highlighter: {showTooltip: true,tooltipAxes: 'y', useAxesFormatters: true}
         });
         
         $("#tabs").tabs();
