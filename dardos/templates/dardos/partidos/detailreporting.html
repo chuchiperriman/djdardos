@@ -1,12 +1,13 @@
-{% extends "dardos/ligasbase.html" %}
-
+<html>
+<head>
 {% load dardos_general %}
 
-{% block title %}Equipo{% endblock %}
+<title>Informe de partido</title>
 
-{% block content %}
-
+<link type="text/css" href="/site_media/css/ui/jquery.ui.all.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/site_media/css/custom.css" media="screen, projection, tv " />
 <link rel="stylesheet" href="/site_media/css/jquery.jqplot.css">
+<script language="JavaScript" src="/site_media/js/jquery-1.4.2.js"></script>
 <script language="JavaScript" src="/site_media/js/jquery.jqplot.min.js"></script>
 <script type="text/javascript" src="/site_media/js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
 <script language="JavaScript" src="/site_media/js/plugins/jqplot.barRenderer.min.js"></script>
@@ -15,6 +16,9 @@
 <style>
 table tr td ul li{
     display: inline;
+}
+#tabs ul{
+    display: none;
 }
 </style>
 
@@ -62,20 +66,13 @@ table tr td ul li{
           },
           highlighter: {showTooltip: true,tooltipAxes: 'y', useAxesFormatters: true}
         });
-        
-        $("#tabs").tabs();
-		$("#tabs #tabs2").tabs();
-		$("#tabs #tabs2").tabs('select',0);
 	});
 	
 </script>
+</head>
+<body>
+<h1>Informe del partido: {{partido.equipo_local.nombre}} - {{partido.equipo_visitante.nombre}} ({{partido.fecha|date:"d-m-Y"}})</h1>
 
-<div style="float:right">
-    <a href="/partidos/{{partido.id}}/reporting">
-        <img src="/site_media/images/report.png" title="Informe de estadísticas del partido"/>
-    </a>
-</div>
-<h1>{{partido.equipo_local.nombre}} - {{partido.equipo_visitante.nombre}} ({{partido.fecha|date:"d-m-Y"}})</h1>
 <div id="tabs">
 	<ul>
 		<li><a href="#tab-acta">Acta</a></li>
@@ -85,6 +82,7 @@ table tr td ul li{
 	</ul>
 	<div id="tab-acta">
 		<div id="partidas">
+		    <h2>Acta del partido</h2>
             <table>
                 <tr>
                     <th class="local">Local</th>
@@ -121,6 +119,7 @@ table tr td ul li{
         </div>
 	</div>
 	<div id="tab-jugadores">
+	    <h2>Datos de jugadores</h2>
         {% show_estadisticas_jugadores estadisticas_jugadores %}
 	</div>
 	<div id="tab-graficas">
@@ -135,15 +134,19 @@ table tr td ul li{
 		        <li><a href="#tab-visitante">Visitante</a></li>
 	        </ul>
 	        <div id="tab-global">
+	            <h2>Análisis de todos los jugadores</h2>
 	            {% show_analisis_jugadores analisis_jugadores %}
 	        </div>
 	        <div id="tab-local">
+	            <h2>Análisis de jugadores locales</h2>
 	            {% show_analisis_jugadores analisis_local %}
 	        </div>
 	        <div id="tab-visitante">
+	            <h2>Análisis de jugadores visitantes</h2>
 	            {% show_analisis_jugadores analisis_visitante %}
 	        </div>
 	    </div>
 	</div>
 </div>
-{% endblock %}
+</body>
+</html>

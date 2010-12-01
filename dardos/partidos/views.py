@@ -24,7 +24,7 @@ def index(request):
     partidos = partidos.order_by('jornada')
     return direct_to_template(request, 'dardos/partidos/index.html', {'partidos': partidos})
 
-def detail(request, partido_id):
+def detail(request, partido_id, reporting=None):
     p = get_object_or_404(Partido, pk=partido_id)
     partidoq = Partido.objects.filter(pk=partido_id)
     partidas = p.partida_set.order_by('numero')
@@ -46,7 +46,12 @@ def detail(request, partido_id):
     
     partidas = list(partidas)
     if len(partidas) > 0:
-        return direct_to_template(request, 'dardos/partidos/detail.html', 
+        if reporting == 'reporting':
+            template = 'dardos/partidos/detailreporting.html'
+        else:
+            template = 'dardos/partidos/detail.html'
+            
+        return direct_to_template(request, template, 
         	{'partido' : p,
              'partidas_par_1' : partidas[0:2],
              'partidas_par_2' : partidas[2:4],

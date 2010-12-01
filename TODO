@@ -23,10 +23,13 @@
         [X] Análisis total
         [X] Análisis de jugadores locales
         [X] Análisis de jugadores visitantes
+    [ ] Reporting de partido
+        [X] Sacar lo mismo que en detalle pero en una página limpia
+        [ ] Unificar los templates de detail y detailreporting porque son copias
     [ ] Estadísticas de un partido:
         [ ] Gráfica de jugadores en el partido:
-            [ ] Barras de partidas ganadas
-            [ ] Barras de partidas perdidas
+            [X] Barras de partidas ganadas
+            [X] Barras de partidas perdidas
             [ ] Barras de diferencia:
              ___  |2|
             |_1_| |_| __
