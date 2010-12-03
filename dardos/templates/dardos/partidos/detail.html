@@ -10,7 +10,6 @@
 <script language="JavaScript" src="/site_media/js/jquery.jqplot.min.js"></script>
 <script type="text/javascript" src="/site_media/js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
 <script language="JavaScript" src="/site_media/js/plugins/jqplot.barRenderer.min.js"></script>
-<script language="JavaScript" src="/site_media/js/plugins/jqplot.highlighter.min.js"></script>
 
 <style>
 table tr td ul li{
@@ -34,13 +33,19 @@ table tr td ul li{
 		    {% endfor %}
         ];
         
+        linediferencia = [
+            {% for e in estadisticas_jugadores.jugadores_list %}
+	            {{e.partidas_diferencia}},
+		    {% endfor %}
+        ];
+        
         ticksbase = [
             {% for e in estadisticas_jugadores.jugadores_list %}
 	            '{{e.jugador.nombre}}',
 		    {% endfor %}
         ];
               
-        plot3 = $.jqplot('divgrafica', [lineganadas, lineperdidas], {
+        plot3 = $.jqplot('divgrafica', [lineganadas, lineperdidas, linediferencia], {
           legend: {show: true, location:'ne', xoffset:10, yoffset:10},
           seriesDefaults: {
             fill:true, 
@@ -51,7 +56,8 @@ table tr td ul li{
           },
           series:[
             {label: 'Ganadas'},
-            {label: 'Perdidas'}
+            {label: 'Perdidas'},
+            {label: 'Diferencia',renderer:$.jqplot.LineRenderer, fill:false, fillToZero:false}
           ],    
           axes: {
             xaxis: {
@@ -60,7 +66,6 @@ table tr td ul li{
             }, 
             yaxis:{autoscale:true}
           },
-          highlighter: {showTooltip: true,tooltipAxes: 'y', useAxesFormatters: true}
         });
         
         $("#tabs").tabs();
