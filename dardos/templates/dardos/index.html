@@ -1,4 +1,4 @@
-{% extends "dardos/generalligasbase.html" %}
+{% extends "dardos/generalbase.html" %}
 
 {% load i18n inlines %}
 
@@ -7,32 +7,6 @@
 {% block content %}
 
 <h1>Liga de dardos</h1>
-<h2>Noticias</h2>
-<div id="noticias">
-	{% for noticia in object_list %}
-		<div id="noticia">
-			<h3>
-				<a href="{{ noticia.get_absolute_url }}" title="Ver la noticia" %}">{{noticia.title}}</a>
-			</h3>
-			<div class="noticia_body">
-				{{ noticia.body|render_inlines|safe }}
-			</div>
-		</div>
-	{% endfor %}
-</div>
-
-    {% load inlines %}
-{% if is_paginated %}
-  <p class="pagination">
-    {% if has_next %}
-    <a class="older" href="?page={{ next }}" title="{% trans "View older posts" %}">{% trans "Older" %}</a>
-    {% endif %}
-    {% if has_next and has_previous %} | {% endif %}
-    {% if has_previous %}
-    <a class="newer" href="?page={{ previous }}" title="{% trans "View newer posts" %}">{% trans "Newer" %}</a>
-    {% endif %}
-  </p>
-  {% endif %}
 
 
 {% endblock %}

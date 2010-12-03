@@ -14,6 +14,11 @@ from django.contrib import messages
 
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 
+
+def index (request):
+    current_path = "/"
+    return direct_to_template(request, 'dardos/index.html')
+        
 def cambiar_liga(request):
     request.session["liga_actual"] = request.REQUEST["liga"]
     return HttpResponseRedirect(get_current_path(request))

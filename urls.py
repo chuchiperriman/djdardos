@@ -10,7 +10,7 @@ from django.views.generic.simple import direct_to_template
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'djdardos.basic.blog.views.post_list'),
+    url(r'^$', 'djdardos.dardos.general.views.index'),
     (r'^ligas/$', 'djdardos.dardos.views.ligas_index'),
     (r'^login/$', 'djdardos.dardos.general.views.login'),
     (r'^logout/$', 'djdardos.dardos.general.views.logout'),
@@ -33,12 +33,6 @@ urlpatterns = patterns('',
     (r'^liga/(?P<liga_id>\d+)/ajax_get_siguiente_jornada/$', 'djdardos.dardos.partidos.views.ajax_get_siguiente_jornada'),
     (r'^maestros/ajax_jornadas_from_liga/(?P<liga_id>\d+)/$', 'djdardos.dardos.maestros.views.ajax_jornadas_from_liga'),
     (r'^maestros/ajax_equipos_from_liga/(?P<liga_id>\d+)/$', 'djdardos.dardos.maestros.views.ajax_equipos_from_liga'),
-    (r'^comments/', include('django.contrib.comments.urls')),
-    (r'^blog/', include('basic.blog.urls')),
-    url(r'^post/(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/$',
-        view='djdardos.dardos.views.post_detail',
-        name='blog_detail'
-    ),
     (r'^pruebas/$', 'djdardos.dardos.pruebas.views.index'),
     (r'^cambiar_liga/$', 'djdardos.dardos.general.views.cambiar_liga'),
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
