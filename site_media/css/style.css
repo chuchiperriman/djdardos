@@ -116,8 +116,6 @@ tr.row-b {
 /* form elements */
 form {
 	margin:10px 15px; padding: 0;
-	border: 1px solid #f2f2f2; 
-	background-color: #FAFAFA; 
 }
 label {
 	display:block;
@@ -321,7 +319,7 @@ input.button {
 #main h1 {
 	padding: 10px 0px 0px 5px;
 	margin: 0 0 0 10px;
-	border-bottom: 1px solid #f2f2f2; 	
+	border-bottom: 3px solid #f2f2f2; 	
 	font: normal 1.5em 'Trebuchet MS', Tahoma, Sans-serif;
 }
 #main ul li {
@@ -395,6 +393,7 @@ input.button {
 .float-left  { float: left; }
 .float-right { float: right; }
 .align-left  { text-align: left; }
+
 
 .align-right {	text-align: right; }
 

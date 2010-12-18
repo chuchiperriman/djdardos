@@ -9,8 +9,7 @@
             <label>Password:</label><input name="password" type="password">
         </p>
         <p>
-            <label>&nbsp;</label>
-            <input id="boton-login" type="submit" value="Entrar">
+            <input id="boton-login" class="boton-login" type="submit" value="Entrar">
         </p>
     </fieldset>
 </form>
@@ -22,10 +21,10 @@
     </tr>
 </table>
 <div style="text-align: right;margin-right: 15px">
-<a id="boton-login" href="/logout">Logout</a>
+<a id="boton-login" class="boton-login" href="/logout">Logout</a>
 </div>
 {% endif %}
 
 <script>
-    $("#boton-login").button();
+    $(".boton-login").button();
 </script>
