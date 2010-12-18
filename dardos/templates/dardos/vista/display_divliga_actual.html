@@ -1,13 +1,11 @@
 <div id="divliga">
     {% if liga_actual %}
-        <div class="sbicontent">
             <ul>
                 <li><b>División:</b> {{liga_actual.division.nombre}}</li>
                 <li><b>Liga:</b> {{liga_actual.nombre}}</li>
                 <li><button id="cambiar-liga">Cambiar liga</button></li>
                 <!-- {{current_path}} -->
             </ul>
-        </div>
         <div id="dialog-ligas" title="Seleccionar liga">
 	        <p>Seleccione la liga de la que quiere ver los datos</p>
 
@@ -49,8 +47,6 @@
         });
         </script>
     {% else %}
-        <div class="sbicontent">
             <p>No hay ninguna liga seleccionada</p>
-        </div>
     {% endif %}
 </div>

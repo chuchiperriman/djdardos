@@ -8,35 +8,16 @@
 {% endblock %}
 
 {% block menu %}
-<div class="sidebaritem">
-  <div class="sbihead">
+
     <h1>General</h1>
-  </div>
-  <div class="sbilinks">
-    <ul class="submenu1">
+    <ul class="sidemenu">
         <li><a href="/">Noticias</a></li>
         <li><a href="#">Reglamento</a></li>
         <li><a href="#">Contacto</a></li>
       </ul>
-  </div>
-</div>
-<div class="sidebaritem">
-  <div class="sbihead">
     <h1>Divisiones</h1>
-  </div>
-  <div class="sbilinks">
-      {% show_divisiones %}
-  </div>
-</div>
+    <ul class="sidemenu">
+        {% show_divisiones %}
+    </ul>
   {% block submenu %}{% endblock %}
-<div class="sidebaritem">
-  <div class="sbihead">
-    <h1>Información</h1>
-  </div>
-  <div class="sbicontent">
-    <p>
-      Este espacio se puede utilizar para enlaces directos, google adds etc.
-    </p>
-  </div>
-</div>
 {% endblock %}
