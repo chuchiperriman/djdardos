@@ -243,3 +243,19 @@ legend
     width: 200px;
 }
 
+#divliga ul{
+    margin: 5px;
+}
+
+#divliga ul li{
+    list-style: none;
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+
+#divliga ul li:last-child{
+    list-style: none;
+    margin: 0px;
+    margin-top: 15px;
+}
