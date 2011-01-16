@@ -88,7 +88,7 @@ class EstadisticaParejasTotal:
     
 def get_estadistica_parejas(equipo, liga):
     #e = Equipo.objects.filter(nombre="Paris")[0]
-    jugadores = equipo.jugador_set.all()
+    jugadores = equipo.get_jugadores_liga(liga)
     parejas = dict()
     for j in jugadores:
         for j2 in jugadores:
