@@ -1,4 +1,4 @@
-[ ] Seleccionar qué jugadores juegan en qué ligas porque hay bajas y altas
+[X] Seleccionar qué jugadores juegan en qué ligas porque hay bajas y altas
     entre una liga y otra
 [X] Maquetar cuandro de login cuando el usuario está logueado
 [X] Alta de jornadas:
@@ -45,4 +45,4 @@
 [ ] Hacer cuadro de resultados en la división
 [X] Quitar todo el blog
 [ ] Hacer una página de inicio con datos generales de todo
-[ ] Poner EquipoJugadorLiga como unique 
+[X] Poner EquipoJugadorLiga como unique 
