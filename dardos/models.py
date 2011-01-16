@@ -128,6 +128,9 @@ class EquipoJugadorLiga(models.Model):
         return self.equipo.nombre + " " + self.jugador.nombre + \
             " " + self.liga.nombre
 
+    class Meta:
+        unique_together = (("equipo", "jugador", "liga"),)
+        
 class Partido(models.Model):
     class Meta:
         permissions = (
