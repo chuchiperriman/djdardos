@@ -123,6 +123,10 @@ class EquipoJugadorLiga(models.Model):
     equipo = models.ForeignKey(Equipo)
     jugador = models.ForeignKey(Jugador)
     liga = models.ForeignKey(Liga)
+    
+    def __unicode__(self):
+        return self.equipo.nombre + " " + self.jugador.nombre + \
+            " " + self.liga.nombre
 
 class Partido(models.Model):
     class Meta:
