@@ -1,8 +1,6 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
 # -*- coding: utf-8 -*-
 
-from itertools import chain
-
 from django.db import models
 from django.db.models import Q
 
@@ -62,6 +60,17 @@ class Equipo(models.Model):
             if l.actual:
                 return l
         return None
+        
+    def get_jugadores_liga(self, liga=None):
+        if liga == None:
+            liga = self.get_liga_actual()
+        
+        ejl = self.equipojugadorliga_set.filter(liga=liga)
+        jugadores = []
+        for t in ejl:
+            jugadores.append(t.jugador)
+            
+        return jugadores
     
     def __unicode__(self):
         return self.nombre
@@ -109,6 +118,11 @@ class Jugador(models.Model):
         
     def __unicode__(self):
         return self.nombre
+
+class EquipoJugadorLiga(models.Model):
+    equipo = models.ForeignKey(Equipo)
+    jugador = models.ForeignKey(Jugador)
+    liga = models.ForeignKey(Liga)
 
 class Partido(models.Model):
     class Meta:

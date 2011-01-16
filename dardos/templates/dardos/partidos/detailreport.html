@@ -1,0 +1,142 @@
+{% load dardos_general %}
+
+<html>
+<body>
+<link rel="stylesheet" href="/site_media/css/jquery.jqplot.css">
+<script language="JavaScript" src="/site_media/js/jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="/site_media/js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script language="JavaScript" src="/site_media/js/plugins/jqplot.barRenderer.min.js"></script>
+<script language="JavaScript" src="/site_media/js/plugins/jqplot.highlighter.min.js"></script>
+
+<style>
+table tr td ul li{
+    display: inline;
+}
+</style>
+
+<script type="text/javascript">
+	$(function() {
+	
+	    $.jqplot.config.enablePlugins = true;
+	    
+	    lineperdidas = [
+	        {% for e in estadisticas_jugadores.jugadores_list %}
+	            -{{e.partidas_perdidas}},
+		    {% endfor %}
+		];
+        lineganadas = [
+            {% for e in estadisticas_jugadores.jugadores_list %}
+	            {{e.partidas_ganadas}},
+		    {% endfor %}
+        ];
+        
+        ticksbase = [
+            {% for e in estadisticas_jugadores.jugadores_list %}
+	            '{{e.jugador.nombre}}',
+		    {% endfor %}
+        ];
+              
+        plot3 = $.jqplot('divgrafica', [lineganadas, lineperdidas], {
+          legend: {show: true, location:'ne', xoffset:10, yoffset:10},
+          seriesDefaults: {
+            fill:true, 
+            fillToZero:true,
+            showMarker: false,
+            renderer:$.jqplot.BarRenderer,
+            rendererOptions:{barPadding: 2, barMargin: 10}
+          },
+          series:[
+            {label: 'Ganadas'},
+            {label: 'Perdidas'}
+          ],    
+          axes: {
+            xaxis: {
+              renderer:$.jqplot.CategoryAxisRenderer,
+              ticks: ticksbase,
+            }, 
+            yaxis:{autoscale:true}
+          },
+          highlighter: {showTooltip: true,tooltipAxes: 'y', useAxesFormatters: true}
+        });
+        
+        $("#tabs").tabs();
+		$("#tabs #tabs2").tabs();
+		$("#tabs #tabs2").tabs('select',0);
+	});
+	
+</script>
+
+<h1>{{partido.equipo_local.nombre}} - {{partido.equipo_visitante.nombre}} ({{partido.fecha|date:"d-m-Y"}})</h1>
+
+<div id="tabs">
+	<ul>
+		<li><a href="#tab-acta">Acta</a></li>
+		<li><a href="#tab-jugadores">Datos jugadores</a></li>
+		<li><a href="#tab-graficas">Gráficas</a></li>
+		<li><a href="#tab-est">Estadísticas</a></li>
+	</ul>
+	<div id="tab-acta">
+		<div id="partidas">
+            <table>
+                <tr>
+                    <th class="local">Local</th>
+                    <th class="resultado">Resultado</th>
+                    <th class="visitante">Visitante</th>
+                </tr>
+            </table>
+
+            <h2>Parejas 501</h2>
+            {% show_partida_parejas partidas_par_1 %}
+
+            {% show_partida_parejas partidas_par_2 %}
+
+            <h2>Individuales 501</h2>
+            {% show_partida_individuales partidas_ind_1 %}
+
+            <h2>Parejas Cricket</h2>
+            {% show_partida_parejas partidas_par_3 %}
+
+            {% show_partida_parejas partidas_par_4 %}
+
+            <h2>Individuales 501</h2>
+            {% show_partida_individuales partidas_ind_2 %}
+            
+            <table class="tabla_parejas">
+                <tr>
+                    <td class="local" style="font-size: 1.5em">Local</td>
+                    <td class="resultado" style="font-size: 1.5em; font-weight: bold">
+                        {{ partido.puntos_local }} - {{ partido.puntos_visitante }}
+                    </td>
+                    <td class="visitante" style="font-size: 1.5em">Visitante</td>
+                </tr>
+            </table>
+        </div>
+	</div>
+	<div id="tab-jugadores">
+        {% show_estadisticas_jugadores estadisticas_jugadores %}
+	</div>
+	<div id="tab-graficas">
+	    <div id="divgrafica" style="height:400px;width:600px; ">
+	    </div>
+	</div>
+	<div id="tab-est">
+	    <div id="tabs2">
+	        <ul>
+		        <li><a href="#tab-global">Global</a></li>
+		        <li><a href="#tab-local">Local</a></li>
+		        <li><a href="#tab-visitante">Visitante</a></li>
+	        </ul>
+	        <div id="tab-global">
+	            {% show_analisis_jugadores analisis_jugadores %}
+	        </div>
+	        <div id="tab-local">
+	            {% show_analisis_jugadores analisis_local %}
+	        </div>
+	        <div id="tab-visitante">
+	            {% show_analisis_jugadores analisis_visitante %}
+	        </div>
+	    </div>
+	</div>
+</div>
+</body>
+</html>

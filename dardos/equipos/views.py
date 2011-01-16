@@ -46,7 +46,7 @@ def detail(request, equipo_id):
         liga_actual = e.get_liga_actual()
     
     estadisticas = EstadisticasEquipo(e, liga_actual)
-    jugadores = e.jugador_set.all()
+    jugadores = e.get_jugadores_liga(liga_actual)
     partidos = Partido.objects.filter(jornada__liga__exact = liga_actual).distinct()
     estjugadores = DatosEstadisticaJugadores(jugadores, partidos)
     analisis_jugadores = AnalisisJugadores(estjugadores)
@@ -84,7 +84,7 @@ def estreport(request, equipo_id, liga_id):
     estadisticas = EstadisticasEquipo(e, liga_actual)
     jornadas_liga = Jornada.objects.filter(liga=liga_actual)
     partidos = Partido.objects.filter(jornada__liga__exact = liga_actual).distinct()
-    estjugadores = DatosEstadisticaJugadores(e.jugador_set.all(), partidos)
+    estjugadores = DatosEstadisticaJugadores(e.get_jugadores_liga(liga_actual), partidos)
     analisis_jugadores = AnalisisJugadores(estjugadores)
     estparejas = get_estadistica_parejas (e, liga_actual)
     return render_to_response('dardos/equipos/estreport.html',
