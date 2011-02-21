@@ -121,7 +121,5 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.messages',
     'tagging',
-    'djdardos.basic.inlines',
-    'djdardos.basic.blog',
     'dardos'
 )
