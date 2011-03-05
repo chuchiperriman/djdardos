@@ -18,7 +18,7 @@
     {% for e in equipos %}
         <tr>
             <td>{{ e.nombre }}</td>
-            <td><a href="/equipos/{{e.id}}" class="view"></a></td>
+            <td><a href="{{e.get_absolute_url}}" class="view"></a></td>
     {% endfor %}
     </table>
 {% else %}

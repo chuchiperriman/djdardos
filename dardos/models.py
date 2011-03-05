@@ -28,6 +28,9 @@ class Division(models.Model):
         
     def __unicode__(self):
         return self.nombre
+        
+    def get_absolute_url(self):
+        return "/division/%i/" % self.id
     
 class Liga(models.Model):
     division = models.ForeignKey(Division)
@@ -74,6 +77,9 @@ class Equipo(models.Model):
     
     def __unicode__(self):
         return self.nombre
+        
+    def get_absolute_url(self):
+        return "/equipos/%i/" % self.id
     
 
 class Jugador(models.Model):
@@ -118,6 +124,9 @@ class Jugador(models.Model):
         
     def __unicode__(self):
         return self.nombre
+        
+    def get_absolute_url(self):
+        return "/jugadores/%i/" % self.id
 
 class EquipoJugadorLiga(models.Model):
     equipo = models.ForeignKey(Equipo)
@@ -148,6 +157,9 @@ class Partido(models.Model):
     
     def __unicode__(self):
         return "Jornada " + str(self.jornada.numero) + ": " + self.equipo_local.nombre + "-" + self.equipo_visitante.nombre + " " + str(self.fecha)
+        
+    def get_absolute_url(self):
+        return "/partidos/%i/" % self.id
 
 class Partida(models.Model):
     numero = models.IntegerField()

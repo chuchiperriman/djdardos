@@ -13,7 +13,7 @@
     		<td>Jornada {{p.jornada.numero}}</td>
     		<td>{{p.fecha|date:"d-m-Y" }}</td>
         	<td>
-        	    <a href="/equipos/{{p.equipo_local.id}}">{{p.equipo_local.nombre}}</a>
+        	    <a href="{{p.equipo_local.get_absolute_url}}">{{p.equipo_local.nombre}}</a>
         	</td>
         	<td>
         	    {% ifequal p.ganador p.equipo_local %}
@@ -36,7 +36,7 @@
 		    {% endif %}
             </td>
         	<td>
-        	    <a href="/equipos/{{p.equipo_visitante.id}}">{{p.equipo_visitante.nombre}}</a>
+        	    <a href="{{p.equipo_visitante.get_absolute_url}}">{{p.equipo_visitante.nombre}}</a>
         	</td>
         	<td>
         	    {% if p.jugado %}

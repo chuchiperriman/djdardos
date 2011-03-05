@@ -27,7 +27,7 @@
         	<td>{{p.equipo_visitante.nombre}}</td>
         	<td>{{ p.fecha|date:"d-m-Y" }}</td>
         	<td>
-        		<a href="/partidos/{{p.id}}" class="view"></a>
+        		<a href="{{p.get_absolute_url}}" class="view"></a>
         		{% if not p.jugado %}
         		<a href="/partidos/partidas/{{p.id}}" class="edit"></a>
         		{% endif %}

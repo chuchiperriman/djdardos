@@ -40,7 +40,7 @@
     </div>
     <div id="datos">
         <b>Nombre:</b> {{jugador.nombre}}<br/>
-        <b>Equipo:</b> <a href="/equipos/{{jugador.equipo.id}}">{{jugador.equipo.nombre}}</a><br/>
+        <b>Equipo:</b> <a href="{{jugador.equipo.get_absolute_url}}">{{jugador.equipo.nombre}}</a><br/>
         <b>Fecha de alta:</b> {{jugador.fecha_alta}}<br/>
         <b>E-Mail:</b> 
         {% if jugador.email %}

@@ -34,11 +34,11 @@
 	<tr>
 		<td>
 		{% ifequal d.equipo.id equipo.id %}
-			<a href="/equipos/{{d.equipo.id}}">
+			<a href="{{ d.equipo.get_absolute_url }}">
 			    <b>{{d.equipo.nombre}}</b>
 			</a>
 		{% else %}
-		    <a href="/equipos/{{d.equipo.id}}">
+		    <a href="{{d.equipo.get_absolute_url}}">
     			{{d.equipo.nombre}}
     		</a>
 		{% endifequal %}

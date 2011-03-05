@@ -17,9 +17,9 @@
         </tr>
     {% for j in jugadores_list %}
         <tr>
-            <td><a href="/jugadores/{{j.equipo.id}}">{{j.equipo.nombre}}</a></td>
-            <td><a href="/jugadores/{{j.id}}">{{ j.nombre }}</a></td>
-            <td><a href="/jugadores/{{j.id}}" class="view"></a></td>
+            <td><a href="{{j.equipo.get_absolute_url}}">{{j.equipo.nombre}}</a></td>
+            <td><a href="{{j.get_absolute_url}}">{{ j.nombre }}</a></td>
+            <td><a href="{{j.get_absolute_url}}" class="view"></a></td>
         </tr>
     {% endfor %}
     </table>

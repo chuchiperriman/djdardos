@@ -49,6 +49,9 @@ class DatosEstadisticaJugador:
             self.partidas_par_ganadas_cricket_por = \
                 self.partidas_par_ganadas_cricket * 100 / self.partidas_par_cricket
         self.partidas_par_cricket_dif = self.partidas_par_ganadas_cricket - self.partidas_par_perdidas_cricket
+        
+    def get_absolute_url(self):
+        return self.jugador.get_absolute_url()
 
 class DatosEstadisticaJugadoresBase:
     def __init__(self, list_est_jugadores):

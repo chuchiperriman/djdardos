@@ -3,7 +3,7 @@
 <ul>
 {% for d in divisiones %}
     <li>
-    <a href="/division/{{d.id}}">{{d.nombre}}</a>
+    <a href="{{d.get_absolute_url}}">{{d.nombre}}</a>
     {% if d.liga_set.count > 0 %}
         <ul>
         {% for l in d.liga_set.all%}

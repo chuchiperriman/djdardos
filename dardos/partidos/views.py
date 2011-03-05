@@ -185,7 +185,7 @@ def setpartidas(request, partido_id):
             procesos.actualizar_puntos_partido(partido)
             messages.success (request, 'Partido dado de alta correctamente')
             
-            return HttpResponseRedirect('/partidos/%d/' % (partido.id))
+            return HttpResponseRedirect(partido.get_absolute_url())
             
         else:
             messages.error (request, 'Revise los datos del acta porque se han producido errores')
