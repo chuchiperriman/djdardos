@@ -76,7 +76,7 @@ table tr td ul li{
 </script>
 
 <div style="float:right">
-    <a href="/partidos/{{partido.id}}/reporting">
+    <a href="{% url dardos-partidos-detail-reporting partido.id 'reporting' %}">
         <img src="/site_media/images/report.png" title="Informe de estadísticas del partido"/>
     </a>
 </div>

@@ -5,19 +5,16 @@ from djdardos.dardos.models import *
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
 
-from ..templatetags.graficos import *
-from ..equipos.estadisticas import DatosEstadisticaJugador
-from ..graficas import graficas
-from .forms import GraficasForm
+from djdardos.dardos.templatetags.graficos import *
+from djdardos.dardos.equipos.estadisticas import DatosEstadisticaJugador
+from djdardos.dardos.graficas import graficas
+from djdardos.dardos.graficas.forms import GraficasForm
 
 def ajax_grafica_evolucion(request):
-    print "---ppp"
     form = GraficasForm(request.GET)
     graf = None
-    print "pop"
     
     if form.is_valid():
-        print 'valido'
         liga = Liga.objects.get(pk=form.cleaned_data["liga"])
             
         g = graficas.GraficaJornadas(liga)
@@ -66,6 +63,3 @@ def ajax_grafica_evolucion(request):
     return render_to_response('dardos/includes/grafico_evolucion.html', 
     	{'grafico_evolucion': graf})
 
-        
-        
-        

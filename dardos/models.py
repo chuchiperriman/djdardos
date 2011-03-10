@@ -30,7 +30,8 @@ class Division(models.Model):
         return self.nombre
         
     def get_absolute_url(self):
-        return "/division/%i/" % self.id
+        return ('dardos-divisiones-detail',(), {'division_id' : self.id})
+    get_absolute_url = models.permalink(get_absolute_url)
     
 class Liga(models.Model):
     division = models.ForeignKey(Division)
@@ -79,8 +80,8 @@ class Equipo(models.Model):
         return self.nombre
         
     def get_absolute_url(self):
-        return "/equipos/%i/" % self.id
-    
+        return ('dardos-equipos-detail',(), {'equipo_id' : self.id})
+    get_absolute_url = models.permalink(get_absolute_url)
 
 class Jugador(models.Model):
     equipo = models.ForeignKey(Equipo)
@@ -126,7 +127,8 @@ class Jugador(models.Model):
         return self.nombre
         
     def get_absolute_url(self):
-        return "/jugadores/%i/" % self.id
+        return ('dardos-jugadores-detail',(), {'jugador_id' : self.id})
+    get_absolute_url = models.permalink(get_absolute_url)
 
 class EquipoJugadorLiga(models.Model):
     equipo = models.ForeignKey(Equipo)
@@ -159,7 +161,8 @@ class Partido(models.Model):
         return "Jornada " + str(self.jornada.numero) + ": " + self.equipo_local.nombre + "-" + self.equipo_visitante.nombre + " " + str(self.fecha)
         
     def get_absolute_url(self):
-        return "/partidos/%i/" % self.id
+        return ('dardos-partidos-detail',(), {'partido_id' : self.id})
+    get_absolute_url = models.permalink(get_absolute_url)
 
 class Partida(models.Model):
     numero = models.IntegerField()
