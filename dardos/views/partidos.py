@@ -1,13 +1,13 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
 # -*- coding: utf-8 -*-
 
-import procesos
+from djdardos.dardos.partidos import procesos
 
 from djdardos.dardos.models import *
 from django.db.models import Max
 from djdardos.dardos.partidos.forms import *
-from ..general.sesiones import *
-from ..equipos.estadisticas import DatosEstadisticaJugadores, AnalisisJugadores
+from djdardos.dardos.general.sesiones import *
+from djdardos.dardos.equipos.estadisticas import DatosEstadisticaJugadores, AnalisisJugadores
 from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic.simple import direct_to_template
 from django.views.generic.create_update import create_object

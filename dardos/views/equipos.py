@@ -6,10 +6,10 @@ from djdardos.dardos.models import *
 from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic.simple import direct_to_template
-from estadisticas import *
-from ..graficas.forms import GraficasForm
-from ..general.sesiones import *
-from estparejas import *
+from djdardos.dardos.equipos.estadisticas import *
+from djdardos.dardos.graficas.forms import GraficasForm
+from djdardos.dardos.general.sesiones import *
+from djdardos.dardos.equipos.estparejas import *
 from django.template import RequestContext
 
 from django.http import HttpResponse, Http404
