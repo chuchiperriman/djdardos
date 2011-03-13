@@ -13,7 +13,7 @@
 		$("#tabs").tabs();
 		
 		$("#boton_formgrafica").click(function(){
-		    $.get('/ajax_grafica_evolucion', $("#formgrafica").serialize(), function(data){
+		    $.get('{% url dardos-graficas-ajax_grafica_evolucion %}', $("#formgrafica").serialize(), function(data){
 		        $("#chartdivevo").html('');
 		        $("#graf_wrapper").html(data);
 		    });

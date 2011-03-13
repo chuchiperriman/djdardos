@@ -5,7 +5,7 @@
 {% block content %}
 <h1>Nueva jornada</h1>
 
-<form action="/partidos/new_jornada/" method="post">
+<form action="{% url dardos-partidos-new_jornada %}" method="post">
     <fieldset>
         <legend>Datos de la jornada</legend>
         {{form.as_p}}

@@ -21,7 +21,7 @@
 		});
 		
 		$("#boton_formgrafica").click(function(){
-		    $.get('/ajax_grafica_evolucion', $("#formgrafica").serialize(), function(data){
+		    $.get('{% url dardos-graficas-ajax_grafica_evolucion %}', $("#formgrafica").serialize(), function(data){
 		        $("#chartdivevo").html('');
 		        $("#graf_wrapper").html(data);
 		    });
@@ -34,7 +34,7 @@
 {% block content %}
 <h1>{{ equipo.nombre }}</h1>
 <div style="float:right">
-    <a href="/equipos/estreport/{{equipo.id}}/{{liga_actual.id}}">
+    <a href="{% url dardos-equipos-estreport equipo_id=equipo.id liga_id=liga_actual.id %}">
         <img src="/site_media/images/report.png" title="Informe de estadísticas"/>
     </a>
 </div>
@@ -68,7 +68,7 @@
 		<li><a href="#tabs-5">Gráficas</a></li>
 		<li><a href="#tabs-6">Contacto</a></li>
 		<li>
-		    <a href="/equipos/estparejas/{{equipo.id}}/{{liga_actual.id}}">
+		    <a href="{% url dardos-equipos-estparejas equipo_id=equipo.id liga_id=liga_actual.id %}">
 		        <span>Parejas</span>
 		        <div class="icon" style="display: none"><img src="/site_media/images/ajax-loader.gif" /></div>
 		    </a>

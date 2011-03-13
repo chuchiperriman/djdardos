@@ -5,7 +5,7 @@
 {% block content %}
 <h1>Nuevo partido</h1>
 
-<a href="/partidos/new_jornada" class="add">Nueva jornada</a>
+<a href="{% url dardos-partidos-new_jornada %}" class="add">Nueva jornada</a>
 <form method="post">
     {{ form.non_field_errors }}
     <fieldset>
@@ -99,16 +99,16 @@
 		
 		$("#id_liga").change(function(){
 		    var liga = $(this).val();
-	        var url = '/maestros/ajax_jornadas_from_liga/'+liga+'/';
-	        var url_equipos = '/maestros/ajax_equipos_from_liga/'+liga+'/';
+	        var url = '{% url dardos-maestros-ajax_jornadas_from_liga %}';
+	        var url_equipos = '{% url dardos-maestros-ajax_equipos_from_liga %}';
 	        selectJornada.children().remove();
 	        selectEquipoLocal.children().remove();
 		    selectEquipoVisitante.children().remove();
 	        if (liga != ''){
-	            $.get(url, function(data) {
+	            $.get(url, {id: liga}, function(data) {
     	            selectJornada.append($(data));
                 });
-                $.get(url_equipos, function(data) {
+                $.get(url_equipos, {id: liga}, function(data) {
     	            selectEquipoLocal.append($(data));
     	            selectEquipoVisitante.append($(data));
                 });

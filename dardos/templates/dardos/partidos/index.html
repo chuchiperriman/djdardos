@@ -6,7 +6,7 @@
 
 <h1>Partidos</h1>
     <div>
-	    <a href="/partidos/new" class="add">
+	    <a href="{% url dardos-partidos-new %}" class="add">
 	    	Nuevo partido
 	    </a>
     </div>
@@ -29,7 +29,7 @@
         	<td>
         		<a href="{{p.get_absolute_url}}" class="view"></a>
         		{% if not p.jugado %}
-        		<a href="/partidos/partidas/{{p.id}}" class="edit"></a>
+        		<a href="{% url dardos-partidos-setpartidas partido_id=p.id%}" class="edit"></a>
         		{% endif %}
         	</td>
        	</tr>
