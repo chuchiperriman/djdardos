@@ -9,24 +9,4 @@ from django.shortcuts import render_to_response, get_object_or_404
 
 from django.http import HttpResponse, Http404
 
-def ajax_jornadas_from_liga (request):
-    if request.is_ajax():
-        jornadas = Jornada.objects.filter(liga=request.GET["id"])
-        texto = ""
-        for j in jornadas:
-            texto = texto + "<option value='"+str(j.id)+"'>"+str(j.numero)+ \
-                " - " + str(j.fecha_prevista) + "</option>"
-        return HttpResponse(texto)
-    else:
-        return HttpResponse(status=400)
-
-def ajax_equipos_from_liga (request):
-    if request.is_ajax():
-        equipos = Equipo.objects.filter(ligas=request.GET["id"])
-        texto = ""
-        for e in equipos:
-            texto = texto + "<option value='"+str(e.id)+"'>"+str(e)+"</option>"
-        return HttpResponse(texto)
-    else:
-        return HttpResponse(status=400)
 

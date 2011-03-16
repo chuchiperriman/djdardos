@@ -9,7 +9,14 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'djdardos.dardos.general.views.index'),
-    (r'^dardos/', include('djdardos.dardos.urls')),
+    (r'^dardos/', include('djdardos.dardos.urls.general')),
+    (r'^dardos/equipos/', include('djdardos.dardos.urls.equipos')),
+    (r'^dardos/jugadores/', include('djdardos.dardos.urls.jugadores')),
+    (r'^dardos/partidos/', include('djdardos.dardos.urls.partidos')),
+    (r'^dardos/graficas/', include('djdardos.dardos.urls.graficas')),
+    (r'^dardos/ligas/', include('djdardos.dardos.urls.ligas')),
+    (r'^dardos/divisiones/', include('djdardos.dardos.urls.divisiones')),
+    (r'^dardos/jornadas/', include('djdardos.dardos.urls.jornadas')),
 
     #Media files
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',

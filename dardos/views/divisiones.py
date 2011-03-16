@@ -41,10 +41,4 @@ def detail(request, division_id):
          'liga': l,
          'current_path': request.path},
          context_instance = RequestContext(request))
-
          
-def ajax_jornada_detail(request):
-    partidos = Partido.objects.filter(jornada = request.GET["id"])
-    return render_to_response('dardos/partidos/partidos_jornada_block.html', 
-    	{'partidos': partidos})
-

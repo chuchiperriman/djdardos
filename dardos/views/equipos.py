@@ -93,3 +93,13 @@ def estreport(request, equipo_id, liga_id):
          'estadistica_parejas': estparejas,
          'analisis_jugadores': analisis_jugadores})
          
+def ajax_equipos_from_liga (request):
+    if request.is_ajax():
+        equipos = Equipo.objects.filter(ligas=request.GET["id"])
+        texto = ""
+        for e in equipos:
+            texto = texto + "<option value='"+str(e.id)+"'>"+str(e)+"</option>"
+        return HttpResponse(texto)
+    else:
+        return HttpResponse(status=400)
+

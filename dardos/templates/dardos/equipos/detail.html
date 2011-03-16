@@ -113,7 +113,7 @@
 				</td>
 				<td>
 				    {% if j.partido.jugado %}
-                		<a href="/partidos/{{j.partido.id}}" class="view"></a>
+                		<a href="{% url dardos-partidos-detail partido_id=j.partido.id %}" class="view"></a>
             		{% endif %}
 				</td>
 			</tr>

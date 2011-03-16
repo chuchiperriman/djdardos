@@ -12,7 +12,7 @@
 	
 	$(document).ready(function () {
   		$('#jornada').change(function(){
-			$.get('{% url dardos-divisiones-ajax_jornada_detail%}', {id: $(this).val()}, function(data) {
+			$.get('{% url dardos-jornadas-ajax_jornada_detail%}', {id: $(this).val()}, function(data) {
 				$('#partidos_jornada').html(data);
 			});
 		});

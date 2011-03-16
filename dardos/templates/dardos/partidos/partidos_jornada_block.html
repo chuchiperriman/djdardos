@@ -40,9 +40,9 @@
         	</td>
         	<td>
         	    {% if p.jugado %}
-        		<a href="/partidos/{{p.id}}" class="view"></a>
+        		<a href="{% url dardos-partidos-detail partido_id=p.id %}" class="view"></a>
         		{% else %}
-        		<a href="/partidos/partidas/{{p.id}}" class="edit"></a>
+        		<a href="{% url dardos-partidos-setpartidas partido_id=p.id %}" class="edit"></a>
         		{% endif %}
         	</td>
        	</tr>
