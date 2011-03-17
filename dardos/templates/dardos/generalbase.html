@@ -5,6 +5,9 @@
 {% block supermenu %}
     <li><a id="selected" href="/">General</a></li>
     <li><a href="{% url dardos-ligas-index %}">Ligas</a></li>
+    {% if user.is_staff %}
+        <li><a href="{% url admin:index %}">Admin</a></li>
+    {% endif %}
 {% endblock %}
 
 {% block menu %}

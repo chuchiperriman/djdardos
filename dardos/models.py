@@ -23,6 +23,9 @@ TIPOS_JUEGO = (
 class Division(models.Model):
     nombre = models.CharField(max_length=100)
     
+    class Meta:
+        verbose_name_plural = "Divisiones"
+    
     def get_liga_actual(self):
         return self.liga_set.get(actual=True)
         
@@ -90,6 +93,9 @@ class Jugador(models.Model):
     path_foto = models.CharField(max_length=255,null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
     
+    class Meta:
+        verbose_name_plural = "Jugadores"
+    
     filters = None
     
     def partidas(self):
@@ -134,13 +140,14 @@ class EquipoJugadorLiga(models.Model):
     equipo = models.ForeignKey(Equipo)
     jugador = models.ForeignKey(Jugador)
     liga = models.ForeignKey(Liga)
-    
-    def __unicode__(self):
-        return self.equipo.nombre + " " + self.jugador.nombre + \
-            " " + self.liga.nombre
 
     class Meta:
         unique_together = (("equipo", "jugador", "liga"),)
+        verbose_name_plural = "Jugadores de un equipo en una liga"
+            
+    def __unicode__(self):
+        return self.equipo.nombre + " en " + self.liga.nombre + \
+            ": " + self.jugador.nombre
         
 class Partido(models.Model):
     class Meta:

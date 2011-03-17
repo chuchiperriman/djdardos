@@ -1,6 +1,5 @@
 # -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
 from djdardos.dardos.models import *
-from django.shortcuts import render_to_response, get_object_or_404
 
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.views.generic import date_based, list_detail

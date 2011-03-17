@@ -4,7 +4,6 @@
 from djdardos.dardos.models import *
 from djdardos.dardos.general.sesiones import *
 from django.db.models import Q
-from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic.simple import direct_to_template
 from djdardos.dardos.liga.clasificacion import *
 from djdardos.dardos.general.sesiones import *
