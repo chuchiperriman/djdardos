@@ -18,6 +18,8 @@ urlpatterns = patterns('',
     (r'^dardos/divisiones/', include('djdardos.dardos.urls.divisiones')),
     (r'^dardos/jornadas/', include('djdardos.dardos.urls.jornadas')),
 
+    (r'^mb/', include('djdardos.mb.urls')),
+
     #Media files
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
                  {'document_root': settings.MEDIA_ROOT}),

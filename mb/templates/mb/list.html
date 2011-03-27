@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Mensajes{% endblock %}
+
+{% block content %}
+
+<div>
+  <form method="POST" action="{% url mb-new_tweet%}">
+    
+    Nuevo mensaje:
+    <textarea name="text"></textarea>
+    <input type="submit" name="new-tweet" value="Publicar" />
+  </form>
+</div>
+{% if form.errors %}
+sdfasdf
+   {% for error in form.non_field_errors %}
+       <li class="error">{{ error|striptags }}</li>
+   {% endfor %}
+   {% for field in form %}
+           {%if field.errors%}
+           	   {% for error in field.errors %}
+               <li class="error">{{field.name}}: {{ error|striptags }}</li>
+           {%endfor%}
+           {%endif%}
+   {% endfor %}
+{% endif %}
+
+<h1>Mensajes</h1>
+{% for t in tweets %}
+<div>
+  <span>Mensaje: {{t.text}}</span>
+</div>
+{% endfor %}
+{% endblock %}
+
+
+
+
