@@ -13,17 +13,21 @@ class TweetForm(ModelForm):
         model = Tweet
         exclude = ['sender_type', 'sender_id', 'sent']
 
-def list(request):
+def list(request, extra = None):
     ct = ContentType.objects.get_for_model(request.user)
     tweets = Tweet.objects.filter(sender_type=ct.id, sender_id=request.user.id)
-    return direct_to_template(request, 'mb/list.html',
-                              {'tweets': tweets})
+    params = {'tweets': tweets}
+    if extra:
+        #FIXME Do it better
+        for k in extra.keys():
+            params[k] = extra[k]
+    return direct_to_template(request, 'mb/list.html', params)
 
 def new_tweet(request):
     if request.method == 'POST':
         print 'post'
         form = TweetForm(data=request.POST)
-                                           
+
         if form.is_valid():
             new_tweet = form.save(commit=False)
             new_tweet.sender = request.user
@@ -33,7 +37,7 @@ def new_tweet(request):
     else:
         form = TweetForm()
 
-    return direct_to_template(request, 'mb/list.html', {'form': form})
+    return list(request, {'form': form})
 
 new_tweet = login_required(new_tweet)
 

@@ -8,12 +8,11 @@
   <form method="POST" action="{% url mb-new_tweet%}">
     
     Nuevo mensaje:
-    <textarea name="text"></textarea>
+    <textarea name="text">{{form.data.text}}</textarea>
     <input type="submit" name="new-tweet" value="Publicar" />
   </form>
 </div>
 {% if form.errors %}
-sdfasdf
    {% for error in form.non_field_errors %}
        <li class="error">{{ error|striptags }}</li>
    {% endfor %}
