@@ -35,14 +35,27 @@
 {% endif %}
 
 <h1>Mensajes</h1>
-{% for t in tweets %}
+{% for t in object_list %}
 <div class="tweet">
   <img src="/site_media/fotos/jugadores/nofoto.jpg"/>
   <span class="contenido">{{t.text}}</span>
 </div>
 {% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Página {{ page_obj.number }} de {{ paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+        {% endif %}
+    </span>
+</div>
+
 {% endblock %}
-
-
-
-

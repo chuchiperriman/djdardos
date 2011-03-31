@@ -9,6 +9,7 @@ from django.forms import ModelForm
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
+from django.views.generic.list_detail import object_list
 
 class TweetForm(ModelForm):
     class Meta:
@@ -16,12 +17,11 @@ class TweetForm(ModelForm):
         exclude = ['sender_type', 'sender_id', 'sent']
 
 def list(request, extra = None):
-    ct = ContentType.objects.get_for_model(request.user)
-    tweets = Tweet.objects.filter(sender_type=ct.id, sender_id=request.user.id)
-    params = {'tweets': tweets}
-    if extra:
-        params.update (extra)
-    return direct_to_template(request, 'mb/list.html', params)
+    return object_list(request,
+                   queryset=Tweet.objects.all(),
+                   paginate_by=10,
+                   template_name='mb/list.html',
+                   extra_context=extra)
 
 def new_tweet(request):
     if request.method == 'POST':
