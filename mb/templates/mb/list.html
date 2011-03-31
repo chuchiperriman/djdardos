@@ -36,8 +36,9 @@
 
 <h1>Mensajes</h1>
 {% for t in tweets %}
-<div>
-  <span>Mensaje: {{t.text}}</span>
+<div class="tweet">
+  <img src="/site_media/fotos/jugadores/nofoto.jpg"/>
+  <span class="contenido">{{t.text}}</span>
 </div>
 {% endfor %}
 {% endblock %}

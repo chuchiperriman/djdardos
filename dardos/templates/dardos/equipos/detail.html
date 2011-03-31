@@ -62,18 +62,18 @@
 <div id="tabs">
 	<ul>
 	    <li><a href="#tab-noticias">Noticias</a></li>
-		<li><a href="#tabs-1">Jugadores</a></li>
-		<li><a href="#tabs-2">Clasificación</a></li>
-		<li><a href="#tabs-3">Jornadas</a></li>
-		<li><a href="#tabs-4">Estadísticas</a></li>
-		<li><a href="#tabs-5">Gráficas</a></li>
-		<li><a href="#tabs-6">Contacto</a></li>
-		<li>
-		    <a href="{% url dardos-equipos-estparejas equipo_id=equipo.id liga_id=liga_actual.id %}">
-		        <span>Parejas</span>
-		        <div class="icon" style="display: none"><img src="/site_media/images/ajax-loader.gif" /></div>
-		    </a>
-		</li>
+	    <li><a href="#tabs-1">Jugadores</a></li>
+	    <li><a href="#tabs-2">Clasificación</a></li>
+	    <li><a href="#tabs-3">Jornadas</a></li>
+	    <li><a href="#tabs-4">Estadísticas</a></li>
+	    <li><a href="#tabs-5">Gráficas</a></li>
+	    <li><a href="#tabs-6">Contacto</a></li>
+	    <li>
+	      <a href="{% url dardos-equipos-estparejas equipo_id=equipo.id liga_id=liga_actual.id %}">
+		<span>Parejas</span>
+		<div class="icon" style="display: none"><img src="/site_media/images/ajax-loader.gif" /></div>
+	      </a>
+	    </li>
 	</ul>
 	<div id="tab-noticias">
 	    {% tweets_object equipo%}

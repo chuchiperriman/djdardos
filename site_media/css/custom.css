@@ -242,9 +242,23 @@ legend
     margin-bottom: 5px;
 }
 
-
 #divliga ul li:last-child{
     list-style: none;
     margin: 0px;
     margin-top: 15px;
+}
+
+.tweet{
+    margin: 5px;
+    padding: 5px;
+    background-color: #F5F5F5;
+    width: 400px;
+    clear:both;
+    min-height: 70px;
+    border: 1px solid #EFEDED;
+}
+
+.tweet img{
+    width: 50px;
+    float: left;
 }

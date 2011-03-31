@@ -1,8 +1,9 @@
 {% if tweets %}
     {% for t in tweets %}
-    <div>
-      <span>Mensaje: {{t.text}}</span>
-    </div>
+<div class="tweet">
+  <img src="/site_media/fotos/jugadores/nofoto.jpg"/>
+  <span class="contenido">{{t.text}}</span>
+</div>
     {% endfor %}
 {% else %}
     No hay mensajes publicados

@@ -37,7 +37,12 @@
 		
 		<!-- Menu Tabs -->
 		<ul>
-			{% block supermenu %}{% endblock %}
+		  <li><a href="/">General</a></li>
+		  <li><a href="{% url dardos-ligas-index %}">Ligas</a></li>
+		  <li><a href="{% url mb-list %}">Noticias</a></li>
+		  {% if user.is_staff %}
+		    <li><a href="{% url admin:index %}">Admin</a></li>
+		  {% endif %}
 		</ul>		
 	</div></div>
 	

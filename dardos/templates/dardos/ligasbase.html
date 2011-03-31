@@ -2,14 +2,6 @@
 
 {% load dardos_general vista %}
 
-{% block supermenu %}
-    <li><a href="/">General</a></li>
-    <li><a id="selected" href="/ligas">Ligas</a></li>
-    {% if user.is_staff %}
-        <li><a href="{% url admin:index %}">Admin</a></li>
-    {% endif %}
-{% endblock %}
-
 {% block menu %}
 
 
