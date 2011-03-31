@@ -216,5 +216,5 @@ class Partida(models.Model):
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
     jugador = models.ForeignKey(Jugador, null=True, unique=True)
-    admin_equipos = models.ManyToManyField (Equipo)
-    admin_ligas = models.ManyToManyField (Liga)
+    admin_equipos = models.ManyToManyField (Equipo, null=True, blank=True)
+    admin_ligas = models.ManyToManyField (Liga, null=True, blank=True)

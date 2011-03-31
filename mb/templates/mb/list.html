@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-{% load mb %}
-
 {% block title %}Mensajes{% endblock %}
 
 {% block content %}
@@ -37,7 +35,11 @@
 {% endif %}
 
 <h1>Mensajes</h1>
-{% tweets_jugador %}
+{% for t in tweets %}
+<div>
+  <span>Mensaje: {{t.text}}</span>
+</div>
+{% endfor %}
 {% endblock %}
 
 
