@@ -3,6 +3,7 @@
 
 from django.db import models
 from django.db.models import Q
+from django.contrib.auth.models import User
 
 TIPO_PARTIDA_INDIVIDUAL = 1
 TIPO_PARTIDA_PAREJAS = 2
@@ -212,4 +213,8 @@ class Partida(models.Model):
     def __unicode__(self):
         return str(self.partido) + " - " + str(self.numero)
     
-    
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, unique=True)
+    jugador = models.ForeignKey(Jugador, null=True, unique=True)
+    admin_equipos = models.ManyToManyField (Equipo)
+    admin_ligas = models.ManyToManyField (Liga)
