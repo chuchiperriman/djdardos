@@ -9,11 +9,11 @@ from django import template
 register = template.Library()
 
 @register.inclusion_tag('mb/tags/lista_tweets.html', takes_context = True)
-def tweets_jugador(context, jugador):
+def tweets_object(context, objeto):
     request = context['request']
-    if jugador:
-        ct = ContentType.objects.get_for_model(jugador)
-        tweets = Tweet.objects.filter(sender_type=ct.id, sender_id=jugador.id)
+    if objeto:
+        ct = ContentType.objects.get_for_model(objeto)
+        tweets = Tweet.objects.filter(sender_type=ct.id, sender_id=objeto.id)
     else:
         tweets = []
     return {'tweets': tweets}

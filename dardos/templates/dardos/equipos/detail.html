@@ -1,6 +1,6 @@
 {% extends "dardos/ligasbase.html" %}
 
-{% load dardos_general graficos %}
+{% load dardos_general graficos mb %}
 
 {% block title %}Equipo{% endblock %}
 
@@ -61,6 +61,7 @@
 </style>
 <div id="tabs">
 	<ul>
+	    <li><a href="#tab-noticias">Noticias</a></li>
 		<li><a href="#tabs-1">Jugadores</a></li>
 		<li><a href="#tabs-2">Clasificación</a></li>
 		<li><a href="#tabs-3">Jornadas</a></li>
@@ -74,6 +75,9 @@
 		    </a>
 		</li>
 	</ul>
+	<div id="tab-noticias">
+	    {% tweets_object equipo%}
+	</div>
 	<div id="tabs-1">
 		{% show_estadisticas_jugadores estjugadores %}
 	</div>

@@ -1,5 +1,9 @@
-{% for t in tweets %}
-<div>
-  <span>Mensaje: {{t.text}}</span>
-</div>
-{% endfor %}
+{% if tweets %}
+    {% for t in tweets %}
+    <div>
+      <span>Mensaje: {{t.text}}</span>
+    </div>
+    {% endfor %}
+{% else %}
+    No hay mensajes publicados
+{% endif %}
