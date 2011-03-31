@@ -37,7 +37,11 @@
 <h1>Mensajes</h1>
 {% for t in object_list %}
 <div class="tweet">
-  <img src="/site_media/fotos/jugadores/nofoto.jpg"/>
+  {% if t.sender.path_foto %}
+    <img src="/site_media/fotos/jugadores/{{t.sender.path_foto}}"/>
+  {% else %}
+    <img src="/site_media/fotos/jugadores/nofoto.jpg"/>
+  {% endif %}
   <span class="contenido">{{t.text}}</span>
 </div>
 {% endfor %}
