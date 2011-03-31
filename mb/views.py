@@ -1,5 +1,7 @@
-# Create your views here.
+# -*- mode: python; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- coding: utf-8 -*-
 from djdardos.mb.models import *
+from djdardos.dardos.models import *
 from django.shortcuts import get_object_or_404
 from django.views.generic.simple import direct_to_template
 from django.http import HttpResponseRedirect
@@ -18,9 +20,7 @@ def list(request, extra = None):
     tweets = Tweet.objects.filter(sender_type=ct.id, sender_id=request.user.id)
     params = {'tweets': tweets}
     if extra:
-        #FIXME Do it better
-        for k in extra.keys():
-            params[k] = extra[k]
+        params.update (extra)
     return direct_to_template(request, 'mb/list.html', params)
 
 def new_tweet(request):
@@ -30,7 +30,13 @@ def new_tweet(request):
 
         if form.is_valid():
             new_tweet = form.save(commit=False)
-            new_tweet.sender = request.user
+            tipo, id = request.POST["origen"].split('_')
+            if tipo == 'jugador':
+                new_tweet.sender = Jugador.objects.get(pk=id)
+            elif tipo == 'equipo':
+                new_tweet.sender = Equipo.objects.get(pk=id)
+            else:
+                raise Exception("Operación no permitida")
             new_tweet.save()
             return HttpResponseRedirect('/mb/list')
             #return HttpResponseRedirect(new_snippet.get_absolute_url())
