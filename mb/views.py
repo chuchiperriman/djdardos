@@ -18,6 +18,8 @@ class TweetForm(ModelForm):
 def list(request, extra = None):
     ct = ContentType.objects.get_for_model(request.user)
     tweets = Tweet.objects.filter(sender_type=ct.id, sender_id=request.user.id)
+    #ct = ContentType.objects.get_for_model(request.user.get_profile().jugador)
+    #tweets = Tweet.objects.filter(sender_type=ct.id, sender_id=request.user.get_profile().jugador.id)
     params = {'tweets': tweets}
     if extra:
         params.update (extra)
