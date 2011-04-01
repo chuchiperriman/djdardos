@@ -4,6 +4,7 @@
 from django.db import models
 from django.db.models import Q
 from django.contrib.auth.models import User
+from libs.thumbs import ImageWithThumbsField 
 
 TIPO_PARTIDA_INDIVIDUAL = 1
 TIPO_PARTIDA_PAREJAS = 2
@@ -59,7 +60,8 @@ class Equipo(models.Model):
     campo = models.CharField(max_length=100)
     email = models.EmailField(null=True, blank=True)
     direccion = models.CharField(max_length=255,null=True, blank=True)
-    path_foto = models.CharField(max_length=255,null=True, blank=True)
+    foto = ImageWithThumbsField(upload_to='equipos/images', 
+        sizes=((50,50),(100,100)), null=True, blank=True)
     telefono = models.CharField(max_length=20, null=True, blank=True)
     google_maps = models.TextField(null=True, blank=True)
 
@@ -91,7 +93,8 @@ class Jugador(models.Model):
     equipo = models.ForeignKey(Equipo)
     nombre = models.CharField(max_length=100)
     fecha_alta = models.DateTimeField('Fecha de Alta')
-    path_foto = models.CharField(max_length=255,null=True, blank=True)
+    foto = ImageWithThumbsField(upload_to='jugadores/images', 
+        sizes=((50,50),(100,100)), null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
     
     class Meta:

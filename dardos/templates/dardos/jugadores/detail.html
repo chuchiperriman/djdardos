@@ -32,8 +32,8 @@
 <h1>{{ jugador.nombre }}</h1>
 <div id="ficha">
     <div id="foto">
-    {% if jugador.path_foto %}
-        <img src="/site_media/fotos/jugadores/{{jugador.path_foto}}"/>
+    {% if jugador.foto %}
+        <img src="{{jugador.foto.url_100x100}}"/>
     {% else %}
         <img src="/site_media/fotos/jugadores/nofoto.jpg"/>
     {% endif %}

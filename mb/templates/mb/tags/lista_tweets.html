@@ -1,8 +1,21 @@
 {% if tweets %}
     {% for t in tweets %}
 <div class="tweet">
-  <img src="/site_media/fotos/jugadores/nofoto.jpg"/>
-  <span class="contenido">{{t.text}}</span>
+    <div class="tweet-image">
+    {% if t.sender.foto %}
+        <img src="{{t.sender.foto.url_50x50}}"/>
+    {% else %}
+        <img src="/site_media/fotos/jugadores/nofoto.jpg"/>
+    {% endif %}
+    </div>
+    <div class="tweet-content">
+        <div class="tweet-user">
+            <a href="{{t.sender.get_absolute_url}}">{{t.sender}}</a>
+        </div>
+        
+        <div class="tweet-text">{{t.text}}</div>
+        <div class="tweet-foot"><a href="#" title="{{t.sent}}">{{t.sent|timesince}}</a></div>
+    </div>
 </div>
     {% endfor %}
 {% else %}

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load mb %}
+
 {% block title %}Mensajes{% endblock %}
 
 {% block content %}
@@ -35,17 +37,9 @@
 {% endif %}
 
 <h1>Mensajes</h1>
-{% for t in object_list %}
-<div class="tweet">
-  {% if t.sender.path_foto %}
-    <img src="/site_media/fotos/jugadores/{{t.sender.path_foto}}"/>
-  {% else %}
-    <img src="/site_media/fotos/jugadores/nofoto.jpg"/>
-  {% endif %}
-  <span class="contenido">{{t.text}}</span>
-</div>
-{% endfor %}
+{% tweets_public %}
 
+<!--
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
@@ -61,5 +55,6 @@
         {% endif %}
     </span>
 </div>
+-->
 
 {% endblock %}
