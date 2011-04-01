@@ -258,7 +258,17 @@ legend
     border: 1px solid #EFEDED;
 }
 
+.tweet-light{
+    background-color: white;
+}
+
 .tweet img{
     width: 50px;
     float: left;
+}
+
+#charCount{
+    margin-right: 10px;
+    font-size: 1.3em;
+    font-weight: bold;
 }

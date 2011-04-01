@@ -6,11 +6,11 @@
 
 {% block content %}
 
+<script type="text/javascript" src="/site_media/js/tweets.js"></script>
 <div>
   <form method="POST" action="{% url mb-new_tweet%}">
-    
     Nuevo mensaje:
-    <textarea name="text">{{form.data.text}}</textarea>
+    <textarea name="text" id="tweet-text-box">{{form.data.text}}</textarea>
     Publicar como: 
     <select name="origen">
     {% if request.user.get_profile.jugador %}
@@ -20,7 +20,7 @@
         <option value="equipo_{{ae.id}}">Equipo: {{ae}}</option>
     {% endfor %}
     </select><br/>
-    <input type="submit" name="new-tweet" value="Publicar" />
+    <span id="charCount">140</span><input type="submit" name="new-tweet" value="Publicar" />
   </form>
 </div>
 {% if form.errors %}

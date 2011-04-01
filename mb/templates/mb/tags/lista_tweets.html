@@ -2,11 +2,13 @@
     {% for t in tweets %}
 <div class="tweet">
     <div class="tweet-image">
-    {% if t.sender.foto %}
-        <img src="{{t.sender.foto.url_50x50}}"/>
-    {% else %}
-        <img src="/site_media/fotos/jugadores/nofoto.jpg"/>
-    {% endif %}
+        <a href="{{t.sender.get_absolute_url}}">
+        {% if t.sender.foto %}
+            <img src="{{t.sender.foto.url_50x50}}"/>
+        {% else %}
+            <img src="/site_media/fotos/jugadores/nofoto.jpg"/>
+        {% endif %}
+        </a>
     </div>
     <div class="tweet-content">
         <div class="tweet-user">
