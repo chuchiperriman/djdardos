@@ -4,6 +4,7 @@
 from djdardos.dardos.models import *
 from djdardos.mb.models import *
 from django.contrib.contenttypes.models import ContentType
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 from django import template
 
@@ -25,8 +26,24 @@ def tweets_public(context):
     Muestra tweets en el timeline público 
     """
     request = context['request']
+
+    print 'aaaaaa',request.GET["page"]
+    
     ct = ContentType.objects.get_for_model(Equipo)
     #tweets = Tweet.objects.filter(sender_type=ct.id)
-    tweets = Tweet.objects.all()
+    tweet_list = Tweet.objects.all()
+
+    #TODO cambiar 5 por algo configurable o más real
+    paginator = Paginator(tweet_list, 5)
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    try:
+        tweets = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        tweets = paginator.page(paginator.num_pages)
+    
     return {'tweets': tweets}
 

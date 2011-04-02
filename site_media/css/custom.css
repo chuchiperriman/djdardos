@@ -267,6 +267,10 @@ legend
     float: left;
 }
 
+.tweet-follow{
+    float: right;
+}
+
 #charCount{
     margin-right: 10px;
     font-size: 1.3em;

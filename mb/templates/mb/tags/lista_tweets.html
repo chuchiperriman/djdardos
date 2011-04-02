@@ -1,5 +1,5 @@
 {% if tweets %}
-    {% for t in tweets %}
+    {% for t in tweets.object_list %}
 <div class="tweet">
     <div class="tweet-image">
         <a href="{{t.sender.get_absolute_url}}">
@@ -13,6 +13,9 @@
     <div class="tweet-content">
         <div class="tweet-user">
             <a href="{{t.sender.get_absolute_url}}">{{t.sender}}</a>
+	    <span class="tweet-follow">
+	      <a href="#">Follow</a>
+	    </span>
         </div>
         
         <div class="tweet-text">{{t.text}}</div>
@@ -20,6 +23,21 @@
     </div>
 </div>
     {% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if tweets.has_previous %}
+            <a href="?page={{ tweets.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Página {{ tweets.number }} de {{ tweets.paginator.num_pages }}.
+        </span>
+
+        {% if tweets.has_next %}
+            <a href="?page={{ tweets.next_page_number }}">Siguiente</a>
+        {% endif %}
+    </span>
+</div>
 {% else %}
     No hay mensajes publicados
 {% endif %}

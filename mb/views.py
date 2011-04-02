@@ -17,15 +17,12 @@ class TweetForm(ModelForm):
         exclude = ['sender_type', 'sender_id', 'sent']
 
 def list(request, extra = None):
-    return object_list(request,
-                   queryset=Tweet.objects.all(),
-                   paginate_by=10,
-                   template_name='mb/list.html',
+    return direct_to_template (request, template='mb/list.html',
                    extra_context=extra)
 
 def new_tweet(request):
     if request.method == 'POST':
-        print 'post'
+
         form = TweetForm(data=request.POST)
 
         if form.is_valid():
