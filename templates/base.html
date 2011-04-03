@@ -51,6 +51,21 @@
 	<!-- content-wrap starts here -->
 	<div id="content-wrap"><div id="content">		
 		<div id="sidebar" >
+
+		  <div class="sidebox">	
+		    <h1>Login</h1>
+		    <div id="top-login">
+		      {% cuadro_login %}
+		    </div>
+		    <!--
+			<form action="#" class="searchform">
+			  <p>
+			    <input name="search_query" class="textbox" type="text" />
+  			    <input name="search" class="button" value="Search" type="submit" />
+			  </p>			
+			</form>			
+			-->
+		  </div>
 		
 			<div class="sidebox">	
 				{% block menu %}{% endblock %}
@@ -63,23 +78,6 @@
 				<p class="align-right">- Perriman</p>
 					
 			</div>		
-			
-			<div class="sidebox">	
-						
-				<h1>Login</h1>	
-				<div id="top-login">
-				{% cuadro_login %}
-				</div>
-				<!--
-				<form action="#" class="searchform">
-					<p>
-					<input name="search_query" class="textbox" type="text" />
-  					<input name="search" class="button" value="Search" type="submit" />
-					</p>			
-				</form>			
-				-->
-			</div>
-					
 		</div>	
 	
 		<div id="main">		

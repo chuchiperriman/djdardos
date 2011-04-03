@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     (r'^dardos/ligas/', include('djdardos.dardos.urls.ligas')),
     (r'^dardos/divisiones/', include('djdardos.dardos.urls.divisiones')),
     (r'^dardos/jornadas/', include('djdardos.dardos.urls.jornadas')),
+    (r'^dardos/usuario/', include('djdardos.dardos.urls.usuarios')),
 
     (r'^mb/', include('djdardos.mb.urls')),
 

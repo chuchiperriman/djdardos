@@ -44,4 +44,12 @@ def new_tweet(request):
 
 new_tweet = login_required(new_tweet)
 
+def follow (request, content_type_id, object_id):
+    ct = ContentType.objects.get(pk=content_type_id)
+    #obj = ct.model_class().objects.get(pk=object_id)
+    obj = get_object_or_404 (ct.model_class(), pk=object_id)
+    print "..",ct, dir(ct), obj
+    Following.objects.follow(request.user, obj)
 
+    
+    

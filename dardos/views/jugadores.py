@@ -12,7 +12,6 @@ from ..graficas import graficas
 from ..graficas.forms import GraficasForm
 from ..general.sesiones import *
 
-# Create your views here.
 def index(request):
     if 'q' in request.GET:
         jugadores_list = Jugador.objects.filter(

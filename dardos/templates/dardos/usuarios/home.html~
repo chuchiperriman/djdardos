@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load mb %}
+
+{% block title %}Mensajes{% endblock %}
+
+{% block content %}
+
+<script type="text/javascript" src="/site_media/js/tweets.js"></script>
+<div>
+  <form method="POST" action="{% url mb-new_tweet%}">
+    Nuevo mensaje:
+    <textarea name="text" id="tweet-text-box">{{form.data.text}}</textarea>
+    Publicar como: 
+    <select name="origen">
+    {% if request.user.get_profile.jugador %}
+        <option value="jugador_{{request.user.get_profile.jugador.id}}">Jugador: {{request.user.get_profile.jugador}}</option>
+    {% endif %}
+    {% for ae in request.user.get_profile.admin_equipos.all %}
+        <option value="equipo_{{ae.id}}">Equipo: {{ae}}</option>
+    {% endfor %}
+    </select><br/>
+    <span id="charCount">140</span><input type="submit" name="new-tweet" value="Publicar" />
+  </form>
+</div>
+{% if form.errors %}
+   {% for error in form.non_field_errors %}
+       <li class="error">{{ error|striptags }}</li>
+   {% endfor %}
+   {% for field in form %}
+           {%if field.errors%}
+           	   {% for error in field.errors %}
+               <li class="error">{{field.name}}: {{ error|striptags }}</li>
+           {%endfor%}
+           {%endif%}
+   {% endfor %}
+{% endif %}
+
+<h1>Mensajes</h1>
+{% tweets_public %}
+
+{% endblock %}

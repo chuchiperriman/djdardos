@@ -14,7 +14,7 @@
         <div class="tweet-user">
             <a href="{{t.sender.get_absolute_url}}">{{t.sender}}</a>
 	    <span class="tweet-follow">
-	      <a href="#">Follow</a>
+	      <a href="{% url mb-follow t.sender_type.id t.sender_id %}">Follow {{t.sender_type.id}}-{{t.sender_id}}</a>
 	    </span>
         </div>
         
